@@ -13,5 +13,6 @@
         'im_notif_data.xml',
         'im_notif_views.xml',
         ],
-    'installable': False
+    'installable': False,
+    'uninstall_hook': 'pre_uninstall',
 }
