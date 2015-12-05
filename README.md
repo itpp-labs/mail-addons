@@ -37,7 +37,26 @@ Addons Forge
     # push to your fork
     git push origin addons-yelizariev-9.0-some-feature
 
-    # create pull request at github to addons-dev repo
+    # create PR to addons-dev repo
     # then PR is checked and merged
     # then your update is tested again
-    # then clean addon is pull-requested to target repo
+    # then clean addon is pull-requested to target repo (see next section)
+
+# Final PR to target repo
+
+    # example for addons-yelizariev
+    cd /path/to/addons-yelizariev
+
+    # add remote if it doesn't exist yet
+    git remote add addons-dev https://github.com/yelizariev/addons-dev.git
+
+    # fetch remote
+    git fetch addons-dev
+
+    # create branch
+    git checkout -b addons-dev/addons-yelizariev-9.0-some-feature
+
+    # push to your fork of target repo
+    git push origin addons-yelizariev-9.0-some-feature
+
+    # create PR to target repo
