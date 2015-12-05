@@ -42,6 +42,8 @@ Addons Forge
 
 If branch (e.g. *addons-yelizariev-9.0-some-feature*) already exists in **addons-dev**, send commits to your fork first and then create PR to **addons-dev**
 
+    git push origin addons-yelizariev-9.0-some-feature
+
 # Final PR to target repo
 
     # example for addons-yelizariev
