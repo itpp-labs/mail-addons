@@ -29,7 +29,7 @@ Addons Forge
     git fetch ${REPO}
 
     # create new branch
-    git checkout -b ${REPO}-${BRANCH}-some-feature
+    git checkout -b ${REPO}-${BRANCH}-some-feature ${REPO}/${BRANCH}
 
     # develop addons, create commits
     # ...
