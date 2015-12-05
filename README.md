@@ -59,6 +59,6 @@ If branch (e.g. *addons-yelizariev-9.0-some-feature*) already exists in **addons
     git checkout -b 9.0-some-feature addons-dev/addons-yelizariev-9.0-some-feature
 
     # push to your fork of target repo
-    git push origin addons-yelizariev-9.0-some-feature
+    git push origin 9.0-some-feature
 
     # create PR to target repo
