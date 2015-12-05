@@ -40,7 +40,7 @@ Addons Forge
 
 # PR to existed branch
 
-If branch (e.g. *addons-yelizariev-9.0-some-feature*) already exists, send commits to your fork first and then create PR to **addons-dev**
+If branch (e.g. *addons-yelizariev-9.0-some-feature*) already exists in **addons-dev**, send commits to your fork first and then create PR to **addons-dev**
 
 # Final PR to target repo
 
