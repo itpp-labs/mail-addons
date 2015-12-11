@@ -21,7 +21,8 @@ Addons Forge
         git remote add website-addons    https://github.com/yelizariev/website-addons.git
         git remote add l10n-addons       https://github.com/yelizariev/l10n-addons.git
 
-# New branch
+# Create new branch
+*(push access is needed)*
 
     # specify target repo and branch:
     export REPO=addons-yelizariev BRANCH=9.0
@@ -31,9 +32,6 @@ Addons Forge
 
     # create new branch
     git checkout -b ${REPO}-${BRANCH}-some-feature ${REPO}/${BRANCH}
-
-    # develop addons, create commits
-    # ...
 
     # push to upstream
     git push upstream addons-yelizariev-9.0-some-feature
