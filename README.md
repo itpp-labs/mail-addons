@@ -25,16 +25,16 @@ Addons Forge
 *(push access is needed)*
 
     # specify target repo and branch:
-    export REPO=addons-yelizariev BRANCH=9.0
+    export REPO=addons-yelizariev BRANCH=9.0 FEATURE=some-feature
 
     # fetch remote
     git fetch ${REPO}
 
     # create new branch
-    git checkout -b ${REPO}-${BRANCH}-some-feature ${REPO}/${BRANCH}
+    git checkout -b ${REPO}-${BRANCH}-${FEATURE} ${REPO}/${BRANCH}
 
     # push to upstream
-    git push upstream addons-yelizariev-9.0-some-feature
+    git push upstream ${REPO}-${BRANCH}-${FEATURE}
 
 # PR to existed branch
 
