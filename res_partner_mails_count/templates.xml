@@ -2,38 +2,28 @@
 <openerp>
     <data>
         <record id="view_task_partner_info_form1" model="ir.ui.view">
-            <field name="name">res.partner.mails.count.income</field>
+            <field name="name">res.partner.mails.count</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="priority" eval="50"/>
             <field name="groups_id" eval="[(4, ref('project.group_project_user'))]"/>
             <field name="arch" type="xml">
                 <xpath expr="//div[@name='buttons']" position="inside">
-                    <button class="oe_inline oe_stat_button" type="action" name="test"
-                        context="{'search_default_partner_id': active_id, 'default_partner_id': active_id}"
+                    <button class="oe_inline oe_stat_button" type="action"
+                        name="%(action_mails_from)d"
+                        context="{'search_default_partner_ids': [active_id]}"
                         icon="fa-envelope">
-                        <field  string="Income" name="income" widget="statinfo"/>
+                        <field string="Mails from" name="mails_from" widget="statinfo"/>
                     </button>
-                </xpath>
-            </field>
-        </record>
-	    <record id="view_task_partner_info_form2" model="ir.ui.view">
-            <field name="name">res.partner.mails.count.sent</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
-            <field name="priority" eval="50"/>
-            <field name="groups_id" eval="[(4, ref('project.group_project_user'))]"/>
-            <field name="arch" type="xml">
-                <xpath expr="//div[@name='buttons']" position="inside">
-                    <button class="oe_inline oe_stat_button" type="action" name="test"
-                        context="{'search_default_partner_id': active_id, 'default_partner_id': active_id}"
+	                <button class="oe_inline oe_stat_button" type="action"
+                        name="%(action_mails_to)d"
+                        context="{'search_default_partner_ids': [active_id]}"
                         icon="fa-envelope-o">
-                        <field  string="Sent" name="sent" widget="statinfo"/>
+                        <field  string="Mails to" name="mails_to" widget="statinfo"/>
                     </button>
                 </xpath>
             </field>
         </record>
-
 
 	    <!--<record id="res_partner_mails_count" model="ir.actions.client">-->
             <!--<field name="name">Income</field>-->

@@ -22,29 +22,17 @@ logger = getlogger(__name__)
 
 class res_partner(models.Model):
     _inherit = 'res.partner'
-    income = fields.Integer(compute="_income")
-    sent = fields.Integer(compute="_sent")
+    mails_from = fields.Integer(compute="_mails_from")
+    mails_to = fields.Integer(compute="_mails_to")
 
-    def _search_partner(self):
-        return self.env['res.partner'].search([('user_ids', '=', self._uid)])
+    @api.one
+    def _mails_from(self):
+        for r in self:
+            letters = self.env['mail.message'].search([('partner_ids', 'in', r.id)])
+            self.mails_from = len(letters)
 
-    def _search_letters(self, partner, param):
-        letters = self.env['mail.message'].search([(param, '=', partner.id)])
-        # logger.debug('partner.id: %s' % partner.id)
-        # logger.debug('Income letters: %s' % letters)
-        return letters
-
-    @api.multi
-    def _income(self):
-        partner = self._search_partner()
-        if partner:
-            letters = self._search_letters(partner, 'partner_ids')
-            partner.income = len(letters)
-
-    @api.multi
-    def _sent(self):
-        partner = self._search_partner()
-        if partner:
-            letters = self._search_letters(partner, 'author_id')
-            partner.sent = len(letters)
-
+    @api.one
+    def _mails_to(self):
+        for r in self:
+            letters = self.env['mail.message'].search([('author_id', '=', r.id)])
+            self.mails_to = len(letters)
