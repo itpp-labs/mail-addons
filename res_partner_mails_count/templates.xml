@@ -17,61 +17,12 @@
                     </button>
 	                <button class="oe_inline oe_stat_button" type="action"
                         name="%(action_mails_to)d"
-                        context="{'search_default_partner_ids': [active_id]}"
+                        context="{'search_default_author_id': active_id}"
                         icon="fa-envelope-o">
                         <field  string="Mails to" name="mails_to" widget="statinfo"/>
                     </button>
                 </xpath>
             </field>
         </record>
-
-	    <!--<record id="res_partner_mails_count" model="ir.actions.client">-->
-            <!--<field name="name">Income</field>-->
-            <!--<field name="tag">mail.wall</field>-->
-            <!--<field name="context">{-->
-              <!--'default_model': 'res.users',-->
-              <!--'default_res_id': uid,-->
-              <!--'thread_model': 'res.partner',-->
-              <!--'needaction_menu_ref': ['mail.mail_tomefeeds', 'mail.mail_starfeeds', 'mail.mail_inboxfeeds']-->
-            <!--}</field>-->
-            <!--<field name="params" eval="&quot;{-->
-                <!--'domain': [-->
-                    <!--'|',-->
-                    <!--('notification_ids.partner_id.user_ids', 'in', [uid]),-->
-                    <!--('author_id.user_ids', 'in', [uid]),-->
-                <!--],-->
-                <!--'view_mailbox': True,-->
-                <!--'show_compose_message': False-->
-            <!--}&quot;"/>-->
-            <!--<field name="help" type="html">-->
-                <!--<p>-->
-                    <!--No message found and no message sent yet.-->
-                <!--</p>-->
-	            <!--<p>-->
-                    <!--Click on the top-right icon to compose a message. This-->
-                    <!--message will be sent by email if it's an internal contact.-->
-                <!--</p>-->
-            <!--</field>-->
-        <!--</record>-->
-
-
-        <!-- <template id="listing"> -->
-        <!--   <ul> -->
-        <!--     <li t-foreach="objects" t-as="object"> -->
-        <!--       <a t-attf-href="#{ root }/objects/#{ object.id }"> -->
-        <!--         <t t-esc="object.display_name"/> -->
-        <!--       </a> -->
-        <!--     </li> -->
-        <!--   </ul> -->
-        <!-- </template> -->
-        <!-- <template id="object"> -->
-        <!--   <h1><t t-esc="object.display_name"/></h1> -->
-        <!--   <dl> -->
-        <!--     <t t-foreach="object._fields" t-as="field"> -->
-        <!--       <dt><t t-esc="field"/></dt> -->
-        <!--       <dd><t t-esc="object[field]"/></dd> -->
-        <!--     </t> -->
-        <!--   </dl> -->
-        <!-- </template> -->
     </data>
 </openerp>
