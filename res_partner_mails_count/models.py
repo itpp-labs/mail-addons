@@ -28,11 +28,9 @@ class res_partner(models.Model):
     @api.one
     def _mails_from(self):
         for r in self:
-            letters = self.env['mail.message'].search([('partner_ids', 'in', r.id)])
-            self.mails_from = len(letters)
+            self.mails_from = self.env['mail.message'].sudo().search_count([('partner_ids', 'in', r.id)])
 
     @api.one
     def _mails_to(self):
         for r in self:
-            letters = self.env['mail.message'].search([('author_id', '=', r.id)])
-            self.mails_to = len(letters)
+            self.mails_to = self.env['mail.message'].sudo().search_count([('author_id', '=', r.id)])
