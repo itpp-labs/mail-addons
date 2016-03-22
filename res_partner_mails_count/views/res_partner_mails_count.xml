@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id="action_mails_from" model="ir.actions.client">
+            <field name="name">Mails from</field>
+            <field name="tag">mail.wall</field>
+            <field name="res_model">mail.message</field>
+            <field name="context">{
+	            'search_default_model': False,
+	            'default_model': 'res.users',
+	            'default_res_id': uid,
+	            'thread_model': 'res.partner',
+                'active_model': False,
+            }</field>
+            <field name="params" eval="&quot;{
+                'view_mailbox': False,
+                'show_compose_message': False
+            }&quot;"/>
+            <field name="help" type="html">
+                <p>
+                    <b>No private message.</b>
+                </p><p>
+                    This list contains messages sent to you.
+                </p>
+            </field>
+        </record>
+		<record id="action_mails_to" model="ir.actions.client">
+            <field name="name">Mails to</field>
+            <field name="tag">mail.wall</field>
+            <field name="context">{
+              'default_model': 'res.users',
+              'default_res_id': uid,
+              'thread_model': 'res.partner',
+              'needaction_menu_ref': ['mail.mail_tomefeeds']
+            }</field>
+            <field name="params" eval="&quot;{
+                'domain': [
+                    ('notification_ids.partner_id.user_ids', 'in', [uid]),
+                    ('author_id.user_ids', 'in', [uid]),
+                ],
+                'view_mailbox': True,
+                'show_compose_message': False
+            }&quot;"/>
+            <field name="help" type="html">
+                <p>
+                    No message found and no message sent yet.
+                </p><p>
+                    Click on the top-right icon to compose a message. This
+                    message will be sent by email if it's an internal contact.
+                </p>
+            </field>
+        </record>
+	</data>
+</openerp>
