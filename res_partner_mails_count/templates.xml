@@ -18,13 +18,13 @@
                 <xpath expr="//div[@name='buttons']" position="inside">
                     <button class="oe_inline oe_stat_button" type="action"
                         name="%(action_mails)d"
-                        context="{'search_default_partner_ids': [active_id]}"
+                        context="{'search_default_partner_ids': [active_id], 'default_model': 'res.partner', 'default_res_id': active_id}"
                         icon="fa-envelope">
                         <field string="Mails to" name="mails_to" widget="statinfo"/>
                     </button>
 	                <button class="oe_inline oe_stat_button" type="action"
                         name="%(action_mails)d"
-                        context="{'search_default_author_id': active_id}"
+                        context="{'search_default_author_id': active_id, 'default_model': 'res.partner', 'default_res_id': active_id}"
                         icon="fa-envelope-o">
                         <field  string="Mails from" name="mails_from" widget="statinfo"/>
                     </button>
