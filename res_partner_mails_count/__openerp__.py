@@ -28,8 +28,4 @@
         'views/res_partner_mails_count.xml',
         'templates.xml',
     ],
-    # only loaded in demonstration mode
-    'demo': [
-        'demo.xml',
-    ],
 }
