@@ -13,8 +13,6 @@ class test_message_count(TransactionCase):
         compose = mail_compose.with_context(
             {
                 'default_composition_mode': 'comment',
-                'default_model': 'res.partner',
-                'default_res_id': new_partner1.id,
             }).create(
             {
                 'subject': 'test subj',
