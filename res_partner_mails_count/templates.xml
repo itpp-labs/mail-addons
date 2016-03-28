@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <template id="res_partner_mails_count_assets_backend"
+                  name="res_partner_mails_count_assets_backend"
+                  inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script src="/res_partner_mails_count/static/src/js/main.js"
+                        type="text/javascript"></script>
+            </xpath>
+        </template>
+
+        <record id="search_notified_partner_ids" model="ir.ui.view">
+            <field name="name">mail.message.search.notified_partner</field>
+            <field name="model">mail.message</field>
+            <field name="priority">50</field>
+            <field name="inherit_id" ref="mail.view_message_search"/>
+            <field name="arch" type="xml">
+                <search string="Messages Search">
+                    <field name="notified_partner_ids"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_res_partner_mails_count_info_form" model="ir.ui.view">
+            <field name="name">res.partner.mails.count</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority" eval="50"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='buttons']" position="inside">
+                    <button class="oe_inline oe_stat_button" type="action"
+                        name="%(action_mails)d"
+                        context="{'search_default_notified_partner_ids': [active_id], 'default_model': 'res.partner', 'default_res_id': active_id}"
+                        icon="fa-envelope">
+                        <field string="Mails to" name="mails_to" widget="statinfo"/>
+                    </button>
+                    <button class="oe_inline oe_stat_button" type="action"
+                        name="%(action_mails)d"
+                        context="{'search_default_author_id': active_id, 'default_model': 'res.partner', 'default_res_id': active_id}"
+                        icon="fa-envelope-o">
+                        <field  string="Mails from" name="mails_from" widget="statinfo"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
