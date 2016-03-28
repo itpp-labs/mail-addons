@@ -11,7 +11,7 @@ class res_partner(models.Model):
     @api.one
     def _mails_to(self):
         for r in self:
-            r.mails_to = self.env['mail.message'].sudo().search_count([('notified_partner_ids', 'in', r.id)])
+            r.mails_to = self.env['mail.message'].sudo().search_count([('partner_ids', 'in', r.id)])
 
     @api.one
     def _mails_from(self):
