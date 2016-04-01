@@ -61,7 +61,7 @@ var channel_seen = _.throttle(function (channel) {
 }, 3000);
 
 
-var MailFunctions = core.Class.extend({
+var MailTools = core.Class.extend({
    init: function () {
        // suggested regexp (gruber url matching regexp, adapted to js, see https://gist.github.com/gruber/8891611)
        this.url_regexp = /\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/gi;
@@ -215,6 +215,27 @@ var MailFunctions = core.Class.extend({
         };
     },
 
+    get_properties: function(msg){
+        return {
+            is_starred: this.property_descr("channel_starred", msg, this),
+            is_needaction: this.property_descr("channel_inbox", msg, this)
+        }
+    },
+
+    set_channel_flags: function(data, msg){
+        if (_.contains(data.needaction_partner_ids, session.partner_id)) {
+            msg.is_needaction = true;
+        }
+        if (_.contains(data.starred_partner_ids, session.partner_id)) {
+            msg.is_starred = true;
+        }
+        return msg
+    },
+
+    get_channel_array: function(msg){
+        return [ msg.channel_ids, 'channel_inbox', 'channel_starred' ];
+    },
+
     make_message: function (data) {
         var msg = {
             id: data.id,
@@ -244,22 +265,11 @@ var MailFunctions = core.Class.extend({
             msg.body = msg.body.replace(regexp, ' <span class="o_mail_emoji">'+emoji_substitutions[key]+'</span> ');
         });
 
-        var self = this;
-        Object.defineProperties(msg, {
-            is_starred: this.property_descr("channel_starred", msg, self),
-            is_needaction: this.property_descr("channel_inbox", msg, self),
-            is_archive: this.property_descr("channel_archive", msg, self)
-        });
+        Object.defineProperties(msg, this.get_properties(msg));
 
-        if (_.contains(data.needaction_partner_ids, session.partner_id)) {
-            msg.is_needaction = true;
-        }
-        if (_.contains(data.starred_partner_ids, session.partner_id)) {
-            msg.is_starred = true;
-        }
-        msg.is_archive = true;
+        msg = this.set_channel_flags(data, msg);
         if (msg.model === 'mail.channel') {
-            var real_channels = _.without(msg.channel_ids, 'channel_inbox', 'channel_starred', 'channel_archive');
+            var real_channels = _.without(this.get_channel_array(msg));
             var origin = real_channels.length === 1 ? real_channels[0] : undefined;
             var channel = origin && chat_manager.get_channel(origin);
             if (channel) {
@@ -425,14 +435,16 @@ var MailFunctions = core.Class.extend({
         });
     },
 
+    get_domain: function(channel){
+        return (channel.id === "channel_inbox") ? [['needaction', '=', true]] :
+            (channel.id === "channel_starred") ? [['starred', '=', true]] :
+                                                [['channel_ids', 'in', channel.id]];
+    },
+
     // options: domain, load_more
     fetch_from_channel: function (channel, options) {
         options = options || {};
-        var domain =
-            (channel.id === "channel_inbox") ? [['needaction', '=', true]] :
-            (channel.id === "channel_starred") ? [['starred', '=', true]] :
-            (channel.id === "channel_archive") ? [] :
-                                                [['channel_ids', 'in', channel.id]];
+        var domain = this.get_domain(channel);
         var cache = this.get_channel_cache(channel, options.domain);
 
         if (options.domain) {
@@ -704,12 +716,6 @@ var MailFunctions = core.Class.extend({
             type: "static"
         });
 
-        this.add_channel({
-            id: "channel_archive",
-            name: _t("Archive"),
-            type: "static"
-        });
-
         var load_channels = session.rpc('/mail/client_action').then(function (result) {
             _.each(result.channel_slots, function (channels) {
                 _.each(channels, cls.add_channel);
@@ -739,10 +745,9 @@ var MailFunctions = core.Class.extend({
             bus.start_polling();
         });
     }
-    
 });
 
-var cls = new MailFunctions();
+var cls = new MailTools();
 
 // Public interface
 //----------------------------------------------------------------------------------
@@ -1074,58 +1079,10 @@ chat_manager.bus.on('client_action_open', null, function (open) {
     client_action_open = open;
 });
 
-// Initialization
-// ---------------------------------------------------------------------------------
-function init (cls) {
-    cls.add_channel({
-        id: "channel_inbox",
-        name: _t("Inbox"),
-        type: "static"
-    }, { display_needactions: true });
-
-    cls.add_channel({
-        id: "channel_starred",
-        name: _t("Starred"),
-        type: "static"
-    });
-
-    cls.add_channel({
-        id: "channel_archive",
-        name: _t("Archive"),
-        type: "static"
-    });
-
-    var load_channels = session.rpc('/mail/client_action').then(function (result) {
-        _.each(result.channel_slots, function (channels) {
-            _.each(channels, cls.add_channel);
-        });
-        needaction_counter = result.needaction_inbox_counter;
-        mention_partner_suggestions = result.mention_partner_suggestions;
-    });
-
-    var load_emojis = session.rpc("/mail/chat_init").then(function (result) {
-        emojis = result.emoji;
-        _.each(emojis, function(emoji) {
-            emoji_substitutions[_.escape(emoji.source)] = emoji.substitution;
-        });
-    });
-
-    var ir_model = new Model("ir.model.data");
-    var load_menu_id = ir_model.call("xmlid_to_res_id", ["mail.mail_channel_menu_root_chat"], {}, {shadow: true});
-    var load_action_id = ir_model.call("xmlid_to_res_id", ["mail.mail_channel_action_client_chat"], {}, {shadow: true});
-
-    bus.on('notification', null, cls.on_notification);
-
-    return $.when(load_menu_id, load_action_id, load_channels, load_emojis).then(function (menu_id, action_id) {
-        discuss_ids = {
-            menu_id: menu_id,
-            action_id: action_id
-        };
-        bus.start_polling();
-    });
-}
-
 chat_manager.is_ready = cls.start();
-return chat_manager;
+return {
+    chat_manager: chat_manager,
+    MailTools: MailTools
+};
     
 });
