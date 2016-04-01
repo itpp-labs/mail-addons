@@ -1,33 +1,28 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "Smart buttons for mails count",
-
-    "summary": """
-        This module adds Smart buttons with "Mails from" and "Mails to" count of mails in the partner form.
-    """,
-
-    "description": """
-        You can see Smart buttons "Mails from" and "Mails to" in the contact
-        form in the Messaging/Contacts menu. If you click on these buttons,
-        you can see list of corresponded mails. Click on the "Send a message"
-        link to send mail to the partner.
-    """,
-
-    "author": "IT-Projects LLC, Pavel Romanchenko",
-    "website": "http://www.it-projects.info",
-
-    # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/master/openerp/addons/base/module/module_data.xml
-    # for the full list
-    "category": "Uncategorized",
+    "name": """Partner mails count""",
+    "summary": """Displays amount of incoming and outgoing partner mails.""",
+    "category": "Sales Management",
+    "images": ['images/1.png'],
     "version": "1.0.0",
 
-    # any module necessary for this one to work correctly
-    "depends": ["base", "mail"],
+    "author": "IT-Projects LLC",
+    "website": "https://it-projects.info",
+    "license": "GPL-3",
+    "price": 30.00,
+    "currency": "EUR",
 
-    # always loaded
-    "data": [
-        "views/res_partner_mails_count.xml",
-        "templates.xml",
+    "depends": [
+        'base',
+        'mail' ,
     ],
+    "external_dependencies": {"python": [], "bin": []},
+    "data": [
+        'views/res_partner_mails_count.xml',
+        'templates.xml',
+    ],
+    "demo": [
+    ],
+    "installable": True,
+    "auto_install": False,
 }
