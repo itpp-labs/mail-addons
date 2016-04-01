@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "mail_archives",
-    "summary": """Create archive channel""",
+    "name": "mail_base",
+    "summary": """Contain common code for other mail modules""",
     "category": "Uncategorized",
     "images": [],
     "version": "1.0.0",
@@ -12,16 +12,11 @@
 
     "depends": [
         "base",
-        "mail",
-        "mail_base"
+        "mail"
     ],
 
     "data": [
-        "views/views.xml",
         "views/templates.xml",
-    ],
-    "qweb": [
-        "static/src/xml/menu.xml",
     ],
     'installable': True,
 }

@@ -56,13 +56,13 @@ base_obj.MailTools.include({
             msg.body = msg.body.replace(regexp, ' <span class="o_mail_emoji">'+emoji_substitutions[key]+'</span> ');
         });
 
-        // Add property to Object
         var properties = this.get_properties(msg);
+        // Add property to Object
         properties.is_archive = this.property_descr("channel_archive", msg, this);
         Object.defineProperties(msg, properties);
 
-        // Set archive flag
         msg = this.set_channel_flags(data, msg);
+        // Set archive flag
         msg.is_archive = true;
         if (msg.model === 'mail.channel') {
             // Add 'channel_archive' to channel_array
@@ -76,7 +76,6 @@ base_obj.MailTools.include({
             }
         }
 
-        // Compute displayed author name or email
         if ((!msg.author_id || !msg.author_id[0]) && msg.email_from) {
             msg.mailto = msg.email_from;
         } else {
@@ -84,10 +83,8 @@ base_obj.MailTools.include({
                                    msg.email_from || _t('Anonymous');
         }
 
-        // Don't redirect on author clicked of self-posted messages
         msg.author_redirect = !msg.is_author;
 
-        // Compute the avatar_url
         if (msg.author_id && msg.author_id[0]) {
             msg.avatar_src = "/web/image/res.partner/" + msg.author_id[0] + "/image_small";
         } else if (msg.message_type === 'email') {
@@ -96,10 +93,8 @@ base_obj.MailTools.include({
             msg.avatar_src = "/mail/static/src/img/smiley/avatar.jpg";
         }
 
-        // add anchor tags to urls
         msg.body = this.parse_and_transform(msg.body, this.add_link);
 
-        // Compute url of attachments
         _.each(msg.attachment_ids, function(a) {
             a.url = '/web/content/' + a.id + '?download=true';
         });
@@ -177,7 +172,6 @@ base_obj.MailTools.include({
 // Change chat_manager with override methods
 var cls = new base_obj.MailTools(base_obj.chat_manager);
 base_obj.chat_manager.is_ready = cls.start();
-console.log('MailTools:', cls);
 
 return base_obj.chat_manager;
 
