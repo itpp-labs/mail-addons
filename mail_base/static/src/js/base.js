@@ -62,10 +62,6 @@ var channel_seen = _.throttle(function (channel) {
 
 
 var MailTools = core.Class.extend({
-   init: function () {
-       // suggested regexp (gruber url matching regexp, adapted to js, see https://gist.github.com/gruber/8891611)
-       this.url_regexp = /\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/gi;
-   },
 
     send_native_notification: function (title, content) {
         var notification = new Notification(title, {body: content, icon: "/mail/static/src/img/odoo_o.png"});
@@ -437,14 +433,13 @@ var MailTools = core.Class.extend({
 
     get_domain: function(channel){
         return (channel.id === "channel_inbox") ? [['needaction', '=', true]] :
-            (channel.id === "channel_starred") ? [['starred', '=', true]] :
-                                                [['channel_ids', 'in', channel.id]];
+            (channel.id === "channel_starred") ? [['starred', '=', true]] : false;
     },
 
     // options: domain, load_more
     fetch_from_channel: function (channel, options) {
         options = options || {};
-        var domain = this.get_domain(channel);
+        var domain = this.get_domain(channel) || [['channel_ids', 'in', channel.id]];
         var cache = this.get_channel_cache(channel, options.domain);
 
         if (options.domain) {
