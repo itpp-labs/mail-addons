@@ -1,11 +1,11 @@
 Mail Archives
 =============
 
-Display archive channel which contain read messages
+Adds Archive menu, which shows all messages
 
 Usage
 -----
-Click by archive menu item and receive read messages (having attribute read = true)
+Click by archive menu item and receive all messages
 
 Further information
 -------------------
