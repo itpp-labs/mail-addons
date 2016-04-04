@@ -2,7 +2,7 @@
 {
     "name": "mail_archives",
     "summary": """Create archive channel""",
-    "category": "Uncategorized",
+    "category": "Discuss",
     "images": [],
     "version": "1.0.0",
 

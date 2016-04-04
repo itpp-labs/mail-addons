@@ -5,7 +5,7 @@ Adds Archive menu, which shows all messages
 
 Usage
 -----
-Click Messaing/Arhive menu -- all messages are displayed
+Click Discuss/Archive menu -- all messages are displayed
 
 Further information
 -------------------
