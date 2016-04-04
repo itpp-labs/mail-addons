@@ -11,6 +11,6 @@ You can see Smart buttons "Mails from" and "Mails to" in the contact form in the
 Further information
 -------------------
 
-HTML Description: https://apps.odoo.com/apps/modules/8.0/res_partner_mails_count/
+HTML Description: https://apps.odoo.com/apps/modules/9.0/res_partner_mails_count/
 
-Tested on Odoo 8.0 5209f6d2f26a38f66c063f05d32a962974741f40
+Tested on Odoo 9.0 b9f206953e3f877adf18643f154d1262842564ee
