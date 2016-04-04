@@ -83,7 +83,7 @@ var MailTools = core.Class.extend({
         if (msg.author_id[1]) {
             title = _.escape(msg.author_id[1]);
         }
-        var content = this.parse_and_transform(msg.body, this.strip_html).substr(0, preview_msg_max_size);
+        var content = chat_manager.mail_tools.parse_and_transform(msg.body, chat_manager.mail_tools.strip_html).substr(0, preview_msg_max_size);
 
         if (!bus.is_odoo_focused()) {
             global_unread_counter++;
@@ -93,7 +93,7 @@ var MailTools = core.Class.extend({
 
         if (Notification && Notification.permission === "granted") {
             if (bus.is_master) {
-                send_native_notification(title, content);
+                chat_manager.mail_tools.send_native_notification(title, content);
             }
         } else {
             web_client.do_notify(title, content);
@@ -107,15 +107,14 @@ var MailTools = core.Class.extend({
         var open_token = "OPEN" + Date.now();
         var string = html_string.replace(/&lt;/g, open_token);
         var children = $('<div>').html(string).contents();
-        return this._parse_and_transform(children, transform_function)
+        return chat_manager.mail_tools._parse_and_transform(children, transform_function)
                     .replace(new RegExp(open_token, "g"), "&lt;");
     },
 
     _parse_and_transform: function (nodes, transform_function) {
-        var self = this;
         return _.map(nodes, function (node) {
             return transform_function(node, function () {
-                return self._parse_and_transform(node.childNodes, transform_function);
+                return chat_manager.mail_tools._parse_and_transform(node.childNodes, transform_function);
             });
         }).join("");
     },
@@ -155,7 +154,7 @@ var MailTools = core.Class.extend({
         var msg = _.findWhere(messages, { id: data.id });
 
         if (!msg) {
-            msg = this.make_message(data);
+            msg = chat_manager.mail_tools.make_message(data);
             // Keep the array ordered by id when inserting the new message
             messages.splice(_.sortedIndex(messages, msg, 'id'), 0, msg);
             _.each(msg.channel_ids, function (channel_id) {
@@ -171,7 +170,7 @@ var MailTools = core.Class.extend({
                     }
                     if (channel.type !== 'static' && !msg.is_author && !msg.is_system_notification) {
                         if (options.increment_unread) {
-                            this.update_channel_unread_counter(channel, channel.unread_counter+1);
+                            chat_manager.mail_tools.update_channel_unread_counter(channel, channel.unread_counter+1);
                         }
                         if (channel.is_chat && options.show_notification) {
                             if (!client_action_open && config.device.size_class !== config.device.SIZES.XS) {
@@ -180,7 +179,7 @@ var MailTools = core.Class.extend({
                             }
                             var query = {is_displayed: false};
                             chat_manager.bus.trigger('anyone_listening', channel, query);
-                            this.notify_incoming_message(msg, query);
+                            chat_manager.mail_tools.notify_incoming_message(msg, query);
                         }
                     }
                 }
@@ -189,7 +188,7 @@ var MailTools = core.Class.extend({
                 chat_manager.bus.trigger('new_message', msg);
             }
         } else if (options.domain && options.domain !== []) {
-            this.add_to_cache(msg, options.domain);
+            chat_manager.mail_tools.add_to_cache(msg, options.domain);
         }
         return msg;
     },
@@ -212,8 +211,8 @@ var MailTools = core.Class.extend({
 
     get_properties: function(msg){
         return {
-            is_starred: this.property_descr("channel_starred", msg, this),
-            is_needaction: this.property_descr("channel_inbox", msg, this)
+            is_starred: chat_manager.mail_tools.property_descr("channel_starred", msg, chat_manager.mail_tools),
+            is_needaction: chat_manager.mail_tools.property_descr("channel_inbox", msg, chat_manager.mail_tools)
         }
     },
 
@@ -260,11 +259,11 @@ var MailTools = core.Class.extend({
             msg.body = msg.body.replace(regexp, ' <span class="o_mail_emoji">'+emoji_substitutions[key]+'</span> ');
         });
 
-        Object.defineProperties(msg, this.get_properties(msg));
+        Object.defineProperties(msg, chat_manager.mail_tools.get_properties(msg));
 
-        msg = this.set_channel_flags(data, msg);
+        msg = chat_manager.mail_tools.set_channel_flags(data, msg);
         if (msg.model === 'mail.channel') {
-            var real_channels = _.without(this.get_channel_array(msg));
+            var real_channels = _.without(chat_manager.mail_tools.get_channel_array(msg));
             var origin = real_channels.length === 1 ? real_channels[0] : undefined;
             var channel = origin && chat_manager.get_channel(origin);
             if (channel) {
@@ -294,7 +293,7 @@ var MailTools = core.Class.extend({
         }
 
         // add anchor tags to urls
-        msg.body = this.parse_and_transform(msg.body, this.add_link);
+        msg.body = chat_manager.mail_tools.parse_and_transform(msg.body, chat_manager.mail_tools.add_link);
 
         // Compute url of attachments
         _.each(msg.attachment_ids, function(a) {
@@ -370,7 +369,7 @@ var MailTools = core.Class.extend({
         }
         channel.is_chat = !channel.type.match(/^(public|private|static)$/);
         if (data.message_unread_counter) {
-            this.update_channel_unread_counter(channel, data.message_unread_counter);
+            chat_manager.mail_tools.update_channel_unread_counter(channel, data.message_unread_counter);
         }
         return channel;
     },
@@ -438,8 +437,8 @@ var MailTools = core.Class.extend({
     // options: domain, load_more
     fetch_from_channel: function (channel, options) {
         options = options || {};
-        var domain = this.get_domain(channel) || [['channel_ids', 'in', channel.id]];
-        var cache = this.get_channel_cache(channel, options.domain);
+        var domain = chat_manager.mail_tools.get_domain(channel) || [['channel_ids', 'in', channel.id]];
+        var cache = chat_manager.mail_tools.get_channel_cache(channel, options.domain);
 
         if (options.domain) {
             domain = new data.CompoundDomain(domain, options.domain || []);
@@ -448,7 +447,6 @@ var MailTools = core.Class.extend({
             var min_message_id = cache.messages[0].id;
             domain = new data.CompoundDomain([['id', '<', min_message_id]], domain);
         }
-        var self = this;
         return MessageModel.call('message_fetch', [domain], {limit: LIMIT}).then(function (msgs) {
             if (!cache.all_history_loaded) {
                 cache.all_history_loaded =  msgs.length < LIMIT;
@@ -456,9 +454,9 @@ var MailTools = core.Class.extend({
             cache.loaded = true;
 
             _.each(msgs, function (msg) {
-                self.add_message(msg, {channel_id: channel.id, silent: true, domain: options.domain});
+                chat_manager.mail_tools.add_message(msg, {channel_id: channel.id, silent: true, domain: options.domain});
             });
-            var channel_cache = self.get_channel_cache(channel, options.domain || []);
+            var channel_cache = chat_manager.mail_tools.get_channel_cache(channel, options.domain || []);
             return channel_cache.messages;
         });
     },
@@ -471,14 +469,13 @@ var MailTools = core.Class.extend({
         var loaded_msg_ids = _.pluck(loaded_msgs, 'id');
 
         options = options || {};
-        var self = this;
         if (options.force_fetch || _.difference(ids.slice(0, LIMIT), loaded_msg_ids).length) {
             var ids_to_load = _.difference(ids, loaded_msg_ids).slice(0, LIMIT);
 
             return MessageModel.call('message_format', [ids_to_load]).then(function (msgs) {
                 var processed_msgs = [];
                 _.each(msgs, function (msg) {
-                    processed_msgs.push(self.add_message(msg, {silent: true}));
+                    processed_msgs.push(chat_manager.mail_tools.add_message(msg, {silent: true}));
                 });
                 return _.sortBy(loaded_msgs.concat(processed_msgs), function (msg) {
                     return msg.date;
@@ -521,31 +518,27 @@ var MailTools = core.Class.extend({
             var model = notification[0][1];
             if (model === 'ir.needaction') {
                 // new message in the inbox
-                // this.on_needaction_notification(notification[1]);
-                cls.on_needaction_notification(notification[1]);
+                chat_manager.mail_tools.on_needaction_notification(notification[1]);
             } else if (model === 'mail.channel') {
                 // new message in a channel
-                // this.on_channel_notification(notification[1]);
-                cls.on_channel_notification(notification[1]);
+                chat_manager.mail_tools.on_channel_notification(notification[1]);
             } else if (model === 'res.partner') {
                 // channel joined/left, message marked as read/(un)starred, chat open/closed
-                // this.on_partner_notification(notification[1]);
-                cls.on_partner_notification(notification[1]);
+                chat_manager.mail_tools.on_partner_notification(notification[1]);
             } else if (model === 'bus.presence') {
                 // update presence of users
-                // this.on_presence_notification(notification[1]);
-                cls.on_presence_notification(notification[1]);
+                chat_manager.mail_tools.on_presence_notification(notification[1]);
             }
         });
     },
 
     on_needaction_notification: function (message) {
-        message = this.add_message(message, {
+        message = chat_manager.mail_tools.add_message(message, {
             channel_id: 'channel_inbox',
             show_notification: true,
             increment_unread: true
         });
-        this.invalidate_caches(message.channel_ids);
+        chat_manager.mail_tools.invalidate_caches(message.channel_ids);
         needaction_counter++;
         _.each(message.channel_ids, function (channel_id) {
             var channel = chat_manager.get_channel(channel_id);
@@ -567,25 +560,25 @@ var MailTools = core.Class.extend({
         }
         def.then(function () {
             // don't increment unread if channel wasn't in cache yet as its unread counter has just been fetched
-            this.add_message(message, { show_notification: true, increment_unread: channel_already_in_cache });
-            this.invalidate_caches(message.channel_ids);
+            chat_manager.mail_tools.add_message(message, { show_notification: true, increment_unread: channel_already_in_cache });
+            chat_manager.mail_tools.invalidate_caches(message.channel_ids);
         });
     },
 
     on_partner_notification: function (data) {
         if (data.info === "unsubscribe") {
-            this.remove_channel(chat_manager.get_channel(data.id));
+            chat_manager.mail_tools.remove_channel(chat_manager.get_channel(data.id));
             chat_manager.bus.trigger("unsubscribe_from_channel", data.id);
         } else if (data.type === 'toggle_star') {
-            this.on_toggle_star_notification(data);
+            chat_manager.mail_tools.on_toggle_star_notification(data);
         } else if (data.type === 'mark_as_read') {
-            this.on_mark_as_read_notification(data);
+            chat_manager.mail_tools.on_mark_as_read_notification(data);
         } else if (data.type === 'mark_as_unread') {
-            this.on_mark_as_unread_notification(data);
+            chat_manager.mail_tools.on_mark_as_unread_notification(data);
         } else if (data.info === 'channel_seen') {
-            this.on_channel_seen_notification(data);
+            chat_manager.mail_tools.on_channel_seen_notification(data);
         } else {
-            this.on_chat_session_notification(data);
+            chat_manager.mail_tools.on_chat_session_notification(data);
         }
     },
 
@@ -611,8 +604,8 @@ var MailTools = core.Class.extend({
         _.each(data.message_ids, function (msg_id) {
             var message = _.findWhere(messages, { id: msg_id });
             if (message) {
-                this.invalidate_caches(message.channel_ids);
-                this.remove_message_from_channel("channel_inbox", message);
+                chat_manager.mail_tools.invalidate_caches(message.channel_ids);
+                chat_manager.mail_tools.remove_message_from_channel("channel_inbox", message);
                 chat_manager.bus.trigger('update_message', message);
             }
         });
@@ -636,9 +629,9 @@ var MailTools = core.Class.extend({
         _.each(data.message_ids, function (message_id) {
             var message = _.findWhere(messages, { id: message_id });
             if (message) {
-                this.invalidate_caches(message.channel_ids);
-                this.add_channel_to_message(message, 'channel_inbox');
-                this.add_to_cache(message, []);
+                chat_manager.mail_tools.invalidate_caches(message.channel_ids);
+                chat_manager.mail_tools.add_channel_to_message(message, 'channel_inbox');
+                chat_manager.mail_tools.add_to_cache(message, []);
             }
         });
         var channel_inbox = chat_manager.get_channel('channel_inbox');
@@ -659,7 +652,7 @@ var MailTools = core.Class.extend({
         if (channel) {
             channel.last_seen_message_id = data.last_message_id;
             if (channel.unread_counter) {
-                this.update_channel_unread_counter(channel, 0);
+                chat_manager.mail_tools.update_channel_unread_counter(channel, 0);
             }
         }
     },
@@ -667,7 +660,7 @@ var MailTools = core.Class.extend({
     on_chat_session_notification: function (chat_session) {
         var channel;
         if ((chat_session.channel_type === "channel") && (chat_session.state === "open")) {
-            this.add_channel(chat_session, {autoswitch: false});
+            chat_manager.mail_tools.add_channel(chat_session, {autoswitch: false});
             if (!chat_session.is_minimized && chat_session.info !== 'creation') {
                 web_client.do_notify(_t("Invitation"), _t("You have been invited to: ") + chat_session.name);
             }

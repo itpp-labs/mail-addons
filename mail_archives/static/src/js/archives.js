@@ -40,7 +40,6 @@ base_obj.MailTools.include({
     }
 });
 
-// Change chat_manager with override methods
 base_obj.chat_manager.is_ready.then(function(){
         // Add archive channel
         base_obj.chat_manager.mail_tools.add_channel({
