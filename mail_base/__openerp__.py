@@ -7,7 +7,7 @@
     "version": "1.0.0",
 
     "author": "IT-Projects LLC, Pavel Romanchenko",
-    "website": "https://www.it-projects.info",
+    "website": "https://it-projects.info",
     "license": "LGPL-3",
 
     "depends": [
