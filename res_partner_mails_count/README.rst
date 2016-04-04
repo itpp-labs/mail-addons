@@ -13,4 +13,4 @@ Further information
 
 HTML Description: https://apps.odoo.com/apps/modules/9.0/res_partner_mails_count/
 
-Tested on Odoo 9.0
+Tested on Odoo 9.0 b9f206953e3f877adf18643f154d1262842564ee

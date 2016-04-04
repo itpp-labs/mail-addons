@@ -9,17 +9,11 @@
         </t>
     </t>
     <!--Add message about empty archive page-->
-    <div t-name="mail.EmptyChannel" class="o_mail_no_content">
-        <t t-if="options.channel_id==='channel_inbox'">
-            <div class="o_thread_title">Congratulations, your inbox is empty</div>
-            <div>New messages appear here.</div>
+    <t t-extend="mail.EmptyChannel">
+        <t t-jquery="t:last-child" t-operation="after">
+            <t t-if="options.channel_id==='channel_archive'">
+                <div class="o_thread_title">Archive is empty</div>
+            </t>
         </t>
-        <t t-if="options.channel_id==='channel_starred'">
-            <div class="o_thread_title">No starred message</div>
-            <div> You can mark any message as 'starred', and it shows up in this channel.</div>
-        </t>
-        <t t-if="options.channel_id==='channel_archive'">
-            <div class="o_thread_title">Archive is empty</div>
-        </t>
-    </div>
+    </t>
 </template>

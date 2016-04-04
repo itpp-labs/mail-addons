@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "mail_base",
-    "summary": """Contain common code for other mail modules""",
-    "category": "Uncategorized",
+    "name": "Mail Base",
+    "summary": """Makes Mail extendable""",
+    "category": "Discuss",
     "images": [],
     "version": "1.0.0",
 
     "author": "IT-Projects LLC, Pavel Romanchenko",
-    "website": "http://www.it-projects.info",
+    "website": "https://www.it-projects.info",
     "license": "LGPL-3",
 
     "depends": [

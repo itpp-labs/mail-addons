@@ -37,23 +37,20 @@ base_obj.MailTools.include({
 
     get_domain: function(channel){
         return (channel.id === "channel_archive") ? [] : this._super.apply(this, arguments);
-    },
+    }
+});
 
-    start: function(){
+// Change chat_manager with override methods
+base_obj.chat_manager.is_ready.then(function(){
         // Add archive channel
-        this.add_channel({
+        base_obj.chat_manager.mail_tools.add_channel({
             id: "channel_archive",
             name: _t("Archive"),
             type: "static"
         });
 
-        return $.when(this._super.apply(this, arguments));
-    }
-});
-
-// Change chat_manager with override methods
-var cls = new base_obj.MailTools(base_obj.chat_manager);
-base_obj.chat_manager.is_ready = cls.start();
+        return $.when();
+    });
 
 return base_obj.chat_manager;
 
