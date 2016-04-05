@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "Mail Sent",
+    "name": "Sentbox",
     "summary": """Create sent channel""",
     "category": "Discuss",
     "images": [],
-    "version": "1.0.0",
+    "version": "1.0.3",
 
-    "author": "IT-Projects LLC, Pavel Romanchenko",
+    "author": "IT-Projects LLC, Ivan Yelizariev, Pavel Romanchenko",
     "website": "https://it-projects.info",
     "license": "LGPL-3",
+    'price': 9.00,
+    'currency': 'EUR',
 
     "depends": [
         "base",
