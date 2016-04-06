@@ -160,9 +160,9 @@ var MailTools = core.Class.extend({
             _.each(msg.channel_ids, function (channel_id) {
                 var channel = chat_manager.get_channel(channel_id);
                 if (channel) {
-                    cls.add_to_cache(msg, []);
+                    chat_manager.mail_tools.add_to_cache(msg, []);
                     if (options.domain && options.domain !== []) {
-                        cls.add_to_cache(msg, options.domain);
+                        chat_manager.mail_tools.add_to_cache(msg, options.domain);
                     }
                     if (channel.hidden) {
                         channel.hidden = false;
@@ -412,7 +412,7 @@ var MailTools = core.Class.extend({
         _.each(message.channel_ids, function (channel_id) {
             var channel = chat_manager.get_channel(channel_id);
             if (channel) {
-                var channel_cache = cls.get_channel_cache(channel, domain);
+                var channel_cache = chat_manager.mail_tools.get_channel_cache(channel, domain);
                 var index = _.sortedIndex(channel_cache.messages, message, 'id');
                 if (channel_cache.messages[index] !== message) {
                     channel_cache.messages.splice(index, 0, message);
@@ -586,12 +586,12 @@ var MailTools = core.Class.extend({
         _.each(data.message_ids, function (msg_id) {
             var message = _.findWhere(messages, { id: msg_id });
             if (message) {
-                cls.invalidate_caches(message.channel_ids);
+                chat_manager.mail_tools.invalidate_caches(message.channel_ids);
                 message.is_starred = data.starred;
                 if (!message.is_starred) {
-                    cls.remove_message_from_channel("channel_starred", message);
+                    chat_manager.mail_tools.remove_message_from_channel("channel_starred", message);
                 } else {
-                    cls.add_to_cache(message, []);
+                    chat_manager.mail_tools.add_to_cache(message, []);
                     var channel_starred = chat_manager.get_channel('channel_starred');
                     channel_starred.cache = _.pick(channel_starred.cache, "[]");
                 }

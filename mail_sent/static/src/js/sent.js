@@ -20,13 +20,15 @@ var _t = core._t;
 base_obj.MailTools.include({
     get_properties: function(msg){
         var properties = this._super.apply(this, arguments);
-        properties.is_archive = this.property_descr("channel_sent", msg, this);
+        properties.is_sent = this.property_descr("channel_sent", msg, this);
         return properties;
     },
 
     set_channel_flags: function(data, msg){
         this._super.apply(this, arguments);
-        msg.is_archive = true;
+        if (_.contains(data.author_id, session.partner_id) && data.partner_ids.length > 0) {
+            msg.is_sent = true;
+        }
         return msg;
     },
 
@@ -36,12 +38,15 @@ base_obj.MailTools.include({
     },
 
     get_domain: function(channel){
-        return (channel.id === "channel_sent") ? [] : this._super.apply(this, arguments);
+        return (channel.id === "channel_sent") ? [
+            ['sent', '=', true],
+            ['author_id.user_ids', 'in', [openerp.session.uid]]
+        ] : this._super.apply(this, arguments);
     }
 });
 
 base_obj.chat_manager.is_ready.then(function(){
-        // Add archive channel
+        // Add sent channel
         base_obj.chat_manager.mail_tools.add_channel({
             id: "channel_sent",
             name: _t("Sent"),
