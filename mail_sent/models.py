@@ -16,6 +16,15 @@ class MailMessage(models.Model):
                          and self_sudo.author_id \
                          and self_sudo.partner_ids[0].id != self_sudo.author_id.id
 
+    @api.multi
+    def message_format(self):
+        message_values = super(MailMessage, self).message_format()
+        for message in message_values:
+            for item in self:
+                if message['id'] == item.id:
+                    message['sent'] = item.sent
+        return message_values
+
 
 class MailComposeMessage(models.TransientModel):
     _inherit = 'mail.compose.message'
