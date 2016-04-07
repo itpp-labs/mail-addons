@@ -22,7 +22,7 @@ class MailMessage(models.Model):
         message_index = {message['id']: message for message in message_values}
         for item in self:
             msg = message_index.get(item.id)
-            if msg:
+            if msg and item._uid == item.author_id.user_ids.id:
                 msg['sent'] = item.sent
         return message_values
 
