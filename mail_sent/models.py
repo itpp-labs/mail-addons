@@ -19,10 +19,11 @@ class MailMessage(models.Model):
     @api.multi
     def message_format(self):
         message_values = super(MailMessage, self).message_format()
-        for message in message_values:
-            for item in self:
-                if message['id'] == item.id:
-                    message['sent'] = item.sent
+        message_index = {message['id']: message for message in message_values}
+        for item in self:
+            msg = message_index.get(item.id)
+            if msg:
+                msg['sent'] = item.sent
         return message_values
 
 
