@@ -8,13 +8,13 @@ class MailMessage(models.Model):
     sent = fields.Boolean('Sent', compute="_get_sent", help='Was message sent to someone', store=True)
 
     @api.one
-    @api.depends('author_id', 'partner_ids')
+    @api.depends('author_id', 'needaction_partner_ids')
     def _get_sent(self):
         self_sudo = self.sudo()
-        self_sudo.sent = len(self_sudo.partner_ids) > 1 \
-                         or len(self_sudo.partner_ids) == 1 \
-                         and self_sudo.author_id \
-                         and self_sudo.partner_ids[0].id != self_sudo.author_id.id
+        self_sudo.sent = len(self_sudo.needaction_partner_ids) > 1 \
+                         or len(self_sudo.needaction_partner_ids) == 1 \
+                            and self_sudo.author_id \
+                            and self_sudo.needaction_partner_ids[0].id != self_sudo.author_id.id
 
     @api.multi
     def message_format(self):
@@ -22,7 +22,7 @@ class MailMessage(models.Model):
         message_index = {message['id']: message for message in message_values}
         for item in self:
             msg = message_index.get(item.id)
-            if msg and item._uid == item.author_id.user_ids.id:
+            if msg:
                 msg['sent'] = item.sent
         return message_values
 
