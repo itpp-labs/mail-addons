@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 {
     "name": "mail_archives",
-    "summary": """Create archive channel""",
-    "category": "Uncategorized",
+    "summary": """Adds menu to find old messages""",
+    "category": "Discuss",
     "images": [],
     "version": "1.0.0",
 
