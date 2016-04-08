@@ -7,6 +7,8 @@
             <xpath expr="." position="inside">
                 <script src="/res_partner_mails_count/static/src/js/main.js"
                         type="text/javascript"></script>
+                <script src="/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js"
+                        type="text/javascript"></script>
             </xpath>
         </template>
 
@@ -29,13 +31,13 @@
             <field name="priority" eval="50"/>
             <field name="arch" type="xml">
                 <xpath expr="//div[@name='buttons']" position="inside">
-                    <button class="oe_inline oe_stat_button" type="action"
+                    <button class="oe_inline oe_stat_button mails_to" type="action"
                         name="%(action_mails)d"
                         context="{'search_default_notified_partner_ids': [active_id], 'default_model': 'res.partner', 'default_res_id': active_id}"
                         icon="fa-envelope">
                         <field string="Mails to" name="mails_to" widget="statinfo"/>
                     </button>
-                    <button class="oe_inline oe_stat_button" type="action"
+                    <button class="oe_inline oe_stat_button mails_from" type="action"
                         name="%(action_mails)d"
                         context="{'search_default_author_id': active_id, 'default_model': 'res.partner', 'default_res_id': active_id}"
                         icon="fa-envelope-o">
@@ -43,6 +45,16 @@
                     </button>
                 </xpath>
             </field>
+        </record>
+        <record id="res_partner_mails_count_tutorial" model="ir.actions.act_url">
+            <field name="name">res_partner_mails_count Tutorial</field>
+            <field name="url" eval="'/web?debug=1&amp;res_partner_mails_count=tutorial#id='+str(ref('base.partner_root'))+'&amp;view_type=form&amp;model=res.partner&amp;/#tutorial_extra.mails_count_tour=true'"/>
+            <field name="target">self</field>
+        </record>
+        <record id="base.open_menu" model="ir.actions.todo">
+            <field name="action_id" ref="res_partner_mails_count_tutorial"/>
+            <field name="state">open</field>
+            <field name="sequence">200</field>
         </record>
     </data>
 </openerp>

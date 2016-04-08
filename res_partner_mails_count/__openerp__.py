@@ -15,6 +15,7 @@
     "depends": [
         'base',
         'mail' ,
+        'web_tour_extra' ,
     ],
     "external_dependencies": {"python": [], "bin": []},
     "data": [
