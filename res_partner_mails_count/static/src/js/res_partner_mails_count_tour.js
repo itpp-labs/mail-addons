@@ -7,7 +7,7 @@
         id: 'mails_count_tour',
         name: _t("Mails count Tour"),
         mode: 'test',
-        path: '/web?debug=1&res_partner_mails_count=tutorial#id=3&view_type=form&model=res.partner',
+        path: '/web?res_partner_mails_count=tutorial#id=3&view_type=form&model=res.partner',
         // mode: 'tutorial',
         steps: [
             {
