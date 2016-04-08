@@ -26,7 +26,7 @@ base_obj.MailTools.include({
 
     set_channel_flags: function(data, msg){
         this._super.apply(this, arguments);
-        if (data.sent && data.author_id[0] == session.partner_id && data.partner_ids.length > 0) {
+        if (data.sent && data.author_id[0] == session.partner_id) {
             msg.is_sent = true;
         }
         return msg;
