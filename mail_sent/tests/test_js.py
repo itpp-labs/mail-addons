@@ -9,7 +9,7 @@ class TestUi(openerp.tests.HttpCase):
             setTimeout(function () {
                 $(".mail_sent").click();
                 setTimeout(function () {console.log('ok');}, 3000);
-            }, 3000);
+            }, 1000);
         """
         link = '/web#action=%s' % self.ref('mail.mail_channel_action_client_chat')
-        self.phantom_js(link, code, "", login="demo")
+        self.phantom_js(link, code, "odoo.__DEBUG__.services['mail_sent.sent']", login="demo")
