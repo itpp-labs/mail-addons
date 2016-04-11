@@ -698,10 +698,10 @@ var cls = new MailTools();
 chat_manager.mail_tools = cls;
 // we add this function this way in order to make them extendable via MailTools.include({...})
 chat_manager.make_message = function(){
-    chat_manager.mail_tools.make_message.apply(chat_manager.mail_tools, arguments)
+    return chat_manager.mail_tools.make_message.apply(chat_manager.mail_tools, arguments)
 };
 chat_manager.make_channel = function(){
-    chat_manager.mail_tools.make_channel.apply(chat_manager.mail_tools, arguments)
+    return chat_manager.mail_tools.make_channel.apply(chat_manager.mail_tools, arguments)
 };
 chat_manager.post_message = function (data, options) {
         options = options || {};
