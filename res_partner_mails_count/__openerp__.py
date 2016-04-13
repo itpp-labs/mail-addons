@@ -13,8 +13,7 @@
     "currency": "EUR",
 
     "depends": [
-        'base',
-        'mail',
+        'mail_sent'
     ],
     "external_dependencies": {"python": [], "bin": []},
     "data": [
