@@ -60,6 +60,28 @@ var channel_seen = _.throttle(function (channel) {
     return ChannelModel.call('channel_seen', [[channel.id]], {}, {shadow: true});
 }, 3000);
 
+var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
+ChatAction.include({
+    start: function() {
+        var result = this._super.apply(this, arguments);
+
+        var search_defaults = {};
+        var context = this.action ? this.action.context : [];
+        _.each(context, function (value, key) {
+            var match = /^search_default_(.*)$/.exec(key);
+            if (match) {
+                search_defaults[match[1]] = value;
+            }
+        });
+        this.searchview.defaults = search_defaults;
+
+        var self = this;
+        $.when(result).done(function() {
+            self.searchview.do_search();
+        });
+    }
+});
+
 var MailTools = core.Class.extend({
 
     send_native_notification: function (title, content) {
