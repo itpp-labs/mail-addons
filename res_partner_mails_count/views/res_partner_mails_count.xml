@@ -6,7 +6,6 @@
             <field name="tag">mail.chat.instant_messaging</field>
             <field name="res_model">mail.message</field>
             <field name="context">{
-                'ignore_search_model': True,
                 'active_id': 'channel_archive'
             }</field>
             <field name="help" type="html">

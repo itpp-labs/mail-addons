@@ -76,7 +76,7 @@ ChatAction.include({
         this.searchview.defaults = search_defaults;
 
         var self = this;
-        $.when(result).done(function() {
+        return $.when(result).done(function() {
             self.searchview.do_search();
         });
     }
