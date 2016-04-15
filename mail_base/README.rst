@@ -1,7 +1,8 @@
 Mail Base
 =========
 
-Modules doesn't introduce new features, but make built-in mail js features extendable.
+* makes built-in mail js features extendable.
+* handle ``search_default_*`` parameters in context.
 
 Usage
 -----
