@@ -84,9 +84,11 @@ ChatAction.include({
     destroy: function() {
         var result = this._super.apply(this, arguments);
         $('.oe_leftbar .oe_secondary_menu').each(function(){
-            if ($(this).css('display') == 'block' && $(this).children().length > 0){
-                $('.oe_leftbar').toggle(true);
-	        	return false;
+            if ($(this).css('display') == 'block'){
+                if ($(this).children().length > 0) {
+                    $('.oe_leftbar').toggle(true);
+                }
+                return false;
             }
         });
         return result;
