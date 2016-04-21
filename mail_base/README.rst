@@ -3,6 +3,7 @@ Mail Base
 
 * makes built-in mail js features extendable.
 * handle ``search_default_*`` parameters in context.
+* fixes toggling left bar
 
 Usage
 -----
