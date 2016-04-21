@@ -77,8 +77,21 @@ ChatAction.include({
 
         var self = this;
         return $.when(result).done(function() {
+            $('.oe_leftbar').toggle(false);
             self.searchview.do_search();
         });
+    },
+    destroy: function() {
+        var result = this._super.apply(this, arguments);
+        $('.oe_leftbar .oe_secondary_menu').each(function(){
+            if ($(this).css('display') == 'block'){
+                if ($(this).children().length > 0) {
+                    $('.oe_leftbar').toggle(true);
+                }
+                return false;
+            }
+        });
+        return result;
     }
 });
 
