@@ -1,9 +1,10 @@
-(function () {
+odoo.define('res_partner_mails_count.mails_count_tour', function (require) {
     'use strict';
+    var Core = require('web.core');
+    var Tour = require('web.Tour');
+    var _t = Core._t;
 
-    var _t = openerp._t;
-
-    openerp.Tour.register({
+    Tour.register({
         id: 'mails_count_tour',
         name: _t("Mails count Tour"),
         mode: 'test',
@@ -22,25 +23,12 @@
                 
             },
             {
-                waitNot:   '.mails_to:visible',
-                title:     _t("Send message from here"),
-                placement: 'left',
-                content:   _t("Now you can see corresponding mails. You can send mail to this partner right from here. Press <em>'Send a mesage'</em>."),
-                element:   '.oe_mail_wall .oe_msg.oe_msg_composer_compact>div>.oe_compose_post',
-            },
-            {
-                title:     "New message",
-                placement: 'left',
-                content:   _t("You can type message here."),
-                element:   'div.oe_msg_content>textarea.field_text',
-            },
-            {
-                wait:   '7000',
-                title:     "That's it",
+                waitFor:   '.o_channel_name.mail_archives:visible',
+                title:     _t("That's it"),
                 content:   _t("Enjoy your day! <br/> <br/><a href='https://www.it-projects.info/apps' target='_blank'>IT-Projects LLC</a> team "),
                 popover:   { next: _t("Close Tutorial") },
             },
         ]
     });
 
-}());
+});
