@@ -5,22 +5,29 @@
 Usage
 =====
 
-First we should register on mailgun.com.
-After registgration there will be one domain available. E.g. sandbox5543f1479be64e5aac193406b4cdccf8.mailgun.org.
-From this point we could already use API calls to mailgun API. There is API key on the
-https://mailgun.com/app/domains/sandbox5543f1479be64e5aac193406b4cdccf8.mailgun.org page.
-We can do all operations using mailgun API if we know our API key. More about it
-on https://documentation.mailgun.com/.
+* register on http://mailgun.com       
+* On https://mailgun.com/app/domains click on sandbox...mailgun.org domain. Here you can see all information needed to configure odoo outgoing mail feature
+* Copy API Key value into odoo
 
-There is 'Add New Domain' on the https://mailgun.com/app/domains to add new domains.
-All domains that we add manually should be verified.
-After adding your domain you will see the https://mailgun.com/app/domains/<yourdomain>/verify page
-with instructions on how to verify and use new domain.
+ * Open menu Settings/Parameters/System Parameters
+ * Edit mailgun.apikey parameter
+ * Put API Key from mailgun into Value field and save
 
-To receive incoming messages we specify so called routes on mailgun.
-You can see more about the routes here https://documentation.mailgun.com/user_manual.html#receiving-forwarding-and-storing-messages
+* From https://mailgun.com/cp/routes create new route
 
-Instruction how to check that module works. What shall user do and what would user get, e.g.
-* Open menu ...
-* Click ...
+ * Priority: ``0``
+ * Filter expression: ``catch_all()``
+ * Actions: ``store(notify="http://<your odoo domain>/mailgun/notify")``
+
+* In odoo remove 'localhost' Outgoing Mail Server and create 'mailgun'. Now you can send emails
+* From odoo menu Settings/General Settings edit Alias Domain
+
+ * Put your mailgun domain here. E.g. sandbox...mailgun.org
+ * Click 'Apply' button
+
+* Edit Messaging Alias for your user. Now you can receive emails that is sent to configured alias email address.
+
+ * From menu Settings/Users/Users open you user and click 'Edit'
+ * On Preference tab put alias into Messaging Alias field and click 'Save'
+
 
