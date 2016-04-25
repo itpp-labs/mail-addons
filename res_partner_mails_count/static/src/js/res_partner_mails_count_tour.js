@@ -1,4 +1,4 @@
-odoo.define('res_partner_mails_count.mails_count_tour', function (require) {
+odoo.define('res_partner_mails_count.res_partner_mails_count_tour', function (require) {
     'use strict';
     var Core = require('web.core');
     var Tour = require('web.Tour');
@@ -8,7 +8,9 @@ odoo.define('res_partner_mails_count.mails_count_tour', function (require) {
         id: 'mails_count_tour',
         name: _t("Mails count Tour"),
         mode: 'test',
-        path: '/web?res_partner_mails_count=tutorial#id=3&view_type=form&model=res.partner',
+        // path: '/web?res_partner_mails_count=tutorial#id=3&view_type=form&model=res.partner',
+        // path: '/web?debug=1&res_partner_mails_count=tutorial#id=3&view_type=form&model=res.partner',
+        path: '/web',
         // mode: 'tutorial',
         steps: [
             {
