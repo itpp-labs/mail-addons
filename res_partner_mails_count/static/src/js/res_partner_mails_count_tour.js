@@ -19,7 +19,7 @@ odoo.define('res_partner_mails_count.res_partner_mails_count_tour', function (re
                 title:     _t("New fields"),
                 content:   _t("Here is new fields with mails counters. Press one of it."),
                 element:   '.mails_to',
-                wait:      '.mails_to:visible',
+                waitFor:   '.mails_to:visible',
                 
             },
             {
