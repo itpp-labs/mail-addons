@@ -8,10 +8,7 @@ odoo.define('res_partner_mails_count.res_partner_mails_count_tour', function (re
         id: 'mails_count_tour',
         name: _t("Mails count Tour"),
         mode: 'test',
-        // path: '/web?res_partner_mails_count=tutorial#id=3&view_type=form&model=res.partner',
-        // path: '/web?debug=1&res_partner_mails_count=tutorial#id=3&view_type=form&model=res.partner',
-        path: '/web',
-        // mode: 'tutorial',
+        path: '/web?&res_partner_mails_count=tutorial#id=3&view_type=form&model=res.partner',
         steps: [
             {
                 title:     _t("Mails count tutorial"),

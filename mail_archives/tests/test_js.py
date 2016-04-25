@@ -12,4 +12,4 @@ class TestUi(openerp.tests.HttpCase):
             }, 1000);
         """
         link = '/web#action=%s' % self.ref('mail.mail_channel_action_client_chat')
-        self.phantom_js(link, code, "odoo.__DEBUG__.services['mail_archives.archives']", login="demo")
+        self.phantom_js(link, code, "odoo.__DEBUG__.services['mail_archives.archives']", login="admin")

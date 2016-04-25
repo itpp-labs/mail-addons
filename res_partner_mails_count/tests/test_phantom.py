@@ -16,4 +16,4 @@ class TestUi(openerp.tests.HttpCase):
             }, 3000);
         """
         link = '/web#id=3&view_type=form&model=res.partner'
-        self.phantom_js(link, code, "openerp.Tour.tours.mails_count_tour", login="admin")
+        self.phantom_js(link, code, "odoo.__DEBUG__.services['web.Tour'].tours.mails_count_tour", login="admin")
