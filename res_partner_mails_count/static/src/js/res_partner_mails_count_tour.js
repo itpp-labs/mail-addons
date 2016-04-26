@@ -24,6 +24,7 @@ odoo.define('res_partner_mails_count.res_partner_mails_count_tour', function (re
             {
                 title:     _t("Messages are found!"),
                 placement: 'left',
+                waitNot:   '.mails_to:visible',
                 element:   '.o_mail_thread',
             },
             {
