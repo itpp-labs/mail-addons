@@ -37,6 +37,8 @@
             <field name="url" eval="'/web?debug=1&amp;res_partner_mails_count=tutorial#id='+str(ref('base.partner_root'))+'&amp;view_type=form&amp;model=res.partner&amp;/#tutorial_extra.mails_count_tour=true'"/>
             <field name="target">self</field>
         </record>
+    </data>
+    <data noupdate="1">
         <record id="base.open_menu" model="ir.actions.todo">
             <field name="action_id" ref="res_partner_mails_count_tutorial"/>
             <field name="state">open</field>
