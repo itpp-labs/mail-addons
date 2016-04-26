@@ -22,8 +22,7 @@ odoo.define('res_partner_mails_count.res_partner_mails_count_tour', function (re
                 waitFor:   '.mails_to:visible',
             },
             {
-                wait:   '2000',
-                waitFor:   '.o_channel_name.mail_archives:visible',
+                wait:   '8000',
                 title:     _t("That's it"),
                 content:   _t("Enjoy your day! <br/> <br/><a href='https://www.it-projects.info/apps' target='_blank'>IT-Projects LLC</a> team "),
                 popover:   { next: _t("Close Tutorial") },
