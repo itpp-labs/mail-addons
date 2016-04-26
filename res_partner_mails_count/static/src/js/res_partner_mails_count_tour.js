@@ -25,8 +25,8 @@
                 waitNot:   '.mails_to:visible',
                 title:     _t("Send message from here"),
                 placement: 'left',
-                content:   _t("Now you can see corresponding mails. You can send mail to this partner right from here. Press <em>'Send a mesage'</em>."),
-                element:   '.oe_mail_wall .oe_msg.oe_msg_composer_compact>div>.oe_compose_post',
+                content:   "Now you can see corresponding mails. You can send mail to this partner right from here. Press <em>'Send a mesage'</em>.",
+                element:   '.oe_mail_wall .oe_msg.oe_msg_composer_compact',
             },
             {
                 title:     "New message",
