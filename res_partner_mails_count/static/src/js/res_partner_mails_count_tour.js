@@ -20,10 +20,15 @@ odoo.define('res_partner_mails_count.res_partner_mails_count_tour', function (re
                 content:   _t("Here is new fields with mails counters. Press one of it."),
                 element:   '.mails_to',
                 waitFor:   '.mails_to:visible',
-                
             },
             {
-                wait:   '2000',
+                title:     _t("Messages are found!"),
+                placement: 'top',
+                waitNot:   '.mails_to:visible',
+                element:   '.o_mail_thread',
+            },
+            {
+                wait:   '5000',
                 waitFor:   '.o_channel_name.mail_archives:visible',
                 title:     _t("That's it"),
                 content:   _t("Enjoy your day! <br/> <br/><a href='https://www.it-projects.info/apps' target='_blank'>IT-Projects LLC</a> team "),
