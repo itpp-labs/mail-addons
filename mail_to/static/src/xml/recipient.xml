@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <t t-extend="mail.ChatThread.Message">
+        <t t-jquery="p[class=o_mail_info]>span" t-operation="before">
+            <span class="recipients_info">
+                <t t-foreach="message.partner_ids" t-as="p">
+                    <i t-att-data-message-id="message.id" title="Recipients Info" t-esc="p[1]"/>
+                </t>
+            </span>
+        </t>
+    </t>
+</template>
