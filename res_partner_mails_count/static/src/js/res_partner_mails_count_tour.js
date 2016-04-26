@@ -22,6 +22,11 @@ odoo.define('res_partner_mails_count.res_partner_mails_count_tour', function (re
                 waitFor:   '.mails_to:visible',
             },
             {
+                title:     _t("Messages are found!"),
+                placement: 'left',
+                element:   '.o_mail_thread',
+            },
+            {
                 wait:   '8000',
                 waitFor:   '.o_channel_name.mail_archives:visible',
                 title:     _t("That's it"),
