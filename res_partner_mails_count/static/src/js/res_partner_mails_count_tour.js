@@ -23,12 +23,12 @@ odoo.define('res_partner_mails_count.res_partner_mails_count_tour', function (re
             },
             {
                 title:     _t("Messages are found!"),
-                placement: 'left',
+                placement: 'top',
                 waitNot:   '.mails_to:visible',
                 element:   '.o_mail_thread',
             },
             {
-                wait:   '8000',
+                wait:   '5000',
                 waitFor:   '.o_channel_name.mail_archives:visible',
                 title:     _t("That's it"),
                 content:   _t("Enjoy your day! <br/> <br/><a href='https://www.it-projects.info/apps' target='_blank'>IT-Projects LLC</a> team "),
