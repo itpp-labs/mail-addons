@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "mail_archives",
+    "name": "Mail archives",
     "summary": """Adds menu to find old messages""",
     "category": "Discuss",
     "images": [],
