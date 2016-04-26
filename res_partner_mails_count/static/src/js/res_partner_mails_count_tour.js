@@ -19,13 +19,12 @@
                 title:     _t("New fields"),
                 content:   _t("Here is new fields with mails counters. Press one of it."),
                 element:   '.mails_to',
-                
             },
             {
                 waitNot:   '.mails_to:visible',
-                title:     _t("Send message from here"),
+                title:     _t("Check messages or send new one"),
                 placement: 'left',
-                content:   _t("Now you can see corresponding mails. You can send mail to this partner right from here. Press <em>'Send a mesage'</em>."),
+                content:   _t("Click <em>'Send a mesage'</em> to continue the Tour"),
                 element:   '.oe_mail_wall .oe_msg.oe_msg_composer_compact>div>.oe_compose_post',
             },
             {
