@@ -1,17 +1,14 @@
 odoo.define('mail_to.MailTo', function (require) {
     "use strict";
 
-    var Thread = require('mail.ChatThread');
-    var Model = require('web.Model');
+    var base_obj = require('mail_base.base');
 
-    Thread.include({
-        render: function (messages, options) {
-            // for(var i = 0; i < messages.length; i++){
-            //     var msg = messages[i];
-            //     msg.needaction_partner_ids = [3];
-            // }
-            // console.log('messages:', messages);
-            this._super(messages, options);
+    base_obj.MailTools.include({
+        make_message: function(data){
+            var msg = this._super(data);
+            msg.partner_ids = data.partner_ids;
+            // msg.needaction_partner_ids = data.needaction_partner_ids;
+            return msg;
         }
     });
 });
