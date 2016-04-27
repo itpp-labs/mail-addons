@@ -6,8 +6,6 @@
                 <t t-if="message.partner_ids.length > 0">To: </t>
                 <t t-foreach="message.partner_ids" t-as="p">
                     <a t-att-href="_.str.sprintf('/web?#id=%s&amp;view_type=form&amp;model=res.partner', p[0])"
-                       t-att-data-oe-model="message.model"
-                       t-att-data-oe-id="message.res_id"
                        class="grey">
                         <i t-att-data-message-id="message.id" title="Recipients Info" t-esc="p[1]"/>
                     </a>
