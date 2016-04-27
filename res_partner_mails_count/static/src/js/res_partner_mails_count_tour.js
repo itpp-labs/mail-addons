@@ -19,7 +19,6 @@
                 title:     _t("New fields"),
                 content:   _t("Here is new fields with mails counters. Press one of it."),
                 element:   '.mails_to',
-                
             },
             {
                 waitNot:   '.mails_to:visible',
