@@ -1,0 +1,9 @@
+.grey {
+    color: grey;
+}
+.o_mail_thread .o_thread_message span.recipients_info {
+    opacity: 0;
+}
+.o_mail_thread .o_thread_message:hover span.recipients_info {
+    opacity: 1;
+}

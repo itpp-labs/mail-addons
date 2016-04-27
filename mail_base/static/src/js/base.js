@@ -845,7 +845,7 @@ chat_manager.undo_mark_as_read = function (message_ids, channel) {
 chat_manager.mark_channel_as_seen = function (channel) {
         if (channel.unread_counter > 0 && channel.type !== 'static') {
             chat_manager.mail_tools.update_channel_unread_counter(channel, 0);
-            chat_manager.mail_tools.channel_seen(channel);
+            channel_seen(channel);
         }
     };
 chat_manager.get_channels = function () {
@@ -1043,7 +1043,7 @@ chat_manager.get_channels_preview = function (channels) {
         });
     };
 chat_manager.get_message_body_preview = function (message_body) {
-        return chat_manager.mail_tools.parse_and_transform(message_body, inline);
+        return chat_manager.mail_tools.parse_and_transform(message_body, chat_manager.mail_tools.inline);
     };
 chat_manager.search_partner = function (search_val, limit) {
         return PartnerModel.call('im_search', [search_val, limit || 20], {}, {shadow: true}).then(function(result) {
