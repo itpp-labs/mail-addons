@@ -29,16 +29,12 @@
                 element:   '.oe_mail_wall .oe_msg.oe_msg_composer_compact',
             },
             {
-                title:     "New message",
-                placement: 'left',
-                content:   _t("You can type message here."),
-                element:   'div.oe_msg_content>textarea.field_text',
-            },
-            {
-                wait:   '7000',
-                title:     "That's it",
-                content:   _t("Enjoy your day! <br/> <br/><a href='https://www.it-projects.info/apps' target='_blank'>IT-Projects LLC</a> team "),
-                popover:   { next: _t("Close Tutorial") },
+                title: _t("Done"),
+                placement: 'top',
+                waitNot: '.mails_to:visible',
+                element: 'div.oe_msg_content>textarea.field_text',
+                content: _t("Message are found. <br/>Enjoy your day! <br/> <br/><a href='https://www.it-projects.info/apps' target='_blank'>IT-Projects LLC</a> team "),
+                popover: {next: _t("Close Tutorial")},
             },
         ]
     });
