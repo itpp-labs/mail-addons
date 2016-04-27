@@ -25,7 +25,7 @@
                 title:     _t("Check messages or send new one"),
                 placement: 'left',
                 content:   _t("Click <em>'Send a mesage'</em> to continue the Tour"),
-                element:   '.oe_mail_wall .oe_msg.oe_msg_composer_compact>div>.oe_compose_post',
+                element:   '.oe_mail_wall .oe_msg.oe_msg_composer_compact',
             },
             {
                 title: _t("Done"),
