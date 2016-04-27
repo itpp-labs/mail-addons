@@ -8,7 +8,6 @@
         name: _t("Mails count Tour"),
         mode: 'test',
         path: '/web?res_partner_mails_count=tutorial#id=3&view_type=form&model=res.partner',
-        // mode: 'tutorial',
         steps: [
             {
                 title:     _t("Mails count tutorial"),
@@ -25,8 +24,12 @@
                 title:     _t("Check messages or send new one"),
                 placement: 'left',
                 content:   _t("Click <em>'Send a mesage'</em> to continue the Tour"),
-                element:   '.oe_mail_wall .oe_msg.oe_msg_composer_compact',
+                // element:   '.oe_mail_wall .oe_msg.oe_msg_composer_compact',
+                element:   '.oe_mail_wall .oe_msg.oe_msg_composer_compact>div>.oe_compose_post',
             },
+            // {
+            //     element:   '.oe_mail_wall .oe_msg.oe_msg_composer_compact>div>.oe_compose_post',
+            // },
             {
                 title: _t("Done"),
                 placement: 'top',
