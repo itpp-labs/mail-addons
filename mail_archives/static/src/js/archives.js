@@ -13,7 +13,7 @@ var session = require('web.session');
 var time = require('web.time');
 var web_client = require('web.web_client');
 
-var _t = core._t;
+var _lt = core._lt;
 //-------------------------------------------------------------------------------
 
 // Inherit class and override methods
@@ -44,7 +44,7 @@ base_obj.chat_manager.is_ready.then(function(){
         // Add archive channel
         base_obj.chat_manager.mail_tools.add_channel({
             id: "channel_archive",
-            name: _t("Archive"),
+            name: _lt("Archive"),
             type: "static"
         });
 
