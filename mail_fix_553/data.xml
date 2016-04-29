@@ -6,5 +6,10 @@
             <field name="key">mail.catchall.alias_from</field>
             <field name="value">portal</field>
         </record>
+        <!-- Name for Catchall Email Alias -->
+        <record id="icp_mail_catchall_name_alias_from" model="ir.config_parameter">
+            <field name="key">mail.catchall.name_alias_from</field>
+            <field name="value">Odoo</field>
+        </record>
     </data>
 </openerp>
