@@ -4,10 +4,20 @@
         <t t-jquery="p[class=o_mail_info]>span" t-operation="after">
             <span class="recipients_info">
                 <t t-if="message.partner_ids.length > 0">To: </t>
-                <t t-foreach="message.partner_ids" t-as="p">
-                    <a t-att-href="_.str.sprintf('/web?#id=%s&amp;view_type=form&amp;model=res.partner', p[0])"
-                       class="grey">
-                        <i t-att-data-message-id="message.id" title="Recipients Info" t-esc="p[1]"/>
+                <t t-foreach="message.partner_ids.length" t-as="i">
+                    <a t-att-href="_.str.sprintf('/web?#id=%s&amp;view_type=form&amp;model=res.partner', message.partner_ids[i][0])"
+                       class="recipient_link">
+                        <t t-if="i &lt; 4">
+                            <i t-esc="message.partner_ids[i][1]"/><t t-if="i &lt; message.partner_ids.length - 1">; </t>
+                        </t>
+                        <t t-if="i &gt; 3">
+                            <span class="more_4">
+                                <i t-esc="message.partner_ids[i][1]"/><t t-if="i &lt; message.partner_ids.length - 1">; </t>
+                            </span>
+                        </t>
+                        <t t-if="i == 4">
+                            <span class="more_4_link"><b>and <t t-esc="message.partner_ids.length - 4"> more...</t></b></span>
+                        </t>
                     </a>
                 </t>
             </span>
