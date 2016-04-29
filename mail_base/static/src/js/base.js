@@ -11,6 +11,7 @@ var time = require('web.time');
 var web_client = require('web.web_client');
 
 var _t = core._t;
+var _lt = core._lt;
 var LIMIT = 100;
 var preview_msg_max_size = 350;  // optimal for native english speakers
 
@@ -354,7 +355,7 @@ var MailTools = core.Class.extend({
         } else {
             channel = chat_manager.mail_tools.make_channel(data, options);
             channels.push(channel);
-            channels = _.sortBy(channels, function (channel) { return channel.name.toLowerCase(); });
+            channels = _.sortBy(channels, function (channel) { return _.isString(channel.name) ? channel.name.toLowerCase() : '' });
             if (!options.silent) {
                 chat_manager.bus.trigger("new_channel", channel);
             }
@@ -1059,7 +1060,7 @@ chat_manager.search_partner = function (search_val, limit) {
         });
     };
 chat_manager.send_native_notification = function(){
-    chat_manager.mail_tools.send_native_notification.apply(chat_manager.mail_tools, arguments)
+    return chat_manager.mail_tools.send_native_notification.apply(chat_manager.mail_tools, arguments)
 };
 chat_manager.bus.on('client_action_open', null, function (open) {
     client_action_open = open;
@@ -1069,13 +1070,13 @@ chat_manager.bus.on('client_action_open', null, function (open) {
 function init(){
     chat_manager.mail_tools.add_channel({
         id: "channel_inbox",
-        name: _t("Inbox"),
+        name: _lt("Inbox"),
         type: "static"
     }, { display_needactions: true });
 
     chat_manager.mail_tools.add_channel({
         id: "channel_starred",
-        name: _t("Starred"),
+        name: _lt("Starred"),
         type: "static"
     });
 
