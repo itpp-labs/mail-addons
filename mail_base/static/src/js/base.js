@@ -1099,6 +1099,8 @@ function init(){
     var load_menu_id = ir_model.call("xmlid_to_res_id", ["mail.mail_channel_menu_root_chat"], {}, {shadow: true});
     var load_action_id = ir_model.call("xmlid_to_res_id", ["mail.mail_channel_action_client_chat"], {}, {shadow: true});
 
+    // unsubscribe and then subscribe to the event, to avoid duplication of new messages
+    bus.off('notification');
     bus.on('notification', null, chat_manager.mail_tools.on_notification);
 
     return $.when(load_menu_id, load_action_id, load_channels, load_emojis).then(function (menu_id, action_id) {

@@ -8,13 +8,13 @@ class MailMessage(models.Model):
     sent = fields.Boolean('Sent', compute="_get_sent", help='Was message sent to someone', store=True)
 
     @api.one
-    @api.depends('author_id', 'needaction_partner_ids')
+    @api.depends('author_id', 'partner_ids')
     def _get_sent(self):
         self_sudo = self.sudo()
-        self_sudo.sent = len(self_sudo.needaction_partner_ids) > 1 \
-                         or len(self_sudo.needaction_partner_ids) == 1 \
+        self_sudo.sent = len(self_sudo.partner_ids) > 1 \
+                         or len(self_sudo.partner_ids) == 1 \
                             and self_sudo.author_id \
-                            and self_sudo.needaction_partner_ids[0].id != self_sudo.author_id.id
+                            and self_sudo.partner_ids[0].id != self_sudo.author_id.id
 
     @api.multi
     def message_format(self):
