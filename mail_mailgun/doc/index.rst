@@ -6,12 +6,40 @@ Usage
 =====
 
 * register on http://mailgun.com       
-* On https://mailgun.com/app/domains click on sandbox...mailgun.org domain. Here you can see all information needed to configure odoo outgoing mail feature
-* Copy API Key value into odoo
+* On https://mailgun.com/app/domains click on sandbox123...mailgun.org domain. Here you can see all information needed to configure odoo outgoing mail feature
+  * Copy API Key value into odoo
+  
+    * Open menu ``Settings / Parameters / System Parameters``
+    * Create new parameter
+  
+      * key: mailgun.apikey parameter
+      * Value: API Key from mailgun (``key-...``)
+      * click Save
+  
+  * Copy smtp credentials into odoo
 
-  * Open menu Settings/Parameters/System Parameters
-  * Edit mailgun.apikey parameter
-  * Put API Key from mailgun into Value field and save
+    * open ``Settings / Technical / Email / Outgoing Mail Servers``
+
+      * delete localhost
+      * create new server
+
+        * Description: ``mailgun``
+        * SMTP Server: ``smtp.mailgun.org``
+        * Connection Security: ``SSL/TLS``
+        * Username: e.g. ``postmaster@sandbox123....mailgun.org``
+        * Password: ``...`` (copy ``Default Password`` from mailgun)
+
+* From odoo menu ``Settings / General Settings`` edit Alias Domain
+
+  * Put your mailgun domain here. E.g. sandbox123...mailgun.org
+  * Click 'Apply' button
+
+* Open menu ``Settings / Users / Users``
+
+  * choose your user and click ``[Edit]``
+  * On Preference tab put alias into Messaging Alias field and click ``[Save]``. E.g. ``admin@sandbox...mailgun.org``
+
+* Now you can receive emails that is sent to configured alias email address.
 
 * From https://mailgun.com/cp/routes create new route
 
@@ -19,19 +47,8 @@ Usage
   * Filter expression: ``catch_all()``
   * Actions: ``store(notify="http://<your odoo domain>/mailgun/notify")``
 
-* In odoo remove 'localhost' Outgoing Mail Server and create 'mailgun'. Now you can send emails
-* From odoo menu Settings/General Settings edit Alias Domain
-
-  * Put your mailgun domain here. E.g. sandbox...mailgun.org
-  * Click 'Apply' button
-
-* Edit Messaging Alias for your user. Now you can receive emails that is sent to configured alias email address.
-
-  * From menu Settings/Users/Users open you user and click 'Edit'
-  * On Preference tab put alias into Messaging Alias field and click 'Save'. E.g. ``admin@sandbox...mailgun.org``
-
-* Send email on ``admin@sandox...mailgun.org``
-* Open ``Discuss`` from odoo
+* Via your favorite mail client (e.g. gmail.com) send email to ``admin@sandox...mailgun.org``
+* Open ``Discuss`` in odoo
 * See your message there
 * Stop odoo and send several emails again. On odoo starting you see all your messages in ``Discuss``
 
