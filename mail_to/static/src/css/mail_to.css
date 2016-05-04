@@ -8,26 +8,16 @@
 .o_mail_thread .o_thread_message span.recipients_info,
 .o_mail_thread .o_thread_message i.o_thread_message_star,
 .o_mail_thread .o_thread_message i.o_thread_message_reply,
-.o_mail_thread .o_thread_message i.o_thread_message_needaction
-{
-    opacity: 0.5;
+.o_mail_thread .o_thread_message i.o_thread_message_needaction {
+    opacity: 0.4;
 }
-.o_mail_thread .o_thread_message:hover span.recipients_info,
+
 .o_mail_thread .o_thread_message:hover i.o_thread_message_star,
 .o_mail_thread .o_thread_message:hover i.o_thread_message_reply,
-.o_mail_thread .o_thread_message:hover i.o_thread_message_needaction
-{
+.o_mail_thread .o_thread_message:hover i.o_thread_message_needaction {
+    opacity: 0.7;
+}
+
+.o_mail_thread .o_thread_message:hover span.recipients_info {
     opacity: 1;
-}
-.more_4 {
-    display: none;
-}
-.more_4_link {
-    display: block;
-}
-.o_mail_thread .o_thread_message:hover span.more_4_link {
-    display: none;
-}
-.o_mail_thread .o_thread_message:hover span.more_4 {
-    display: block;
 }
