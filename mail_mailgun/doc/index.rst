@@ -12,7 +12,7 @@ Usage
     * Open menu ``Settings / Parameters / System Parameters``
     * Create new parameter
   
-      * key: mailgun.apikey parameter
+      * key: ``mailgun.apikey``
       * Value: API Key from mailgun (``key-...``)
       * click Save
   
@@ -34,12 +34,10 @@ Usage
   * Put your mailgun domain here. E.g. sandbox123...mailgun.org
   * Click 'Apply' button
 
-* Open menu ``Settings / Users / Users``
+* Set admin's email alias. Open menu ``Settings / Users / Users``
 
   * choose your user and click ``[Edit]``
   * On Preference tab put alias into Messaging Alias field and click ``[Save]``. E.g. ``admin@sandbox...mailgun.org``
-
-* Now you can receive emails that is sent to configured alias email address.
 
 * From https://mailgun.com/cp/routes create new route
 
@@ -50,6 +48,7 @@ Usage
 * Via your favorite mail client (e.g. gmail.com) send email to ``admin@sandox...mailgun.org``
 * Open ``Discuss`` in odoo
 * See your message there
+* Reply to the message and check it in your mail client (e.g. gmail.com)
 * Stop odoo and send several emails again. On odoo starting you see all your messages in ``Discuss``
 
 

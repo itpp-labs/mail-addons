@@ -11,17 +11,17 @@ Credits
 =======
 
 Contributors
-============
+------------
 * Ildar Nasyrov <Nasyrov@it-projects.info>
 
 Sponsors
-========
+--------
 * `IT-Projects LLC <https://it-projects.info>`_
 
 Further information
 ===================
 
-HTML Description: https://apps.odoo.com/apps/modules/VERSION/TECHNICAL_NAME/
+HTML Description: https://apps.odoo.com/apps/modules/9.0/mail_mailgun/
 
 Usage instructions: `<doc/index.rst>`_
 
