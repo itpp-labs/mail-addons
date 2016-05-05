@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Mail archives",
-    "summary": """Adds menu to find sent/received messages""",
+    "summary": """Adds menu to find old messages""",
     "category": "Discuss",
     "images": [],
     "version": "1.0.0",

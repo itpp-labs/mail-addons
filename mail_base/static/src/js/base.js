@@ -97,6 +97,15 @@ ChatAction.include({
             }
         });
         return result;
+    },
+    set_channel: function(channel){
+        var result = this._super.apply(this, arguments);
+        var self = this;
+        return $.when(result).done(function() {
+            self.$buttons
+                .find('.o_mail_chat_button_new_message')
+                .toggle(self.show_send_message_button.indexOf(channel.id) != -1);
+        });
     }
 });
 
