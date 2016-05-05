@@ -63,6 +63,10 @@ var channel_seen = _.throttle(function (channel) {
 
 var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
 ChatAction.include({
+    init: function(parent, action, options) {
+        this._super.apply(this, arguments);
+        this.show_send_message_button = ['channel_inbox'];
+    },
     start: function() {
         var result = this._super.apply(this, arguments);
 

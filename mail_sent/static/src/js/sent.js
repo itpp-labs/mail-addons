@@ -20,12 +20,13 @@ var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
 ChatAction.include({
     set_channel: function(channel){
         var result = this._super.apply(this, arguments);
+        // Add "Send message" button in the Sent menu
+        this.show_send_message_button.push('channel_sent');
         var self = this;
         return $.when(result).done(function() {
-            // Add "Send message" button in the Sent menu
             self.$buttons
                 .find('.o_mail_chat_button_new_message')
-                .toggle(channel.id === "channel_inbox" || channel.id === "channel_sent");
+                .toggle(self.show_send_message_button.includes(channel.id));
         });
     },
     get_thread_rendering_options: function (messages) {
