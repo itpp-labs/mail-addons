@@ -26,7 +26,7 @@ ChatAction.include({
         return $.when(result).done(function() {
             self.$buttons
                 .find('.o_mail_chat_button_new_message')
-                .toggle(self.show_send_message_button.includes(channel.id));
+                .toggle(self.show_send_message_button.indexOf(channel.id) != -1);
         });
     },
     get_thread_rendering_options: function (messages) {
