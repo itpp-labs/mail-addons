@@ -13,8 +13,8 @@
     "currency": "EUR",
 
     "depends": [
-        'mail_archives',
-        'web_tour_extra' ,
+        'mail_all',
+        'web_tour_extra',
     ],
     "external_dependencies": {"python": [], "bin": []},
     "data": [
