@@ -2,8 +2,9 @@ Mail Base
 =========
 
 * makes built-in mail js features extendable.
-* handle ``search_default_*`` parameters in context.
+* handles ``search_default_*`` parameters in context.
 * fixes toggling left bar
+* fixes Recipients field. Out-of-box this field could be empty.
 
 Usage
 -----

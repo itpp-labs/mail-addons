@@ -1,0 +1,23 @@
+.recipient_link {
+    color: grey;
+}
+.recipient_link:hover {
+    color: #0d0d0d;
+}
+
+.o_mail_thread .o_thread_message span.recipients_info,
+.o_mail_thread .o_thread_message i.o_thread_message_star,
+.o_mail_thread .o_thread_message i.o_thread_message_reply,
+.o_mail_thread .o_thread_message i.o_thread_message_needaction {
+    opacity: 0.4;
+}
+
+.o_mail_thread .o_thread_message:hover i.o_thread_message_star,
+.o_mail_thread .o_thread_message:hover i.o_thread_message_reply,
+.o_mail_thread .o_thread_message:hover i.o_thread_message_needaction {
+    opacity: 0.7;
+}
+
+.o_mail_thread .o_thread_message:hover span.recipients_info {
+    opacity: 1;
+}
