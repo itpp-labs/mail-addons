@@ -2,11 +2,7 @@
  Show all messages
 ===================
 
-Adds All menu, which shows all messages
-
-Usage
------
-Click Discuss/All menu -- all messages are displayed
+Adds ``Discuss / All`` menu, that shows all messages accesable by current user
 
 Further information
 -------------------

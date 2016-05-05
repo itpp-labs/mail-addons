@@ -5,5 +5,5 @@
 Usage
 =====
 
-* Open menu Discuss menu and click All menu on the sidebar
+* Open menu ``Discuss / All messages``
 * You see all messages

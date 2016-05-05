@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Show all messages",
-    "summary": """Adds menu to find all messages""",
+    "summary": """Checkout all messages where you have access""",
     "category": "Discuss",
     "images": [],
     "version": "1.0.0",
