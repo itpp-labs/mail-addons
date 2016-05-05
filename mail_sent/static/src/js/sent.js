@@ -18,7 +18,7 @@ var _lt = core._lt;
 
 var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
 ChatAction.include({
-    set_channel: function(channel){
+    init: function(parent, action, options) {
         this._super.apply(this, arguments);
         // Add channel Sent for show "Send message" button
         this.show_send_message_button.push('channel_sent');
