@@ -16,6 +16,15 @@ var web_client = require('web.web_client');
 var _lt = core._lt;
 //-------------------------------------------------------------------------------
 
+var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
+ChatAction.include({
+    get_thread_rendering_options: function (messages) {
+        var options = this._super.apply(this, arguments);
+        options.display_subject = options.display_subject || this.channel.id === "channel_archive";
+        return options;
+    }
+});
+
 // Inherit class and override methods
 base_obj.MailTools.include({
     get_properties: function(msg){

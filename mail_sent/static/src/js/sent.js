@@ -27,6 +27,11 @@ ChatAction.include({
                 .find('.o_mail_chat_button_new_message')
                 .toggle(channel.id === "channel_inbox" || channel.id === "channel_sent");
         });
+    },
+    get_thread_rendering_options: function (messages) {
+        var options = this._super.apply(this, arguments);
+        options.display_subject = options.display_subject || this.channel.id === "channel_sent";
+        return options;
     }
 });
 
