@@ -40,7 +40,8 @@
         <record id="base.open_menu" model="ir.actions.todo">
             <field name="action_id" ref="res_partner_mails_count_tutorial"/>
             <field name="state">open</field>
-            <field name="sequence">200</field>
+            <field name="sequence">500</field>
+            <field name="type">automatic</field>
         </record>
     </data>
 </openerp>

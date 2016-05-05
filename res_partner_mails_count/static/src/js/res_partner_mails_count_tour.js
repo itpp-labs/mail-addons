@@ -22,17 +22,13 @@ odoo.define('res_partner_mails_count.res_partner_mails_count_tour', function (re
                 waitFor:   '.mails_to:visible',
             },
             {
-                title:     _t("Messages are found!"),
+                title: _t("Done"),
                 placement: 'top',
-                waitNot:   '.mails_to:visible',
-                element:   '.o_mail_thread',
-            },
-            {
-                wait:   '5000',
-                waitFor:   '.o_channel_name.mail_all:visible',
-                title:     _t("That's it"),
-                content:   _t("Enjoy your day! <br/> <br/><a href='https://www.it-projects.info/apps' target='_blank'>IT-Projects LLC</a> team "),
-                popover:   { next: _t("Close Tutorial") },
+                waitNot: '.mails_to:visible',
+                waitFor: '.o_mail_thread',
+                element: '.o_mail_thread',
+                content: _t("Message are found. <br/>Enjoy your day! <br/> <br/><a href='https://www.it-projects.info/apps' target='_blank'>IT-Projects LLC</a> team "),
+                popover: {next: _t("Close Tutorial")},
             },
         ]
     });
