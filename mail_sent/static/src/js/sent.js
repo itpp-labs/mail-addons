@@ -16,6 +16,20 @@ var web_client = require('web.web_client');
 var _lt = core._lt;
 //-------------------------------------------------------------------------------
 
+var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
+ChatAction.include({
+    set_channel: function(channel){
+        var result = this._super.apply(this, arguments);
+        var self = this;
+        return $.when(result).done(function() {
+            // Add "Send message" button in the Sent menu
+            self.$buttons
+                .find('.o_mail_chat_button_new_message')
+                .toggle(channel.id === "channel_inbox" || channel.id === "channel_sent");
+        });
+    }
+});
+
 // Inherit class and override methods
 base_obj.MailTools.include({
     get_properties: function(msg){
