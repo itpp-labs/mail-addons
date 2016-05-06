@@ -22,7 +22,7 @@ ChatAction.include({
         this._super.apply(this, arguments);
         var channel_name = 'channel_sent';
         // Add channel Sent for show "Send message" button
-        this.show_send_message_button.push(channel_name);
+        this.channels_show_send_button.push(channel_name);
         // Add channel Sent for enable "display_subject" option
         this.channels_display_subject.push(channel_name);
     }
