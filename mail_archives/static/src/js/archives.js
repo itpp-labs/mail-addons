@@ -42,10 +42,7 @@ base_obj.MailTools.include({
         }
 
         // If author or recipient
-        if (
-            (data.sent && data.author_id[0] == session.partner_id)
-            || (recipients_ids.indexOf(session.partner_id) != -1)
-        ) {
+        if (data.author_id[0] == session.partner_id || recipients_ids.indexOf(session.partner_id) != -1) {
             msg.is_archive = true;
         }
 
@@ -60,7 +57,6 @@ base_obj.MailTools.include({
     get_domain: function(channel){
         return (channel.id === "channel_archive") ? [
             '|', ['partner_ids', 'in', [openerp.session.partner_id]],
-            '&', ['sent', '=', true],
             ['author_id.user_ids', 'in', [openerp.session.uid]]
         ] : this._super.apply(this, arguments);
     }
