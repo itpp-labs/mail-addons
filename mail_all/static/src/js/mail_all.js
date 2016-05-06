@@ -1,4 +1,4 @@
-odoo.define('mail_archives.archives', function (require) {
+odoo.define('mail_all.all', function (require) {
 "use strict";
 
 var base_obj = require('mail_base.base');
@@ -20,7 +20,7 @@ var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
 ChatAction.include({
     get_thread_rendering_options: function (messages) {
         var options = this._super.apply(this, arguments);
-        options.display_subject = options.display_subject || this.channel.id === "channel_archive";
+        options.display_subject = options.display_subject || this.channel.id === "channel_all";
         return options;
     }
 });
@@ -29,48 +29,31 @@ ChatAction.include({
 base_obj.MailTools.include({
     get_properties: function(msg){
         var properties = this._super.apply(this, arguments);
-        properties.is_archive = this.property_descr("channel_archive", msg, this);
+        properties.is_all = this.property_descr("channel_all", msg, this);
         return properties;
     },
 
     set_channel_flags: function(data, msg){
         this._super.apply(this, arguments);
-        // Get recipients ids
-        var recipients_ids = [];
-        for (var i = 0; i < data.partner_ids.length; i++){
-            recipients_ids.push(data.partner_ids[i][0]);
-        }
-
-        // If author or recipient
-        if (
-            (data.sent && data.author_id[0] == session.partner_id)
-            || (recipients_ids.indexOf(session.partner_id) != -1)
-        ) {
-            msg.is_archive = true;
-        }
-
+        msg.is_all = true;
         return msg;
     },
 
     get_channel_array: function(msg){
         var arr = this._super.apply(this, arguments);
-        return arr.concat('channel_archive');
+        return arr.concat('channel_all');
     },
 
     get_domain: function(channel){
-        return (channel.id === "channel_archive") ? [
-            '|', ['partner_ids', 'in', [openerp.session.partner_id]],
-            '&', ['sent', '=', true],
-            ['author_id.user_ids', 'in', [openerp.session.uid]]
-        ] : this._super.apply(this, arguments);
+        return (channel.id === "channel_all") ? [] : this._super.apply(this, arguments);
     }
 });
 
 base_obj.chat_manager.is_ready.then(function(){
-        // Add archive channel
+        // Add all channel
         base_obj.chat_manager.mail_tools.add_channel({
-            id: "channel_archive",
-            name: _lt("Archive"),
+            id: "channel_all",
+            name: _lt("All messages"),
             type: "static"
         });
 

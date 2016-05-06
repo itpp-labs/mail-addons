@@ -63,6 +63,10 @@ var channel_seen = _.throttle(function (channel) {
 
 var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
 ChatAction.include({
+    init: function(parent, action, options) {
+        this._super.apply(this, arguments);
+        this.show_send_message_button = ['channel_inbox'];
+    },
     start: function() {
         var result = this._super.apply(this, arguments);
 
@@ -93,6 +97,15 @@ ChatAction.include({
             }
         });
         return result;
+    },
+    set_channel: function(channel){
+        var result = this._super.apply(this, arguments);
+        var self = this;
+        return $.when(result).done(function() {
+            self.$buttons
+                .find('.o_mail_chat_button_new_message')
+                .toggle(self.show_send_message_button.indexOf(channel.id) != -1);
+        });
     }
 });
 

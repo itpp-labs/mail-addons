@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "Mail archives",
-    "summary": """Adds menu to find old messages""",
+    "name": "Show all messages",
+    "summary": """Checkout all messages where you have access""",
     "category": "Discuss",
     "images": [],
     "version": "1.0.0",
@@ -13,14 +13,16 @@
     'currency': 'EUR',
 
     "depends": [
-        "mail_sent",
+        "mail_base"
     ],
-
+    "external_dependencies": {"python": [], "bin": []},
     "data": [
         "views/templates.xml",
     ],
     "qweb": [
         "static/src/xml/menu.xml",
     ],
+    "demo": [],
     'installable': True,
+    "auto_install": False,
 }

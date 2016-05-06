@@ -1,11 +1,11 @@
 Mail Archives
 =============
 
-Adds Archive menu, which shows all messages
+Adds Archive menu, which shows sent/received messages
 
 Usage
 -----
-Click Discuss/Archive menu -- all messages are displayed
+Click Discuss/Archive menu -- sent/received messages are displayed
 
 Further information
 -------------------
