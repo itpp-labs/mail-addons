@@ -12,9 +12,16 @@
     #"price": 9.00,
     #"currency": "EUR",
 
-    "depends": [],
+    "depends": [
+        "mail_base",
+    ],
     "external_dependencies": {"python": [], "bin": []},
-    "data": [],
+    "data": [
+        'templates.xml'
+    ],
+    "qweb": [
+        "static/src/xml/reply_button.xml",
+    ],
     "demo": [],
     "installable": True,
     "auto_install": False,

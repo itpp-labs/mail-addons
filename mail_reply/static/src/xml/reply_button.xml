@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <t t-extend="mail.ChatThread.Message">
+        <t t-jquery='i[class="fa fa-reply o_thread_message_reply"]' t-operation="replace">
+            <i t-if="message.model != 'mail.channel' &amp;&amp; options.display_reply_icon"
+                class="fa fa-reply o_thread_message_reply"
+                t-att-data-message-id="message.id" title="Reply"/>
+        </t>
+    </t>
+</template>
