@@ -13,7 +13,7 @@
     'currency': 'EUR',
 
     "depends": [
-        "mail_base"
+        "mail_sent",
     ],
 
     "data": [
