@@ -16,6 +16,16 @@ var web_client = require('web.web_client');
 var _lt = core._lt;
 //-------------------------------------------------------------------------------
 
+var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
+ChatAction.include({
+    init: function(parent, action, options) {
+        this._super.apply(this, arguments);
+        var channel_name = 'channel_archive';
+        // Add channel Archive for enable "display_subject" option
+        this.channels_display_subject.push(channel_name);
+    }
+});
+
 // Inherit class and override methods
 base_obj.MailTools.include({
     get_properties: function(msg){
@@ -26,7 +36,17 @@ base_obj.MailTools.include({
 
     set_channel_flags: function(data, msg){
         this._super.apply(this, arguments);
-        msg.is_archive = true;
+        // Get recipients ids
+        var recipients_ids = [];
+        for (var i = 0; i < data.partner_ids.length; i++){
+            recipients_ids.push(data.partner_ids[i][0]);
+        }
+
+        // If author or recipient
+        if (data.author_id[0] == session.partner_id || recipients_ids.indexOf(session.partner_id) != -1) {
+            msg.is_archive = true;
+        }
+
         return msg;
     },
 
@@ -36,7 +56,10 @@ base_obj.MailTools.include({
     },
 
     get_domain: function(channel){
-        return (channel.id === "channel_archive") ? [] : this._super.apply(this, arguments);
+        return (channel.id === "channel_archive") ? [
+            '|', ['partner_ids', 'in', [openerp.session.partner_id]],
+            ['author_id.user_ids', 'in', [openerp.session.uid]]
+        ] : this._super.apply(this, arguments);
     }
 });
 

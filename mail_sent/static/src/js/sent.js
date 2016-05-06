@@ -16,6 +16,18 @@ var web_client = require('web.web_client');
 var _lt = core._lt;
 //-------------------------------------------------------------------------------
 
+var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
+ChatAction.include({
+    init: function(parent, action, options) {
+        this._super.apply(this, arguments);
+        var channel_name = 'channel_sent';
+        // Add channel Sent for show "Send message" button
+        this.channels_show_send_button.push(channel_name);
+        // Add channel Sent for enable "display_subject" option
+        this.channels_display_subject.push(channel_name);
+    }
+});
+
 // Inherit class and override methods
 base_obj.MailTools.include({
     get_properties: function(msg){
