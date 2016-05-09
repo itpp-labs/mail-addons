@@ -25,8 +25,6 @@
                 placement: 'left',
                 content: _t("Thank you! <br/> <br/><a href='https://www.it-projects.info/apps' target='_blank'>IT-Projects LLC</a> team "),
                 element:   '.oe_mail_wall .oe_msg.oe_msg_composer_compact>div>.oe_compose_post',
-                popover: {next: _t("Close Tutorial")},
-
             },
         ]
     });
