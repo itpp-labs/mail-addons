@@ -3,9 +3,9 @@
     'version' : '1.0.2',
     'author' : 'IT-Projects LLC, Ivan Yelizariev',
     'license': 'GPL-3',
-    'category' : 'Social Network',
+    'category' : 'Discuss',
     'website' : 'https://twitter.com/yelizariev',
-    'price': 9.00,
+    'price': 40.00,
     'currency': 'EUR',
     'depends' : ['mail'],
     'data':[
