@@ -23,16 +23,10 @@
                 waitNot:   '.mails_to:visible',
                 title:     _t("Check messages or send new one"),
                 placement: 'left',
-                content:   _t("Click <em>'Send a mesage'</em> to continue the Tour"),
+                content: _t("Thank you! <br/> <br/><a href='https://www.it-projects.info/apps' target='_blank'>IT-Projects LLC</a> team "),
                 element:   '.oe_mail_wall .oe_msg.oe_msg_composer_compact>div>.oe_compose_post',
-            },
-            {
-                title: _t("That's it"),
-                placement: 'top',
-                waitNot: '.mails_to:visible',
-                element: 'div.oe_msg_content>textarea.field_text',
-                content: _t("Enjoy your day! <br/> <br/><a href='https://www.it-projects.info/apps' target='_blank'>IT-Projects LLC</a> team "),
                 popover: {next: _t("Close Tutorial")},
+
             },
         ]
     });
