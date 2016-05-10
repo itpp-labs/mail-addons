@@ -1,28 +1,24 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "Sentbox",
-    "summary": """Quick way to find sent messages""",
+    "name": "Mail Base",
+    "summary": """Makes Mail extendable""",
     "category": "Discuss",
     "images": [],
-    "version": "1.0.3",
+    "version": "1.0.0",
 
-    "author": "IT-Projects LLC, Ivan Yelizariev, Pavel Romanchenko",
+    "author": "IT-Projects LLC, Pavel Romanchenko",
     "website": "https://it-projects.info",
     "license": "LGPL-3",
-    'price': 40.00,
+    'price': 9.00,
     'currency': 'EUR',
 
     "depends": [
         "base",
-        "mail",
-        "mail_base"
+        "mail"
     ],
 
     "data": [
         "views/templates.xml",
-    ],
-    "qweb": [
-        "static/src/xml/menu.xml",
     ],
     'installable': True,
 }

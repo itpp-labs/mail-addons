@@ -1,21 +1,19 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "Sentbox",
-    "summary": """Quick way to find sent messages""",
+    "name": "Mail archives",
+    "summary": """Adds menu to find old messages""",
     "category": "Discuss",
     "images": [],
-    "version": "1.0.3",
+    "version": "1.0.0",
 
-    "author": "IT-Projects LLC, Ivan Yelizariev, Pavel Romanchenko",
+    "author": "IT-Projects LLC, Pavel Romanchenko",
     "website": "https://it-projects.info",
     "license": "LGPL-3",
     'price': 40.00,
     'currency': 'EUR',
 
     "depends": [
-        "base",
-        "mail",
-        "mail_base"
+        "mail_base",
     ],
 
     "data": [

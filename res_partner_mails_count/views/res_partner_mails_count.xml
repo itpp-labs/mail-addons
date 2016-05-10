@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="action_mails" model="ir.actions.client">
+            <field name="name">Mails</field>
+            <field name="tag">mail.chat.instant_messaging</field>
+            <field name="res_model">mail.message</field>
+            <field name="context">{
+                'active_id': 'channel_all'
+            }</field>
+            <field name="help" type="html">
+                <p>
+                    Mails not found. Probably, they exist, but you don't have access.
+                </p>
+            </field>
+        </record>
+    </data>
+</openerp>
