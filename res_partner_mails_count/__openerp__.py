@@ -2,7 +2,7 @@
 {
     "name": """Partner mails count""",
     "summary": """Displays amount of incoming and outgoing partner mails.""",
-    "category": "Sales Management",
+    "category": "Discuss",
     "images": ['images/1.png'],
     "version": "1.0.0",
 

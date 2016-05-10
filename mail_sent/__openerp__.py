@@ -3,7 +3,7 @@
     "name": "Sentbox",
     "summary": """Quick way to find sent messages""",
     "category": "Discuss",
-    "images": [],
+    "images": ['images/menu.png'],
     "version": "1.0.3",
 
     "author": "IT-Projects LLC, Ivan Yelizariev, Pavel Romanchenko",
