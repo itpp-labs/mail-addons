@@ -11,7 +11,7 @@
                         </a>
                     </t>
                 </t>
-                <t t-if="message.partner_ids.length &gt; message.more_recipients_value - 1">
+                <t t-if="message.partner_ids.length &gt; message.more_recipients_value">
                     <span t-att-title="message.more_recipients">
                         and <t t-esc="message.partner_ids.length - message.more_recipients_value"/> more
                     </span>
