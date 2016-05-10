@@ -3,7 +3,7 @@
     "name": "Mail archives",
     "summary": """Adds menu to find old messages""",
     "category": "Discuss",
-    "images": [],
+    "images": ['images/1.jpg'],
     "version": "1.0.0",
 
     "author": "IT-Projects LLC, Pavel Romanchenko",

@@ -3,7 +3,7 @@
     "name": """Show message recipients""",
     "summary": """Allows you be sure, that all discussion participants were notified""",
     "category": "Discuss",
-    "images": [],
+    "images": ['images/1.png'],
     "version": "1.0.0",
 
     "author": "IT-Projects LLC, Pavel Romanchenko",
