@@ -19,6 +19,8 @@ Configuration
 
 You can configure default alias at Settings -> System Parameters -> mail.catchall.alias_from
 
+You can configure name for default alias at Settings -> System Parameters -> mail.catchall.name_alias_from
+
 Known issues / Roadmap
 ======================
 

@@ -38,6 +38,7 @@ class mail_mail(osv.Model):
 
         # NEW STUFF
         catchall_alias = self.pool['ir.config_parameter'].get_param(cr, uid, "mail.catchall.alias_from", context=context)
+        catchall_alias_name = self.pool['ir.config_parameter'].get_param(cr, uid, "mail.catchall.name_alias_from", context=context)
         catchall_domain = self.pool['ir.config_parameter'].get_param(cr, uid, "mail.catchall.domain", context=context)
 
         correct_email_from = '@%s>?\s*$'%catchall_domain
@@ -101,6 +102,8 @@ class mail_mail(osv.Model):
                     email_from = mail.email_from
                     if re.search(correct_email_from, email_from) is None:
                         email_from = default_email_from
+                    if catchall_alias_name:
+                        email_from = formataddr((catchall_alias_name, email_from))
 
                     msg = ir_mail_server.build_email(
                         email_from=email_from, # NEW STUFF

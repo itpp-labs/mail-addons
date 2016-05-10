@@ -18,10 +18,11 @@ var _lt = core._lt;
 
 var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
 ChatAction.include({
-    get_thread_rendering_options: function (messages) {
-        var options = this._super.apply(this, arguments);
-        options.display_subject = options.display_subject || this.channel.id === "channel_archive";
-        return options;
+    init: function(parent, action, options) {
+        this._super.apply(this, arguments);
+        var channel_name = 'channel_archive';
+        // Add channel Archive for enable "display_subject" option
+        this.channels_display_subject.push(channel_name);
     }
 });
 
@@ -42,10 +43,7 @@ base_obj.MailTools.include({
         }
 
         // If author or recipient
-        if (
-            (data.sent && data.author_id[0] == session.partner_id)
-            || (recipients_ids.indexOf(session.partner_id) != -1)
-        ) {
+        if (data.author_id[0] == session.partner_id || recipients_ids.indexOf(session.partner_id) != -1) {
             msg.is_archive = true;
         }
 
@@ -60,7 +58,6 @@ base_obj.MailTools.include({
     get_domain: function(channel){
         return (channel.id === "channel_archive") ? [
             '|', ['partner_ids', 'in', [openerp.session.partner_id]],
-            '&', ['sent', '=', true],
             ['author_id.user_ids', 'in', [openerp.session.uid]]
         ] : this._super.apply(this, arguments);
     }
