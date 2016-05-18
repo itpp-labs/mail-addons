@@ -786,14 +786,24 @@ chat_manager.post_message = function (data, options) {
                 subtype_id: data.subtype_id
             });
 
-            var model = new Model(options.model);
-            return model.call('message_post', [options.res_id], msg).then(function (msg_id) {
-                return MessageModel.call('message_format', [msg_id]).then(function (msgs) {
-                    msgs[0].model = options.model;
-                    msgs[0].res_id = options.res_id;
-                    chat_manager.mail_tools.add_message(msgs[0]);
+            if (options.model && options.res_id){
+                var model = new Model(options.model);
+                return model.call('message_post', [options.res_id], msg).then(function (msg_id) {
+                    return MessageModel.call('message_format', [msg_id]).then(function (msgs) {
+                        msgs[0].model = options.model;
+                        msgs[0].res_id = options.res_id;
+                        chat_manager.mail_tools.add_message(msgs[0]);
+                    });
                 });
-            });
+            } else {
+                options.model = 'mail.compose.message';
+                options.res_id = msg.id;
+                var compose_model = new Model(options.model);
+                return compose_model.call('send_mail_action', [options.res_id], {
+                    res_model: options.model,
+                    res_id: options.res_id
+                });
+            }
         }
     };
 chat_manager.get_message = function (id) {
