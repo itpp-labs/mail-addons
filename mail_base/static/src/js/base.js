@@ -798,14 +798,9 @@ chat_manager.post_message = function (data, options) {
             } else {
                 options.model = 'mail.compose.message';
                 var compose_model = new Model(options.model);
-                return compose_model.call('send_mail_action', [options.res_id, {
-                    res_model: options.model,
-                    res_id: options.res_id,
-                    context: {
-                        default_parent_id: options.parent_id
-                    }
-                    
-                }]);
+                return compose_model.call('create', [msg, {default_parent_id: options.parent_id}]).then(function(id){
+                    return compose_model.call('send_mail_action', [id, {}]);
+                });
             }
         }
     };
