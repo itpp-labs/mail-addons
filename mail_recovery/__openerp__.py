@@ -10,5 +10,5 @@
     'data': [
         'data.xml',
         ],
-    'installable': False
+    "installable": False,
 }
