@@ -2,7 +2,7 @@
  Show all messages
 ===================
 
-Adds ``Messaging / All`` menu, that shows all messages accesable by current user
+Adds ``Messaging / All messages`` menu, that shows all messages accesable by current user
 
 Further information
 -------------------
