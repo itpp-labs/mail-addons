@@ -1,6 +1,6 @@
-===================
- Show reply button
-===================
+==========================
+ Always show reply button
+==========================
 
 The module allows to reply to any message. Out-of-box odoo shows reply button for messages attached to some record.
 
