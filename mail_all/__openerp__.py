@@ -17,10 +17,7 @@
     ],
     "external_dependencies": {"python": [], "bin": []},
     "data": [
-        # "views/templates.xml",
-    ],
-    "qweb": [
-        # "static/src/xml/menu.xml",
+        "views/templates.xml",
     ],
     "demo": [],
     "post_load": None,
