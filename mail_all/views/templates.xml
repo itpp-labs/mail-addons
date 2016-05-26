@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="action_mail_all_feeds" model="ir.actions.client">
+            <field name="name">All messages</field>
+            <field name="tag">mail.wall</field>
+            <field name="context">{
+              'default_model': 'res.users',
+              'default_res_id': uid,
+              'thread_model': 'res.partner',
+              'needaction_menu_ref': ['mail.mail_tomefeeds', 'mail.mail_starfeeds', 'mail.mail_inboxfeeds']
+            }</field>
+            <field name="params" eval="&quot;{
+                'domain': [],
+                'view_mailbox': True,
+                'show_compose_message': False
+            }&quot;"/>
+            <field name="help" type="html">
+                <p>
+                    No message found.
+                </p>
+            </field>
+        </record>
+
+        <record id="mail_all_feeds" model="ir.ui.menu">
+          <field name="name">All messages</field>
+          <field name="sequence" eval="100"/>
+          <field name="action" ref="action_mail_all_feeds"/>
+          <field name="parent_id" ref="mail.mail_feeds"/>
+        </record>
+	</data>
+</openerp>
