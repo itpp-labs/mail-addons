@@ -3,7 +3,7 @@
     'version' : '1.0.4',
     'author' : 'IT-Projects LLC, Ivan Yelizariev',
     'license': 'LGPL-3',
-    'category' : 'Social Network',
+    'category' : 'Discuss',
     'website' : 'https://twitter.com/yelizariev',
     'price': 9.00,
     'currency': 'EUR',
@@ -16,5 +16,5 @@
     'qweb': [
         'static/src/xml/mail_move_message_main.xml',
     ],
-    'installable': False
+    'installable': True,
 }
