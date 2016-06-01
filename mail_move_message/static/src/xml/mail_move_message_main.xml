@@ -11,10 +11,8 @@
 
 <template>
     <t t-extend="mail.ChatThread.Message">
-        <t t-jquery='.fa.fa-lg.o_thread_message_star.fa-star-o' t-operation="before">
-        <!--<t t-jquery='i[class="fa fa-lg o_thread_message_star fa-star-o"]' t-operation="replace">-->
-        <!--<t t-jquery='.o_mail_subject' t-operation="replace">-->
-            <i class="fa fa-arrows-alt"
+        <t t-jquery='p.o_mail_info>span>i:first-child' t-operation="before">
+            <i t-att-class="'fa fa-arrows-alt oe_move' + (message.is_moved ? 'oe_moved' : '')"
                t-att-data-message-id="message.id" title="Move to thread"/>
         </t>
     </t>
