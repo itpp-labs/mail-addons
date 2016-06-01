@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Outdated code begin -->
+<!--<template>-->
+    <!--<t t-extend="mail.thread.message">-->
+        <!--<t t-jquery=".oe_msg_icons" t-operation="append">-->
+            <!--<span t-attf-class="oe_move #{widget.is_moved?'oe_moved':''}"><a title="Move to thread" class="oe_e">f</a></span>-->
+        <!--</t>-->
+    <!--</t>-->
+<!--</template>-->
+<!-- Outdated code end -->
+
 <template>
-    <t t-extend="mail.thread.message">
-        <t t-jquery=".oe_msg_icons" t-operation="append">
-            <span t-attf-class="oe_move #{widget.is_moved?'oe_moved':''}"><a title="Move to thread" class="oe_e">f</a></span>
+    <t t-extend="mail.ChatThread.Message">
+        <t t-jquery='.fa.fa-lg.o_thread_message_star.fa-star-o' t-operation="before">
+        <!--<t t-jquery='i[class="fa fa-lg o_thread_message_star fa-star-o"]' t-operation="replace">-->
+        <!--<t t-jquery='.o_mail_subject' t-operation="replace">-->
+            <i class="fa fa-arrows-alt"
+               t-att-data-message-id="message.id" title="Move to thread"/>
         </t>
     </t>
 </template>
