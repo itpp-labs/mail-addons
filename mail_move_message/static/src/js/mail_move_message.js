@@ -5,26 +5,22 @@ odoo.define('mail_move_message.relocate', function (require) {
     var base_obj = require('mail_base.base');
     var Model = require('web.Model');
     var form_common = require('web.form_common');
+    var widgets = require('web.form_widgets');
     var core = require('web.core');
 
-    var QWeb = core.qweb;
     var _t = core._t;
 
     var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
     ChatAction.include({
         start: function() {
             var result = this._super.apply(this, arguments);
-            
-            this.$buttons = $(QWeb.render("mail.chat.ControlButtons", {}));
-            this.$buttons.find('button').css({display:"inline-block"});
             this.$buttons.on('click', '.oe_move', this.on_move_message);
-
             return $.when(result).done(function() {});
         },
 
         on_move_message: function(event){
             var self = this;
-            var id = $(event.target).data('oe-id');
+            var id = $(event.target).data('message-id');
             var context = {'default_message_id': id};
             var action = {
                 name: _t('Relocate Message'),
@@ -53,7 +49,6 @@ odoo.define('mail_move_message.relocate', function (require) {
         }
     });
 
-    var widgets = require('web.form_widgets');
     widgets.WidgetButton.include({
         on_click: function(){
             if(this.node.attrs.special == 'quick_create'){
