@@ -7,7 +7,7 @@
     'website' : 'https://twitter.com/yelizariev',
     'price': 9.00,
     'currency': 'EUR',
-    'depends' : ['mail_base', 'web_polymorphic_field'],
+    'depends' : ['mail_all', 'web_polymorphic_field'],
     'images': ['images/inbox.png'],
     'data':[
         'mail_move_message_views.xml',

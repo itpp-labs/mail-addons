@@ -176,13 +176,12 @@ class wizard(models.TransientModel):
 
             r.message_id.move(r.parent_id.id, r.res_id, r.model, r.move_back, r.move_followers)
 
-        if not ( r.model and r.res_id ):
-            obj = self.pool.get('ir.model.data').get_object_reference(self._cr, SUPERUSER_ID, 'mail', 'mail_archivesfeeds')[1]
+        if not (r.model and r.res_id):
+            r.message_id.needaction = False
             return {
-                'type' : 'ir.actions.client',
-                'name' : 'Archive',
-                'tag' : 'reload',
-                'params' : {'menu_id': obj},
+                'type': 'ir.actions.client',
+                'name': 'All messages',
+                'tag': 'reload',
             }
         return {
             'name': _('Record'),
@@ -327,6 +326,16 @@ class mail_message(models.Model):
         res = super(mail_message, self)._message_read_dict(cr, uid, message, parent_id, context)
         res['is_moved'] = message.is_moved
         return res
+
+    @api.multi
+    def message_format(self):
+        message_values = super(mail_message, self).message_format()
+        message_index = {message['id']: message for message in message_values}
+        for item in self:
+            msg = message_index.get(item.id)
+            if msg:
+                msg['is_moved'] = item.is_moved
+        return message_values
 
 
 class mail_move_message_configuration(models.TransientModel):
