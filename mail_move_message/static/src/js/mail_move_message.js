@@ -3,6 +3,7 @@ odoo.define('mail_move_message.relocate', function (require) {
 
     var chat_manager = require('mail.chat_manager');
     var base_obj = require('mail_base.base');
+    var thread = require('mail.ChatThread');
     var Model = require('web.Model');
     var form_common = require('web.form_common');
     var widgets = require('web.form_widgets');
@@ -10,18 +11,27 @@ odoo.define('mail_move_message.relocate', function (require) {
 
     var _t = core._t;
 
+    // Add click reaction in the events of the thread object
+    thread.include({
+        init: function(){
+            this._super.apply(this, arguments);
+            this.events['click .oe_move'] = function(event) {
+                var message_id = $(event.currentTarget).data('message-id');
+                this.trigger("move_message", message_id);
+            }
+        }
+    });
+
     var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
     ChatAction.include({
         start: function() {
             var result = this._super.apply(this, arguments);
-            this.$buttons.on('click', '.oe_move', this.on_move_message);
+            this.thread.on('move_message', this, this.on_move_message);
             return $.when(result).done(function() {});
         },
-
-        on_move_message: function(event){
+        on_move_message: function(message_id){
             var self = this;
-            var id = $(event.target).data('message-id');
-            var context = {'default_message_id': id};
+            var context = {'default_message_id': message_id};
             var action = {
                 name: _t('Relocate Message'),
                 type: 'ir.actions.act_window',
@@ -32,15 +42,18 @@ odoo.define('mail_move_message.relocate', function (require) {
                 target: 'new',
                 context: context
             };
+            self.message_id = message_id;
 
             self.do_action(action, {
-                'on_close': function(message){
+                'on_close': function(){
+                    var message = base_obj.chat_manager.get_message(self.message_id);
                     chat_manager.bus.trigger('update_message', message);
                 }
             });
         }
     });
 
+    // TODO: icon show that message was moved after reload thread. How reload thread?
     base_obj.MailTools.include({
         make_message: function(data){
             var msg = this._super(data);
