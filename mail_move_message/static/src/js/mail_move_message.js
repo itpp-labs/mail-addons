@@ -49,6 +49,8 @@ odoo.define('mail_move_message.relocate', function (require) {
                     var message = base_obj.chat_manager.get_message(self.message_id);
                     chat_manager.bus.trigger('update_message', message);
                 }
+            }).then(function(){
+                self.fetch_and_render_thread();
             });
         }
     });
