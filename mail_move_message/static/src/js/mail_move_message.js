@@ -1,6 +1,7 @@
 odoo.define('mail_move_message.relocate', function (require) {
     "use strict";
 
+    var bus = require('bus.bus').bus;
     var chat_manager = require('mail.chat_manager');
     var base_obj = require('mail_base.base');
     var thread = require('mail.ChatThread');
@@ -48,14 +49,20 @@ odoo.define('mail_move_message.relocate', function (require) {
                 'on_close': function(){
                     var message = base_obj.chat_manager.get_message(self.message_id);
                     chat_manager.bus.trigger('update_message', message);
+                    self.fetch_and_render_thread();
+                    bus.on('notification', null, self.on_notification);
                 }
-            }).then(function(){
-                self.fetch_and_render_thread();
             });
+        },
+        on_notification: function(notification){
+            var model = notification[0][1];
+            if (model === 'ir.needaction') {
+                // new message in the inbox
+                chat_manager.mail_tools.on_needaction_notification(notification[1]);
+            }
         }
     });
 
-    // TODO: icon show that message was moved after reload thread. How reload thread?
     base_obj.MailTools.include({
         make_message: function(data){
             var msg = this._super(data);

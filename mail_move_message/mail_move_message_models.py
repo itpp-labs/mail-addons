@@ -307,6 +307,10 @@ class mail_message(models.Model):
                 'res_model': r_vals.get('model')
             })
 
+        # Send notification
+        notification = {'message_ids': [self.id], 'values': vals}
+        self.env['bus.bus'].sendone((self._cr.dbname, 'res.partner', self.env.user.partner_id.id), notification)
+
     def name_get(self, cr, uid, ids, context=None):
         if not (context or {}).get('extended_name'):
             return super(mail_message, self).name_get(cr, uid, ids, context=context)

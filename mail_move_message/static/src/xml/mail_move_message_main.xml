@@ -12,7 +12,7 @@
 <template>
     <t t-extend="mail.ChatThread.Message">
         <t t-jquery='p.o_mail_info>span>i:first-child' t-operation="before">
-            <i t-att-class="'fa fa-arrows-alt oe_move' + (message.is_moved ? ' oe_moved' : '')"
+            <i t-att-class="'fa fa-exchange oe_move' + (message.is_moved ? ' oe_moved' : '')"
                t-att-data-message-id="message.id" title="Move to thread"/>
         </t>
     </t>
