@@ -309,7 +309,7 @@ class mail_message(models.Model):
 
         # Send notification
         notification = {'message_ids': [self.id], 'values': vals}
-        self.env['bus.bus'].sendone((self._cr.dbname, 'res.partner', self.env.user.partner_id.id), notification)
+        self.env['bus.bus'].sendone((self._cr.dbname, 'mail_move_message'), notification)
 
     def name_get(self, cr, uid, ids, context=None):
         if not (context or {}).get('extended_name'):

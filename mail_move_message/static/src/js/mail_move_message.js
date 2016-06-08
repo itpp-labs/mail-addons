@@ -46,28 +46,34 @@ odoo.define('mail_move_message.relocate', function (require) {
             self.message_id = message_id;
 
             self.do_action(action, {
-                'on_close': function(){
-                    var message = base_obj.chat_manager.get_message(self.message_id);
-                    chat_manager.bus.trigger('update_message', message);
-                    self.fetch_and_render_thread();
-                    bus.on('notification', null, self.on_notification);
-                }
+                'on_close': function(){}
             });
-        },
-        on_notification: function(notification){
-            var model = notification[0][1];
-            if (model === 'ir.needaction') {
-                // new message in the inbox
-                chat_manager.mail_tools.on_needaction_notification(notification[1]);
-            }
         }
     });
 
     base_obj.MailTools.include({
         make_message: function(data){
             var msg = this._super(data);
+            // Mark msg as moved after reload
             msg.is_moved = data.is_moved || false;
             return msg;
+        },
+        on_notification: function(notifications){
+            this._super(notifications);
+            _.each(notifications, function (notification) {
+                var model = notification[0][1];
+                if (model === 'mail_move_message') {
+                    var message_id = notification[1].message_ids[0];
+                    var message = base_obj.chat_manager.get_message(message_id);
+
+                    // Mark message as moved after move and for update cache
+                    message.is_moved = notification[1].values.is_moved;
+                    // Update cache and accordingly message in the thread
+                    chat_manager.mail_tools.add_to_cache(message, []);
+                    // Call ChatAction.on_update_message(message)
+                    chat_manager.bus.trigger('update_message', message);
+                }
+            });
         }
     });
 
