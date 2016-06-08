@@ -112,6 +112,25 @@ ChatAction.include({
         var options = this._super.apply(this, arguments);
         options.display_subject = options.display_subject || this.channels_display_subject.indexOf(this.channel.id) != -1;
         return options;
+    },
+    update_message_on_current_channel: function(current_channel_id, message){
+        var starred = current_channel_id === "channel_starred" && !message.is_starred;
+        var inbox = current_channel_id === "channel_inbox" && !message.is_needaction;
+        return starred || inbox;
+    },
+    on_update_message: function (message) {
+        var self = this;
+        var current_channel_id = this.channel.id;
+        if (this.update_message_on_current_channel(current_channel_id, message)) {
+            chat_manager.get_messages({channel_id: this.channel.id, domain: this.domain}).then(function (messages) {
+                var options = self.get_thread_rendering_options(messages);
+                self.thread.remove_message_and_render(message.id, messages, options).then(function () {
+                    self.update_button_status(messages.length === 0);
+                });
+            });
+        } else if (_.contains(message.channel_ids, current_channel_id)) {
+            this.fetch_and_render_thread();
+        }
     }
 });
 
@@ -1128,7 +1147,9 @@ function init(){
 
     // unsubscribe and then subscribe to the event, to avoid duplication of new messages
     bus.off('notification');
-    bus.on('notification', null, chat_manager.mail_tools.on_notification);
+    bus.on('notification', null, function(){
+        chat_manager.mail_tools.on_notification.apply(chat_manager.mail_tools, arguments)
+    });
 
     return $.when(load_menu_id, load_action_id, load_channels, load_emojis).then(function (menu_id, action_id) {
         discuss_ids = {
