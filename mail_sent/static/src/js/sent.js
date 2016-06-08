@@ -54,6 +54,12 @@ base_obj.MailTools.include({
             ['sent', '=', true],
             ['author_id.user_ids', 'in', [openerp.session.uid]]
         ] : this._super.apply(this, arguments);
+    },
+
+    update_message_on_current_channel: function(current_channel_id, message){
+        var result = this._super.apply(this, arguments);
+        var sent = current_channel_id === "channel_sent" && !message.is_sent;
+        return sent || result;
     }
 });
 
