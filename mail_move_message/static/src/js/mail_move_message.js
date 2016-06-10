@@ -62,8 +62,8 @@ odoo.define('mail_move_message.relocate', function (require) {
             this._super(notifications);
             _.each(notifications, function (notification) {
                 var model = notification[0][1];
+                var message_id = notification[1].message_ids[0];
                 if (model === 'mail_move_message') {
-                    var message_id = notification[1].message_ids[0];
                     var message = base_obj.chat_manager.get_message(message_id);
 
                     // Mark message as moved after move and for update cache
@@ -72,6 +72,17 @@ odoo.define('mail_move_message.relocate', function (require) {
                     chat_manager.mail_tools.add_to_cache(message, []);
                     // Call ChatAction.on_update_message(message)
                     chat_manager.bus.trigger('update_message', message);
+                } else if (model === 'mail_move_message.delete_message') {
+                    chat_manager.get_messages(
+                        // TODO: получить channel.id и this.domain
+                        {channel_id: this.channel.id, domain: this.domain}
+                    ).then(function (messages) {
+                        var options = self.get_thread_rendering_options(messages);
+                        thread.remove_message_and_render(message_id, messages, options)
+                            .then(function () {
+                                self.update_button_status(messages.length === 0);
+                            });
+                    });
                 }
             });
         }
