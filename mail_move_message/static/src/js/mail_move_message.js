@@ -23,6 +23,32 @@ odoo.define('mail_move_message.relocate', function (require) {
         }
     });
 
+    var chatter = require('mail.Chatter');
+    chatter.include({
+        start: function() {
+            var result = this._super.apply(this, arguments);
+            this.thread.on('move_message', this, this.on_move_message);
+            return $.when(result).done(function() {});
+        },
+        on_move_message: function(message_id){
+            var action = {
+                name: _t('Relocate Message'),
+                type: 'ir.actions.act_window',
+                res_model: 'mail_move_message.wizard',
+                view_mode: 'form',
+                view_type: 'form',
+                views: [[false, 'form']],
+                target: 'new',
+                context: {'default_message_id': message_id}
+            };
+
+            this.do_action(action, {
+                'on_close': function(){}
+            });
+        }
+    });
+
+
     var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
     ChatAction.include({
         start: function() {
