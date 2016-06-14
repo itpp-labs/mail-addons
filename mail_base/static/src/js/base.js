@@ -495,6 +495,20 @@ var MailTools = core.Class.extend({
         });
     },
 
+    remove_from_cache: function(message, domain){
+        var self = this;
+        _.each(message.channel_ids, function (channel_id) {
+            var channel = chat_manager.get_channel(channel_id);
+            if (channel) {
+                var channel_cache = self.get_channel_cache(channel, domain);
+                var index = _.sortedIndex(channel_cache.messages, message, 'id');
+                if (channel_cache.messages[index] === message) {
+                    channel_cache.messages.splice(index, 1);
+                }
+            }
+        });
+    },
+
     remove_message_from_channel: function (channel_id, message) {
         message.channel_ids = _.without(message.channel_ids, channel_id);
         var channel = _.findWhere(channels, { id: channel_id });

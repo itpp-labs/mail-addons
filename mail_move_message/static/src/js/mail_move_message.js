@@ -73,17 +73,7 @@ odoo.define('mail_move_message.relocate', function (require) {
                     // Call ChatAction.on_update_message(message)
                     chat_manager.bus.trigger('update_message', message);
                 } else if (model === 'mail_move_message.delete_message') {
-                    // Remove message from cache
-                    _.each(message.channel_ids, function (channel_id) {
-                        var channel = chat_manager.get_channel(channel_id);
-                        if (channel) {
-                            var channel_cache = self.get_channel_cache(channel, []);
-                            var index = _.sortedIndex(channel_cache.messages, message, 'id');
-                            if (channel_cache.messages[index] === message) {
-                                channel_cache.messages.splice(index, 1);
-                            }
-                        }
-                    });
+                    self.remove_from_cache(message, []);
                     chat_manager.bus.trigger('update_message', message);
                 }
             });
