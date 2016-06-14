@@ -1,14 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Outdated code begin -->
-<!--<template>-->
-    <!--<t t-extend="mail.thread.message">-->
-        <!--<t t-jquery=".oe_msg_icons" t-operation="append">-->
-            <!--<span t-attf-class="oe_move #{widget.is_moved?'oe_moved':''}"><a title="Move to thread" class="oe_e">f</a></span>-->
-        <!--</t>-->
-    <!--</t>-->
-<!--</template>-->
-<!-- Outdated code end -->
-
 <template>
     <t t-extend="mail.ChatThread.Message">
         <t t-jquery='p.o_mail_info>span>i:first-child' t-operation="before">
