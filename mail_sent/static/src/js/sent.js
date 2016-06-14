@@ -25,6 +25,12 @@ ChatAction.include({
         this.channels_show_send_button.push(channel_name);
         // Add channel Sent for enable "display_subject" option
         this.channels_display_subject.push(channel_name);
+    },
+
+    update_message_on_current_channel: function(current_channel_id, message){
+        var result = this._super.apply(this, arguments);
+        var sent = current_channel_id === "channel_sent" && !message.is_sent;
+        return sent || result;
     }
 });
 
@@ -54,12 +60,6 @@ base_obj.MailTools.include({
             ['sent', '=', true],
             ['author_id.user_ids', 'in', [openerp.session.uid]]
         ] : this._super.apply(this, arguments);
-    },
-
-    update_message_on_current_channel: function(current_channel_id, message){
-        var result = this._super.apply(this, arguments);
-        var sent = current_channel_id === "channel_sent" && !message.is_sent;
-        return sent || result;
     }
 });
 
