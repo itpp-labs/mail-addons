@@ -196,12 +196,12 @@ class wizard(models.TransientModel):
     @api.one
     def delete(self):
         msg_id = self.message_id.id
-        self.message_id.unlink()
 
         # Send notification
         notification = {'message_ids': [msg_id]}
         self.env['bus.bus'].sendone((self._cr.dbname, 'mail_move_message.delete_message'), notification)
 
+        self.message_id.unlink()
         return {}
 
     @api.model
