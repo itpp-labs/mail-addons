@@ -77,6 +77,7 @@ odoo.define('mail_move_message.relocate', function (require) {
                 if (model === 'mail_move_message' && message) {
                     message.res_id = notification[1].res_id;
                     message.model = notification[1].model;
+                    message.record_name = notification[1].record_name;
                     // Mark message as moved after move
                     message.is_moved = notification[1].is_moved;
                     // Update cache and accordingly message in the thread

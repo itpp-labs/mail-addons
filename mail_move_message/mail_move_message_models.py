@@ -320,6 +320,10 @@ class mail_message(models.Model):
             'model': vals.get('model'),
             'is_moved': vals['is_moved']
         }
+        if vals.get('model') and vals.get('res_id'):
+            record = self.env[vals.get('model')].browse(vals.get('res_id'))
+            if record:
+                notification['record_name'] = record.name
         self.env['bus.bus'].sendone((self._cr.dbname, 'mail_move_message'), notification)
 
     def name_get(self, cr, uid, ids, context=None):
