@@ -198,7 +198,7 @@ class wizard(models.TransientModel):
         msg_id = self.message_id.id
 
         # Send notification
-        notification = {'message_ids': [msg_id]}
+        notification = {'id': msg_id}
         self.env['bus.bus'].sendone((self._cr.dbname, 'mail_move_message.delete_message'), notification)
 
         self.message_id.unlink()
