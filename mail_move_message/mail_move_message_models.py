@@ -314,7 +314,12 @@ class mail_message(models.Model):
             })
 
         # Send notification
-        notification = {'message_ids': [self.id], 'values': vals}
+        notification = {
+            'id': self.id,
+            'res_id': vals.get('res_id'),
+            'model': vals.get('model'),
+            'is_moved': vals['is_moved']
+        }
         self.env['bus.bus'].sendone((self._cr.dbname, 'mail_move_message'), notification)
 
     def name_get(self, cr, uid, ids, context=None):

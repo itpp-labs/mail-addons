@@ -72,14 +72,16 @@ odoo.define('mail_move_message.relocate', function (require) {
             var self = this;
             _.each(notifications, function (notification) {
                 var model = notification[0][1];
-                var message_id = notification[1].message_ids[0];
+                var message_id = notification[1].id;
                 var message = base_obj.chat_manager.get_message(message_id);
-                if (model === 'mail_move_message') {
-                    // Mark message as moved after move and for update cache
-                    message.is_moved = notification[1].values.is_moved;
+                if (model === 'mail_move_message' && message) {
+                    message.res_id = notification[1].res_id;
+                    message.model = notification[1].model;
+                    // Mark message as moved after move
+                    message.is_moved = notification[1].is_moved;
                     // Update cache and accordingly message in the thread
                     self.add_to_cache(message, []);
-                    // Call ChatAction.on_update_message(message)
+                    // Call thread.on_update_message(message)
                     chat_manager.bus.trigger('update_message', message);
                 } else if (model === 'mail_move_message.delete_message') {
                     self.remove_from_cache(message, []);
