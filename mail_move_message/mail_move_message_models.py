@@ -313,13 +313,17 @@ class mail_message(models.Model):
                 'res_model': r_vals.get('model')
             })
 
+        # Update record_name in message
+        record_name = self._get_record_name(vals)
+        for item in self:
+            item.record_name = record_name
         # Send notification
         notification = {
             'id': self.id,
             'res_id': vals.get('res_id'),
             'model': vals.get('model'),
             'is_moved': vals['is_moved'],
-            'record_name': self._get_record_name(vals)
+            'record_name': record_name
         }
         self.env['bus.bus'].sendone((self._cr.dbname, 'mail_move_message'), notification)
 
