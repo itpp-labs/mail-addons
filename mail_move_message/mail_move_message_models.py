@@ -74,7 +74,7 @@ class wizard(models.TransientModel):
     message_email_from = fields.Char()
     message_name_from = fields.Char()
     # FIXME message_to_read should be True even if current message or any his childs are unread
-    message_to_read = fields.Boolean(related='message_id.to_read')
+    message_to_read = fields.Boolean(related='message_id.needaction')
     uid = fields.Integer()
     move_followers = fields.Boolean(
         'Move Followers',
@@ -176,13 +176,12 @@ class wizard(models.TransientModel):
 
             r.message_id.move(r.parent_id.id, r.res_id, r.model, r.move_back, r.move_followers)
 
-        if not ( r.model and r.res_id ):
-            obj = self.pool.get('ir.model.data').get_object_reference(self._cr, SUPERUSER_ID, 'mail', 'mail_archivesfeeds')[1]
+        if not (r.model and r.res_id):
+            r.message_id.needaction = False
             return {
-                'type' : 'ir.actions.client',
-                'name' : 'Archive',
-                'tag' : 'reload',
-                'params' : {'menu_id': obj},
+                'type': 'ir.actions.client',
+                'name': 'All messages',
+                'tag': 'reload',
             }
         return {
             'name': _('Record'),
@@ -196,6 +195,12 @@ class wizard(models.TransientModel):
 
     @api.one
     def delete(self):
+        msg_id = self.message_id.id
+
+        # Send notification
+        notification = {'id': msg_id}
+        self.env['bus.bus'].sendone((self._cr.dbname, 'mail_move_message.delete_message'), notification)
+
         self.message_id.unlink()
         return {}
 
@@ -287,6 +292,9 @@ class mail_message(models.Model):
             vals['moved_by_user_id'] = self.env.user.id
             vals['moved_by_message_id'] = self.id
 
+        # Update record_name in message
+        vals['record_name'] = self._get_record_name(vals)
+
         for r in self.all_child_ids:
             r_vals = vals.copy()
             if not r.is_moved:
@@ -308,6 +316,16 @@ class mail_message(models.Model):
                 'res_model': r_vals.get('model')
             })
 
+        # Send notification
+        notification = {
+            'id': self.id,
+            'res_id': vals.get('res_id'),
+            'model': vals.get('model'),
+            'is_moved': vals['is_moved'],
+            'record_name': vals['record_name']
+        }
+        self.env['bus.bus'].sendone((self._cr.dbname, 'mail_move_message'), notification)
+
     def name_get(self, cr, uid, ids, context=None):
         if not (context or {}).get('extended_name'):
             return super(mail_message, self).name_get(cr, uid, ids, context=context)
@@ -327,6 +345,16 @@ class mail_message(models.Model):
         res = super(mail_message, self)._message_read_dict(cr, uid, message, parent_id, context)
         res['is_moved'] = message.is_moved
         return res
+
+    @api.multi
+    def message_format(self):
+        message_values = super(mail_message, self).message_format()
+        message_index = {message['id']: message for message in message_values}
+        for item in self:
+            msg = message_index.get(item.id)
+            if msg:
+                msg['is_moved'] = item.is_moved
+        return message_values
 
 
 class mail_move_message_configuration(models.TransientModel):

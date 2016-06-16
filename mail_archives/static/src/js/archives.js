@@ -23,6 +23,12 @@ ChatAction.include({
         var channel_name = 'channel_archive';
         // Add channel Archive for enable "display_subject" option
         this.channels_display_subject.push(channel_name);
+    },
+    
+    update_message_on_current_channel: function(current_channel_id, message){
+        var result = this._super.apply(this, arguments);
+        var archive = current_channel_id === "channel_archive" && !message.is_archive;
+        return archive || result;
     }
 });
 

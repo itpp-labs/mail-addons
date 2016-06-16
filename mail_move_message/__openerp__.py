@@ -1,13 +1,13 @@
 {
     'name' : 'Mail relocation',
     'version' : '1.0.4',
-    'author' : 'IT-Projects LLC, Ivan Yelizariev',
+    'author' : 'IT-Projects LLC, Ivan Yelizariev, Pavel Romanchenko',
     'license': 'LGPL-3',
-    'category' : 'Social Network',
+    'category' : 'Discuss',
     'website' : 'https://twitter.com/yelizariev',
     'price': 100.00,
     'currency': 'EUR',
-    'depends' : ['mail', 'web_polymorphic_field'],
+    'depends' : ['mail_all', 'web_polymorphic_field'],
     'images': ['images/inbox.png'],
     'data':[
         'mail_move_message_views.xml',
@@ -16,5 +16,5 @@
     'qweb': [
         'static/src/xml/mail_move_message_main.xml',
     ],
-    'installable': False
+    'installable': True,
 }
