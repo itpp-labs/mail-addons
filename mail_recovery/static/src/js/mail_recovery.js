@@ -1,12 +1,11 @@
-openerp.mail_recovery = function (session) {
-    var mail = session.mail;
+odoo.define('mail_recovery', function (require) {
+    var composer = require('mail.composer');
 
-    mail.ThreadComposeMessage = mail.ThreadComposeMessage.extend({
-        bind_events: function () {
-            var self = this;
-            this.$('textarea').on('focus', self.on_focus_textarea);
-            this.$('textarea').on('keyup', self.on_keyup_textarea);
-            this._super();
+    composer.BasicComposer.include({
+        init: function(){
+            this._super.apply(this, arguments);
+            this.events['focus .o_composer_input textarea'] = 'on_focus_textarea';
+            this.events['keyup .o_composer_input textarea'] = 'on_keyup_textarea';
         },
         on_focus_textarea: function(event) {
             var $input = $(event.target);
@@ -17,9 +16,9 @@ openerp.mail_recovery = function (session) {
         on_keyup_textarea: function(event) {
             window.localStorage['message_storage'] = $(event.target).val();
         },
-        on_message_post: function (event) {
+        send_message: function (event) {
             window.localStorage['message_storage'] = '';
             return this._super(event);
         },
     });
-};
+})

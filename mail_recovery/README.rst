@@ -23,12 +23,12 @@ Sponsors
 Further information
 ===================
 
-Demo: http://runbot.it-projects.info/demo/mail-addons/8.0
+Demo: http://runbot.it-projects.info/demo/mail-addons/9.0
 
-HTML Description: https://apps.odoo.com/apps/modules/8.0/mail_recovery/
+HTML Description: https://apps.odoo.com/apps/modules/9.0/mail_recovery/
 
 Usage instructions: `<doc/index.rst>`_
 
 Changelog: `<doc/changelog.rst>`_
 
-Tested on Odoo 8.0 17a130428516d9dd8105f90e8c9a65a0b4e8901b
+Tested on Odoo 9.0 fd9eb2e4819031c6758c021f4c335b591367632d
