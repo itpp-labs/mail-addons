@@ -2,7 +2,12 @@
  Mail Recovery
 ===============
 
-Save and recover message from localStorage if it was not sent
+Backup and recover unsent message. It works via localStorage.
+
+TODO
+====
+
+* add support for *full mail composer*
 
 Credits
 =======
@@ -18,10 +23,12 @@ Sponsors
 Further information
 ===================
 
+Demo: http://runbot.it-projects.info/demo/mail-addons/8.0
+
 HTML Description: https://apps.odoo.com/apps/modules/8.0/mail_recovery/
 
-.. Usage instructions: `<doc/index.rst>`_
+Usage instructions: `<doc/index.rst>`_
 
-.. Changelog: `<doc/changelog.rst>`_
+Changelog: `<doc/changelog.rst>`_
 
-Tested on Odoo 8.0 2ff993ff8cff94bdc568f8579000f2f10b32c810
+Tested on Odoo 8.0 17a130428516d9dd8105f90e8c9a65a0b4e8901b
