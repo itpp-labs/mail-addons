@@ -3,7 +3,7 @@
     'version' : '1.0.0',
     'author' : 'IT-Projects LLC, Ivan Yelizariev',
     'license': 'LGPL-3',
-    'category' : 'Social Network',
+    "category": "Discuss",
     'website' : 'https://yelizariev.github.io',
     'description': """
 Allows to check outgoing mails, i.e. failed or delayed.
