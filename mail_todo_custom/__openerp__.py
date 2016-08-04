@@ -5,7 +5,7 @@
     'author': 'IT-Projects LLC',
     'license': 'GPL-3',
     'website': "https://yelizariev.github.io",
-    'category': 'Tools',
+    "category": "Discuss",
     'depends': ['mail'],
     'data': ['mail_todo_custom.xml'],
     'demo': [],
