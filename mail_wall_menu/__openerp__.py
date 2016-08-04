@@ -3,7 +3,7 @@
     'version' : '1.0.0',
     'author' : 'IT-Projects LLC, Ivan Yelizariev',
     'license': 'GPL-3',
-    'category' : 'Social Network',
+    "category": "Discuss",
     'website' : 'https://yelizariev.github.io',
     'description': """
 Module creates special menu at Messaging section to show only gamification-like blocks there.
