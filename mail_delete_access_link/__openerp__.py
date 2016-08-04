@@ -1,8 +1,8 @@
 {
-    'name' : 'Fix "False" in empty email body',
+    'name' : 'Delete access link in email footer',
     'version' : '1.0.0',
     'author' : 'IT-Projects LLC, Ivan Yelizariev',
-    'license': 'LGPL-3',
+    'license': 'GPL-3',
     "category": "Discuss",
     'website' : 'https://twitter.com/yelizariev',
     'price': 9.00,
@@ -10,5 +10,5 @@
     'depends' : ['mail'],
     'data':[
         ],
-    'installable': False
+    'installable': True
 }
