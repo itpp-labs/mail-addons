@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <t t-extend="mail.compose_message">
+		<t t-jquery="a[title='Send a message to all followers of the document']" t-operation="after">
+			<span class="oe_grey oe_sep_word">or</span><a class="oe_compose_post_private" t-if="!widget.options.compose_placeholder and !widget.options.view_mailbox" title="Send a message to all followers of the document">Send internal message</a>
+		</t>
+	</t>
+</template>
