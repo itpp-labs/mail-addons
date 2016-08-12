@@ -104,6 +104,7 @@ openerp.mail_private = function(instance){
             this._super.apply(this, arguments);
         },
         on_toggle_quick_composer_private: function (event) {
+            this.recipients = [];
             var self = this;
             var $input = $(event.target);
             this.compute_emails_from();
@@ -156,20 +157,31 @@ openerp.mail_private = function(instance){
             var self = this;
             self.result = {};
             return new instance.web.Model(context.default_model).call(
-                'read', [ids, ['message_follower_ids'], context]
+                'read', [ids, ['message_follower_ids', 'partner_id'], context]
             ).then(function (thread) {
                 for (var i = 0; i < thread.length; i++) {
                     var res_id = thread[i].id;
-                    var followers = thread[i].message_follower_ids;
+                    var recipient_ids = thread[i].message_follower_ids;
                     self.result[res_id] = [];
+
+                    // Add customer
+                    self.customer = thread[i].partner_id;
+                    if (self.customer && !recipient_ids.includes(self.customer[0])) {
+                        recipient_ids.splice(0, 0, self.customer[0]);
+                    }
+
                     return new instance.web.Model('res.partner').call(
-                        'read', [followers, ['name', 'email', 'user_ids']]
+                        'read', [recipient_ids, ['name', 'email', 'user_ids']]
                     ).then(function (res_partners){
                         for (var j = 0; j < res_partners.length; j++) {
-                            if (!_.include(res_partners[j].user_ids, self.session.uid)){
-                                var partner = res_partners[j];
+                            var partner = res_partners[j];
+                            if (!_.include(partner.user_ids, self.session.uid)){
+                                var reason = 'Follower';
+                                if (self.customer && partner.id == self.customer[0]){
+                                    reason = 'Partner';
+                                }
                                 self.result[res_id].push(
-                                    [partner.id, partner.name + '<' + partner.email + '>']
+                                    [partner.id, partner.name + '<' + partner.email + '>', reason]
                                 );
                             }
                         }
