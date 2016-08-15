@@ -1,4 +1,6 @@
-from openerp import api, models, fields, SUPERUSER_ID
+# -*- coding: utf-8 -*-
+from openerp import models
+
 
 class mail_compose_message(models.TransientModel):
     _inherit = 'mail.compose.message'

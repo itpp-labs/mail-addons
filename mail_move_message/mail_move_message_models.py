@@ -1,7 +1,8 @@
-from lxml import etree
+# -*- coding: utf-8 -*-
 from openerp import api, models, fields, SUPERUSER_ID
 from openerp.tools import email_split
 from openerp.tools.translate import _
+
 
 class wizard(models.TransientModel):
     _name = 'mail_move_message.wizard'
@@ -34,7 +35,7 @@ class wizard(models.TransientModel):
         if 'message_id' in res:
             message = self.env['mail.message'].browse(res['message_id'])
             email_from = message.email_from
-            parts = email_split(email_from.replace(' ',','))
+            parts = email_split(email_from.replace(' ', ','))
             if parts:
                 email = parts[0]
                 name = email_from.find(email) != -1 and email_from[:email_from.index(email)].replace('"', '').replace('<', '').strip() or email_from
@@ -51,7 +52,7 @@ class wizard(models.TransientModel):
                 res['res_id'] = res_id and res_id[0].id
 
         config_parameters = self.env['ir.config_parameter']
-        res['move_followers'] =  config_parameters.get_param('mail_relocation_move_followers')
+        res['move_followers'] = config_parameters.get_param('mail_relocation_move_followers')
 
         res['uid'] = self.env.uid
 
@@ -102,8 +103,8 @@ class wizard(models.TransientModel):
     def update_move_back(self):
         model = self.message_id.moved_from_model
         self.move_back = self.parent_id == self.message_id.moved_from_parent_id \
-                         and self.res_id == self.message_id.moved_from_res_id \
-                         and (self.model == model or (not self.model and not model))
+            and self.res_id == self.message_id.moved_from_res_id \
+            and (self.model == model or (not self.model and not model))
 
     @api.onchange('parent_id')
     def on_change_parent_id(self):
@@ -140,7 +141,7 @@ class wizard(models.TransientModel):
         operation = 'write'
         context = self._context
 
-        if not ( self.model and self.res_id ):
+        if not (self.model and self.res_id):
             return True
         model_obj = self.pool[self.model]
         mids = model_obj.exists(cr, uid, [self.res_id])
@@ -169,20 +170,20 @@ class wizard(models.TransientModel):
         for r in self:
             r.check_access()
             if not r.parent_id or not (r.parent_id.model == r.model and
-                r.parent_id.res_id == r.res_id):
-                #link with the first message of record
-                parent = self.env['mail.message'].search([('model','=',r.model), ('res_id','=',r.res_id)], order='id', limit=1)
+                                       r.parent_id.res_id == r.res_id):
+                # link with the first message of record
+                parent = self.env['mail.message'].search([('model', '=', r.model), ('res_id', '=', r.res_id)], order='id', limit=1)
                 r.parent_id = parent.id or None
 
             r.message_id.move(r.parent_id.id, r.res_id, r.model, r.move_back, r.move_followers)
 
-        if not ( r.model and r.res_id ):
+        if not (r.model and r.res_id):
             obj = self.pool.get('ir.model.data').get_object_reference(self._cr, SUPERUSER_ID, 'mail', 'mail_archivesfeeds')[1]
             return {
-                'type' : 'ir.actions.client',
-                'name' : 'Archive',
-                'tag' : 'reload',
-                'params' : {'menu_id': obj},
+                'type': 'ir.actions.client',
+                'name': 'Archive',
+                'tag': 'reload',
+                'params': {'menu_id': obj},
             }
         return {
             'name': _('Record'),
@@ -260,7 +261,7 @@ class mail_message(models.Model):
         fol_obj = self.env['mail.followers']
         for message in self:
             followers = fol_obj.sudo().search([('res_model', '=', message.model),
-                                                 ('res_id', '=', message.res_id)])
+                                               ('res_id', '=', message.res_id)])
             for f in followers:
                 self.env[model].browse(ids).message_subscribe([f.partner_id.id], [s.id for s in f.subtype_ids])
 
@@ -315,7 +316,7 @@ class mail_message(models.Model):
             return []
         if isinstance(ids, (long, int)):
             ids = [ids]
-        reads = self.read(cr, uid, ids, ['record_name','model', 'res_id'], context=context)
+        reads = self.read(cr, uid, ids, ['record_name', 'model', 'res_id'], context=context)
         res = []
         for record in reads:
             name = record['record_name'] or ''
@@ -372,11 +373,11 @@ class res_partner(models.Model):
             email_address = (vals['email'].replace('\\', '\\\\').replace('%', '\\%').replace('_', '\\_'))
             email_brackets = "<%s>" % email_address
             messages = mail_message_obj.search([
-                                '|',
-                                ('email_from', '=ilike', email_address),
-                                ('email_from', 'ilike', email_brackets),
-                                ('author_id', '=', False)
-                            ])
+                '|',
+                ('email_from', '=ilike', email_address),
+                ('email_from', 'ilike', email_brackets),
+                ('author_id', '=', False)
+            ])
             if messages:
                 messages.sudo().write({'author_id': res.id})
         return res

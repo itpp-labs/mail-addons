@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
 {
-    'name' : 'Improvements for mass mailing',
-    'version' : '1.0.0',
-    'author' : 'IT-Projects LLC, Ivan Yelizariev',
+    'name': 'Improvements for mass mailing',
+    'version': '1.0.0',
+    'author': 'IT-Projects LLC, Ivan Yelizariev',
     'license': 'GPL-3',
     "category": "Discuss",
-    'website' : 'https://yelizariev.github.io',
+    'website': 'https://yelizariev.github.io',
     'description': """
 Modules adds:
 
@@ -13,9 +14,9 @@ Modules adds:
 
 Tested on 8.0 f8d5a6727d3e8d428d9bef93da7ba6b11f344284
     """,
-    'depends' : ['mass_mailing'],
-    'data':[
+    'depends': ['mass_mailing'],
+    'data': [
         'views.xml',
-        ],
+    ],
     'installable': True
 }

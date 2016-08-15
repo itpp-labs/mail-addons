@@ -1,1 +1,2 @@
-import mail_delete_access_link
+# -*- coding: utf-8 -*-
+from . import mail_delete_access_link

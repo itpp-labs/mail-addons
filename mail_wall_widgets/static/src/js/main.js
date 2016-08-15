@@ -8,13 +8,13 @@ openerp.mail_wall_widgets = function(instance) {
             var self = this;
             this._super(parent, action);
             this.deferred = $.Deferred();
-            self.money_df = $.Deferred()
+            self.money_df = $.Deferred();
             self.money_df.resolve();
-            self.money_cache = {}
+            self.money_cache = {};
             //$(document).off('keydown.klistener');
             this.widget_templates = {
                 'mail.wall.widgets.widget': "mail_wall_widgets.Widget"
-            }
+            };
         },
         events: {
             'click .oe_open_record': function(event){
@@ -27,7 +27,7 @@ openerp.mail_wall_widgets = function(instance) {
                     'target': 'current',
                     'views': [[false, 'form'],[false, 'list']],
                     'domain':  $t.parent().parent().attr('data-domain'),
-                })
+                });
             },
             'click .oe_open_record_list': function(event){
                 var $t = $(event.currentTarget);
@@ -38,7 +38,7 @@ openerp.mail_wall_widgets = function(instance) {
                     'target': 'current',
                     'views': [[false, 'list'],[false, 'form']],
                     'domain':  $t.parent().attr('data-domain'),
-                })
+                });
             },
             'click .oe_open_record_list_funnel': function(event){
                 var $t = $(event.currentTarget);
@@ -49,7 +49,7 @@ openerp.mail_wall_widgets = function(instance) {
                     'target': 'current',
                     'views': [[false, 'list'],[false, 'form']],
                     'domain':  $t.attr('data-domain'),
-                })
+                });
             },
         },
         start: function() {
@@ -97,18 +97,18 @@ openerp.mail_wall_widgets = function(instance) {
                 self.money_df =
                     self.money_df.then(function(){
                         var callback = function(){
-                            money_field.set({'currency_info': self.money_cache[currency_id]})
-                        }
+                            money_field.set({'currency_info': self.money_cache[currency_id]});
+                        };
                         if (self.money_cache[currency_id]){
                             callback();
                             return;
                         }
-                        var req = new instance.web.Model("res.currency").query(["symbol", "position"]).filter([["id", "=", currency_id]]).first()
+                        var req = new instance.web.Model("res.currency").query(["symbol", "position"]).filter([["id", "=", currency_id]]).first();
                         return req.then(function(res){
                                    self.money_cache[currency_id] = res;
                                    callback();
-                               })
-                    })
+                               });
+                    });
             });
         },
         render_float_fields: function(item) {
@@ -123,8 +123,8 @@ openerp.mail_wall_widgets = function(instance) {
                 if (precision && precision<1)
                     digits[1] = ($(this).attr('data-precision') || '0.01').slice(2).indexOf('1')+1;
 
-                value = instance.web.format_value(parseFloat(value), {type: "float", digits: digits}, '')
-                $(this).text(value)
+                value = instance.web.format_value(parseFloat(value), {type: "float", digits: digits}, '');
+                $(this).text(value);
             });
         },
         render_user_avatars: function(item) {

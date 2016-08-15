@@ -1,5 +1,7 @@
-from openerp import api,models,fields
-from openerp.osv import fields as old_fields
+# -*- coding: utf-8 -*-
+from openerp import fields
+from openerp import models
+
 
 class hr_employee(models.Model):
     _inherit = 'hr.employee'

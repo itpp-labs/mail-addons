@@ -11,14 +11,14 @@ openerp.mail_recovery = function (session) {
         on_focus_textarea: function(event) {
             var $input = $(event.target);
             if (!$input.val()) {
-                $input.val(window.localStorage['message_storage']);
+                $input.val(window.localStorage.message_storage);
             }
         },
         on_keyup_textarea: function(event) {
-            window.localStorage['message_storage'] = $(event.target).val();
+            window.localStorage.message_storage = $(event.target).val();
         },
         on_message_post: function (event) {
-            window.localStorage['message_storage'] = '';
+            window.localStorage.message_storage = '';
             return this._super(event);
         },
     });

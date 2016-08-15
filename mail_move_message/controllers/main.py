@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
 from openerp.addons.web.controllers.main import DataSet
 from openerp.tools.translate import _
 from openerp import http
 from openerp.http import request
+
 
 class DataSetCustom(DataSet):
 
@@ -26,12 +28,11 @@ class DataSetCustom(DataSet):
                 res.append((r[0], _('%s ID %s') % (r[1], r[0])))
         return res
 
-
     @http.route('/web/dataset/call_kw/<model>/name_search', type='json', auth="user")
     def name_search(self, model, method, args, kwargs):
         context = kwargs.get('context')
         if context and context.get('extended_name_with_contact'):
-            #add order by ID desc
+            # add order by ID desc
             cr, uid = request.cr, request.uid
             Model = request.registry[model]
             search_args = list(kwargs.get('args') or [])
