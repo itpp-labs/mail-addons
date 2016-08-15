@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from openerp import api, models, fields
 
 
@@ -25,4 +26,3 @@ class mail_compose_message(models.TransientModel):
 
     _inherit = 'mail.compose.message'
     sent = fields.Boolean('Sent', help='dummy field to fix inherit error')
-

@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 from openerp.osv import osv
-from openerp import tools, SUPERUSER_ID
+
 
 class mail_mail(osv.Model):
     _inherit = 'mail.mail'

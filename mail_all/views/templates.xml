@@ -28,5 +28,5 @@
           <field name="action" ref="action_mail_all_feeds"/>
           <field name="parent_id" ref="mail.mail_feeds"/>
         </record>
-	</data>
+    </data>
 </openerp>

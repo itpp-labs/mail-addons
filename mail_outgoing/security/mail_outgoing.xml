@@ -3,10 +3,10 @@
     <data>
         <record model="res.groups" id="group_all_emails">
             <field name="name">all_emails</field>
-			<field name="comment">Gets access to all emails. For example to check outgoing emails.</field>
-		</record>
+            <field name="comment">Gets access to all emails. For example to check outgoing emails.</field>
+        </record>
 
-		<record model="ir.rule" id="rule_mail_mail_user">
+        <record model="ir.rule" id="rule_mail_mail_user">
             <field name="name">mail.mail: user</field>
             <field name="model_id" ref="mail.model_mail_mail"/>
             <field name="domain_force">[('author_id', '=', user.partner_id.id)]</field>
@@ -16,9 +16,9 @@
             <field name="perm_create" eval="True"/>
             <field name="perm_unlink" eval="False"/>
             <field name="global" eval="False"/>
-		</record>
+        </record>
 
-		<record model="ir.rule" id="rule_mail_mail_system">
+        <record model="ir.rule" id="rule_mail_mail_system">
             <field name="name">mail.mail: system</field>
             <field name="model_id" ref="mail.model_mail_mail"/>
             <field name="domain_force">[(1, '=', 1)]</field>
@@ -28,6 +28,6 @@
             <field name="perm_create" eval="True"/>
             <field name="perm_unlink" eval="True"/>
             <field name="global" eval="False"/>
-		</record>
-	</data>
+        </record>
+    </data>
 </openerp>

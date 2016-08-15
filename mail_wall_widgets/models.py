@@ -1,4 +1,5 @@
-from openerp.osv import osv,fields as old_fields
+# -*- coding: utf-8 -*-
+from openerp.osv import fields as old_fields
 from openerp import api, models, fields, tools
 from openerp.tools.safe_eval import safe_eval
 try:
@@ -15,6 +16,7 @@ from datetime import date, datetime, timedelta
 from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
+
 class mail_wall_widgets_widget(models.Model):
     _name = 'mail.wall.widgets.widget'
     _order = "sequence, id"
@@ -25,10 +27,10 @@ class mail_wall_widgets_widget(models.Model):
             ('list', 'List'),
             ('funnel', 'Funnel'),
             ('slice', 'Slice'),
-            #('', ''),
-            #('', ''),
-            #('', ''),
-            #('', ''),
+            # ('', ''),
+            # ('', ''),
+            # ('', ''),
+            # ('', ''),
         ], help='''
 Slice - use "domain" for total and "won_domain" for target
         '''),
@@ -39,19 +41,19 @@ Slice - use "domain" for total and "won_domain" for target
         'limit': old_fields.integer('Limit', help='Limit count of records to show'),
         'order': old_fields.char('Order', help='Order of records to show'),
         'value_field_id': old_fields.many2one('ir.model.fields',
-            string='Value field',
-            help='The field containing the value of record'),
+                                              string='Value field',
+                                              help='The field containing the value of record'),
         'stage_field_id': old_fields.many2one('ir.model.fields',
-            string='Stage field',
-            help='Field to split records in funnel. It can be selection type or many2one (the later should have "sequence" field)'),
-        #'stage_field_domain': old_fields.many2one('ir.model.fields',
+                                              string='Stage field',
+                                              help='Field to split records in funnel. It can be selection type or many2one (the later should have "sequence" field)'),
+        # 'stage_field_domain': old_fields.many2one('ir.model.fields',
         #    string='Stage field domain',
         #    help='(for many2one stage_field_id) Domain to find stage objects'),
         'won_domain': old_fields.char('Won domain',
-            help='Domain to find won objects'),
+                                      help='Domain to find won objects'),
         'field_date_id': old_fields.many2one('ir.model.fields',
-            string='Date Field',
-            help='The date to use for the time period evaluated'),
+                                             string='Date Field',
+                                             help='The date to use for the time period evaluated'),
         'start_date': old_fields.date('Start Date'),
         'end_date': old_fields.date('End Date'),  # no start and end = always active
         'content': old_fields.char('Line template', help='Mako template to show content'),
@@ -95,10 +97,11 @@ Slice - use "domain" for total and "won_domain" for target
             if self.agenda:
                 today = date.today()
                 tomorrow = today + timedelta(days=1)
+
                 def r2date(r):
                     d = getattr(r, field_date_name)
                     if d:
-                        d = datetime.strptime(d, self.field_date_id.ttype=='date' and DEFAULT_SERVER_DATE_FORMAT or DEFAULT_SERVER_DATETIME_FORMAT)
+                        d = datetime.strptime(d, self.field_date_id.ttype == 'date' and DEFAULT_SERVER_DATE_FORMAT or DEFAULT_SERVER_DATETIME_FORMAT)
                         d = d.date()
                     else:
                         d = date.today()
@@ -140,10 +143,10 @@ Slice - use "domain" for total and "won_domain" for target
             })
             for r in obj.search(domain, limit=self.limit, order=self.order):
                 mako = mako_template_env.from_string(tools.ustr(self.content))
-                content = mako.render({'record':r})
+                content = mako.render({'record': r})
                 r_json = {
                     'id': r.id,
-                    #'fields': dict( (f,getattr(r,f)) for f in fields),
+                    # 'fields': dict( (f,getattr(r,f)) for f in fields),
                     'display_mode': 'progress',
                     'state': 'inprogress',
                     'completeness': 0,
@@ -161,26 +164,26 @@ Slice - use "domain" for total and "won_domain" for target
             for g in groups:
                 del g['test']
         elif self.type == 'funnel':
-            stage_ids = [] # [key]
+            stage_ids = []  # [key]
             for group in obj.read_group(domain, [], [self.stage_field_id.name]):
                 key = group[self.stage_field_id.name]
                 if isinstance(key, (list, tuple)):
                     key = key[0]
                 stage_ids.append(key)
 
-            stages = [] # [{'name':Name, 'id': key}]
+            stages = []  # [{'name':Name, 'id': key}]
             if self.stage_field_id.ttype == 'selection':
-                d = dict (self.stage_field_id.selection)
-                stages = [ {'id':id, 'name':d[id]} for id in stage_ids ]
-            else: # many2one
+                d = dict(self.stage_field_id.selection)
+                stages = [{'id': id, 'name': d[id]} for id in stage_ids]
+            else:  # many2one
                 stage_model = self.stage_field_id.relation
                 for r in self.env[stage_model].browse(stage_ids):
-                    stages.append({'id': r.id, 'name':r.name_get()[0][1]})
+                    stages.append({'id': r.id, 'name': r.name_get()[0][1]})
 
             value_field_name = self.value_field_id.name
             for stage in stages:
                 d = copy.copy(domain)
-                d.append( (self.stage_field_id.name, '=', stage['id']) )
+                d.append((self.stage_field_id.name, '=', stage['id']))
                 result = obj.read_group(d, [value_field_name], [])
                 stage['closed_value'] = result and result[0][value_field_name] or 0.0
                 stage['domain'] = str(d)
@@ -189,7 +192,7 @@ Slice - use "domain" for total and "won_domain" for target
             d = domain + won_domain
             result = obj.read_group(domain, [value_field_name], [])
             won = {'name': _('Won'),
-                   'id':'__won__',
+                   'id': '__won__',
                    'closed_value': result and result[0][value_field_name] or 0.0
                    }
             stages.append(won)
@@ -200,7 +203,7 @@ Slice - use "domain" for total and "won_domain" for target
             total_value = stages[0]['abs_value']
             precision = self.precision
             for s in stages:
-                s['rel_value'] = round(100*s['abs_value']/total_value/precision)*precision if total_value else 100
+                s['rel_value'] = round(100 * s['abs_value'] / total_value / precision) * precision if total_value else 100
                 # dummy fields
                 s['display_mode'] = 'progress'
                 s['monetary'] = 1
@@ -210,7 +213,7 @@ Slice - use "domain" for total and "won_domain" for target
             res['conversion_rate'] = stages[-1]['rel_value']
         elif self.type == 'slice':
             value_field_name = self.value_field_id.name
-            for f,d  in [('total', domain), ('won', won_domain)]:
+            for f, d in [('total', domain), ('won', won_domain)]:
                 result = obj.read_group(d, [value_field_name], [])
                 res[f] = result and result[0][value_field_name] or 0.0
 
@@ -219,11 +222,12 @@ Slice - use "domain" for total and "won_domain" for target
 
             precision = self.precision
             total_value = res['total']
-            res['slice'] = round(100*res['won']/res['total']/precision)*precision if res['total'] else 100
+            res['slice'] = round(100 * res['won'] / res['total'] / precision) * precision if res['total'] else 100
             # dummy fields
             res['display_mode'] = 'progress'
             res['monetary'] = self.value_field_monetary
         return res
+
 
 class mail_wall_widgets_cache(models.Model):
     _name = 'mail.wall.widgets.cache'
@@ -232,6 +236,7 @@ class mail_wall_widgets_cache(models.Model):
     res_id = fields.Integer('Resource ID')
     res_model = fields.Integer('Resource Model')
     user_id = fields.Many2one('res.users')
+
 
 class res_users(models.Model):
     _inherit = 'res.users'
@@ -258,7 +263,7 @@ class res_users(models.Model):
         domain = [('group_ids', 'in', user.groups_id.ids), ('active', '=', True)]
         for widget in self.env[model].search(domain, order='sequence'):
             if widget.cache:
-                #TODO
+                # TODO
                 continue
             res.append({
                 'model': model,
@@ -268,7 +273,7 @@ class res_users(models.Model):
             })
         return res
 
-    #def get_challenge_suggestions(self, cr, uid, context=None):
+    # def get_challenge_suggestions(self, cr, uid, context=None):
     #    """Return the list of challenges suggested to the user"""
     #    challenge_info = []
     #    challenge_obj = self.pool.get('mail_wall_widgets.challenge')

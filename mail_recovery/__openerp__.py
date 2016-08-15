@@ -12,5 +12,5 @@
     'depends': ['mail'],
     'data': [
         'data.xml',
-        ],
+    ],
 }
