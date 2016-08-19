@@ -1,4 +1,5 @@
-from openerp import api,models,fields
+from openerp import api, models, fields
+
 
 class MailMailStats(models.Model):
 
@@ -8,7 +9,7 @@ class MailMailStats(models.Model):
 
     @api.one
     def _get_partner_id(self):
-        if self.model=='res.partner':
+        if self.model == 'res.partner':
             self.partner_id = self.res_id
         else:
             self.partner_id = None
@@ -22,7 +23,6 @@ class MailMailStats(models.Model):
             res[p.id] = p
         if self.partner_id and self.partner_id.id not in res:
             res[self.partner_id.id] = self.partner_id
-        self.partners = ', '.join([('%s <%s>' % (p.name, p.email)) for id,p in res.items()])
-
+        self.partners = ', '.join([('%s <%s>' % (p.name, p.email)) for id, p in res.items()])
 
     partners = fields.Char('Partners', compute=_get_partners)

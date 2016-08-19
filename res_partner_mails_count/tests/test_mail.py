@@ -5,6 +5,7 @@ from openerp.tests.common import TransactionCase
 
 class test_message_count(TransactionCase):
     post_install = True
+
     def test_count(self):
         new_partner1 = self.env['res.partner'].sudo().create({'name': 'rpmc Test Partner one', 'email': 'tt@tt', 'notify_email': 'always'})
         new_partner2 = self.env['res.partner'].sudo().create({'name': 'rpmc Test Partner two', 'email': 'rr@rr', 'notify_email': 'always'})

@@ -16,6 +16,7 @@ _logger = logging.getLogger(__name__)
 
 import re
 
+
 class mail_mail(osv.Model):
     _inherit = "mail.mail"
 
@@ -41,9 +42,8 @@ class mail_mail(osv.Model):
         catchall_alias_name = self.pool['ir.config_parameter'].get_param(cr, uid, "mail.catchall.name_alias_from", context=context)
         catchall_domain = self.pool['ir.config_parameter'].get_param(cr, uid, "mail.catchall.domain", context=context)
 
-        correct_email_from = '@%s>?\s*$'%catchall_domain
+        correct_email_from = '@%s>?\s*$' % catchall_domain
         default_email_from = '%s@%s' % (catchall_alias, catchall_domain)
-
 
         context = dict(context or {})
         ir_mail_server = self.pool.get('ir.mail_server')
@@ -64,8 +64,8 @@ class mail_mail(osv.Model):
                 # soft/hard mem limits with temporary data.
                 attachment_ids = [a.id for a in mail.attachment_ids]
                 attachments = [(a['datas_fname'], base64.b64decode(a['datas']))
-                                 for a in ir_attachment.read(cr, SUPERUSER_ID, attachment_ids,
-                                                             ['datas_fname', 'datas'])]
+                               for a in ir_attachment.read(cr, SUPERUSER_ID, attachment_ids,
+                                                           ['datas_fname', 'datas'])]
 
                 # specific behavior to customize the send email for notified partners
                 email_list = []
@@ -106,7 +106,7 @@ class mail_mail(osv.Model):
                         email_from = formataddr((catchall_alias_name, email_from))
 
                     msg = ir_mail_server.build_email(
-                        email_from=email_from, # NEW STUFF
+                        email_from=email_from,  # NEW STUFF
                         email_to=email.get('email_to'),
                         subject=email.get('subject'),
                         body=email.get('body'),
@@ -122,8 +122,8 @@ class mail_mail(osv.Model):
                         headers=headers)
                     try:
                         res = ir_mail_server.send_email(cr, uid, msg,
-                                                    mail_server_id=mail.mail_server_id.id,
-                                                    context=context)
+                                                        mail_server_id=mail.mail_server_id.id,
+                                                        context=context)
                     except AssertionError as error:
                         if error.message == ir_mail_server.NO_VALID_RECIPIENT:
                             # No valid recipient found for this particular
@@ -146,8 +146,8 @@ class mail_mail(osv.Model):
             except MemoryError:
                 # prevent catching transient MemoryErrors, bubble up to notify user or abort cron job
                 # instead of marking the mail as failed
-                _logger.exception('MemoryError while processing mail with ID %r and Msg-Id %r. '\
-                                      'Consider raising the --limit-memory-hard startup option',
+                _logger.exception('MemoryError while processing mail with ID %r and Msg-Id %r. '
+                                  'Consider raising the --limit-memory-hard startup option',
                                   mail.id, mail.message_id)
                 raise
             except Exception as e:

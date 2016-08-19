@@ -12,9 +12,9 @@ class MailMessage(models.Model):
     def _get_sent(self):
         self_sudo = self.sudo()
         self_sudo.sent = len(self_sudo.partner_ids) > 1 \
-                         or len(self_sudo.partner_ids) == 1 \
-                            and self_sudo.author_id \
-                            and self_sudo.partner_ids[0].id != self_sudo.author_id.id
+            or len(self_sudo.partner_ids) == 1 \
+            and self_sudo.author_id \
+            and self_sudo.partner_ids[0].id != self_sudo.author_id.id
 
     @api.multi
     def message_format(self):

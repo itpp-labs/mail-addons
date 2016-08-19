@@ -1,5 +1,6 @@
 from openerp.osv import osv
 
+
 class mail_message(osv.Model):
     _inherit = 'mail.message'
 
@@ -13,10 +14,11 @@ class mail_message(osv.Model):
 
         return super(mail_message, self).check_access_rule(cr, uid, ids, operation, context)
 
+
 class mail_mail(osv.Model):
     _name = 'mail.mail'
     _inherit = ['mail.mail', 'ir.needaction_mixin']
     _needaction = True
 
     def _needaction_domain_get(self, cr, uid, context=None):
-        return [('state','in', ['outgoing', 'exception'])]
+        return [('state', 'in', ['outgoing', 'exception'])]

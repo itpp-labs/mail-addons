@@ -12,6 +12,6 @@
     'depends': ['mail'],
     'data': [
         'data.xml',
-        ],
+    ],
     "installable": True,
 }
