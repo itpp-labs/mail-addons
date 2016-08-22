@@ -60,7 +60,6 @@ class FetchMailImmediately(models.AbstractModel):
     def run_fetchmail_manually(self):
 
         fetchmail_task = self.env.ref('fetchmail.ir_cron_mail_gateway_action')
-        fetchmail_task_id = fetchmail_task.id
         fetchmail_model = self.env['fetchmail.server'].sudo()
 
         fetchmail_task._try_lock()

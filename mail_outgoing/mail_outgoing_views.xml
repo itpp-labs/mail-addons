@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-		
+        
         <record id="action_mail_outgoing" model="ir.actions.act_window">
             <field name="name">Outgoing</field>
             <field name="res_model">mail.mail</field>
@@ -10,8 +10,8 @@
             <field name="context">{}</field>
             <field name="search_view_id" ref="mail.view_mail_search"/>
             <field name="help" type="html">
-				<p>
-					Failed or delayed emails will be shown here. You will be able to retry failed emails and send delayed emails manually.
+                <p>
+                    Failed or delayed emails will be shown here. You will be able to retry failed emails and send delayed emails manually.
                 </p>
             </field>
         </record>
@@ -30,5 +30,5 @@
         </record>
 
 
-	</data>
+    </data>
 </openerp>

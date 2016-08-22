@@ -1,8 +1,10 @@
 import openerp.tests
 
+
 @openerp.tests.common.at_install(False)
 @openerp.tests.common.post_install(True)
 class TestUi(openerp.tests.HttpCase):
+
     def test_01_mail_all(self):
         # wait till page loaded and then click and wait again
         code = """

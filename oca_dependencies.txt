@@ -1,0 +1,4 @@
+OCA_web https://github.com/OCA/web
+access-addons https://github.com/it-projects-llc/access-addons.git
+misc-addons https://github.com/it-projects-llc/misc-addons
+website-addons https://github.com/it-projects-llc/website-addons

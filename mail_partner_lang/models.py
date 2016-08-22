@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from openerp.osv import osv,fields
-from openerp import SUPERUSER_ID
+from openerp.osv import osv
+
+
 
 class mail_thread(osv.Model):
     _inherit = "mail.thread"
@@ -37,7 +38,7 @@ class mail_thread(osv.Model):
         for browse_record in self.browse(cr, uid, ids, context=context):
             p = getattr(browse_record, 'partner_id', None)
             if p:
-                browse_record._context.update({'lang':p.lang})
+                browse_record._context.update({'lang': p.lang})
 
             initial = initial_values[browse_record.id]
             changes = set()
@@ -53,12 +54,12 @@ class mail_thread(osv.Model):
 
                 if record_value == initial_value and getattr(self._all_columns[col_name].column, 'track_visibility', None) == 'always':
                     tracked_values[col_name] = dict(col_info=col_info['string'],
-                                                        new_value=convert_for_display(record_value, col_info))
+                                                    new_value=convert_for_display(record_value, col_info))
                 elif record_value != initial_value and (record_value or initial_value):  # because browse null != False
                     if getattr(self._all_columns[col_name].column, 'track_visibility', None) in ['always', 'onchange']:
                         tracked_values[col_name] = dict(col_info=col_info['string'],
-                                                            old_value=convert_for_display(initial_value, col_info),
-                                                            new_value=convert_for_display(record_value, col_info))
+                                                        old_value=convert_for_display(initial_value, col_info),
+                                                        new_value=convert_for_display(record_value, col_info))
                     if col_name in tracked_fields:
                         changes.add(col_name)
             if not changes:
