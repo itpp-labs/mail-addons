@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 {
     'name': 'Outgoing mails menu',
     'version': '1.0.0',

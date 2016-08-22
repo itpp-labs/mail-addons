@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from openerp.osv import osv, fields
-from openerp import SUPERUSER_ID
+from openerp.osv import osv
+
 
 
 class mail_thread(osv.Model):

@@ -3,7 +3,7 @@
 from openerp.tests.common import TransactionCase
 
 
-class test_message_count(TransactionCase):
+class TestMessageCount(TransactionCase):
     post_install = True
 
     def test_count(self):

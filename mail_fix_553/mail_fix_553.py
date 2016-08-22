@@ -2,19 +2,18 @@
 
 import base64
 import logging
+import re
 from email.utils import formataddr
-from urlparse import urljoin
 
-from openerp import api, tools
+from openerp import tools
 from openerp import SUPERUSER_ID
 from openerp.addons.base.ir.ir_mail_server import MailDeliveryException
-from openerp.osv import fields, osv
+from openerp.osv import osv
 from openerp.tools.safe_eval import safe_eval as eval
 from openerp.tools.translate import _
 
 _logger = logging.getLogger(__name__)
 
-import re
 
 
 class mail_mail(osv.Model):

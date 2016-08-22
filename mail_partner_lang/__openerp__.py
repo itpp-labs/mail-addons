@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 {
     'name': 'Use partner language in mail',
     'version': '1.0.0',

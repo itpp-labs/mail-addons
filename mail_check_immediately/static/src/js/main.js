@@ -10,7 +10,7 @@ openerp.mail_check_immediately = function(instance, local) {
             this.imm_model = new instance.web.Model('fetch_mail.imm');
             this.events['click a.oe_fetch_new_mails'] = function(){
                 _this.run_fetchmail_manually();
-            }
+            };
         },
 
         start: function() {
@@ -22,7 +22,7 @@ openerp.mail_check_immediately = function(instance, local) {
             this.get_last_fetched_time();
 
             this.get_time_loop = setInterval(function(){
-                _this.get_last_fetched_time()
+                _this.get_last_fetched_time();
             }, 30000);
 
         },
@@ -31,8 +31,8 @@ openerp.mail_check_immediately = function(instance, local) {
             var _this = this;
 
             this.imm_model.call('run_fetchmail_manually', {context: new instance.web.CompoundContext()}).then(function(){
-                _this.get_last_fetched_time()
-            })
+                _this.get_last_fetched_time();
+            });
         },
 
         get_last_fetched_time: function(){
@@ -43,7 +43,7 @@ openerp.mail_check_immediately = function(instance, local) {
                     value = $.timeago(res);
                 value = value || 'undefined';
                 _this.$el.find('span.oe_view_manager_fetch_mail_imm_field').html(value);
-            })
+            });
         },
 
         destroy: function(){

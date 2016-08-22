@@ -41,4 +41,4 @@ openerp.mail_todo_custom = function(session) {
         },
 
     });
-}
+};

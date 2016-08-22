@@ -96,7 +96,7 @@ odoo.define('mail_move_message.relocate', function (require) {
         on_click: function(){
             if(this.node.attrs.special == 'quick_create'){
                 var self = this;
-                var related_field = this.field_manager.fields[this.node.attrs['field']];
+                var related_field = this.field_manager.fields[this.node.attrs.field];
                 var context_built = $.Deferred();
                 if(this.node.attrs.use_for_mail_move_message) {
                     var model = new Model(this.view.dataset.model);
@@ -116,7 +116,7 @@ odoo.define('mail_move_message.relocate', function (require) {
                 }
                 $.when(context_built).pipe(function (context) {
                     if(self.node.attrs.use_for_mail_move_message) {
-                        self.field_manager.fields['partner_id'].set_value(context['partner_id']);
+                        self.field_manager.fields.partner_id.set_value(context.partner_id);
                     }
                     var dialog = new form_common.FormViewDialog(self, {
                         res_model: related_field.field.relation,
@@ -130,8 +130,8 @@ odoo.define('mail_move_message.relocate', function (require) {
                     });
                     dialog.on('create_completed', self, function(id) {
                         related_field.set_value(id);
-                        if(self.field_manager.fields['filter_by_partner']) {
-                            self.field_manager.fields['filter_by_partner'].set_value(true);
+                        if(self.field_manager.fields.filter_by_partner) {
+                            self.field_manager.fields.filter_by_partner.set_value(true);
                         }
                     });
                 });

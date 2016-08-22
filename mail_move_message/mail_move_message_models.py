@@ -1,4 +1,4 @@
-from lxml import etree
+# -*- coding: utf-8 -*-
 from openerp import api, models, fields, SUPERUSER_ID
 from openerp.tools import email_split
 from openerp.tools.translate import _

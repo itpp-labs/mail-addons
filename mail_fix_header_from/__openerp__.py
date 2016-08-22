@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 {
     "name": "Fix non-ascii header 'from' (OBSOLETE)",
     "version": "0.3",

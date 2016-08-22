@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 {
     'name': 'Mail relocation',
     'version': '1.0.4',

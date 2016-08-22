@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import re
 from openerp.addons.base.ir import ir_mail_server
 

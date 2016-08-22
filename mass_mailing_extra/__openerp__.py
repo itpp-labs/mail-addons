@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 {
     'name': 'Improvements for mass mailing',
     'version': '1.0.0',

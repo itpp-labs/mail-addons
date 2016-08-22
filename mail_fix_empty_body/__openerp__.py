@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 {
     'name': 'Fix "False" in empty email body',
     'version': '1.0.0',

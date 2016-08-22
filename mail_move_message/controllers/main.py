@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from openerp.addons.web.controllers.main import DataSet
 from openerp.tools.translate import _
 from openerp import http
@@ -16,6 +17,7 @@ class MailChatController(openerp.addons.bus.controllers.main.BusController):
             channels.append((request.db, 'mail_move_message'))
             channels.append((request.db, 'mail_move_message.delete_message'))
         return super(MailChatController, self)._poll(dbname, channels, last, options)
+
 
 
 class DataSetCustom(DataSet):
