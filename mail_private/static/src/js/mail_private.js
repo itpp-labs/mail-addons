@@ -136,6 +136,12 @@ openerp.mail_private = function(instance){
             else {
                 suggested_partners.resolve({});
             }
+            // uncheck partners from compute_emails_from
+            _.each(this.recipients, function(r){
+                if (!r.partner_id){
+                    r.checked = false;
+                }
+            })
 
             // when call for suggested partners finished: re-render the widget
             $.when(suggested_partners).pipe(function (additional_recipients) {
