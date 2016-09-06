@@ -10,19 +10,15 @@ Nothing special is needed to install this module.
 Usage
 =====
 
-Для того чтобы отправить сообщение только выбранным получателям:
+To send a message to specified recipients:
 
-* Кликните по кнопке ``[Send Private Message]``
+* Click on the ``[Send internal message]``.
 
-* По умолчанию все подписанные пользователи отключены. Включите флажки тем пользователям, которым вы хотите отправить сообщение.
+* Choose the recipients that should receive a message by ticking the checkboxes.
 
-* Если вы хотите добавить получателей из числа неподписанных пользователей, нажмите на кнопку ``[Open the full mail composer]`` в правом верхнем углу блока отправки сообщения.
+* To add more recipients click on the ``[Open the full mail composer]`` on the right upper corner of the message block and choose recipients in the **Recipient** field.
 
-* В поле **Recipient** добавьте получателей.
-
-* Нажмите кнопку ``[Send]``.
-
-Для проверки подпишите на какую-нибудь карточку двух получателей: Demo User и любого другого. Отправьте сообщение, выбрав в числе получателей только второго подписанного пользователя. Залогиньтесь как Demo User и проверьте, что ему сообщение не пришло.
+* Click on the ``[Send]`` button.
 
 Uninstallation
 ==============
