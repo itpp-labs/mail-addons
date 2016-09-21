@@ -231,8 +231,8 @@ class wizard(models.TransientModel):
 
     @api.one
     def read_close(self):
-        self.message_id.set_message_read(True)
-        self.message_id.child_ids.set_message_read(True)
+        self.message_id.set_message_done()
+        self.message_id.child_ids.set_message_done()
         return {'type': 'ir.actions.act_window_close'}
 
 
