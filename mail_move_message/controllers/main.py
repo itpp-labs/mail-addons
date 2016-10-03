@@ -13,19 +13,16 @@ class MailChatController(openerp.addons.bus.controllers.main.BusController):
 
     def _poll(self, dbname, channels, last, options):
         if request.session.uid:
-            registry, cr, uid, context = request.registry, request.cr, request.session.uid, request.context
             channels.append((request.db, 'mail_move_message'))
             channels.append((request.db, 'mail_move_message.delete_message'))
         return super(MailChatController, self)._poll(dbname, channels, last, options)
 
 
-
 class DataSetCustom(DataSet):
 
     def _extend_name(self, model, records):
-        cr, uid, context = request.cr, request.uid, request.context
-        Model = request.registry[model]
-        fields = Model.fields_get(cr, uid, False, context)
+        Model = request.env[model]
+        fields = Model.fields_get()
         contact_field = False
         for n, f in fields.iteritems():
             if f['type'] == 'many2one' and f['relation'] == 'res.partner':
@@ -33,7 +30,7 @@ class DataSetCustom(DataSet):
                 break
         partner_info = {}
         if contact_field:
-            partner_info = Model.read(cr, uid, [r[0] for r in records], [contact_field], context)
+            partner_info = Model.browse([r[0] for r in records]).read([contact_field])
             partner_info = dict([(p['id'], p[contact_field]) for p in partner_info])
         res = []
         for r in records:
@@ -48,16 +45,15 @@ class DataSetCustom(DataSet):
         context = kwargs.get('context')
         if context and context.get('extended_name_with_contact'):
             # add order by ID desc
-            cr, uid = request.cr, request.uid
-            Model = request.registry[model]
+            Model = request.env[model]
             search_args = list(kwargs.get('args') or [])
             limit = int(kwargs.get('limit') or 100)
             operator = kwargs.get('operator')
             name = kwargs.get('name')
             if Model._rec_name and (not name == '' and operator == 'ilike'):
                 search_args += [(Model._rec_name, operator, name)]
-            ids = Model.search(cr, uid, search_args, limit=limit, order='id desc', context=context)
-            res = Model.name_get(cr, uid, ids, context)
+            records = Model.search(search_args, limit=limit, order='id desc')
+            res = records.name_get()
             return self._extend_name(model, res)
 
         return self._call_kw(model, method, args, kwargs)

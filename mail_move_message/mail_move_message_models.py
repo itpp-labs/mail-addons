@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from openerp import api, models, fields, SUPERUSER_ID
+from openerp import api, models, fields
 from openerp.tools import email_split
 from openerp.tools.translate import _
 
@@ -49,7 +49,8 @@ class wizard(models.TransientModel):
                 res['filter_by_partner'] = True
             if message.author_id and res.get('model'):
                 res_id = self.env[res['model']].search([], order='id desc', limit=1)
-                res['res_id'] = res_id and res_id[0].id
+                if res_id:
+                    res['res_id'] = res_id[0].id
 
         config_parameters = self.env['ir.config_parameter']
         res['move_followers'] = config_parameters.get_param('mail_relocation_move_followers')
@@ -136,19 +137,16 @@ class wizard(models.TransientModel):
 
     @api.one
     def check_access(self):
-        cr = self._cr
-        uid = self.env.user.id
         operation = 'write'
-        context = self._context
 
         if not (self.model and self.res_id):
             return True
-        model_obj = self.pool[self.model]
-        mids = model_obj.exists(cr, uid, [self.res_id])
+        model_obj = self.env[self.model]
+        mids = model_obj.browse(self.res_id).exists()
         if hasattr(model_obj, 'check_mail_message_access'):
-            model_obj.check_mail_message_access(cr, uid, mids, operation, context=context)
+            model_obj.check_mail_message_access(mids.ids, operation)
         else:
-            self.pool['mail.thread'].check_mail_message_access(cr, uid, mids, operation, model_obj=model_obj, context=context)
+            self.env['mail.thread'].check_mail_message_access(mids.ids, operation, model_name=self.model)
 
     @api.multi
     def open_moved_by_message_id(self):
@@ -308,7 +306,7 @@ class mail_message(models.Model):
                 r_vals['parent_id'] = r.moved_from_parent_id.id
                 r_vals['res_id'] = r.moved_from_res_id
                 r_vals['model'] = r.moved_from_model
-            print 'update message', r, r_vals
+
             if move_followers:
                 r.sudo().move_followers(r_vals.get('model'), r_vals.get('res_id'))
             r.sudo().write(r_vals)
@@ -327,24 +325,17 @@ class mail_message(models.Model):
         }
         self.env['bus.bus'].sendone((self._cr.dbname, 'mail_move_message'), notification)
 
-    def name_get(self, cr, uid, ids, context=None):
+    @api.multi
+    def name_get(self):
+        context = self.env.context
         if not (context or {}).get('extended_name'):
-            return super(mail_message, self).name_get(cr, uid, ids, context=context)
-        if isinstance(ids, (list, tuple)) and not len(ids):
-            return []
-        if isinstance(ids, (long, int)):
-            ids = [ids]
-        reads = self.read(cr, uid, ids, ['record_name', 'model', 'res_id'], context=context)
+            return super(mail_message, self).name_get()
+        reads = self.read(['record_name', 'model', 'res_id'])
         res = []
         for record in reads:
             name = record['record_name'] or ''
             extended_name = '   [%s] ID %s' % (record.get('model', 'UNDEF'), record.get('res_id', 'UNDEF'))
             res.append((record['id'], name + extended_name))
-        return res
-
-    def _message_read_dict(self, cr, uid, message, parent_id=False, context=None):
-        res = super(mail_message, self)._message_read_dict(cr, uid, message, parent_id, context)
-        res['is_moved'] = message.is_moved
         return res
 
     @api.multi

@@ -35,14 +35,16 @@
                 </div>
                 <label for="filter_by_partner"/>
                 <div>
-                    <field name="filter_by_partner"/>
-                    <field name="partner_id" style="width:50%"/>
-                    <button string="Create Partner" attrs="{'invisible':[('partner_id','!=',False)]}" class="oe_highlight" special="quick_create" field="partner_id" context="{'force_email':True,'default_email':message_email_from,'default_name':message_name_from, 'update_message_author':True}"/>
+                    <field name="filter_by_partner" class="oe_inline"/>
+                    <field name="partner_id" class="oe_inline"/>
+                    <button string="Create Partner" attrs="{'invisible':[('partner_id','!=',False)]}"
+                            class="oe_highlight oe_inline ml32"
+                            special="quick_create" field="partner_id" context="{'force_email':True,'default_email':message_email_from,'default_name':message_name_from, 'update_message_author':True}" />
                 </div>
                 <label for="res_id"/>
                 <div>
-                    <field name="res_id" context="{'extended_name_with_contact':1}" widget="many2one" attrs="{'readonly': [('model','=',False)]}" style="width:50%"/>
-                    <button string="Create new record" name="create_record" type="object" class="oe_highlight" attrs="{'invisible':['|',('model','=',False)]}" special="quick_create" field="res_id" use_for_mail_move_message="True"/>
+                    <field name="res_id" context="{'extended_name_with_contact':1}" widget="many2one" attrs="{'readonly': [('model','=',False)]}" class="oe_inline"/>
+                    <button string="Create new record" name="create_record" type="object" class="oe_highlight oe_inline ml32" attrs="{'invisible':['|',('model','=',False)]}" special="quick_create" field="res_id" use_for_mail_move_message="True"/>
                 </div>
                 <label for="move_back" attrs="{'invisible':[('message_is_moved','=',False)]}"/>
                 <div attrs="{'invisible':[('message_is_moved','=',False)]}">
@@ -78,7 +80,7 @@
                 <button special="cancel" string="Close" class="oe_link"/>
 
 
-                <button name="delete" string="Delete message" type="object" class="oe_highlight oe_right" confirm="Do you really want to delete this message?" attrs="{'invisible':[('uid','!=',1)]}"/>
+                <button name="delete" string="Delete message" type="object" class="oe_highlight pull-right" confirm="Do you really want to delete this message?" attrs="{'invisible':[('uid','!=',1)]}"/>
             </footer>
         </form>
     </field>
