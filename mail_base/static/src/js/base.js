@@ -611,7 +611,7 @@ var MailTools = core.Class.extend({
         } else if (data.info === 'channel_seen') {
             chat_manager.mail_tools.on_channel_seen_notification(data);
         } else if (data.info === 'transient_message') {
-            on_transient_message_notification(data);
+            chat_manager.mail_tools.on_transient_message_notification(data);
         } else {
             chat_manager.mail_tools.on_chat_session_notification(data);
         }
