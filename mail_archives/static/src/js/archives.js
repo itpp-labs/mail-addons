@@ -44,12 +44,12 @@ base_obj.MailTools.include({
         this._super.apply(this, arguments);
         // Get recipients ids
         var recipients_ids = [];
-        for (var i = 0; i < data.partner_ids.length; i++){
+        for (var i = 0; i < (data.partner_ids || []).length; i++){
             recipients_ids.push(data.partner_ids[i][0]);
         }
 
         // If author or recipient
-        if (data.author_id[0] == session.partner_id || recipients_ids.indexOf(session.partner_id) != -1) {
+        if (data.author_id[0] === session.partner_id || recipients_ids.indexOf(session.partner_id) != -1) {
             msg.is_archive = true;
         }
 

@@ -241,7 +241,8 @@ var MailTools = core.Class.extend({
             subtype_description: data.subtype_description,
             is_author: data.author_id && data.author_id[0] === session.partner_id,
             is_note: data.is_note,
-            is_system_notification: data.message_type === 'notification' && data.model === 'mail.channel',
+            is_system_notification: data.message_type === 'notification' && data.model === 'mail.channel'
+                || data.info === 'transient_message',
             attachment_ids: data.attachment_ids || [],
             subject: data.subject,
             email_from: data.email_from,
@@ -611,7 +612,7 @@ var MailTools = core.Class.extend({
         } else if (data.info === 'channel_seen') {
             chat_manager.mail_tools.on_channel_seen_notification(data);
         } else if (data.info === 'transient_message') {
-            on_transient_message_notification(data);
+            chat_manager.mail_tools.on_transient_message_notification(data);
         } else {
             chat_manager.mail_tools.on_chat_session_notification(data);
         }
@@ -731,7 +732,7 @@ var MailTools = core.Class.extend({
         var last_message = _.last(messages);
         data.id = (last_message ? last_message.id : 0) + 0.01;
         data.author_id = data.author_id || ODOOBOT_ID;
-        add_message(data);
+        chat_manager.mail_tools.add_message(data);
     }
 
 });
@@ -1148,6 +1149,7 @@ function init () {
 
 chat_manager.is_ready = init();
 return {
+    ODOOBOT_ID: ODOOBOT_ID,
     chat_manager: chat_manager,
     MailTools: MailTools
 };
