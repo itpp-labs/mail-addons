@@ -2,7 +2,7 @@
 <template>
     <t t-extend="mail.ChatThread.Message">
         <t t-jquery="p[class=o_mail_info]>span" t-operation="after">
-            <span class="recipients_info">
+            <span class="recipients_info"><t t-if="message.partner_ids">
                 <t t-if="message.partner_ids.length > 0">To: </t>
                 <t t-foreach="message.partner_ids.length" t-as="i">
                     <t t-if="i &lt; message.more_recipients_value">
@@ -16,7 +16,7 @@
                         and <t t-esc="message.partner_ids.length - message.more_recipients_value"/> more
                     </span>
                 </t>
-            </span>
+            </t></span>
         </t>
     </t>
 </template>

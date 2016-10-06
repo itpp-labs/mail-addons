@@ -35,7 +35,7 @@ base_obj.MailTools.include({
 
     set_channel_flags: function(data, msg){
         this._super.apply(this, arguments);
-        msg.is_all = true;
+        msg.is_all = data.author_id != 'ODOOBOT';
         return msg;
     },
 
