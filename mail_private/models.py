@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openerp import api
 from openerp.osv import osv, fields
-from openerp import SUPERUSER_ID
 
 
 class MailComposeMessage(osv.TransientModel):
