@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from openerp import api, models, fields, SUPERUSER_ID
+from openerp import api
+from openerp import fields
+from openerp import models
 from openerp.tools import email_split
 from openerp.tools.translate import _
 
