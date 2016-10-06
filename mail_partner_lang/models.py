@@ -2,7 +2,7 @@
 from openerp.osv import osv
 
 
-class mail_thread(osv.Model):
+class MailThread(osv.Model):
     _inherit = "mail.thread"
 
     def message_track(self, cr, uid, ids, tracked_fields, initial_values, context={}):

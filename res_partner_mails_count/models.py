@@ -3,7 +3,7 @@
 from openerp import models, fields, api
 
 
-class res_partner(models.Model):
+class ResPartner(models.Model):
     _inherit = 'res.partner'
     mails_to = fields.Integer(compute="_mails_to")
     mails_from = fields.Integer(compute="_mails_from")
