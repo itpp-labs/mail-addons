@@ -243,7 +243,7 @@ class ResUsers(models.Model):
 
     @api.v7
     def get_serialised_mail_wall_widgets_summary(self, cr, uid, excluded_categories=None, context=None):
-        return self._get_serialised_mail_wall_widgets_summary(cr, uid, uid, excluded_categories=excluded_categories, context=context)[0]
+        return self._get_serialised_mail_wall_widgets_summary(cr, uid, uid, excluded_categories, context=context)[0]
 
     @api.one
     def _get_serialised_mail_wall_widgets_summary(self, excluded_categories=None):
