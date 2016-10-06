@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 import requests
-import dateutil
-import pytz
 import simplejson
 
 from openerp import models, api
