@@ -310,7 +310,7 @@ class MailMessage(models.Model):
                 r_vals['parent_id'] = r.moved_from_parent_id.id
                 r_vals['res_id'] = r.moved_from_res_id
                 r_vals['model'] = r.moved_from_model
-            print 'update message', r, r_vals
+            # print 'update message', r, r_vals
             if move_followers:
                 r.sudo().move_followers(r_vals.get('model'), r_vals.get('res_id'))
             r.sudo().write(r_vals)
