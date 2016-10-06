@@ -40,7 +40,7 @@ class MailMail(osv.Model):
         catchall_alias_name = self.pool['ir.config_parameter'].get_param(cr, uid, "mail.catchall.name_alias_from", context=context)
         catchall_domain = self.pool['ir.config_parameter'].get_param(cr, uid, "mail.catchall.domain", context=context)
 
-        correct_email_from = '@%s>?\s*$' % catchall_domain
+        correct_email_from = r'@%s>?\s*$' % catchall_domain
         default_email_from = '%s@%s' % (catchall_alias, catchall_domain)
 
         context = dict(context or {})
