@@ -15,8 +15,7 @@ from openerp.tools.translate import _
 _logger = logging.getLogger(__name__)
 
 
-
-class mail_mail(osv.Model):
+class MailMail(osv.Model):
     _inherit = "mail.mail"
 
     def send(self, cr, uid, ids, auto_commit=False, raise_exception=False, context=None):
@@ -41,7 +40,7 @@ class mail_mail(osv.Model):
         catchall_alias_name = self.pool['ir.config_parameter'].get_param(cr, uid, "mail.catchall.name_alias_from", context=context)
         catchall_domain = self.pool['ir.config_parameter'].get_param(cr, uid, "mail.catchall.domain", context=context)
 
-        correct_email_from = '@%s>?\s*$' % catchall_domain
+        correct_email_from = r'@%s>?\s*$' % catchall_domain
         default_email_from = '%s@%s' % (catchall_alias, catchall_domain)
 
         context = dict(context or {})
