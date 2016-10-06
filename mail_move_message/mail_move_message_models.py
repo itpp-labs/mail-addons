@@ -349,7 +349,7 @@ class MailMessage(models.Model):
 
     @api.multi
     def message_format(self):
-        message_values = super(mail_message, self).message_format()
+        message_values = super(MailMessage, self).message_format()
         message_index = {message['id']: message for message in message_values}
         for item in self:
             msg = message_index.get(item.id)
