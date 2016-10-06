@@ -7,8 +7,8 @@ import openerp.tests
 class TestUi(openerp.tests.HttpCase):
 
     # TODO test returns error "Timeout after 10000 ms"
-#    def test_01_res_partner_mails_to_count(self):
-#        self.phantom_js('/', "openerp.Tour.run('mails_count_tour', 'test')", "openerp.Tour.tours.mails_count_tour", login="admin")
+    #    def test_01_res_partner_mails_to_count(self):
+    #        self.phantom_js('/', "openerp.Tour.run('mails_count_tour', 'test')", "openerp.Tour.tours.mails_count_tour", login="admin")
 
     def test_02_res_partner_mails_from_count(self):
         # wait till page loaded and then click and wait again
