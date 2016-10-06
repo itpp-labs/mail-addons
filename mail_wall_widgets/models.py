@@ -17,7 +17,7 @@ from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 
-class mail_wall_widgets_widget(models.Model):
+class MailWallWidgetsWidget(models.Model):
     _name = 'mail.wall.widgets.widget'
     _order = "sequence, id"
 
@@ -229,7 +229,7 @@ Slice - use "domain" for total and "won_domain" for target
         return res
 
 
-class mail_wall_widgets_cache(models.Model):
+class MailWallWidgetsCache(models.Model):
     _name = 'mail.wall.widgets.cache'
 
     cache = fields.Text('Cached data')
@@ -238,7 +238,7 @@ class mail_wall_widgets_cache(models.Model):
     user_id = fields.Many2one('res.users')
 
 
-class res_users(models.Model):
+class ResUsers(models.Model):
     _inherit = 'res.users'
 
     @api.v7

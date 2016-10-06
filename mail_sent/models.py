@@ -2,7 +2,7 @@
 from openerp import api, models, fields
 
 
-class mail_message(models.Model):
+class MailMessage(models.Model):
     _inherit = 'mail.message'
 
     @api.one
@@ -14,15 +14,15 @@ class mail_message(models.Model):
     sent = fields.Boolean('Sent', compute=_get_sent, help='Was message sent to someone', store=True)
 
 
-class mail_notification(models.Model):
+class MailNotification(models.Model):
     _inherit = 'mail.notification'
 
     def _notify(self, cr, uid, message_id, **kwargs):
-        super(mail_notification, self)._notify(cr, uid, message_id, **kwargs)
+        super(MailNotification, self)._notify(cr, uid, message_id, **kwargs)
         self.pool['mail.message'].browse(cr, uid, message_id)._get_sent()
 
 
-class mail_compose_message(models.TransientModel):
+class MailComposeMessage(models.TransientModel):
 
     _inherit = 'mail.compose.message'
     sent = fields.Boolean('Sent', help='dummy field to fix inherit error')

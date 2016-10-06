@@ -2,7 +2,7 @@
 from openerp.osv import osv
 
 
-class mail_message(osv.Model):
+class MailMessage(osv.Model):
     _inherit = 'mail.message'
 
     def check_access_rule(self, cr, uid, ids, operation, context=None):
@@ -13,10 +13,10 @@ class mail_message(osv.Model):
         if user_groups.issuperset(group_all_emails):
             return
 
-        return super(mail_message, self).check_access_rule(cr, uid, ids, operation, context)
+        return super(MailMessage, self).check_access_rule(cr, uid, ids, operation, context)
 
 
-class mail_mail(osv.Model):
+class MailMail(osv.Model):
     _name = 'mail.mail'
     _inherit = ['mail.mail', 'ir.needaction_mixin']
     _needaction = True
