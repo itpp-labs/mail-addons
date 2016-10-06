@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <openerp>
     <data>
+        <!--
         <template id="res_partner_mails_count_assets_backend"
                   inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
@@ -8,6 +9,7 @@
                         type="text/javascript"></script>
             </xpath>
         </template>
+        -->
         <record id="view_res_partner_mails_count_info_form" model="ir.ui.view">
             <field name="name">res.partner.mails.count</field>
             <field name="model">res.partner</field>
