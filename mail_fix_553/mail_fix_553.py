@@ -15,7 +15,6 @@ from openerp.tools.translate import _
 _logger = logging.getLogger(__name__)
 
 
-
 class mail_mail(osv.Model):
     _inherit = "mail.mail"
 

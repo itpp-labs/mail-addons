@@ -19,7 +19,6 @@ class MailChatController(openerp.addons.bus.controllers.main.BusController):
         return super(MailChatController, self)._poll(dbname, channels, last, options)
 
 
-
 class DataSetCustom(DataSet):
 
     def _extend_name(self, model, records):

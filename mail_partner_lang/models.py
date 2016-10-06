@@ -2,7 +2,6 @@
 from openerp.osv import osv
 
 
-
 class mail_thread(osv.Model):
     _inherit = "mail.thread"
 

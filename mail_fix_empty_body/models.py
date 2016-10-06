@@ -2,7 +2,6 @@
 from openerp import models
 
 
-
 class mail_compose_message(models.TransientModel):
     _inherit = 'mail.compose.message'
 
