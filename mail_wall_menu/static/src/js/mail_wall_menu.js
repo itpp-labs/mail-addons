@@ -21,16 +21,16 @@ openerp.mail_wall_menu = function(instance){
                         update = 0;
                     msnry.reloadItems();
                     msnry.layout();
-                }, 1000)
+                }, 1000);
 
 
                 return;
             }
-            this._super.apply(this, arguments)
+            this._super.apply(this, arguments);
         },
         destroy: function(){
             clearInterval(this.msnry_interval);
             this._super.apply(this, arguments);
         }
-    })
-}
+    });
+};

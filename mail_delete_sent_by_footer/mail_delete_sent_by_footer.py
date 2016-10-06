@@ -3,7 +3,7 @@ from openerp.osv import osv
 from openerp import tools, SUPERUSER_ID
 
 
-class mail_notification(osv.Model):
+class MailNotification(osv.Model):
     _inherit = 'mail.notification'
 
     def get_signature_footer(self, cr, uid, user_id, res_model=None, res_id=None, context=None, user_signature=True):

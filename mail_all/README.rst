@@ -9,8 +9,8 @@ Further information
 
 HTML Description: https://apps.odoo.com/apps/modules/8.0/mail_all/
 
-Usage instructions: `<doc/index.rst>`__
+Usage instructions: `<doc/index.rst>`___
 
-Changelog: `<doc/changelog.rst>`__
+Changelog: `<doc/changelog.rst>`___
 
 Tested on Odoo 8.0 0af32f3f84bae07b11abb8538d02e35c7369a348
