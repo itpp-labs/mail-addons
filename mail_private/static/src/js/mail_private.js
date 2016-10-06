@@ -52,7 +52,7 @@ openerp.mail_private = function(instance){
                 };
 
                 self.do_action(action, {
-                    'on_close': function(){ !self.parent_thread.options.view_inbox && self.parent_thread.message_fetch() }
+                    'on_close': function(){ !self.parent_thread.options.view_inbox && self.parent_thread.message_fetch(); }
                 });
                 self.on_cancel();
             });
@@ -75,10 +75,10 @@ openerp.mail_private = function(instance){
                 'content_subtype': 'plaintext',
             };
             if (log || self.private) {
-                values['subtype'] = false;
+                values.subtype = false;
             }
             else {
-                values['subtype'] = 'mail.mt_comment';
+                values.subtype = 'mail.mt_comment';
             }
             this.parent_thread.ds_thread._model.call('message_post', [this.context.default_res_id], values).done(function (message_id) {
                 var thread = self.parent_thread;
@@ -128,7 +128,7 @@ openerp.mail_private = function(instance){
                                     'name': parsed_email[0],
                                     'email_address': parsed_email[1],
                                     'reason': recipient[2],
-                                })
+                                });
                             }
                         });
                     });
@@ -141,7 +141,7 @@ openerp.mail_private = function(instance){
                 if (!r.partner_id){
                     r.checked = false;
                 }
-            })
+            });
 
             // when call for suggested partners finished: re-render the widget
             $.when(suggested_partners).pipe(function (additional_recipients) {
