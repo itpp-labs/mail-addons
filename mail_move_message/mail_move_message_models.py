@@ -4,7 +4,7 @@ from openerp.tools import email_split
 from openerp.tools.translate import _
 
 
-class wizard(models.TransientModel):
+class Wizard(models.TransientModel):
     _name = 'mail_move_message.wizard'
 
     def _model_selection(self):
@@ -26,7 +26,7 @@ class wizard(models.TransientModel):
 
     @api.model
     def default_get(self, fields_list):
-        res = super(wizard, self).default_get(fields_list)
+        res = super(Wizard, self).default_get(fields_list)
 
         model_fields = self.fields_get()
         if model_fields['model']['selection']:
@@ -236,7 +236,7 @@ class wizard(models.TransientModel):
         return {'type': 'ir.actions.act_window_close'}
 
 
-class mail_message(models.Model):
+class MailMessage(models.Model):
     _inherit = 'mail.message'
 
     is_moved = fields.Boolean('Is moved')
@@ -308,7 +308,7 @@ class mail_message(models.Model):
                 r_vals['parent_id'] = r.moved_from_parent_id.id
                 r_vals['res_id'] = r.moved_from_res_id
                 r_vals['model'] = r.moved_from_model
-            print 'update message', r, r_vals
+            # print 'update message', r, r_vals
             if move_followers:
                 r.sudo().move_followers(r_vals.get('model'), r_vals.get('res_id'))
             r.sudo().write(r_vals)
@@ -329,7 +329,7 @@ class mail_message(models.Model):
 
     def name_get(self, cr, uid, ids, context=None):
         if not (context or {}).get('extended_name'):
-            return super(mail_message, self).name_get(cr, uid, ids, context=context)
+            return super(MailMessage, self).name_get(cr, uid, ids, context=context)
         if isinstance(ids, (list, tuple)) and not len(ids):
             return []
         if isinstance(ids, (long, int)):
@@ -343,13 +343,13 @@ class mail_message(models.Model):
         return res
 
     def _message_read_dict(self, cr, uid, message, parent_id=False, context=None):
-        res = super(mail_message, self)._message_read_dict(cr, uid, message, parent_id, context)
+        res = super(MailMessage, self)._message_read_dict(cr, uid, message, parent_id, context)
         res['is_moved'] = message.is_moved
         return res
 
     @api.multi
     def message_format(self):
-        message_values = super(mail_message, self).message_format()
+        message_values = super(MailMessage, self).message_format()
         message_index = {message['id']: message for message in message_values}
         for item in self:
             msg = message_index.get(item.id)
@@ -358,7 +358,7 @@ class mail_message(models.Model):
         return message_values
 
 
-class mail_move_message_configuration(models.TransientModel):
+class MailMoveMessageConfiguration(models.TransientModel):
     _name = 'mail_move_message.config.settings'
     _inherit = 'res.config.settings'
 
@@ -389,12 +389,12 @@ class mail_move_message_configuration(models.TransientModel):
             config_parameters.set_param('mail_relocation_move_followers', record.move_followers or '')
 
 
-class res_partner(models.Model):
+class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     @api.model
     def create(self, vals):
-        res = super(res_partner, self).create(vals)
+        res = super(ResPartner, self).create(vals)
         if 'update_message_author' in self.env.context and 'email' in vals:
             mail_message_obj = self.env['mail.message']
             # Escape special SQL characters in email_address to avoid invalid matches

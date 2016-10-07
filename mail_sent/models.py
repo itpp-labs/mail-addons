@@ -28,5 +28,6 @@ class MailMessage(models.Model):
 
 
 class MailComposeMessage(models.TransientModel):
+
     _inherit = 'mail.compose.message'
     sent = fields.Boolean('Sent', help='dummy field to fix inherit error')
