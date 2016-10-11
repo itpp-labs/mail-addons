@@ -21,4 +21,4 @@ odoo.define('mail_recovery', function (require) {
             return this._super(event);
         },
     });
-})
+});
