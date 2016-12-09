@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <t t-extend="mail.thread.message.attachments">
+        <t t-jquery="t[t-if='attachment.file_type_icon === 'webimage''] a[t-att-href='attachment.url']" t-operation="replace">
+            <span class="m-dotted" t-attf-onclick="$('#ImageModal{{ attachment.id }}').arcticmodal()">
+                <img t-att-src="widget.attachments_resize_image(attachment.id, [100,80])"></img>
+                <div class='oe_name'><t t-raw='attachment.name' /></div>
+            </span>
+            <div class="g-hidden">
+                <div class="box-modal" t-attf-id="ImageModal{{ attachment.id }}">
+                    <div class="box-modal_close arcticmodal-close">X</div>
+                    <img t-att-src="widget.attachments_resize_image(attachment.id, [100,80])"></img>
+                    <div class='oe_name'><t t-raw='attachment.name' /></div>
+                    <div class='oe_download_original_img'><a t-att-href='attachment.url' target="_blank">Download</a></div>
+                </div>
+            </div>
+        </t>
+    </t>
+</template>

@@ -1,0 +1,10 @@
+.g-hidden {
+    display: none;
+}
+.box-modal img {
+    max-width: 1100px;
+    width: 100%;
+}
+.oe_attachment.oe_preview {
+    cursor: pointer;
+}
