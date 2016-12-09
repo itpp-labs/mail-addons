@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
-    <t t-extend="mail.thread.message.attachments">
-        <t t-jquery="t[t-if='attachment.file_type_icon === 'webimage''] a[t-att-href='attachment.url']" t-operation="replace">
-            <span class="m-dotted" t-attf-onclick="$('#ImageModal{{ attachment.id }}').arcticmodal()">
-                <img t-att-src="widget.attachments_resize_image(attachment.id, [100,80])"></img>
-                <div class='oe_name'><t t-raw='attachment.name' /></div>
-            </span>
-            <div class="g-hidden">
-                <div class="box-modal" t-attf-id="ImageModal{{ attachment.id }}">
-                    <div class="box-modal_close arcticmodal-close">X</div>
-                    <img t-att-src="widget.attachments_resize_image(attachment.id, [100,80])"></img>
-                    <div class='oe_name'><t t-raw='attachment.name' /></div>
-                    <div class='oe_download_original_img'><a t-att-href='attachment.url' target="_blank">Download</a></div>
+    <t t-extend="mail.Attachment">
+        <t t-jquery="div[t-att-title='attachment.name'] .o_image" t-operation="replace">
+            <t t-if="attachment.mimetype == 'image/png'">
+                <span class="m-dotted" t-attf-onclick="$('#ImageModal{{ attachment.id }}').arcticmodal()">
+                    <div class="o_image" target="_blank" t-att-data-mimetype="attachment.mimetype" t-attf-data-src="/web/image/#{attachment.id}/100x80">
+                        <span class='o_attachment_name'><t t-esc='attachment.name'/></span>
+                    </div>
+                </span>
+                <div class="g-hidden">
+                    <div class="box-modal" t-attf-id="ImageModal{{ attachment.id }}">
+                        <div class="box-modal_close arcticmodal-close">X</div>
+                        <img t-att-data-mimetype="attachment.mimetype" t-attf-src="/web/image/#{attachment.id}"></img>
+                        <ul class="box-modal-li">
+                            <li><span class='o_attachment_name'><t t-esc='attachment.name'/></span></li>
+                            <li><span class='oe_download_original_img'><a t-att-href='attachment.url' target="_blank">Download</a></span></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </t>
+            <t t-if="attachment.mimetype != 'image/png'">
+                <a class="o_image" t-att-href='attachment.url' target="_blank" t-att-data-mimetype="attachment.mimetype" t-attf-data-src="/web/image/#{attachment.id}/100x80">
+                    <span class='o_attachment_name'><t t-esc='attachment.name'/></span>
+                </a>
+            </t>
         </t>
     </t>
 </template>

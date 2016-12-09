@@ -2,9 +2,15 @@
     display: none;
 }
 .box-modal img {
-    max-width: 1100px;
+    max-width: 900px;
     width: 100%;
 }
-.oe_attachment.oe_preview {
+.box-modal-li li {
+    list-style-type: none;
+}
+.box-modal-li {
+    padding-left: 0;
+}
+.o_attachment .o_image {
     cursor: pointer;
 }
