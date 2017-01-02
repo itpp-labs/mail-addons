@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
 import requests
 import simplejson
 
 from openerp import models, api
+
 
 import logging
 _logger = logging.getLogger(__name__)

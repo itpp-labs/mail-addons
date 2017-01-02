@@ -20,7 +20,7 @@ odoo.define('mail_move_message.relocate', function (require) {
             this.events['click .oe_move'] = function(event) {
                 var message_id = $(event.currentTarget).data('message-id');
                 this.trigger("move_message", message_id);
-            }
+            };
         },
         on_move_message: function(message_id){
             var action = {
@@ -100,9 +100,9 @@ odoo.define('mail_move_message.relocate', function (require) {
                 var context_built = $.Deferred();
                 if(this.node.attrs.use_for_mail_move_message) {
                     var model = new Model(this.view.dataset.model);
-                    var partner_id = self.field_manager.fields['partner_id'].get_value();
-                    var message_name_from = self.field_manager.fields['message_name_from'].get_value();
-                    var message_email_from = self.field_manager.fields['message_email_from'].get_value();
+                    var partner_id = self.field_manager.fields.partner_id.get_value();
+                    var message_name_from = self.field_manager.fields.message_name_from.get_value();
+                    var message_email_from = self.field_manager.fields.message_email_from.get_value();
                     context_built = model.call('create_partner', [
                             self.view.dataset.context.default_message_id,
                             related_field.field.relation,

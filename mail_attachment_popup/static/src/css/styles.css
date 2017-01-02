@@ -1,0 +1,16 @@
+.g-hidden {
+    display: none;
+}
+.box-modal img {
+    max-width: 900px;
+    width: 100%;
+}
+.box-modal-li li {
+    list-style-type: none;
+}
+.box-modal-li {
+    padding-left: 0;
+}
+.o_attachment .o_image {
+    cursor: pointer;
+}
