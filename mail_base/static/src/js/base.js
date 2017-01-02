@@ -241,8 +241,7 @@ var MailTools = core.Class.extend({
             subtype_description: data.subtype_description,
             is_author: data.author_id && data.author_id[0] === session.partner_id,
             is_note: data.is_note,
-            is_system_notification: data.message_type === 'notification' && data.model === 'mail.channel'
-                || data.info === 'transient_message',
+            is_system_notification: data.message_type === 'notification' && data.model === 'mail.channel' || data.info === 'transient_message',
             attachment_ids: data.attachment_ids || [],
             subject: data.subject,
             email_from: data.email_from,
@@ -1116,9 +1115,9 @@ function init () {
     });
 
     // unsubscribe and then subscribe to the event, to avoid duplication of new messages
-    bus.off('notification')
+    bus.off('notification');
     bus.on('notification', null, function(){
-        chat_manager.mail_tools.on_notification.apply(chat_manager.mail_tools, arguments)
+        chat_manager.mail_tools.on_notification.apply(chat_manager.mail_tools, arguments);
     });
 
     return session.rpc('/mail/client_action').then(function (result) {
