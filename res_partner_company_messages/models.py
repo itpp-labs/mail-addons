@@ -3,16 +3,17 @@ from openerp import api
 from openerp import models
 
 
-class MailMessage(models.Model):
-    _inherit = 'mail.message'
+class Partner(models.Model):
+    _inherit = 'res.partner'
 
-    @api.cr_uid_context
-    def message_read(self, cr, uid, ids=None, domain=None, message_unload_ids=None,
-                     thread_level=0, context=None, parent_id=False, limit=None):
-        if context and context.get('default_model') == 'res.partner':
-            partner = self.pool['res.partner'].browse(cr, uid, context.get('default_res_id'))
-            domain_by_id = domain and len(domain) == 1 and domain[0][0] == 'id' and domain[0][1] == '='
-            if partner.is_company and not domain_by_id:
-                ids = None
+    @api.multi
+    def read(self, fields=None, load='_classic_read'):
+        res = super(Partner, self).read(fields=fields, load=load)
+        if fields and 'message_ids' in fields:
+            for vals in res:
+                partner = self.browse(vals['id'])
+                if not partner.is_company:
+                    continue
                 domain = [('model', '=', 'res.partner'), ('res_id', 'in', [partner.id] + partner.child_ids.ids)]
-        return super(MailMessage, self).message_read(cr, uid, ids, domain, message_unload_ids, thread_level, context, parent_id, limit)
+                vals['message_ids'] = self.env['mail.message'].search(domain).ids
+        return res
