@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-import openerp.tests
+import odoo.tests
 
 
-@openerp.tests.common.at_install(False)
-@openerp.tests.common.post_install(True)
-class TestUi(openerp.tests.HttpCase):
+@odoo.tests.common.at_install(False)
+@odoo.tests.common.post_install(True)
+class TestUi(odoo.tests.HttpCase):
 
     def test_01_res_partner_mails_to_count(self):
         # self.phantom_js('/',  "openerp.Tour.run('mails_count_tour', 'test')", "openerp.Tour.tours.mails_count_tour", login="admin")

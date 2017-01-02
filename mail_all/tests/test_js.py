@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-import openerp.tests
+import odoo.tests
 
 
-@openerp.tests.common.at_install(False)
-@openerp.tests.common.post_install(True)
-class TestUi(openerp.tests.HttpCase):
+@odoo.tests.common.at_install(False)
+@odoo.tests.common.post_install(True)
+class TestUi(odoo.tests.HttpCase):
 
     def test_01_mail_all(self):
         # wait till page loaded and then click and wait again
