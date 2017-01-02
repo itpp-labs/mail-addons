@@ -331,7 +331,7 @@ class MailMessage(models.Model):
     def name_get(self):
         context = self.env.context
         if not (context or {}).get('extended_name'):
-            return super(mail_message, self).name_get()
+            return super(MailMessage, self).name_get()
         reads = self.read(['record_name', 'model', 'res_id'])
         res = []
         for record in reads:
