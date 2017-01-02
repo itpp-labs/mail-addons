@@ -87,8 +87,14 @@ class Wizard(models.TransientModel):
              "You can change default value for this option at Settings/System Parameters")
 
     @api.depends('message_id')
-    @api.one
+    @api.multi
     def get_can_move(self):
+        for r in self:
+            r.get_can_move_one(self)
+
+    @api.multi
+    def get_can_move_one(self):
+        self.ensure_one()
         # message was not moved before OR message is a top message of previous move
         self.can_move = not self.message_id.moved_by_message_id or self.message_id.moved_by_message_id.id == self.message_id.id
 
@@ -137,8 +143,14 @@ class Wizard(models.TransientModel):
             self.res_id = None
         return {'domain': domain}
 
-    @api.one
+    @api.multi
     def check_access(self):
+        for r in self:
+            r.check_access_one(self)
+
+    @api.multi
+    def check_access_one(self):
+        self.ensure_one()
         operation = 'write'
 
         if not (self.model and self.res_id):
@@ -194,8 +206,14 @@ class Wizard(models.TransientModel):
             'type': 'ir.actions.act_window',
         }
 
-    @api.one
+    @api.multi
     def delete(self):
+        for r in self:
+            r.delete_one(self)
+
+    @api.multi
+    def delete_one(self):
+        self.ensure_one()
         msg_id = self.message_id.id
 
         # Send notification
@@ -229,8 +247,14 @@ class Wizard(models.TransientModel):
             context.update({'default_%s' % contact_field: partner_id})
         return context
 
-    @api.one
+    @api.multi
     def read_close(self):
+        for r in self:
+            r.read_close_one(self)
+
+    @api.multi
+    def read_close_one(self):
+        self.ensure_one()
         self.message_id.set_message_done()
         self.message_id.child_ids.set_message_done()
         return {'type': 'ir.actions.act_window_close'}
@@ -247,8 +271,14 @@ class MailMessage(models.Model):
     moved_by_user_id = fields.Many2one('res.users', 'Moved by user', ondelete='set null')
     all_child_ids = fields.One2many('mail.message', string='All childs', compute='_get_all_childs', help='all childs, including subchilds')
 
-    @api.one
+    @api.multi
     def _get_all_childs(self, include_myself=True):
+        for r in self:
+            r._get_all_childs_one(self, include_myself=True)
+
+    @api.multi
+    def _get_all_childs_one(self, include_myself=True):
+        self.ensure_one()
         ids = []
         if include_myself:
             ids.append(self.id)
@@ -270,8 +300,14 @@ class MailMessage(models.Model):
             for f in followers:
                 self.env[model].browse(ids).message_subscribe([f.partner_id.id], [s.id for s in f.subtype_ids])
 
-    @api.one
+    @api.multi
     def move(self, parent_id, res_id, model, move_back, move_followers=False):
+        for r in self:
+            r.move_one(self, parent_id, res_id, model, move_back, move_followers=False)
+
+    @api.multi
+    def move_one(self, parent_id, res_id, model, move_back, move_followers=False):
+        self.ensure_one()
         if parent_id == res_id:
             return
         vals = {}
