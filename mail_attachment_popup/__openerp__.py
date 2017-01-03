@@ -23,6 +23,6 @@
         "static/src/xml/mail_attachment_popup.xml",
     ],
 
-    "installable": False,
+    "installable": True,
     'auto_install': False,
 }
