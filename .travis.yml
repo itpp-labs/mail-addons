@@ -3,6 +3,7 @@ language: python
 python:
   - "2.7"
   
+dist: trusty
 sudo: false
 cache: pip
 
@@ -32,3 +33,6 @@ script:
 
 after_success:
   coveralls
+
+notifications:
+  email: false

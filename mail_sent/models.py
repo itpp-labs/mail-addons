@@ -5,11 +5,11 @@ from openerp import api, models, fields
 class MailMessage(models.Model):
     _inherit = 'mail.message'
 
-    sent = fields.Boolean('Sent', compute="_get_sent", help='Was message sent to someone', store=True)
+    sent = fields.Boolean('Sent', compute="_compute_sent", help='Was message sent to someone', store=True)
 
     @api.one
     @api.depends('author_id', 'partner_ids')
-    def _get_sent(self):
+    def _compute_sent(self):
         self_sudo = self.sudo()
         self_sudo.sent = len(self_sudo.partner_ids) > 1 \
             or len(self_sudo.partner_ids) == 1 \
@@ -28,5 +28,6 @@ class MailMessage(models.Model):
 
 
 class MailComposeMessage(models.TransientModel):
+
     _inherit = 'mail.compose.message'
     sent = fields.Boolean('Sent', help='dummy field to fix inherit error')

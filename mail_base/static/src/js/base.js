@@ -214,7 +214,7 @@ var MailTools = core.Class.extend({
         return {
             is_starred: chat_manager.mail_tools.property_descr("channel_starred", msg, chat_manager.mail_tools),
             is_needaction: chat_manager.mail_tools.property_descr("channel_inbox", msg, chat_manager.mail_tools)
-        }
+        };
     },
 
     set_channel_flags: function(data, msg){
@@ -224,7 +224,7 @@ var MailTools = core.Class.extend({
         if (_.contains(data.starred_partner_ids, session.partner_id)) {
             msg.is_starred = true;
         }
-        return msg
+        return msg;
     },
 
     get_channel_array: function(msg){
@@ -241,8 +241,7 @@ var MailTools = core.Class.extend({
             subtype_description: data.subtype_description,
             is_author: data.author_id && data.author_id[0] === session.partner_id,
             is_note: data.is_note,
-            is_system_notification: data.message_type === 'notification' && data.model === 'mail.channel'
-                || data.info === 'transient_message',
+            is_system_notification: data.message_type === 'notification' && data.model === 'mail.channel' || data.info === 'transient_message',
             attachment_ids: data.attachment_ids || [],
             subject: data.subject,
             email_from: data.email_from,
@@ -325,7 +324,7 @@ var MailTools = core.Class.extend({
         } else {
             channel = chat_manager.mail_tools.make_channel(data, options);
             channels.push(channel);
-            channels = _.sortBy(channels, function (channel) { return _.isString(channel.name) ? channel.name.toLowerCase() : '' });
+            channels = _.sortBy(channels, function (channel) { return _.isString(channel.name) ? channel.name.toLowerCase() : ''; });
             if (!options.silent) {
                 chat_manager.bus.trigger("new_channel", channel);
             }
@@ -744,10 +743,10 @@ var cls = new MailTools();
 chat_manager.mail_tools = cls;
 // we add this function this way in order to make them extendable via MailTools.include({...})
 chat_manager.make_message = function(){
-    return chat_manager.mail_tools.make_message.apply(chat_manager.mail_tools, arguments)
+    return chat_manager.mail_tools.make_message.apply(chat_manager.mail_tools, arguments);
 };
 chat_manager.make_channel = function(){
-    return chat_manager.mail_tools.make_channel.apply(chat_manager.mail_tools, arguments)
+    return chat_manager.mail_tools.make_channel.apply(chat_manager.mail_tools, arguments);
 };
 chat_manager.post_message = function (data, options) {
         options = options || {};
@@ -1116,9 +1115,9 @@ function init () {
     });
 
     // unsubscribe and then subscribe to the event, to avoid duplication of new messages
-    bus.off('notification')
+    bus.off('notification');
     bus.on('notification', null, function(){
-        chat_manager.mail_tools.on_notification.apply(chat_manager.mail_tools, arguments)
+        chat_manager.mail_tools.on_notification.apply(chat_manager.mail_tools, arguments);
     });
 
     return session.rpc('/mail/client_action').then(function (result) {

@@ -8,8 +8,14 @@ class MailMailStats(models.Model):
 
     partner_ids = fields.Many2many('res.partner', related='mail_mail_id.recipient_ids', string='Partners (Mail)')
 
-    @api.one
+    @api.multi
     def _get_partner_id(self):
+        for r in self:
+            r._get_partner_id_one(self)
+
+    @api.multi
+    def _get_partner_id_one(self):
+        self.ensure_one()
         if self.model == 'res.partner':
             self.partner_id = self.res_id
         else:
@@ -17,8 +23,14 @@ class MailMailStats(models.Model):
 
     partner_id = fields.Many2one('res.partner', compute=_get_partner_id, string='Partner (Document ID)')
 
-    @api.one
+    @api.multi
     def _get_partners(self):
+        for r in self:
+            r._get_partners_one(self)
+
+    @api.multi
+    def _get_partners_one(self):
+        self.ensure_one()
         res = {}
         for p in self.partner_ids:
             res[p.id] = p

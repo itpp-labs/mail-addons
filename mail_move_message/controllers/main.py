@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from openerp.addons.web.controllers.main import DataSet
-from openerp.tools.translate import _
-from openerp import http
-from openerp.http import request
-from openerp.addons.bus.controllers.main import BusController
+from odoo.addons.web.controllers.main import DataSet
+from odoo.tools.translate import _
+from odoo import http
+from odoo.http import request
+from odoo.addons.bus.controllers.main import BusController
 
 
 class MailChatController(BusController):

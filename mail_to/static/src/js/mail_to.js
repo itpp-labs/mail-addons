@@ -8,7 +8,7 @@ odoo.define('mail_to.MailTo', function (require) {
             var msg = this._super(data);
             msg.partner_ids = data.partner_ids;
             if (!msg.partner_ids)
-                return msg
+                return msg;
 
             var more_recipients = '';
             // value which define more recipients

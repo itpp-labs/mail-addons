@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-from openerp import api, models, fields
+from openerp import api
+from openerp import fields
+from openerp import models
 from openerp.tools import email_split
 from openerp.tools.translate import _
 
 
-class wizard(models.TransientModel):
+class Wizard(models.TransientModel):
     _name = 'mail_move_message.wizard'
 
     def _model_selection(self):
@@ -26,7 +28,7 @@ class wizard(models.TransientModel):
 
     @api.model
     def default_get(self, fields_list):
-        res = super(wizard, self).default_get(fields_list)
+        res = super(Wizard, self).default_get(fields_list)
 
         model_fields = self.fields_get()
         if model_fields['model']['selection']:
@@ -85,8 +87,14 @@ class wizard(models.TransientModel):
              "You can change default value for this option at Settings/System Parameters")
 
     @api.depends('message_id')
-    @api.one
+    @api.multi
     def get_can_move(self):
+        for r in self:
+            r.get_can_move_one(self)
+
+    @api.multi
+    def get_can_move_one(self):
+        self.ensure_one()
         # message was not moved before OR message is a top message of previous move
         self.can_move = not self.message_id.moved_by_message_id or self.message_id.moved_by_message_id.id == self.message_id.id
 
@@ -135,8 +143,14 @@ class wizard(models.TransientModel):
             self.res_id = None
         return {'domain': domain}
 
-    @api.one
+    @api.multi
     def check_access(self):
+        for r in self:
+            r.check_access_one(self)
+
+    @api.multi
+    def check_access_one(self):
+        self.ensure_one()
         operation = 'write'
 
         if not (self.model and self.res_id):
@@ -192,8 +206,14 @@ class wizard(models.TransientModel):
             'type': 'ir.actions.act_window',
         }
 
-    @api.one
+    @api.multi
     def delete(self):
+        for r in self:
+            r.delete_one(self)
+
+    @api.multi
+    def delete_one(self):
+        self.ensure_one()
         msg_id = self.message_id.id
 
         # Send notification
@@ -227,14 +247,20 @@ class wizard(models.TransientModel):
             context.update({'default_%s' % contact_field: partner_id})
         return context
 
-    @api.one
+    @api.multi
     def read_close(self):
+        for r in self:
+            r.read_close_one(self)
+
+    @api.multi
+    def read_close_one(self):
+        self.ensure_one()
         self.message_id.set_message_done()
         self.message_id.child_ids.set_message_done()
         return {'type': 'ir.actions.act_window_close'}
 
 
-class mail_message(models.Model):
+class MailMessage(models.Model):
     _inherit = 'mail.message'
 
     is_moved = fields.Boolean('Is moved')
@@ -245,8 +271,14 @@ class mail_message(models.Model):
     moved_by_user_id = fields.Many2one('res.users', 'Moved by user', ondelete='set null')
     all_child_ids = fields.One2many('mail.message', string='All childs', compute='_get_all_childs', help='all childs, including subchilds')
 
-    @api.one
+    @api.multi
     def _get_all_childs(self, include_myself=True):
+        for r in self:
+            r._get_all_childs_one(self, include_myself=True)
+
+    @api.multi
+    def _get_all_childs_one(self, include_myself=True):
+        self.ensure_one()
         ids = []
         if include_myself:
             ids.append(self.id)
@@ -268,8 +300,14 @@ class mail_message(models.Model):
             for f in followers:
                 self.env[model].browse(ids).message_subscribe([f.partner_id.id], [s.id for s in f.subtype_ids])
 
-    @api.one
+    @api.multi
     def move(self, parent_id, res_id, model, move_back, move_followers=False):
+        for r in self:
+            r.move_one(self, parent_id, res_id, model, move_back, move_followers=False)
+
+    @api.multi
+    def move_one(self, parent_id, res_id, model, move_back, move_followers=False):
+        self.ensure_one()
         if parent_id == res_id:
             return
         vals = {}
@@ -329,7 +367,7 @@ class mail_message(models.Model):
     def name_get(self):
         context = self.env.context
         if not (context or {}).get('extended_name'):
-            return super(mail_message, self).name_get()
+            return super(MailMessage, self).name_get()
         reads = self.read(['record_name', 'model', 'res_id'])
         res = []
         for record in reads:
@@ -340,7 +378,7 @@ class mail_message(models.Model):
 
     @api.multi
     def message_format(self):
-        message_values = super(mail_message, self).message_format()
+        message_values = super(MailMessage, self).message_format()
         message_index = {message['id']: message for message in message_values}
         for item in self:
             msg = message_index.get(item.id)
@@ -349,7 +387,7 @@ class mail_message(models.Model):
         return message_values
 
 
-class mail_move_message_configuration(models.TransientModel):
+class MailMoveMessageConfiguration(models.TransientModel):
     _name = 'mail_move_message.config.settings'
     _inherit = 'res.config.settings'
 
@@ -380,12 +418,12 @@ class mail_move_message_configuration(models.TransientModel):
             config_parameters.set_param('mail_relocation_move_followers', record.move_followers or '')
 
 
-class res_partner(models.Model):
+class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     @api.model
     def create(self, vals):
-        res = super(res_partner, self).create(vals)
+        res = super(ResPartner, self).create(vals)
         if 'update_message_author' in self.env.context and 'email' in vals:
             mail_message_obj = self.env['mail.message']
             # Escape special SQL characters in email_address to avoid invalid matches
