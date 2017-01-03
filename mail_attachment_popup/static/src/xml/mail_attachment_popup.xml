@@ -2,7 +2,7 @@
 <template>
     <t t-extend="mail.Attachment">
         <t t-jquery="div[t-att-title='attachment.name'] .o_image" t-operation="replace">
-            <t t-if="attachment.mimetype and attachment.mimetype.startswith('image/')">
+            <t t-if="attachment.mimetype and attachment.mimetype.search('image/') !== -1">
                 <span class="m-dotted" t-attf-onclick="$('#ImageModal{{ attachment.id }}').arcticmodal()">
                     <div class="o_image" target="_blank" t-att-data-mimetype="attachment.mimetype" t-attf-data-src="/web/image/#{attachment.id}/100x80">
                         <span class='o_attachment_name'><t t-esc='attachment.name'/></span>
@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </t>
-            <t t-if="not (attachment.mimetype and attachment.mimetype.startswith('image/'))">
+            <t t-if="not (attachment.mimetype and attachment.mimetype.search('image/') !== -1)">
                 <a class="o_image" t-att-href='attachment.url' target="_blank" t-att-data-mimetype="attachment.mimetype" t-attf-data-src="/web/image/#{attachment.id}/100x80">
                     <span class='o_attachment_name'><t t-esc='attachment.name'/></span>
                 </a>
