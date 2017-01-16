@@ -10,7 +10,7 @@ class ResPartnerStripEmail(models.Model):
     @api.multi
     def write(self, vals):
         for r in self:
-            r.write_one(self, vals)
+            r.write_one(vals)
 
     @api.multi
     def write_one(self, vals):

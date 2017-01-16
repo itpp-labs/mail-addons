@@ -90,7 +90,7 @@ class Wizard(models.TransientModel):
     @api.multi
     def get_can_move(self):
         for r in self:
-            r.get_can_move_one(self)
+            r.get_can_move_one()
 
     @api.multi
     def get_can_move_one(self):
@@ -146,7 +146,7 @@ class Wizard(models.TransientModel):
     @api.multi
     def check_access(self):
         for r in self:
-            r.check_access_one(self)
+            r.check_access_one()
 
     @api.multi
     def check_access_one(self):
@@ -209,7 +209,7 @@ class Wizard(models.TransientModel):
     @api.multi
     def delete(self):
         for r in self:
-            r.delete_one(self)
+            r.delete_one()
 
     @api.multi
     def delete_one(self):
@@ -250,7 +250,7 @@ class Wizard(models.TransientModel):
     @api.multi
     def read_close(self):
         for r in self:
-            r.read_close_one(self)
+            r.read_close_one()
 
     @api.multi
     def read_close_one(self):
@@ -274,7 +274,7 @@ class MailMessage(models.Model):
     @api.multi
     def _get_all_childs(self, include_myself=True):
         for r in self:
-            r._get_all_childs_one(self, include_myself=True)
+            r._get_all_childs_one(include_myself=True)
 
     @api.multi
     def _get_all_childs_one(self, include_myself=True):
@@ -303,7 +303,7 @@ class MailMessage(models.Model):
     @api.multi
     def move(self, parent_id, res_id, model, move_back, move_followers=False):
         for r in self:
-            r.move_one(self, parent_id, res_id, model, move_back, move_followers=False)
+            r.move_one(parent_id, res_id, model, move_back, move_followers=False)
 
     @api.multi
     def move_one(self, parent_id, res_id, model, move_back, move_followers=False):
