@@ -11,7 +11,7 @@ class MailMailStats(models.Model):
     @api.multi
     def _get_partner_id(self):
         for r in self:
-            r._get_partner_id_one(self)
+            r._get_partner_id_one()
 
     @api.multi
     def _get_partner_id_one(self):
@@ -26,7 +26,7 @@ class MailMailStats(models.Model):
     @api.multi
     def _get_partners(self):
         for r in self:
-            r._get_partners_one(self)
+            r._get_partners_one()
 
     @api.multi
     def _get_partners_one(self):
