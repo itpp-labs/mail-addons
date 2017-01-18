@@ -8,6 +8,7 @@
     "application": False,
 
     "author": "IT-Projects LLC, Pavel Romanchenko",
+    "support": "apps@it-projects.info",
     "website": "https://it-projects.info",
     "license": "GPL-3",
     "price": 50.00,

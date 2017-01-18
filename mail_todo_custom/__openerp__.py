@@ -4,6 +4,7 @@
     'version': '1.0',
     'author': 'IT-Projects LLC',
     'license': 'LGPL-3',
+    "support": "apps@it-projects.info",
     'website': "https://yelizariev.github.io",
     "category": "Discuss",
     'depends': ['mail'],
