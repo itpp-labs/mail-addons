@@ -5,6 +5,7 @@
     'author': 'IT-Projects LLC, Ivan Yelizariev, Pavel Romanchenko',
     'license': 'LGPL-3',
     'category': 'Discuss',
+    "support": "apps@it-projects.info",
     'website': 'https://twitter.com/yelizariev',
     'price': 100.00,
     'currency': 'EUR',

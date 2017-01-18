@@ -7,6 +7,7 @@
     "price": 70.00,
     "currency": "EUR",
     'category': 'Discuss',
+    "support": "apps@it-projects.info",
     'website': 'https://twitter.com/yelizariev',
     'images': ['images/child.png', 'images/parent.png'],
     'depends': ['mail'],
