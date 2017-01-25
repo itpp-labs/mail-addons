@@ -485,7 +485,7 @@ var MailTools = core.Class.extend({
     clear_cache_all_channels: function(){
         _.each(channels, function(channel){
             channel.cache = {};
-        })
+        });
     },
 
     add_to_cache: function (message, domain) {
