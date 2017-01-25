@@ -5,16 +5,17 @@ from openerp import api, models, fields
 class MailMessage(models.Model):
     _inherit = 'mail.message'
 
-    sent = fields.Boolean('Sent', compute="_get_sent", help='Was message sent to someone', store=True)
+    sent = fields.Boolean('Sent', compute="_compute_sent", help='Was message sent to someone', store=True)
 
-    @api.one
     @api.depends('author_id', 'partner_ids')
-    def _get_sent(self):
-        self_sudo = self.sudo()
-        self_sudo.sent = len(self_sudo.partner_ids) > 1 \
-            or len(self_sudo.partner_ids) == 1 \
-            and self_sudo.author_id \
-            and self_sudo.partner_ids[0].id != self_sudo.author_id.id
+    def _compute_sent(self):
+        for r in self:
+            r_sudo = r.sudo()
+            sent = len(r_sudo.partner_ids) > 1 \
+                or len(r_sudo.partner_ids) == 1 \
+                and r_sudo.author_id \
+                and r_sudo.partner_ids[0].id != r_sudo.author_id.id
+            r.sent = sent
 
     @api.multi
     def message_format(self):
