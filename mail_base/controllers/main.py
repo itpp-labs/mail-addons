@@ -1,0 +1,15 @@
+# -*- coding: utf-8 -*-
+from openerp.http import request
+import openerp
+
+
+class MailChatController(openerp.addons.bus.controllers.main.BusController):
+    # -----------------------------
+    # Extends BUS Controller Poll
+    # -----------------------------
+
+    def _poll(self, dbname, channels, last, options):
+        if request.session.uid:
+            channels.append((request.db, 'mail_base.mail_sent'))
+
+        return super(MailChatController, self)._poll(dbname, channels, last, options)
