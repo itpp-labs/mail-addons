@@ -274,7 +274,7 @@ class MailMessage(models.Model):
     @api.multi
     def _get_all_childs(self, include_myself=True):
         for r in self:
-            r._get_all_childs_one(include_myself=True)
+            r._get_all_childs_one(include_myself=include_myself)
 
     @api.multi
     def _get_all_childs_one(self, include_myself=True):
@@ -303,12 +303,15 @@ class MailMessage(models.Model):
     @api.multi
     def move(self, parent_id, res_id, model, move_back, move_followers=False):
         for r in self:
-            r.move_one(parent_id, res_id, model, move_back, move_followers=False)
+            r.move_one(parent_id, res_id, model, move_back, move_followers=move_followers)
 
     @api.multi
     def move_one(self, parent_id, res_id, model, move_back, move_followers=False):
         self.ensure_one()
-        if parent_id == res_id:
+        if parent_id == self.id:
+            # if for any reason method is called to move message with parent
+            # equal to oneself, we need stop to prevent infinitive loop in
+            # building message tree
             return
         vals = {}
         if move_back:
