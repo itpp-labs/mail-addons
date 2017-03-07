@@ -1,3 +1,9 @@
+`1.0.5`
+-------
+
+- FIX: TypeError "Cannot read property 'constructor' of undefined" when change a model
+- FIX: Issue related to 'Move to origin' option
+
 `1.0.4`
 -------
 
