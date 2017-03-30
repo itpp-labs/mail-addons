@@ -40,12 +40,12 @@ msgstr "Assistente de Composição de Email"
 #. module: mail_sent
 #: model:ir.model,name:mail_sent.model_mail_message
 msgid "Message"
-msgstr "Message"
+msgstr "Mensagem"
 
 #. module: mail_sent
 #: model:ir.model,name:mail_sent.model_mail_notification
 msgid "Notifications"
-msgstr "Notifications"
+msgstr "Notificações"
 
 #. module: mail_sent
 #: model:ir.actions.client,name:mail_sent.action_mail_sent_feeds
@@ -58,10 +58,10 @@ msgstr "Enviados"
 #. module: mail_sent
 #: help:mail.message,sent:0
 msgid "Was message sent to someone"
-msgstr "Was message sent to someone"
+msgstr "Foi enviada mensagem para alguém"
 
 #. module: mail_sent
 #: help:mail.compose.message,sent:0
 msgid "dummy field to fix inherit error"
-msgstr "dummy field to fix inherit error"
+msgstr "campo fictício para corrigir o erro da herança"
 

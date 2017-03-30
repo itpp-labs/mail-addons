@@ -58,10 +58,10 @@ msgstr "Enviados"
 #. module: mail_sent
 #: help:mail.message,sent:0
 msgid "Was message sent to someone"
-msgstr "Was message sent to someone"
+msgstr "Foi enviada mensagem para alguém"
 
 #. module: mail_sent
 #: help:mail.compose.message,sent:0
 msgid "dummy field to fix inherit error"
-msgstr "dummy field to fix inherit error"
+msgstr "campo fictício para corrigir o erro da herança"
 
