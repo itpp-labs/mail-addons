@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
-    <t t-extend="mail.compose_message">
-        <t t-jquery="a[title='Send a message to all followers of the document']" t-operation="after">
+    <t t-extend="mail.Chatter">
+        <t t-jquery="button[title='Send a message']" t-operation="after">
             <span class="oe_grey oe_sep_word">or</span><a class="oe_compose_post_private" t-if="!widget.options.compose_placeholder and !widget.options.view_mailbox" title="Send a message to specified recipients only">Send internal message</a>
         </t>
     </t>
-  <t t-extend="mail.thread.list_recipients">
+  <t t-extend="mail.chatter.ChatComposer">
       <t t-jquery="[t-if='!widget.is_private']" t-operation="replace">
             <t t-if="!widget.is_private and !widget.private">
                 <span class="oe_all_follower">

@@ -16,6 +16,7 @@
 
     "depends": [
         "mail",
+        "mail_base"
     ],
     "external_dependencies": {"python": [], "bin": []},
     "data": [
@@ -32,5 +33,5 @@
     "post_init_hook": None,
 
     "auto_install": False,
-    "installable": False,
+    "installable": True,
 }
