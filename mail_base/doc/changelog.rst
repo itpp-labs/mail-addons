@@ -1,3 +1,8 @@
+`1.0.2`
+-------
+
+- **FIX**: fixed an error with unsubscribing from channel or closing dialog window
+
 `1.0.1`
 -------
 
