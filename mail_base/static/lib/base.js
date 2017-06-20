@@ -612,7 +612,7 @@ var MailTools = core.Class.extend({
                 } else {
                     msg = _.str.sprintf(_t('You unpinned your conversation with <b>%s</b>.'), channel.name);
                 }
-                remove_channel(channel);
+                this.remove_channel(channel);
                 chat_manager.bus.trigger("unsubscribe_from_channel", data.id);
                 web_client.do_notify(_("Unsubscribed"), msg);
             }
