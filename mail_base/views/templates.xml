@@ -5,7 +5,7 @@
                   name="mail_base_assets_backend"
                   inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
-                <script src="/mail_base/static/src/js/base.js" type="text/javascript"></script>
+                <script src="/mail_base/static/lib/base.js" type="text/javascript"></script>
             </xpath>
         </template>
     </data>
