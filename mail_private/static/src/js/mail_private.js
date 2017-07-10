@@ -1,16 +1,11 @@
 odoo.define('mail_private', function (require) {
 'use strict';
 
-var base_obj = require('mail_base.base');
-
 var core = require('web.core');
 var Chatter = require('mail.Chatter');
 var chat_manager = require('mail.chat_manager');
 var session = require('web.session');
 var Model = require('web.Model');
-var utils = require('mail.utils');
-var MessageModel = new Model('mail.message', session.user_context);
-var ChannelModel = new Model('mail.channel', session.user_context);
 
 
     Chatter.include({
@@ -42,7 +37,6 @@ var ChannelModel = new Model('mail.channel', session.user_context);
             this.private = true;
             this.get_recipients_for_internal_message().then(function (data) {
                 var private_message = 'private_message';
-                self.recipients_for_internal_message = [];
                 self.recipients_for_internal_message = data;
                 self.open_composer(private_message);
             });
