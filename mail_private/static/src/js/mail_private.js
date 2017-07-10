@@ -24,7 +24,6 @@ var ChannelModel = new Model('mail.channel', session.user_context);
         var self = this;
         if (this.private) {
             message.subtype = false;
-            this.private = false;
         }
         var options = {model: this.model, res_id: this.res_id};
         chat_manager
@@ -95,11 +94,6 @@ var ChannelModel = new Model('mail.channel', session.user_context);
                                         res_partners_filtered.push(partner.partner_id[0]);
                                     }
                                 });
-                                // Add customer
-//                                if (self.customer && !res_partners_filtered.includes(self.customer[0])) {
-//                                    res_partners_filtered.splice(0, 0, self.customer[0]);
-//                                }
-                                // Fetch followers data
                                 return new Model('res.partner').call(
                                     'read', [res_partners_filtered, ['name', 'email', 'user_ids']]
                                         ).then(function (recipients) {
