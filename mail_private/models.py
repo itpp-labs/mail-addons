@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from openerp.osv import osv, fields
+from odoo import models, fields
 
 
-class MailComposeMessage(osv.TransientModel):
+class MailComposeMessage(models.TransientModel):
     _inherit = 'mail.compose.message'
 
-    _columns = {
-        'private': fields.boolean('Send Internal Message'),
-    }
+    private = fields.Boolean(string='Send Internal Message')
