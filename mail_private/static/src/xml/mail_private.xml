@@ -2,7 +2,7 @@
 <template>
     <t t-extend="mail.Chatter">
         <t t-jquery="button[title='Send a message']" t-operation="after">
-            <span class="oe_grey oe_sep_word">or</span><a class="oe_compose_post_private" t-if="!widget.options.compose_placeholder and !widget.options.view_mailbox" title="Send a message to specified recipients only">Send internal message</a>
+            <button class="btn btn-sm btn-link oe_compose_post_private" t-if="!widget.options.compose_placeholder and !widget.options.view_mailbox" title="Send a message to specified recipients only">Send internal message</button>
         </t>
     </t>
   <t t-extend="mail.chatter.ChatComposer">
