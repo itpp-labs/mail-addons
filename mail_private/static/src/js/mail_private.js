@@ -27,7 +27,7 @@ var ChannelModel = new Model('mail.channel', session.user_context);
         }
         var options = {model: this.model, res_id: this.res_id};
         chat_manager.post_message(message, options).then(
-        	function () {
+            function () {
                 self.close_composer();
                 if (message.partner_ids.length) {
                     self.refresh_followers();
@@ -65,7 +65,7 @@ var ChannelModel = new Model('mail.channel', session.user_context);
                         full_name: self.recipients_for_internal_message[i].name,
                         name: self.recipients_for_internal_message[i].name,
                         email_address: self.recipients_for_internal_message[i].email,
-                        reason: _.include(self.recipients_for_internal_message[i].user_ids, self.session.uid) 
+                        reason: _.include(self.recipients_for_internal_message[i].user_ids, self.session.uid)
                         ?'Partner'
                         :'Follower'
                     });
@@ -78,8 +78,8 @@ var ChannelModel = new Model('mail.channel', session.user_context);
             self.result = {};
             return new Model(this.context.default_model).query(
                 ['message_follower_ids', 'partner_id']).filter(
-                [['id', '=', self.context.default_res_id]]).all()
-                .then(function (thread) {
+                [['id', '=', self.context.default_res_id]]).all().
+                then(function (thread) {
                         var follower_ids = thread[0].message_follower_ids;
                         self.result[self.context.default_res_id] = [];
                         self.customer = thread[0].partner_id;
