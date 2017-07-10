@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<template priority="100">
+<template>
     <t t-extend="mail.Chatter">
         <t t-jquery="button[title='Send a message']" t-operation="after">
             <button class="btn btn-sm btn-link oe_compose_post_private" t-if="!widget.options.compose_placeholder and !widget.options.view_mailbox" title="Send a message to specified recipients only">Send internal message</button>

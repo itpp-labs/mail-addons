@@ -4,6 +4,7 @@
         <record id="mail_private_email_compose_message_wizard_form" model="ir.ui.view">
             <field name="name">mail.private.mail.compose.message.form</field>
             <field name="model">mail.compose.message</field>
+            <field name="priority" eval="100"/>
             <field name="inherit_id" ref="mail.email_compose_message_wizard_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//div[@groups='base.group_user']" position="replace">
