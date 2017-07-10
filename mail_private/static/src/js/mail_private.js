@@ -26,7 +26,6 @@ var ChannelModel = new Model('mail.channel', session.user_context);
             message.subtype = false;
             this.private = false;
         }
-        console.log(this.private)
         var options = {model: this.model, res_id: this.res_id};
         chat_manager
             .post_message(message, options)
@@ -53,23 +52,23 @@ var ChannelModel = new Model('mail.channel', session.user_context);
         },
 
         on_open_composer_new_message: function () {
-            this._super.apply(this, arguments)
+            this._super.apply(this, arguments);
             this.private = false;
         },
 
         open_composer: function (options) {
             var self = this;
-            this._super.apply(this, arguments)
+            this._super.apply(this, arguments);
             if (options === 'private_message') {
                 //Clear existing suggested partners
                 for (var i=0; i<self.recipients_for_internal_message.length; i++) {
                     this.composer.suggested_partners.push({
                         checked: true,
-                        partner_id: self.recipients_for_internal_message[i]['id'],
-                        full_name: self.recipients_for_internal_message[i]['name'],
-                        name: self.recipients_for_internal_message[i]['name'],
-                        email_address: self.recipients_for_internal_message[i]['email'],
-                        reason: !_.include(self.recipients_for_internal_message[i]['user_ids'], self.session.uid) ? 'Follower' : 'Partner'
+                        partner_id: self.recipients_for_internal_message[i].id,
+                        full_name: self.recipients_for_internal_message[i].name,
+                        name: self.recipients_for_internal_message[i].name,
+                        email_address: self.recipients_for_internal_message[i].email,
+                        reason: !_.include(self.recipients_for_internal_message[i].user_ids, self.session.uid) ? 'Follower' : 'Partner'
                     });
                 }
             }
