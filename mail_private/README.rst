@@ -18,12 +18,12 @@ Sponsors
 Further information
 ===================
 
-Demo: http://runbot.it-projects.info/demo/mail-addons/8.0
+Demo: http://runbot.it-projects.info/demo/mail-addons/9.0
 
-HTML Description: https://apps.odoo.com/apps/modules/8.0/mail_private/
+HTML Description: https://apps.odoo.com/apps/modules/9.0/mail_private/
 
 Usage instructions: `<doc/index.rst>`__
 
 Changelog: `<doc/changelog.rst>`__
 
-Tested on Odoo 8.0 0af32f3f84bae07b11abb8538d02e35c7369a348
+Tested on Odoo 9.0 d612daae719ce3da86c3e44a91a6138a1733dcc2
