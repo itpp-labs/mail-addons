@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
     <t t-extend="mail.ChatThread.Message">
-        <t t-jquery="small[class=o_mail_timestamp]" t-operation="after">
+        <t t-jquery="p[class=o_mail_info] span:last-child" t-operation="after">
             <span class="recipients_info"><t t-if="message.partner_ids">
                 <t t-if="message.partner_ids.length > 0">To: </t>
                 <t t-foreach="message.partner_ids.length" t-as="i">
