@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Mail recovery",
+    'name': "Mail Recovery",
     'summary': """Backup and recover unsent message""",
     'author': "IT-Projects LLC, Ildar Nasyrov",
     'license': 'LGPL-3',
