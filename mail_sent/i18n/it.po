@@ -11,22 +11,22 @@ msgstr ""
 "POT-Creation-Date: 2017-07-17 20:20+0000\n"
 "PO-Revision-Date: 2017-07-17 20:20+0000\n"
 "Last-Translator: Translation Bot <i18n-bot@it-projects.info>, 2017\n"
-"Language-Team: Slovenian (https://www.transifex.com/it-projects-llc/teams/76080/sl/)\n"
+"Language-Team: Italian (https://www.transifex.com/it-projects-llc/teams/76080/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mail_sent
 #: model:ir.model,name:mail_sent.model_mail_compose_message
 msgid "Email composition wizard"
-msgstr ""
+msgstr "Componi Email"
 
 #. module: mail_sent
 #: model:ir.model,name:mail_sent.model_mail_message
 msgid "Message"
-msgstr "Sporočilo"
+msgstr "Messaggio"
 
 #. module: mail_sent
 #. openerp-web
@@ -44,13 +44,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_sent.field_mail_message_sent
 #, python-format
 msgid "Sent"
-msgstr "Poslano"
+msgstr ""
 
 #. module: mail_sent
 #: model:ir.model.fields,help:mail_sent.field_mail_mail_sent
 #: model:ir.model.fields,help:mail_sent.field_mail_message_sent
 msgid "Was message sent to someone"
-msgstr "Je bilo sporočilo komu poslano"
+msgstr ""
 
 #. module: mail_sent
 #. openerp-web
