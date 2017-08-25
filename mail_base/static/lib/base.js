@@ -13,6 +13,8 @@ var web_client = require('web.web_client');
 
 var composer = require('mail.composer');
 var config = require('web.config');
+var Chatter = require('mail.Chatter');
+
 
 var _t = core._t;
 var _lt = core._lt;
@@ -373,6 +375,41 @@ var MailComposer = composer.BasicComposer.extend({
             }).then(self.trigger.bind(self, 'close_composer'));
         });
     }
+});
+
+Chatter.include({
+    open_composer: function (options) {
+        var self = this;
+        var old_composer = this.composer;
+        // create the new composer
+        this.composer = new MailComposer(this, this.thread_dataset, {
+            commands_enabled: false,
+            context: this.context,
+            input_min_height: 50,
+            input_max_height: Number.MAX_VALUE, // no max_height limit for the chatter
+            input_baseline: 14,
+            is_log: options && options.is_log,
+            record_name: this.record_name,
+            default_body: old_composer && old_composer.$input && old_composer.$input.val(),
+            default_mention_selections: old_composer && old_composer.mention_get_listener_selections(),
+        });
+        this.composer.on('input_focused', this, function () {
+            this.composer.mention_set_prefetched_partners(this.mention_suggestions || []);
+        });
+        this.composer.insertBefore(this.$('.o_mail_thread')).then(function () {
+            // destroy existing composer
+            if (old_composer) {
+                old_composer.destroy();
+            }
+            if (!config.device.touch) {
+                self.composer.focus();
+            }
+            self.composer.on('post_message', self, self.on_post_message);
+            self.composer.on('need_refresh', self, self.refresh_followers);
+            self.composer.on('close_composer', null, self.close_composer.bind(self, true));
+        });
+        this.mute_new_message_button(true);
+    },
 });
 
 var MailTools = core.Class.extend({

@@ -50,7 +50,15 @@ Chatter.include({
     },
 
     open_composer: function (options) {
+        if (options && options.is_private) {
+            this.open_composer_private(options);
+        } else {
+            this._super.apply(this, arguments);
+        }
+        
+    },
 
+    open_composer_private: function (options) {
         var self = this;
         var old_composer = this.composer;
         // create the new composer
@@ -83,20 +91,17 @@ Chatter.include({
         });
         this.mute_new_message_button(true);
 
-        if (options && options.is_private) {
-            //Clear existing suggested partners
-            for (var i=0; i<self.recipients_for_internal_message.length; i++) {
-                this.composer.suggested_partners.push({
-                    checked: true,
-                    partner_id: self.recipients_for_internal_message[i].id,
-                    full_name: self.recipients_for_internal_message[i].name,
-                    name: self.recipients_for_internal_message[i].name,
-                    email_address: self.recipients_for_internal_message[i].email,
-                    reason: _.include(self.recipients_for_internal_message[i].user_ids, self.session.uid)
-                    ?'Partner'
-                    :'Follower'
-                });
-            }
+        for (var i=0; i<self.recipients_for_internal_message.length; i++) {
+            this.composer.suggested_partners.push({
+                checked: true,
+                partner_id: self.recipients_for_internal_message[i].id,
+                full_name: self.recipients_for_internal_message[i].name,
+                name: self.recipients_for_internal_message[i].name,
+                email_address: self.recipients_for_internal_message[i].email,
+                reason: _.include(self.recipients_for_internal_message[i].user_ids, self.session.uid)
+                ?'Partner'
+                :'Follower'
+            });
         }
     },
 
@@ -133,7 +138,7 @@ Chatter.include({
 MailComposer.include({
     init: function (parent, dataset, options) {
         this._super(parent, dataset, options);
-        this.events['click .oe_compose_uncheck'] = 'on_uncheck_recipients';
+        this.events['click .oe_composer_uncheck'] = 'on_uncheck_recipients';
 
     },
 
