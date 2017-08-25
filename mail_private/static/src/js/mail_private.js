@@ -50,48 +50,11 @@ Chatter.include({
     },
 
     open_composer: function (options) {
-        if (options && options.is_private) {
-            this.open_composer_private(options);
-        } else {
-            this._super.apply(this, arguments);
-        }
-        
-    },
-
-    open_composer_private: function (options) {
         var self = this;
-        var old_composer = this.composer;
-        // create the new composer
-        this.composer = new MailComposer(this, this.thread_dataset, {
-            commands_enabled: false,
-            context: this.context,
-            input_min_height: 50,
-            input_max_height: Number.MAX_VALUE, // no max_height limit for the chatter
-            input_baseline: 14,
-            is_log: options && options.is_log,
-            record_name: this.record_name,
-            default_body: old_composer && old_composer.$input && old_composer.$input.val(),
-            default_mention_selections: old_composer && old_composer.mention_get_listener_selections(),
-            is_private: options && options.is_private,
-        });
-        this.composer.on('input_focused', this, function () {
-            this.composer.mention_set_prefetched_partners(this.mention_suggestions || []);
-        });
-        this.composer.insertBefore(this.$('.o_mail_thread')).then(function () {
-            // destroy existing composer
-            if (old_composer) {
-                old_composer.destroy();
-            }
-            if (!config.device.touch) {
-                self.composer.focus();
-            }
-            self.composer.on('post_message', self, self.on_post_message);
-            self.composer.on('need_refresh', self, self.refresh_followers);
-            self.composer.on('close_composer', null, self.close_composer.bind(self, true));
-        });
-        this.mute_new_message_button(true);
-
-        for (var i=0; i<self.recipients_for_internal_message.length; i++) {
+        this._super.apply(this, arguments);
+        if (options && options.is_private) {
+            this.composer.options.is_private = options.is_private;
+            for (var i=0; i<self.recipients_for_internal_message.length; i++) {
             this.composer.suggested_partners.push({
                 checked: true,
                 partner_id: self.recipients_for_internal_message[i].id,
@@ -101,7 +64,8 @@ Chatter.include({
                 reason: _.include(self.recipients_for_internal_message[i].user_ids, self.session.uid)
                 ?'Partner'
                 :'Follower'
-            });
+                });
+            }
         }
     },
 
