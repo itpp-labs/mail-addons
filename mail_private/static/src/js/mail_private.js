@@ -19,21 +19,21 @@ Chatter.include({
     },
 
     on_post_message: function (message) {
-    var self = this;
-    if (this.private) {
-        message.subtype = false;
-    }
-    var options = {model: this.model, res_id: this.res_id};
-    chat_manager.post_message(message, options).then(
-        function () {
-            self.close_composer();
-            if (message.partner_ids.length) {
-                self.refresh_followers();
-            }
-        }).fail(function () {
-            // todo: display notification
-        });
-    },
+        var self = this;
+        if (this.private) {
+            message.subtype = false;
+        }
+        var options = {model: this.model, res_id: this.res_id};
+        chat_manager.post_message(message, options).then(
+            function () {
+                self.close_composer();
+                if (message.partner_ids.length) {
+                    self.refresh_followers();
+                }
+            }).fail(function () {
+                // todo: display notification
+            });
+        },
 
     on_open_composer_private_message: function (event) {
         var self = this;
@@ -53,19 +53,23 @@ Chatter.include({
         var self = this;
         this._super.apply(this, arguments);
         if (options && options.is_private) {
+
             this.composer.options.is_private = options.is_private;
-            for (var i=0; i<self.recipients_for_internal_message.length; i++) {
-            this.composer.suggested_partners.push({
-                checked: true,
-                partner_id: self.recipients_for_internal_message[i].id,
-                full_name: self.recipients_for_internal_message[i].name,
-                name: self.recipients_for_internal_message[i].name,
-                email_address: self.recipients_for_internal_message[i].email,
-                reason: _.include(self.recipients_for_internal_message[i].user_ids, self.session.uid)
-                ?'Partner'
-                :'Follower'
+
+            _.each(self.recipients_for_internal_message, function (partner) {
+                self.composer.suggested_partners.push({
+                    checked: (partner.user_ids.length > 0)
+                    ? true
+                    : false,
+                    partner_id: partner.id,
+                    full_name: partner.name,
+                    name: partner.name,
+                    email_address: partner.email,
+                    reason: _.include(partner.user_ids, self.session.uid)
+                    ?'Partner'
+                    :'Follower'
                 });
-            }
+            });
         }
     },
 
@@ -76,25 +80,29 @@ Chatter.include({
             ['message_follower_ids', 'partner_id']).filter(
             [['id', '=', self.context.default_res_id]]).all().
             then(function (thread) {
-                    var follower_ids = thread[0].message_follower_ids;
-                    self.result[self.context.default_res_id] = [];
-                    self.customer = thread[0].partner_id;
-                    // Fetch partner ids
-                    return new Model('mail.followers').call(
-                        'read', [follower_ids, ['partner_id']]).then(function (res_partners) {
-                            var res_partners_filtered = [];
-                            // Filter result and push to array
-                            _.each(res_partners, function (partner) {
-                                if (partner.partner_id[0] && partner.partner_id[0] !== session.partner_id ) {
-                                    res_partners_filtered.push(partner.partner_id[0]);
-                                }
-                            });
-                            return new Model('res.partner').call(
-                                'read', [res_partners_filtered, ['name', 'email', 'user_ids']]
-                                    ).then(function (recipients) {
-                                        return recipients;
-                                    });
+                var follower_ids = thread[0].message_follower_ids;
+                self.result[self.context.default_res_id] = [];
+                self.customer = thread[0].partner_id;
+
+                // Fetch partner ids
+                return new Model('mail.followers').call(
+                    'read', [follower_ids, ['partner_id']]).then(function (res_partners) {
+                        
+                        // Filter result and push to array
+                        var res_partners_filtered = _.map(res_partners, function (partner) {
+                            if (partner.partner_id[0] && partner.partner_id[0] !== session.partner_id ) {
+                                return partner.partner_id[0];
+                            }
+                        }).filter(function (partner) {
+                            return typeof partner != 'undefined';
                         });
+
+                        return new Model('res.partner').call(
+                            'read', [res_partners_filtered, ['name', 'email', 'user_ids']]
+                                ).then(function (recipients) {
+                                    return recipients;
+                                });
+                    });
         });
     }
 });
@@ -157,7 +165,14 @@ MailComposer.include({
                 },
             }).then(self.trigger.bind(self, 'close_composer'));
         });
-    }
+    },
+
+    get_checked_suggested_partners: function () {
+        var checked_partners = this._super(this, arguments);
+        _.map(checked_partners, function (partner) {return partner.checked = true;})
+        return checked_partners;
+    },
+
 });
 
 });
