@@ -58,9 +58,7 @@ Chatter.include({
 
             _.each(self.recipients_for_internal_message, function (partner) {
                 self.composer.suggested_partners.push({
-                    checked: (partner.user_ids.length > 0)
-                    ? true
-                    : false,
+                    checked: (partner.user_ids.length > 0),
                     partner_id: partner.id,
                     full_name: partner.name,
                     name: partner.name,
@@ -87,14 +85,13 @@ Chatter.include({
                 // Fetch partner ids
                 return new Model('mail.followers').call(
                     'read', [follower_ids, ['partner_id']]).then(function (res_partners) {
-                        
                         // Filter result and push to array
                         var res_partners_filtered = _.map(res_partners, function (partner) {
                             if (partner.partner_id[0] && partner.partner_id[0] !== session.partner_id ) {
                                 return partner.partner_id[0];
                             }
                         }).filter(function (partner) {
-                            return typeof partner != 'undefined';
+                            return typeof partner !== 'undefined';
                         });
 
                         return new Model('res.partner').call(
@@ -169,7 +166,9 @@ MailComposer.include({
 
     get_checked_suggested_partners: function () {
         var checked_partners = this._super(this, arguments);
-        _.map(checked_partners, function (partner) {return partner.checked = true;})
+        _.map(checked_partners, function (partner) {
+            return partner.checked = true;
+        });
         return checked_partners;
     },
 
