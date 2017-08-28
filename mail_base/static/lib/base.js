@@ -14,7 +14,7 @@ var web_client = require('web.web_client');
 var composer = require('mail.composer');
 var config = require('web.config');
 var Chatter = require('mail.Chatter');
-
+var form_common = require('web.form_common');
 
 var _t = core._t;
 var _lt = core._lt;
