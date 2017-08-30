@@ -16,10 +16,12 @@
 
     "depends": [
         "mail",
+        "base"
     ],
     "external_dependencies": {"python": [], "bin": []},
     "data": [
         'template.xml',
+        'full_composer_wizard.xml',
     ],
     "qweb": [
         'static/src/xml/mail_private.xml',

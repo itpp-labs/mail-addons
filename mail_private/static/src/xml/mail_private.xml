@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
+
     <t t-extend="mail.Chatter">
         <t t-jquery="button[title='Send a message']" t-operation="after">
             <button class="btn btn-sm btn-link oe_compose_post_private" t-if="!widget.options.compose_placeholder and !widget.options.view_mailbox" title="Send a message to specified recipients only">Send internal message</button>
         </t>
     </t>
+    
   <t t-extend="mail.chatter.ChatComposer">
-      <t t-jquery="[t-if='!widget.is_private']" t-operation="replace">
-            <t t-if="!widget.is_private and !widget.private">
-                <span class="oe_all_follower">
-                    <t t-if="widget.parent_thread.parent_message.record_name">
-                        Followers of <t t-raw="'&quot;' + widget.parent_thread.parent_message.record_name + '&quot;'"/>
+        <t t-jquery="span[class='o_chatter_composer_info']" t-operation="replace">
+            <span class="o_chatter_composer_info" t-if="!widget.options.is_private">
+                    To: Followers of
+                    <t t-if="widget.options.record_name">
+                        &quot;<t t-esc="widget.options.record_name"/>&quot;
                     </t>
-                    <t t-if="!widget.parent_thread.parent_message.record_name and widget.options.view_inbox">My Followers</t>
-                    <t t-if="!widget.parent_thread.parent_message.record_name and !widget.options.view_inbox">Followers of this document</t>
-                </span>
-            </t>
-      </t>
+                    <t t-if="!widget.options.record_name">
+                        this document
+                    </t>
+            </span>
+        </t>
+        <t t-jquery="div[class='o_composer_suggested_partners']" t-operation="after">
+            <button class="btn btn-sm btn-link oe_composer_uncheck" t-if="widget.options.is_private">Uncheck all</button>
+        </t>
   </t>
+
 </template>
