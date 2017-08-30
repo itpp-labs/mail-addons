@@ -166,8 +166,10 @@ MailComposer.include({
 
     get_checked_suggested_partners: function () {
         var checked_partners = this._super(this, arguments);
-        _.map(checked_partners, function (partner) {
-            return partner.checked = true;
+        // workaround: odoo code works only when all partners are checked intially,
+        // while may select only some of them (internal recepients)
+        _.each(checked_partners, function (partner) {
+            partner.checked = true;
         });
         return checked_partners;
     },
