@@ -137,9 +137,12 @@ MailComposer.include({
                 default_attachment_ids: _.pluck(self.get('attachment_ids'), 'id'),
                 default_partner_ids: partner_ids,
                 default_is_log: self.options.is_log,
-                default_is_private: self.options && self.options.is_private,
                 mail_post_autofollow: true,
             };
+
+            if (self.options && self.options.is_private) {
+                context.default_is_private = self.options.is_private;
+            }
 
             if (self.context.default_model && self.context.default_res_id) {
                 context.default_model = self.context.default_model;
