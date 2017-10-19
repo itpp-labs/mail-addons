@@ -1,5 +1,5 @@
 # mail-addons
-Odoo (OpenERP) mail addons
+Odoo mail addons
 
 List of repositories:
 ---------------------
