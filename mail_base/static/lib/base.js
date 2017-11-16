@@ -6,7 +6,6 @@ var utils = require('mail.utils');
 var config = require('web.config');
 var core = require('web.core');
 var data = require('web.data');
-var Model = require('web.Model');
 var session = require('web.session');
 var time = require('web.time');
 var web_client = require('web.web_client');
@@ -14,7 +13,7 @@ var web_client = require('web.web_client');
 var composer = require('mail.composer');
 var config = require('web.config');
 var Chatter = require('mail.Chatter');
-var form_common = require('web.form_common');
+var view_dialogs = require('web.view_dialogs');
 
 var _t = core._t;
 var _lt = core._lt;
@@ -22,10 +21,12 @@ var LIMIT = 100;
 var preview_msg_max_size = 350;  // optimal for native english speakers
 var ODOOBOT_ID = "ODOOBOT";
 
+/* TODO: update or remove
 var MessageModel = new Model('mail.message', session.context);
 var ChannelModel = new Model('mail.channel', session.context);
 var UserModel = new Model('res.users', session.context);
 var PartnerModel = new Model('res.partner', session.context);
+*/
 var chat_manager = require('mail.chat_manager');
 
 // Private model
