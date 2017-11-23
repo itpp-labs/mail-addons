@@ -131,7 +131,7 @@ chat_manager.get_properties = function(msg){
     };
 }
 
-chat_manager.property_descr = function (channel) {
+chat_manager.property_descr = function (channel, msg, self) {
     return {
         enumerable: true,
         get: function () {
