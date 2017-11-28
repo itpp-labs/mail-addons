@@ -4,7 +4,7 @@
     "summary": """Allows you be sure, that all discussion participants were notified""",
     "category": "Discuss",
     "images": ['images/1.png'],
-    "version": "1.0.1",
+    "version": "1.0.2",
 
     "author": "IT-Projects LLC, Pavel Romanchenko",
     "support": "apps@it-projects.info",
@@ -24,6 +24,6 @@
         'static/src/xml/recipient.xml',
     ],
     "demo": [],
-    "installable": False,
+    "installable": True,
     "auto_install": False,
 }
