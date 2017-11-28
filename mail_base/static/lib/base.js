@@ -435,7 +435,7 @@ chat_manager.on_notification = function (notifications) {
             chat_manager.on_partner_notification(notification[1]);
         } else if (model === 'bus.presence') {
             // update presence of users
-            on_presence_notification(notification[1]);
+            chat_manager.on_presence_notification(notification[1]);
         }
     });
 }
@@ -662,13 +662,13 @@ chat_manager.start = function () {
             return session.rpc('/mail/client_action', {context: context});
         }).then(chat_manager._onMailClientAction.bind(this));
 
-    add_channel({
+    chat_manager.add_channel({
         id: "channel_inbox",
         name: _lt("Inbox"),
         type: "static",
     }, { display_needactions: true });
 
-    add_channel({
+    chat_manager.add_channel({
         id: "channel_starred",
         name: _lt("Starred"),
         type: "static"
@@ -1125,6 +1125,7 @@ chat_manager.close_chat_session = function (channel_id) {
             kwargs: {uuid : channel.uuid, state : 'closed'},
         }, {shadow: true});
 }
+
 chat_manager.fold_channel = function (channel_id, folded) {
     var args = {
         uuid: this.get_channel(channel_id).uuid,
@@ -1287,18 +1288,11 @@ chat_manager.search_partner = function (search_val, limit) {
     });
 }
 
-chat_manager.add_channel({
-    id: "channel_inbox",
-    name: _lt("Inbox"),
-    type: "static",
-}, { display_needactions: true });
-
-chat_manager.add_channel({
-    id: "channel_starred",
-    name: _lt("Starred"),
-    type: "static"
+chat_manager.start();
+bus.off('notification');
+bus.on('notification', null, function () {
+    chat_manager.on_notification.apply(chat_manager, arguments);
 });
-
 
 return {
     ODOOBOT_ID: ODOOBOT_ID,
