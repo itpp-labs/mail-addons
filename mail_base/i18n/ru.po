@@ -1,9 +1,8 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * mail_to
+# * mail_base
 # 
 # Translators:
-# Translation Bot <i18n-bot@it-projects.info>, 2017
 # Ivan Yelizariev <yelizariev@it-projects.info>, 2017
 msgid ""
 msgstr ""
@@ -19,23 +18,12 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#. module: mail_to
-#. openerp-web
-#: code:addons/mail_to/static/src/xml/recipient.xml:6
-#, python-format
-msgid "To:"
-msgstr "К кому:"
+#. module: mail_base
+#: model:ir.model,name:mail_base.model_mail_compose_message
+msgid "Email composition wizard"
+msgstr ""
 
-#. module: mail_to
-#. openerp-web
-#: code:addons/mail_to/static/src/xml/recipient.xml:15
-#, python-format
-msgid "and"
-msgstr "и"
-
-#. module: mail_to
-#. openerp-web
-#: code:addons/mail_to/static/src/xml/recipient.xml:16
-#, python-format
-msgid "more"
-msgstr "ещё"
+#. module: mail_base
+#: model:ir.model,name:mail_base.model_mail_message
+msgid "Message"
+msgstr "Сообщение"
