@@ -47,6 +47,79 @@ bus.on("window_focus", null, function() {
     web_client.set_title_part("_chat");
 });
 
+var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
+ChatAction.include({
+    init: function(parent, action, options) {
+        this._super.apply(this, arguments);
+        this.channels_show_send_button = ['channel_inbox'];
+        this.channels_display_subject = [];
+    },
+    start: function() {
+        var result = this._super.apply(this, arguments);
+
+        var search_defaults = {};
+        var context = this.action ? this.action.context : [];
+        _.each(context, function (value, key) {
+            var match = /^search_default_(.*)$/.exec(key);
+            if (match) {
+                search_defaults[match[1]] = value;
+            }
+        });
+        this.searchview.defaults = search_defaults;
+
+        var self = this;
+        return $.when(result).done(function() {
+            $('.oe_leftbar').toggle(false);
+            self.searchview.do_search();
+        });
+    },
+    destroy: function() {
+        var result = this._super.apply(this, arguments);
+        $('.oe_leftbar .oe_secondary_menu').each(function(){
+            if ($(this).css('display') == 'block'){
+                if ($(this).children().length > 0) {
+                    $('.oe_leftbar').toggle(true);
+                }
+                return false;
+            }
+        });
+        return result;
+    },
+    set_channel: function(channel){
+        var result = this._super.apply(this, arguments);
+        var self = this;
+        return $.when(result).done(function() {
+            self.$buttons
+                .find('.o_mail_chat_button_new_message')
+                .toggle(self.channels_show_send_button.indexOf(channel.id) != -1);
+        });
+    },
+    get_thread_rendering_options: function (messages) {
+        var options = this._super.apply(this, arguments);
+        options.display_subject = options.display_subject || this.channels_display_subject.indexOf(this.channel.id) != -1;
+        return options;
+    },
+    update_message_on_current_channel: function(current_channel_id, message){
+        var starred = current_channel_id === "channel_starred" && !message.is_starred;
+        var inbox = current_channel_id === "channel_inbox" && !message.is_needaction;
+        return starred || inbox;
+    },
+    on_update_message: function (message) {
+        var self = this;
+        var current_channel_id = this.channel.id;
+        if (this.update_message_on_current_channel(current_channel_id, message)) {
+            chat_manager.get_messages({channel_id: this.channel.id, domain: this.domain}).then(function (messages) {
+                var options = self.get_thread_rendering_options(messages);
+                self.thread.remove_message_and_render(message.id, messages, options).then(function () {
+                    self.update_button_status(messages.length === 0);
+                });
+            });
+        } else if (_.contains(message.channel_ids, current_channel_id)) {
+            this.fetch_and_render_thread();
+        }
+    }
+});
+
 chat_manager.notify_incoming_message = function (msg, options) {
     if (bus.is_odoo_focused() && options.is_displayed) {
         // no need to notify
