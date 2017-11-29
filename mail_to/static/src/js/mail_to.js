@@ -13,8 +13,8 @@ chat_manager.make_message = function (data) {
     var more_recipients = '';
     // value which define more recipients
     msg.more_recipients_value = 4;
-    for (var i = 0; i < msg.partner_ids.length; i++){
-        if (i >= msg.more_recipients_value){
+    for (var i = 0; i < msg.partner_ids.length; i++) {
+        if (i >= msg.more_recipients_value) {
             // append names
             more_recipients += msg.partner_ids[i][1];
             // separate them with semicolon
