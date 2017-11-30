@@ -26,7 +26,7 @@ chat_manager.get_properties = function (msg) {
 
 chat_manager.set_channel_flags = function (data, msg) {
     chat_manager_super.set_channel_flags.apply(this, arguments);
-    msg.is_all = data.author_id != 'ODOOBOT';
+    msg.is_all = data.author_id !== 'ODOOBOT';
     return msg;
 };
 
