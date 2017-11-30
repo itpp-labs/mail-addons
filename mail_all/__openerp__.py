@@ -3,8 +3,10 @@
     "name": "Show all messages",
     "summary": """Checkout all messages where you have access""",
     "category": "Discuss",
+    # "live_test_url": "",
     "images": ['images/1.jpg'],
     "version": "1.0.0",
+    "application": False,
 
     "author": "IT-Projects LLC, Pavel Romanchenko",
     "support": "apps@it-projects.info",
@@ -24,6 +26,12 @@
         "static/src/xml/menu.xml",
     ],
     "demo": [],
-    'installable': False,
+
+    "post_load": None,
+    "pre_init_hook": None,
+    "post_init_hook": None,
+    "uninstall_hook": None,
+
+    'installable': True,
     "auto_install": False,
 }

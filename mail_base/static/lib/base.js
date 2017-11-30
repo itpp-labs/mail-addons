@@ -49,12 +49,12 @@ bus.on("window_focus", null, function() {
 
 var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
 ChatAction.include({
-    init: function(parent, action, options) {
+    init: function (parent, action, options) {
         this._super.apply(this, arguments);
         this.channels_show_send_button = ['channel_inbox'];
         this.channels_display_subject = [];
     },
-    start: function() {
+    start: function () {
         var result = this._super.apply(this, arguments);
 
         var search_defaults = {};
@@ -68,14 +68,14 @@ ChatAction.include({
         this.searchview.defaults = search_defaults;
 
         var self = this;
-        return $.when(result).done(function() {
+        return $.when(result).done(function () {
             $('.oe_leftbar').toggle(false);
             self.searchview.do_search();
         });
     },
     destroy: function() {
         var result = this._super.apply(this, arguments);
-        $('.oe_leftbar .oe_secondary_menu').each(function(){
+        $('.oe_leftbar .oe_secondary_menu').each(function () {
             if ($(this).css('display') == 'block'){
                 if ($(this).children().length > 0) {
                     $('.oe_leftbar').toggle(true);
@@ -85,7 +85,7 @@ ChatAction.include({
         });
         return result;
     },
-    set_channel: function(channel){
+    set_channel: function (channel) {
         var result = this._super.apply(this, arguments);
         var self = this;
         return $.when(result).done(function() {
@@ -99,7 +99,7 @@ ChatAction.include({
         options.display_subject = options.display_subject || this.channels_display_subject.indexOf(this.channel.id) != -1;
         return options;
     },
-    update_message_on_current_channel: function(current_channel_id, message){
+    update_message_on_current_channel: function (current_channel_id, message) {
         var starred = current_channel_id === "channel_starred" && !message.is_starred;
         var inbox = current_channel_id === "channel_inbox" && !message.is_needaction;
         return starred || inbox;
@@ -220,7 +220,7 @@ chat_manager.property_descr = function (channel, msg, self) {
     };
 }
 
-chat_manager.set_channel_flags = function(data, msg){
+chat_manager.set_channel_flags = function (data, msg) {
     if (_.contains(data.needaction_partner_ids, session.partner_id)) {
         msg.is_needaction = true;
     }
@@ -785,7 +785,7 @@ chat_manager.get_domain = function (channel) {
     // options: domain, load_more
 chat_manager._fetchFromChannel = function (channel, options) {
     options = options || {};
-    var domain = chat_manager.get_domain(channel);
+    var domain = chat_manager.get_domain(channel) || [['channel_ids', 'in', channel.id]];
     var cache = chat_manager.get_channel_cache(channel, options.domain);
 
     if (options.domain) {
