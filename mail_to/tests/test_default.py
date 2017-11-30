@@ -6,9 +6,10 @@ import odoo.tests
 class TestUi(odoo.tests.HttpCase):
 
     def test_01_mail_to(self):
-        # wait till page loaded
+        # checks the presence of an element with a link to the recipient
         code = """
             setTimeout(function () {
+                $('a.recipient_link')[0].click();
                 console.log('ok');
             }, 1000);
         """
