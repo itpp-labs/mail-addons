@@ -48,8 +48,8 @@ chat_manager.get_channel_array = function (msg) {
 };
 
 chat_manager.get_domain = function (channel) {
-    return (channel.id === "channel_sent") 
-    ? [['sent', '=', true],['author_id.user_ids', 'in', [session.uid]]] 
+    return (channel.id === "channel_sent")
+    ? [['sent', '=', true],['author_id.user_ids', 'in', [session.uid]]]
     : chat_manager_super.get_domain.apply(this, arguments);
 };
 
