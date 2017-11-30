@@ -776,13 +776,16 @@ chat_manager._onMailClientAction = function (result) {
     bus.start_polling();
 }
 
+chat_manager.get_domain = function (channel) {
+    return (channel.id === "channel_inbox") ? [['needaction', '=', true]] :
+        (channel.id === "channel_starred") ? [['starred', '=', true]] : false;
+
+}
+
     // options: domain, load_more
 chat_manager._fetchFromChannel = function (channel, options) {
     options = options || {};
-    var domain =
-        (channel.id === "channel_inbox") ? [['needaction', '=', true]] :
-        (channel.id === "channel_starred") ? [['starred', '=', true]] :
-                                            [['channel_ids', 'in', channel.id]];
+    var domain = chat_manager.get_domain(channel);
     var cache = chat_manager.get_channel_cache(channel, options.domain);
 
     if (options.domain) {
