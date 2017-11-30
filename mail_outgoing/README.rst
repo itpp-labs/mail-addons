@@ -1,8 +1,8 @@
-==============================
- Use partner language in mail
-==============================
+=====================
+ Outgoing mails menu
+=====================
 
-  FIXME: there is issue with frozen dict in new odoo.
+  Allows to check outgoing mails, i.e. failed or delayed.
 
 Credits
 =======
@@ -26,7 +26,7 @@ Further information
 
 Demo: http://runbot.it-projects.info/demo/mail-addons/8.0
 
-HTML Description: https://apps.odoo.com/apps/modules/8.0/mail_partner_lang/
+HTML Description: https://apps.odoo.com/apps/modules/8.0/mail_outgoing/
 
 Usage instructions: `<doc/index.rst>`_
 

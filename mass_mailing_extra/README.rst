@@ -1,8 +1,10 @@
-==============================
- Use partner language in mail
-==============================
+===============================
+ Improvements for mass mailing
+===============================
 
-  FIXME: there is issue with frozen dict in new odoo.
+  Module adds:
+  * partners info in mail.mail.statistics tree
+  * partners info in mail.mail.statistics form
 
 Credits
 =======
@@ -26,10 +28,10 @@ Further information
 
 Demo: http://runbot.it-projects.info/demo/mail-addons/8.0
 
-HTML Description: https://apps.odoo.com/apps/modules/8.0/mail_partner_lang/
+HTML Description: https://apps.odoo.com/apps/modules/8.0/mass_mailing_extra/
 
 Usage instructions: `<doc/index.rst>`_
 
 Changelog: `<doc/changelog.rst>`_
 
-Tested on Odoo 8.0 ab7b5d7732a7c222a0aea45bd173742acd47242d
+Tested on Odoo 8.0 f8d5a6727d3e8d428d9bef93da7ba6b11f344284
