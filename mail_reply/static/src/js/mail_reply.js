@@ -19,7 +19,7 @@ ChatAction.include({
     },
     on_post_message: function (message) {
         var self = this;
-        var options = this.selected_message 
+        var options = this.selected_message
             ? {}
             : {channel_id: this.channel.id};
         if (this.selected_message) {
@@ -43,5 +43,7 @@ ChatAction.include({
             });
     }
 });
+
+return chat_manager;
 
 });
