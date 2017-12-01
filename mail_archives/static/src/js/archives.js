@@ -58,7 +58,7 @@ chat_manager.get_channel_array = function (msg) {
 chat_manager.get_domain = function (channel) {
     return (channel.id === "channel_archive")
     ? ['|', ['partner_ids', 'in', [session.partner_id]],
-        ['author_id.user_ids', 'in', [session.uid]]]
+        ['author_id', 'in', [session.partner_id]]]
     : chat_manager_super.get_domain.apply(this, arguments);
 };
 
