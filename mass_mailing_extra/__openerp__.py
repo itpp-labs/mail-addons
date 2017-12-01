@@ -7,12 +7,10 @@
     "category": "Discuss",
     'website': 'https://yelizariev.github.io',
     'description': """
-Modules adds:
+        Modules adds:
 
-* partners info in mail.mail.statistics tree
-* partners info in mail.mail.statistics form
-
-Tested on 8.0 f8d5a6727d3e8d428d9bef93da7ba6b11f344284
+        * partners info in mail.mail.statistics tree
+        * partners info in mail.mail.statistics form
     """,
     'depends': ['mass_mailing'],
     'data': [

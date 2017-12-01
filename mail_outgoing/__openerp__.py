@@ -7,9 +7,7 @@
     "category": "Discuss",
     'website': 'https://yelizariev.github.io',
     'description': """
-Allows to check outgoing mails, i.e. failed or delayed.
-
-Tested on Odoo 8.0 ab7b5d7732a7c222a0aea45bd173742acd47242d
+        Allows to check outgoing mails, i.e. failed or delayed.
     """,
     'depends': ['mail'],
     'data': [

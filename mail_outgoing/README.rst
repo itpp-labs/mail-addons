@@ -1,6 +1,8 @@
-=============================
- Delete Odoo footer in email
-=============================
+=====================
+ Outgoing mails menu
+=====================
+
+  Allows to check outgoing mails, i.e. failed or delayed.
 
 Credits
 =======
@@ -22,9 +24,9 @@ Maintainers
 Further information
 ===================
 
-Demo: http://runbot.it-projects.info/demo/mail_addons/8.0
+Demo: http://runbot.it-projects.info/demo/mail-addons/8.0
 
-HTML Description: https://apps.odoo.com/apps/modules/8.0/mail_delete_odoo_footer/
+HTML Description: https://apps.odoo.com/apps/modules/8.0/mail_outgoing/
 
 Usage instructions: `<doc/index.rst>`_
 
