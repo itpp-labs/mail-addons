@@ -17,9 +17,9 @@ Note. Due to odoo restrictions, module makes mail initialization again. That is 
 Further information
 ===================
 
-Demo: http://runbot.it-projects.info/demo/mail-addons/9.0
+Demo: http://runbot.it-projects.info/demo/mail-addons/10.0
 
-.. HTML Description: https://apps.odoo.com/apps/modules/9.0/mail_base/
+.. HTML Description: https://apps.odoo.com/apps/modules/10.0/mail_base/
 
 Usage instructions: `<doc/index.rst>`_
 
