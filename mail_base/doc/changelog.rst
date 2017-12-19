@@ -1,3 +1,7 @@
+`1.0.3`
+-------
+**FIX**: fixed an error with empty cache
+
 `1.0.2`
 -------
 
