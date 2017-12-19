@@ -1,6 +1,6 @@
 `1.0.3`
 -------
-**FIX**: fixed an error with empty cache
+**FIX**: error on clicking messages preview after sending new message
 
 `1.0.2`
 -------
