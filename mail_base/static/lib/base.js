@@ -706,7 +706,13 @@ var MailTools = core.Class.extend({
 
     clear_cache_all_channels: function(){
         _.each(channels, function(channel){
-            channel.cache = {};
+            channel.cache = {
+                '[]': {
+                all_history_loaded: false,
+                loaded: false,
+                messages: []
+                }
+            }
         });
     },
 
@@ -1454,5 +1460,5 @@ return {
     MailTools: MailTools,
     MailComposer: MailComposer
 };
-    
+
 });
