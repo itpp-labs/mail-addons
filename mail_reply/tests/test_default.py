@@ -10,16 +10,30 @@ class TestUi(odoo.tests.HttpCase):
         # wait till page loaded and then click and wait again
         code = """
             setTimeout(function () {
-                $(".fa fa-reply.o_thread_icon.o_thread_message_reply").click();
-                setTimeout(function () {
-                    $("o_input o_composer_text_field")
-                    .val($('o_input o_composer_text_field').val()+ "test");
+                var reply_button = $(".fa.fa-reply.o_thread_icon.o_thread_message_reply");
+                if (reply_button.length === 0) {
+                    console.log('error');
+                }
+                reply_button[0].click();
 
-                    $("btn btn-sm btn-primary o_composer_button_send hidden-xs").click();
+                setTimeout(function () {
+                    var send_button = $(".btn.btn-sm.btn-primary.o_composer_button_send.hidden-xs:visible");
+                    if (send_button.length === 0) {
+                        console.log('error');
+                    }
+                    $("textarea.o_input.o_composer_text_field")[1].value = 'test';
+                    send_button.click();
+
                     setTimeout(function () {
-                        console.log('ok');
-                    }, 3000);   
+                        if ($(".alert.o_mail_snackbar:visible").length === 0) {
+                            console.log('error');
+                        } else {
+                            console.log('ok');
+                        }
+                    }, 1000);
+
                 }, 3000);
+
             }, 1000);
         """
         link = '/web#action=%s' % self.ref('mail.mail_channel_action_client_chat')
