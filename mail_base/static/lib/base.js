@@ -897,7 +897,8 @@ chat_manager.post_message = function (data, options) {
             subtype_id: data.subtype_id,
         });
 
-        return this._rpc({
+        if (options.model && options.res_id) {
+            return this._rpc({
                 model: options.model,
                 method: 'message_post',
                 args: [options.res_id],
@@ -915,6 +916,23 @@ chat_manager.post_message = function (data, options) {
                         chat_manager.add_message(msgs[0]);
                     });
             });
+        } else {
+            // This condition was added to avoid an error in the mail_reply module. 
+            // If the options.channel_id or options.model variables are missing, 
+            // the mail.compose.message model is used. */
+            options.model = 'mail.compose.message';
+            return this._rpc({
+                model: options.model,
+                method: 'create',
+                args: [msg],
+            }).then(function (id) {
+                return self._rpc({
+                    model: options.model,
+                    method: 'send_mail_action',
+                    args: [id]
+                })
+            });
+        }
     }
 }
 

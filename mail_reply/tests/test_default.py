@@ -11,7 +11,15 @@ class TestUi(odoo.tests.HttpCase):
         code = """
             setTimeout(function () {
                 $(".fa fa-reply.o_thread_icon.o_thread_message_reply").click();
-                setTimeout(function () {console.log('ok');}, 3000);
+                setTimeout(function () {
+                    $("o_input o_composer_text_field")
+                    .val($('o_input o_composer_text_field').val()+ "test");
+
+                    $("btn btn-sm btn-primary o_composer_button_send hidden-xs").click();
+                    setTimeout(function () {
+                        console.log('ok');
+                    }, 3000);   
+                }, 3000);
             }, 1000);
         """
         link = '/web#action=%s' % self.ref('mail.mail_channel_action_client_chat')
