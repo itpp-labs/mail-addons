@@ -918,8 +918,10 @@ chat_manager.post_message = function (data, options) {
             });
         } else {
             // This condition was added to avoid an error in the mail_reply module. 
-            // If the options.channel_id or options.model variables are missing, 
-            // the mail.compose.message model is used. */
+            // If the options.channel_id or options.model variables are missing
+            // the mail.compose.message model has to be used.
+            // It happens when we send a message not attached to any record or channel
+            // and hence we cannot call message_post method. */
             options.model = 'mail.compose.message';
             return this._rpc({
                 model: options.model,
