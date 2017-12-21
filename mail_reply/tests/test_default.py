@@ -10,7 +10,7 @@ class TestUi(odoo.tests.HttpCase):
         # wait till page loaded and then click and wait again
         code = """
             setTimeout(function () {
-                var reply_button = $(".fa.fa-reply.o_thread_icon.o_thread_message_reply");
+                var reply_button = $('.o_mail_info:not(:has(.o_document_link))').find(".fa.fa-reply.o_thread_icon.o_thread_message_reply");
                 if (reply_button.length === 0) {
                     console.log('error');
                 }
