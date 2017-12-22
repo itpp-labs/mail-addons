@@ -6,4 +6,5 @@ Usage
 =====
 
 * Open Discuss menu
-* All messages have reply button
+* RESULT: you ca see, that messages not attached to any record now has Reply button
+* Note: messages from Channels (including Direct messages) don’t have this button. You need to open corresponding channel instead.
