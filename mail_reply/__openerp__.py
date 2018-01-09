@@ -24,6 +24,6 @@
         "static/src/xml/reply_button.xml",
     ],
     "demo": [],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
 }
