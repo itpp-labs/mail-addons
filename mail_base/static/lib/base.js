@@ -706,17 +706,38 @@ chat_manager.onActivityUpdateNodification = function (data) {
 
 //----------------------------------------------------------------------------------
 
-chat_manager.init = function (parent) {
-    var self = this;
-    Mixins.EventDispatcherMixin.init.call(this);
-    this.setParent(parent);
+// chat_manager.init = function (parent) {
+//     var self = this;
+//     Mixins.EventDispatcherMixin.init.call(this);
+//     this.setParent(parent);
 
-    this.bus = new Bus();
+//     this.bus = new Bus();
+//     this.bus.on('client_action_open', null, function (open) {
+//         client_action_open = open;
+//     });
+
+//     bus.on('notification', null, chat_manager.on_notification);
+
+//     this.channel_seen = _.throttle(function (channel) {
+//         return self._rpc({
+//                 model: 'mail.channel',
+//                 method: 'channel_seen',
+//                 args: [[channel.id]],
+//             }, {
+//                 shadow: true
+//             });
+//     }, 3000);
+// }
+
+chat_manager.start = function () {
+    var self = this;
     this.bus.on('client_action_open', null, function (open) {
         client_action_open = open;
     });
-
-    bus.on('notification', null, chat_manager.on_notification);
+    this.is_ready = session.is_bound.then(function(){
+            var context = _.extend({isMobile: config.device.isMobile}, session.user_context);
+            return session.rpc('/mail/client_action', {context: context});
+        }).then(chat_manager._onMailClientAction.bind(this));
 
     this.channel_seen = _.throttle(function (channel) {
         return self._rpc({
@@ -727,13 +748,6 @@ chat_manager.init = function (parent) {
                 shadow: true
             });
     }, 3000);
-}
-
-chat_manager.start = function () {
-    this.is_ready = session.is_bound.then(function(){
-            var context = _.extend({isMobile: config.device.isMobile}, session.user_context);
-            return session.rpc('/mail/client_action', {context: context});
-        }).then(chat_manager._onMailClientAction.bind(this));
 
     chat_manager.add_channel({
         id: "channel_inbox",
