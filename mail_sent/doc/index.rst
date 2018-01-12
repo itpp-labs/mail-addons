@@ -1,6 +1,6 @@
-===================
- Show all messages
-===================
+=========
+ Sentbox
+=========
 
 Installation
 ============
@@ -15,5 +15,5 @@ This module does not require special configuration.
 Usage
 =====
 
-* Open menu ``Discuss / All messages``
-* You see all messages
+* Open menu ``Discuss / Sent``
+* You see sent messages

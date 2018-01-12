@@ -1,6 +1,6 @@
-===================
- Show all messages
-===================
+==============
+ Mail Archives
+==============
 
 Installation
 ============
@@ -15,5 +15,6 @@ This module does not require special configuration.
 Usage
 =====
 
-* Open menu ``Discuss / All messages``
-* You see all messages
+* Open ``Discuss``.
+* Click ``Archive``.
+* Sent/received messages are displayed.

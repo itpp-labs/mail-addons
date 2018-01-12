@@ -4,13 +4,36 @@
 
 The module allows to reply to any message. Out-of-box odoo shows reply button for messages attached to some record.
 
+Credits
+=======
+
+Contributors
+------------
+* Pavel Romanchenko <apps@it-projects.info>
+
+Sponsors
+--------
+* `IT-Projects LLC <https://it-projects.info>`__
+
+Maintainers
+-----------
+* `IT-Projects LLC <https://it-projects.info>`__
+
+      To get a guaranteed support you are kindly requested to purchase the module at `odoo apps store <https://apps.odoo.com/apps/modules/11.0/mail_reply/>`__.
+
+      Thank you for understanding!
+
+      `IT-Projects Team <https://www.it-projects.info/team>`__
+
 Further information
 ===================
 
-HTML Description: https://apps.odoo.com/apps/modules/9.0/mail_reply/
+Demo: http://runbot.it-projects.info/demo/mail_addons/11.0
 
-Usage instructions: `<doc/index.rst>`__
+HTML Description: https://apps.odoo.com/apps/modules/11.0/mail_reply/
 
-Changelog: `<doc/changelog.rst>`__
+Usage instructions: `<doc/index.rst>`_
 
-Tested on Odoo 9.0 d3dd4161ad0598ebaa659fbd083457c77aa9448d
+Changelog: `<doc/changelog.rst>`_
+
+Tested on Odoo 11.0 ecbf7aa4714479229658d14cce28fa00376ed390
