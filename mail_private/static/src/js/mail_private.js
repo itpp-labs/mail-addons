@@ -37,7 +37,7 @@ Chatter.include({
             commands_enabled: false,
             context: this.context,
             input_min_height: 50,
-            input_max_height: Number.MAX_VALUE, // no max_height limit for the chatter
+            input_max_height: Number.MAX_VALUE,
             input_baseline: 14,
             is_log: options && options.is_log,
             record_name: this.record_name,
@@ -84,7 +84,6 @@ Chatter.include({
         var self = this;
         self.result = {};
         var follower_ids_domain = [['id', '=', self.context.default_res_id]];
-        this.context.default_model;
         return rpc.query({
             model: 'mail.message',
             method: 'send_recepients_for_internal_message',
@@ -120,7 +119,7 @@ ChatterComposer.include({
             }
 
             if (self.options.is_private) {
-                message.is_private = true
+                message.is_private = true;
                 message.channel_ids = self.get_checked_channel_ids();
             }
 
@@ -139,7 +138,7 @@ ChatterComposer.include({
                 def.resolve(message);
             }
         });
-        return def;                    
+        return def;
     },
 
     on_uncheck_recipients: function () {
@@ -204,7 +203,7 @@ ChatterComposer.include({
         _.each(checked_partners, function (partner) {
             partner.checked = true;
         });
-        var checked_partners = _.uniq(_.filter(checked_partners, function (obj) {
+        checked_partners = _.uniq(_.filter(checked_partners, function (obj) {
             return obj.reason !== 'Channel';
         }));
         this.get_checked_channel_ids();
