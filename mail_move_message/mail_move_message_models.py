@@ -134,7 +134,9 @@ class Wizard(models.TransientModel):
                 if f['type'] == 'many2one' and f['relation'] == 'res.partner':
                     contact_field = n
                     break
-            if contact_field:
+            if contact_field and self.model == 'res.partner':
+                domain['res_id'].append(('id', '=', self.partner_id.id))
+            elif contact_field:
                 domain['res_id'].append((contact_field, '=', self.partner_id.id))
         if self.model:
             res_id = self.env[self.model].search(domain['res_id'], order='id desc', limit=1)
@@ -142,6 +144,17 @@ class Wizard(models.TransientModel):
         else:
             self.res_id = None
         return {'domain': domain}
+
+    @api.onchange('message_id')
+    def on_message_id(self):
+        """ Put the original thread as default model destination """
+        if self.message_id:
+            model = self.message_id.model
+            if not model or model == 'mail.channel':
+                # This is useful for incoming messages that are not linked
+                # to any thread. We use res.partner as default value.
+                model = 'res.partner'
+            self.model = model
 
     @api.multi
     def check_access(self):
