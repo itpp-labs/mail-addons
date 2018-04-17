@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-from openerp import api
-from openerp import fields
-from openerp import models
-from openerp.tools import email_split
-from openerp.tools.translate import _
+from odoo import api
+from odoo import fields
+from odoo import models
+from odoo.tools import email_split
+from odoo.tools.translate import _
 
 
 class Wizard(models.TransientModel):
@@ -12,7 +11,7 @@ class Wizard(models.TransientModel):
     def _model_selection(self):
         selection = []
         config_parameters = self.env['ir.config_parameter']
-        model_names = config_parameters.get_param('mail_relocation_models')
+        model_names = config_parameters.sudo().get_param('mail_relocation_models')
         model_names = model_names.split(',') if model_names else []
 
         if 'default_message_id' in self.env.context:
@@ -55,7 +54,7 @@ class Wizard(models.TransientModel):
                     res['res_id'] = res_id[0].id
 
         config_parameters = self.env['ir.config_parameter']
-        res['move_followers'] = config_parameters.get_param('mail_relocation_move_followers')
+        res['move_followers'] = config_parameters.sudo().get_param('mail_relocation_move_followers')
 
         res['uid'] = self.env.uid
 
@@ -127,19 +126,32 @@ class Wizard(models.TransientModel):
     @api.onchange('model', 'filter_by_partner', 'partner_id')
     def on_change_partner(self):
         domain = {'res_id': [('id', '!=', self.message_id.res_id)]}
+        # print('======0============', self.message_id.res_id, domain)
+        # print('===', self.model)
+        # print('===', self.filter_by_partner)
+        # print('===', self.partner_id)
         if self.model and self.filter_by_partner and self.partner_id:
             fields = self.env[self.model].fields_get(False)
             contact_field = False
-            for n, f in fields.iteritems():
+            # print('======1============')
+            for n, f in iter(fields.items()):
+                # print('=====2=============', n, f)
                 if f['type'] == 'many2one' and f['relation'] == 'res.partner':
+                    print('=====3=============', n)
                     contact_field = n
                     break
             if contact_field:
+                print('=======', contact_field)
                 domain['res_id'].append((contact_field, '=', self.partner_id.id))
+        print('---res_id is in coming-----')
         if self.model:
+            print('-------- ', 'says IF')
             res_id = self.env[self.model].search(domain['res_id'], order='id desc', limit=1)
+            print('--------', res_id)
             self.res_id = res_id and res_id[0].id
+            print('--------', self.res_id)
         else:
+            print('-------- ', 'says ELSE')
             self.res_id = None
         return {'domain': domain}
 
@@ -239,7 +251,7 @@ class Wizard(models.TransientModel):
 
         fields = model.fields_get()
         contact_field = False
-        for n, f in fields.iteritems():
+        for n, f in iter(fields.items()):
             if f['type'] == 'many2one' and f['relation'] == 'res.partner':
                 contact_field = n
                 break
@@ -401,14 +413,14 @@ class MailMoveMessageConfiguration(models.TransientModel):
     def get_default_move_message_configs(self, fields):
         config_parameters = self.env['ir.config_parameter']
         model_obj = self.env['ir.model']
-        model_names = config_parameters.get_param('mail_relocation_models')
+        model_names = config_parameters.sudo().get_param('mail_relocation_models')
         if not model_names:
             return {}
         model_names = model_names.split(',')
         model_ids = model_obj.search([('model', 'in', model_names)])
         return {
             'model_ids': [m.id for m in model_ids],
-            'move_followers': config_parameters.get_param('mail_relocation_move_followers')
+            'move_followers': config_parameters.sudo().get_param('mail_relocation_move_followers')
         }
 
     @api.multi
@@ -417,8 +429,8 @@ class MailMoveMessageConfiguration(models.TransientModel):
         model_names = ''
         for record in self:
             model_names = ','.join([m.model for m in record.model_ids])
-            config_parameters.set_param('mail_relocation_models', model_names)
-            config_parameters.set_param('mail_relocation_move_followers', record.move_followers or '')
+            config_parameters.sudo().set_param('mail_relocation_models', model_names)
+            config_parameters.sudo().set_param('mail_relocation_move_followers', record.move_followers or '')
 
 
 class ResPartner(models.Model):

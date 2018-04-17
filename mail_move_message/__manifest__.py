@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     'name': 'Mail relocation',
     'version': '1.0.5',
@@ -18,5 +17,5 @@
     'qweb': [
         'static/src/xml/mail_move_message_main.xml',
     ],
-    'installable': False,
+    'installable': True,
 }

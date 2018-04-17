@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from odoo.addons.web.controllers.main import DataSet
 from odoo.tools.translate import _
 from odoo import http
@@ -24,7 +23,7 @@ class DataSetCustom(DataSet):
         Model = request.env[model]
         fields = Model.fields_get()
         contact_field = False
-        for n, f in fields.iteritems():
+        for n, f in fields.Iteritems():
             if f['type'] == 'many2one' and f['relation'] == 'res.partner':
                 contact_field = n
                 break

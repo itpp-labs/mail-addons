@@ -15,14 +15,14 @@ ChatAction.include({
     }
 });
 
-// override methods
-var chat_manager_super = _.clone(chat_manager);
+    // override methods
+    var chat_manager_super = _.clone(chat_manager);
 
-chat_manager.get_properties = function (msg) {
-    var properties = chat_manager_super.get_properties.apply(this, arguments);
-    properties.is_all = this.property_descr("channel_all", msg, this);
-    return properties;
-};
+    chat_manager.get_properties = function (msg) {
+        var properties = chat_manager_super.get_properties.apply(this, arguments);
+        properties.is_all = this.property_descr("channel_all", msg, this);
+        return properties;
+    };
 
 chat_manager.set_channel_flags = function (data, msg) {
     chat_manager_super.set_channel_flags.apply(this, arguments);
