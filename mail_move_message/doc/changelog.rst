@@ -1,3 +1,10 @@
+`10.0.1.0.6`
+-------
+
+- IMP: Select by default the same model destination as where the original message is posted
+- FIX: If the related model is res.partner, use the field "id" for the domain restriction on the record
+- FIX: Code cleaning (PEP8 + Pylint)
+
 `1.0.5`
 -------
 

@@ -109,15 +109,10 @@ class Wizard(models.TransientModel):
     @api.multi
     def _compute_can_move(self):
         for r in self:
-            r.get_can_move_one()
-
-    @api.multi
-    def get_can_move_one(self):
-        self.ensure_one()
-        # message was not moved before OR message is a top message of
-        # previous move
-        self.can_move = not self.message_id.moved_by_message_id or \
-            self.message_id.moved_by_message_id.id == self.message_id.id
+            # message was not moved before OR message is a top message of
+            # previous move
+            r.can_move = not r.message_id.moved_by_message_id or \
+                r.message_id.moved_by_message_id.id == r.message_id.id
 
     @api.onchange('move_back')
     def on_change_move_back(self):
@@ -176,8 +171,10 @@ class Wizard(models.TransientModel):
             model = self.message_id.model
             if not model or model == 'mail.channel':
                 # This is useful for incoming messages that are not linked
-                # to any thread. We use res.partner as default value.
-                model = 'res.partner'
+                # to any thread. We put res.partner if no default is configured
+                model_selection = self._fields['model'].get_values(self.env)
+                model_selection.remove('mail.channel')
+                model = model_selection and model_selection[0]
             self.model = model
 
     @api.multi
@@ -272,11 +269,12 @@ class Wizard(models.TransientModel):
         model = self.env[relation]
         message = self.env['mail.message'].browse(message_id)
         if not partner_id and message_name_from:
-            partner_id = self.env['res.partner'].with_context(
-                {'update_message_author': True}).create({
-                    'name': message_name_from,
-                    'email': message_email_from
-                }).id
+            partner_id = self.env['res.partner'].with_context({
+                'update_message_author': True
+            }).create({
+                'name': message_name_from,
+                'email': message_email_from
+            }).id
 
         context = {'partner_id': partner_id}
         if model._rec_name:
@@ -325,23 +323,19 @@ class MailMessage(models.Model):
     @api.multi
     def _compute_all_childs(self, include_myself=True):
         for r in self:
-            r._compute_all_childs_one(include_myself=include_myself)
-
-    @api.multi
-    def _compute_all_childs_one(self, include_myself=True):
-        self.ensure_one()
-        ids = []
-        if include_myself:
-            ids.append(self.id)
-        while True:
-            new_ids = self.search([
-                ('parent_id', 'in', ids), ('id', 'not in', ids)]).ids
-            if new_ids:
-                ids = ids + new_ids
-                continue
-            break
-        moved_childs = self.search([('moved_by_message_id', '=', self.id)]).ids
-        self.all_child_ids = ids + moved_childs
+            ids = []
+            if include_myself:
+                ids.append(r.id)
+            while True:
+                new_ids = self.search([
+                    ('parent_id', 'in', ids), ('id', 'not in', ids)]).ids
+                if new_ids:
+                    ids = ids + new_ids
+                    continue
+                break
+            moved_childs = self.search([
+                ('moved_by_message_id', '=', r.id)]).ids
+            r.all_child_ids = ids + moved_childs
 
     @api.multi
     def move_followers(self, model, ids):
