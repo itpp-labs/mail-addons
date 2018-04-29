@@ -9,7 +9,6 @@
     'version': '1.1.0',
     'depends': ['mail'],
     'data': [
-        'data/cron.xml',
     ],
-    'installable': False
+    'installable': True,
 }
