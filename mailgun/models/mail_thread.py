@@ -2,7 +2,7 @@
 import requests
 import simplejson
 
-from openerp import models, api
+from odoo import models, api
 
 
 import logging
