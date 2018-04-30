@@ -61,8 +61,17 @@ Odoo-side
 
     * Open menu ``[[ Settings ]] >> Users >> Users``
     * Select the ``Administrator`` user (this is for example, you should configure all your users the same way but using different aliases) and click ``[Edit]``
-    * On Preference tab edit **Alias** field - create new mail alias, e.g. ``admin@<you mail domain>``
-    * On Mail alias form pay attention to the required **Aliased Model** field (The model (Odoo Document Kind) to which this alias corresponds. Any incoming email that does not reply to an existing record will cause the creation of a new record of this model (e.g. a Project Task)). You can select ``Test Mail Model`` here but just for testing the feature
+    * On Preference tab edit **Alias** field - create new mail alias, e.g. ``admin@<you mail domain>`` with the following settings
+
+      * **Alias Name** - ``admin``
+      * **Aliased Model** - ``Users``
+      * **Record Thread ID** - ``1``
+      * **Default Values** - ``{}``
+      * **Alias Contact** - ``Everyone``
+      * **Security Owner** - ``Administrator``
+      * **Parent Model** - Not set
+      * **Parent Record Thread ID** - ``0``
+
     * Open user's **Related Partner** and edit **Email** field - usually should be the same as mail alias name (``admin@<you mailgun domain`` for ``Administrator``) - this would be an address for replying user's messages
 
 Usage
@@ -78,9 +87,6 @@ Outgoing
 Incoming
 --------
 
-* Reply the message in you mail client (e.g. on gmail.com)
-* Open ``[[ Discuss ]]`` in odoo
-* RESULT: See your reply message there
-
 * Create new message from you mail client to e.g. ``admin@<you mailgun domain>``
-* RESULT: in Odoo open menu ``[[ Settings ]] >> Technical >> Email >> Messages`` and see the message there
+* Open menu ``[[ Discuss ]]`` in Odoo
+* RESULT: See your message there
