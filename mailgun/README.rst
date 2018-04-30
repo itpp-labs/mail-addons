@@ -43,7 +43,7 @@ Further information
 
 Demo: http://runbot.it-projects.info/demo/mail-addons/11.0
 
-HTML Description: https://apps.odoo.com/apps/modules/{VERSION}/{TECHNICAL_NAME}/
+HTML Description: https://apps.odoo.com/apps/modules/11.0/mailgun/
 
 Usage instructions: `<doc/index.rst>`_
 
