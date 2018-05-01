@@ -22,6 +22,7 @@
     ],
     "external_dependencies": {"python": [], "bin": []},
     "data": [
+        'data/ir_cron_data.xml',
     ],
     "demo": [
     ],
