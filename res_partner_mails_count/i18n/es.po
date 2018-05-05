@@ -1,0 +1,126 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * res_partner_mails_count
+# 
+# Translators:
+# Randall Castro <rcastro@treintaycinco.com>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-19 16:49+0000\n"
+"PO-Revision-Date: 2017-12-19 16:49+0000\n"
+"Last-Translator: Randall Castro <rcastro@treintaycinco.com>, 2018\n"
+"Language-Team: Spanish (https://www.transifex.com/it-projects-llc/teams/76080/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: res_partner_mails_count
+#. openerp-web
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:31
+#, python-format
+msgid "Close Tutorial"
+msgstr "Cerrar Tutorial"
+
+#. module: res_partner_mails_count
+#. openerp-web
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:25
+#, python-format
+msgid "Done"
+msgstr "Realizado"
+
+#. module: res_partner_mails_count
+#. openerp-web
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:20
+#, python-format
+msgid "Here is new fields with mails counters. Press one of it."
+msgstr ""
+"Aquí hay nuevos campos con contadores de correos. Presione uno de ellos."
+
+#. module: res_partner_mails_count
+#. openerp-web
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:15
+#, python-format
+msgid "Let's see how mails count work."
+msgstr "Veamos cómo funcionan los correos electrónicos."
+
+#. module: res_partner_mails_count
+#: model:ir.actions.client,name:res_partner_mails_count.action_mails
+msgid "Mails"
+msgstr "Correos"
+
+#. module: res_partner_mails_count
+#. openerp-web
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:9
+#, python-format
+msgid "Mails count Tour"
+msgstr "Contador de correos Tour"
+
+#. module: res_partner_mails_count
+#. openerp-web
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:14
+#, python-format
+msgid "Mails count tutorial"
+msgstr "Tutorial de contador de correos"
+
+#. module: res_partner_mails_count
+#: model:ir.model.fields,field_description:res_partner_mails_count.field_res_partner_mails_from
+#: model:ir.model.fields,field_description:res_partner_mails_count.field_res_users_mails_from
+#: model:ir.ui.view,arch_db:res_partner_mails_count.view_res_partner_mails_count_info_form
+msgid "Mails from"
+msgstr "Mensajes de"
+
+#. module: res_partner_mails_count
+#: model:ir.actions.client,help:res_partner_mails_count.action_mails
+msgid "Mails not found. Probably, they exist, but you don't have access."
+msgstr "Correos no encontrados. Probablemente existen, pero no tienes acceso."
+
+#. module: res_partner_mails_count
+#: model:ir.model.fields,field_description:res_partner_mails_count.field_res_partner_mails_to
+#: model:ir.model.fields,field_description:res_partner_mails_count.field_res_users_mails_to
+#: model:ir.ui.view,arch_db:res_partner_mails_count.view_res_partner_mails_count_info_form
+msgid "Mails to"
+msgstr "Correos para"
+
+#. module: res_partner_mails_count
+#. openerp-web
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:30
+#, python-format
+msgid ""
+"Message are found. <br/>Enjoy your day! <br/> <br/><a href='https://www.it-"
+"projects.info/apps' target='_blank'>IT-Projects LLC</a> team "
+msgstr ""
+
+#. module: res_partner_mails_count
+#. openerp-web
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:19
+#, python-format
+msgid "New fields"
+msgstr "Nuevos campos"
+
+#. module: res_partner_mails_count
+#: model:ir.model,name:res_partner_mails_count.model_res_partner
+msgid "Partner"
+msgstr "Cliente"
+
+#. module: res_partner_mails_count
+#. openerp-web
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:16
+#, python-format
+msgid "Skip"
+msgstr "Saltar"
+
+#. module: res_partner_mails_count
+#. openerp-web
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:16
+#, python-format
+msgid "Start Tutorial"
+msgstr "Iniciar Tutorial"
+
+#. module: res_partner_mails_count
+#: model:ir.actions.act_url,name:res_partner_mails_count.res_partner_mails_count_tutorial
+msgid "res_partner_mails_count Tutorial"
+msgstr "Tutorial res_partner_mails_count"
