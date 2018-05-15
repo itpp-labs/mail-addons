@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     "name": "Fix mail error 553",
     "version": "0.3",

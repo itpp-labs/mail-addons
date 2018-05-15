@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     "name": """Partner mails count""",
     "summary": """Displays amount of incoming and outgoing partner mails.""",
