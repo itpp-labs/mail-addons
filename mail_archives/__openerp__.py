@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     "name": "Mail archives",
     "summary": """Adds menu to find old messages""",

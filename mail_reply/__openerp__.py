@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     "name": """Always show reply button""",
     "summary": """Got a message out of a Record? Now you can reply to it too!""",

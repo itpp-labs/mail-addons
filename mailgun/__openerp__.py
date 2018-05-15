@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     'name': "Mailgun",
     'author': "IT-Projects LLC, Ildar Nasyrov",

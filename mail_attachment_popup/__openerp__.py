@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     "name": """Popup Attachments""",
     "summary": """Open attached mail images in popup""",

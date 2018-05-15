@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     "name": "Mail Base",
     "summary": """Makes Mail extendable""",
