@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     "name": "Show all messages",
     "summary": """Checkout all messages where you have access""",

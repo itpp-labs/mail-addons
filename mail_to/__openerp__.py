@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     "name": """Show message recipients""",
     "summary": """Allows you be sure, that all discussion participants were notified""",

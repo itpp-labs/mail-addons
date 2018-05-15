@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from odoo.addons.web.controllers.main import DataSet
 from odoo.tools.translate import _
 from odoo import http
