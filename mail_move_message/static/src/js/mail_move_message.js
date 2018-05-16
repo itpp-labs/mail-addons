@@ -6,6 +6,7 @@ odoo.define('mail_move_message.relocate', function (require) {
     var thread = require('mail.ChatThread');
     var chatter = require('mail.Chatter');
     var rpc = require('web.rpc');
+    var Basicmodel = require('web.BasicModel');
     var view_dialogs = require('web.view_dialogs');
     var field_utils_format = require('web.field_utils').format;
     var BasicRenderer = require('web.BasicRenderer');
@@ -14,6 +15,7 @@ odoo.define('mail_move_message.relocate', function (require) {
     var session = require('web.Session');
     var FormController = require('web.FormController');
     var FormView = require('web.FormView');
+    var registry = require('web.field_registry');
 
     var _t = core._t;
 
@@ -37,10 +39,10 @@ odoo.define('mail_move_message.relocate', function (require) {
                 target: 'new',
                 context: {'default_message_id': message_id}
             };
-
-            this.do_action(action, {
-                'on_close': function(){}
-            });
+            return this.do_action(action);
+//            this.do_action(action, {
+//                'on_close': function(){}
+//            });
         }
     });
 
@@ -53,29 +55,6 @@ odoo.define('mail_move_message.relocate', function (require) {
             return $.when(result).done(function() {});
         }
     });
-
-//    var _super_session = session.prototype;
-//    session.include({
-//        rpc: function(url, params, options){
-//            url = url || ''
-//            return _super_session.rpc.apply(this, arguments);
-//        }
-//    });
-
-//    session_super = new session();
-//    session_super_rpc = session_super.rpc;
-//    session.include({
-//        rpc: function(url, params, options){
-//            url = url || '';
-//            session_super_rpc.apply(this, [url, params, options])
-//        }
-//    });
-
-//    var session_super_rpc = session.rpc;
-//    session.rpc = function(url, params, options){
-//        url = url || '';
-//        return session_super_rpc(url, params, options);
-//    }
 
     var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
     ChatAction.include({
@@ -120,138 +99,83 @@ odoo.define('mail_move_message.relocate', function (require) {
         });
     };
 
-    var field_utils_super_formatMany2one = field_utils_format.many2one;
-    field_utils_format.many2one = function(value, field, options) {
-        if (value && typeof value === 'number'){
-            return '';
+    Basicmodel.include({
+        applyDefaultValues: function (recordID, values, options) {
+            console.log('sdsad')
+            this._super(recordID, values, options)
         }
-        return field_utils_super_formatMany2one(value, field, options)
-    }
+    });
 
-    form_widget.include({
-//        on_click: function(){
-//            if(this.node.attrs.special == 'quick_create'){
-//                var self = this;
-//                var related_field = this.field_manager.fields[this.node.attrs.field];
-//                var context_built = $.Deferred();
-//                if(this.node.attrs.use_for_mail_move_message) {
-//                    var model = new Model(this.view.dataset.model);
-//                    var partner_id = self.field_manager.fields.partner_id.get_value();
-//                    var message_name_from = self.field_manager.fields.message_name_from.get_value();
-//                    var message_email_from = self.field_manager.fields.message_email_from.get_value();
-//                    context_built = model.call('create_partner', [
-//                            self.view.dataset.context.default_message_id,
-//                            related_field.field.relation,
-//                            partner_id,
-//                            message_name_from,
-//                            message_email_from
-//                        ]);
-//                    //rpc.query({
-//                    //    model: 'stock.picking.type',
-//                    //    method: 'search_read',
-//                    //    args: []
-//                    //})
-//                }
-//                else {
-//                    context_built.resolve(this.build_context());
-//                }
-//                $.when(context_built).pipe(function (context) {
-//                    if(self.node.attrs.use_for_mail_move_message) {
-//                        self.field_manager.fields.partner_id.set_value(context.partner_id);
-//                    }
-//                    var dialog = new view_dialogs.FormViewDialog(self, {
-//                        res_model: related_field.field.relation,
-//                        res_id: false,
-//                        context: context,
-//                        title: _t("Create new record")
-//                    }).open();
-//                    dialog.on('closed', self, function () {
-//                        self.force_disabled = false;
-//                        self.check_disable();
-//                    });
-//                    dialog.on('create_completed', self, function(id) {
-//                        related_field.set_value(id);
-//                        if(self.field_manager.fields.filter_by_partner) {
-//                            self.field_manager.fields.filter_by_partner.set_value(true);
+//    var field_utils_super_formatMany2one = field_utils_format.many2one;
+//    field_utils_format.many2one = function(value, field, options) {
+//        if (value && typeof value === 'number'){
+//            return '';
+//        }
+//        return field_utils_super_formatMany2one(value, field, options)
+//    }
+
+//    form_widget.extend({
+//        _addOnClickAction: function ($el, node) {
+//            var self = this;
+//            if (!this.nodes) {
+//                this.nodes = [];
+//            }
+//            this.nodes.push();
+//            if (node.attrs && node.attrs.special == 'quick_create') {
+//                $el.click(function () {
+//                    if(self.node.attrs.special == 'quick_create'){
+//                        var related_field = self.state.data.model;
+//                        var context_built = $.Deferred();
+//                        console.log(core)
+//                        if(node.attrs.use_for_mail_move_message) {
+//                            console.log(registry)
+//                            //var model = new Model(self.view.dataset.model);
+//                            var partner_id = self.state.data.partner_id;
+//                            var message_name_from = self.state.data.message_name_from;
+//                            var message_email_from = self.state.data.message_email_from;
+//                            context_built = rpc.query({
+//                                model: 'res.partner',
+//                                method: 'create_partner',
+//                                args: [
+//                                    self.state.data.message_id.context.default_message_id,
+//                                    related_field,
+//                                    partner_id.res_id,
+//                                    message_name_from,
+//                                    message_email_from
+//                                ]
+//                            });
 //                        }
-//                    });
+//                        else {
+//                            //context_built.resolve(self.build_context());
+//                            context_built.resolve();
+//                        }
+//                        $.when(context_built).pipe(function (context) {
+//                            if(node.attrs.use_for_mail_move_message) {
+//                                self.field_manager.fields.partner_id.set_value(context.partner_id);
+//                            }
+//                            var dialog = new view_dialogs.FormViewDialog(self, {
+//                                res_model: related_field.field.relation,
+//                                res_id: false,
+//                                context: context,
+//                                title: _t("Create new record")
+//                            }).open();
+//                            dialog.on('closed', self, function () {
+//                                self.force_disabled = false;
+//                                self.check_disable();
+//                            });
+//                            dialog.on('create_completed', self, function(id) {
+//                                related_field.set_value(id);
+//                                if(self.field_manager.fields.filter_by_partner) {
+//                                    self.field_manager.fields.filter_by_partner.set_value(true);
+//                                }
+//                            });
+//                        });
+//                    }
 //                });
 //            }
 //            else {
-//                this._super.apply(this, arguments);
+//                self._super.apply($el, node);
 //            }
 //        },
-//
-        _addOnClickAction: function ($el, node) {
-            var self = this;
-            if (!this.nodes) {
-                this.nodes = [];
-            }
-            this.nodes.push();
-            if (node.attrs && node.attrs.special == 'quick_create') {
-                $el.click(function () {
-//                    if(self.node.attrs.special == 'quick_create'){
-                        //var self = this;
-//                        var related_field = self.field_manager.fields[self.node.attrs.field];
-                        var related_field = node.attrs.field;
-                        var context_built = $.Deferred();
-                        if(node.attrs.use_for_mail_move_message) {
-console.log(new FormController())
-console.log(new FormView())
-//                            var model = new Model(self.view.dataset.model);
-                            var partner_id = self.field_manager.fields.partner_id.get_value();
-                            var message_name_from = self.field_manager.fields.message_name_from.get_value();
-                            var message_email_from = self.field_manager.fields.message_email_from.get_value();
-//                            context_built = model.call('create_partner', [
-//                                    self.view.dataset.context.default_message_id,
-//                                    related_field.field.relation,
-//                                    partner_id,
-//                                    message_name_from,
-//                                    message_email_from
-//                                ]);
-                            context_built = rpc.query({
-                                model: 'res.partner',
-                                method: 'create_partner',
-                                args: [
-                                    self.view.dataset.context.default_message_id,
-                                    related_field.field.relation,
-                                    partner_id,
-                                    message_name_from,
-                                    message_email_from
-                                ]
-                            })
-                        }
-                        else {
-//                            context_built.resolve(self.build_context());
-                            context_built.resolve();
-                        }
-                        $.when(context_built).pipe(function (context) {
-                            if(node.attrs.use_for_mail_move_message) {
-                                self.field_manager.fields.partner_id.set_value(context.partner_id);
-                            }
-                            var dialog = new view_dialogs.FormViewDialog(self, {
-                                res_model: related_field.field.relation,
-                                res_id: false,
-                                context: context,
-                                title: _t("Create new record")
-                            }).open();
-                            dialog.on('closed', self, function () {
-                                self.force_disabled = false;
-                                self.check_disable();
-                            });
-                            dialog.on('create_completed', self, function(id) {
-                                related_field.set_value(id);
-                                if(self.field_manager.fields.filter_by_partner) {
-                                    self.field_manager.fields.filter_by_partner.set_value(true);
-                                }
-                            });
-                        });
-//                    }
-//                    else {
-//                        self._super.apply(self, arguments);
-//                    }
-                });
-            }
-        },
-    });
+//    });
 });

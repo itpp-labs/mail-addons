@@ -8,12 +8,12 @@ from odoo.tools.translate import _
 class Wizard(models.TransientModel):
     _name = 'mail_move_message.wizard'
 
+    @api.model
     def _model_selection(self):
         selection = []
         config_parameters = self.env['ir.config_parameter']
         model_names = config_parameters.sudo().get_param('mail_relocation_models')
         model_names = model_names.split(',') if model_names else []
-
         if 'default_message_id' in self.env.context:
             message = self.env['mail.message'].browse(self.env.context['default_message_id'])
             if message.model and message.model not in model_names:
@@ -22,7 +22,17 @@ class Wizard(models.TransientModel):
                 model_names.append(message.moved_from_model)
         if model_names:
             selection = [(m.model, m.display_name) for m in self.env['ir.model'].search([('model', 'in', model_names)])]
+        print('SELECTION____', selection)
+        # print([(link.object, link.name) for link in self.env['res.request.link'].search([])])
+        # return [(link.object, link.name) for link in self.env['res.request.link'].search([])]
+        return [('', '')] + selection
 
+    def _record_selection(self):
+        selection = []
+        print(selection, '----')
+        if self.model:
+            selection = self.env[self.model].search([])
+        print(selection, '----')
         return selection
 
     @api.model
@@ -46,18 +56,20 @@ class Wizard(models.TransientModel):
             res['message_email_from'] = email
 
             res['partner_id'] = message.author_id.id
+            print('``````')
+            print('~~~~~~',message.author_id, self.env.uid, [u.id for u in message.author_id.user_ids])
             if message.author_id and self.env.uid not in [u.id for u in message.author_id.user_ids]:
                 res['filter_by_partner'] = True
-            if message.author_id and res.get('model'):
-                res_id = self.env[res['model']].search([], order='id desc', limit=1)
-                if res_id:
-                    res['res_id'] = res_id[0].id
+            # if message.author_id and res.get('model'):
+            #     res_id = self.env[res['model']].search([], order='id desc', limit=1)
+            #     if res_id:
+            #         res['res_id'] = res_id[0].id
 
         config_parameters = self.env['ir.config_parameter']
         res['move_followers'] = config_parameters.sudo().get_param('mail_relocation_move_followers')
 
         res['uid'] = self.env.uid
-
+        print(res)
         return res
 
     message_id = fields.Many2one('mail.message', string='Message')
@@ -68,8 +80,13 @@ class Wizard(models.TransientModel):
     message_moved_by_user_id = fields.Many2one('res.users', related='message_id.moved_by_user_id', string='Moved by', readonly=True)
     message_is_moved = fields.Boolean(string='Is Moved', related='message_id.is_moved', readonly=True)
     parent_id = fields.Many2one('mail.message', string='Search by name', )
-    model = fields.Selection(_model_selection, string='Model')
+    model = fields.Reference(selection="_model_selection", string='Model')
+    # model = fields.Selection(_model_selection, string='Model')
     res_id = fields.Integer(string='Record')
+    # res_id = fields.Reference(selection="_record_selection")
+    # res_id = fields.Selection(selection="_record_selection")
+    # res_id = fields.Char(string='Record ID')
+
     can_move = fields.Boolean('Can move', compute='get_can_move')
     move_back = fields.Boolean('MOVE TO ORIGIN', help='Move  message and submessages to original place')
     partner_id = fields.Many2one('res.partner', string='Author')
