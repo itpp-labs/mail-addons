@@ -29,9 +29,11 @@
             </group>
 
             <group attrs="{'invisible':[('can_move', '=', False)]}" colspan="2">
-                <label for="model"/>
+                <label for="model_record"/>
                 <div>
-                    <field name="model"/>
+                    <field name="model_record" class="oe_inline"/>
+                    <field name="model" invisible="1"/>
+                    <field name="res_id" invisible="1"/>
                 </div>
                 <label for="filter_by_partner"/>
                 <div>
@@ -41,11 +43,6 @@
                             class="oe_highlight oe_inline ml32"
                             special="quick_create" field="partner_id" context="{'force_email':True,'default_email':message_email_from,'default_name':message_name_from, 'update_message_author':True}" />
                 </div>
-                <!--<label for="res_id"/>-->
-                <!--<div>-->
-                    <!--<field name="res_id" context="{'extended_name_with_contact':1}" attrs="{'readonly': [('model','=',False)]}" class="oe_inline"/>-->
-                    <!--&lt;!&ndash;<button string="Create new record" name="create_record" type="object" class="oe_highlight oe_inline ml32" attrs="{'invisible':['|',('model','=',False)]}" special="quick_create" field="res_id" use_for_mail_move_message="True"/>&ndash;&gt;-->
-                <!--</div>-->
                 <label for="move_back" attrs="{'invisible':[('message_is_moved','=',False)]}"/>
                 <div attrs="{'invisible':[('message_is_moved','=',False)]}">
                     <field name="move_back"/>

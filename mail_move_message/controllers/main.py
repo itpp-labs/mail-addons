@@ -59,16 +59,8 @@ class DataSetCustom(DataSet):
 
     @http.route('/web/dataset/call_kw/<model>/name_get', type='json', auth="user")
     def name_get(self, model, method, args, kwargs):
-        records = request.env[model].search([('name', 'in', args)])
-        records = len(records) and records.ids or False
-        print('++++++++', model, records, '++++++++', method, '++++++++', args, '++++++++', kwargs)
-        # if type(args[0]) is not 'integer':
-        #     args = [2, args[0]] + args
-        #     print('++++++++', model, records, '++++++++', method, '++++++++', args, '++++++++', kwargs)
         res = self._call_kw(model, method, args, kwargs)
-        print('++++++++')
         context = kwargs.get('context')
         if context and context.get('extended_name_with_contact'):
             res = self._extend_name(model, res)
-        print('++++++++')
         return res

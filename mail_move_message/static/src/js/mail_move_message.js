@@ -102,17 +102,10 @@ odoo.define('mail_move_message.relocate', function (require) {
     Basicmodel.include({
         applyDefaultValues: function (recordID, values, options) {
             console.log('sdsad')
-            this._super(recordID, values, options)
+            delete values.model
+            return this._super(recordID, values, options)
         }
     });
-
-//    var field_utils_super_formatMany2one = field_utils_format.many2one;
-//    field_utils_format.many2one = function(value, field, options) {
-//        if (value && typeof value === 'number'){
-//            return '';
-//        }
-//        return field_utils_super_formatMany2one(value, field, options)
-//    }
 
 //    form_widget.extend({
 //        _addOnClickAction: function ($el, node) {

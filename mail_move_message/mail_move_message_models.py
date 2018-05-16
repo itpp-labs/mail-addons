@@ -22,26 +22,11 @@ class Wizard(models.TransientModel):
                 model_names.append(message.moved_from_model)
         if model_names:
             selection = [(m.model, m.display_name) for m in self.env['ir.model'].search([('model', 'in', model_names)])]
-        print('SELECTION____', selection)
-        # print([(link.object, link.name) for link in self.env['res.request.link'].search([])])
-        # return [(link.object, link.name) for link in self.env['res.request.link'].search([])]
-        return [('', '')] + selection
-
-    def _record_selection(self):
-        selection = []
-        print(selection, '----')
-        if self.model:
-            selection = self.env[self.model].search([])
-        print(selection, '----')
         return selection
 
     @api.model
     def default_get(self, fields_list):
         res = super(Wizard, self).default_get(fields_list)
-
-        model_fields = self.fields_get()
-        if model_fields['model']['selection']:
-            res['model'] = model_fields['model']['selection'] and model_fields['model']['selection'][0][0]
 
         if 'message_id' in res:
             message = self.env['mail.message'].browse(res['message_id'])
@@ -56,8 +41,6 @@ class Wizard(models.TransientModel):
             res['message_email_from'] = email
 
             res['partner_id'] = message.author_id.id
-            print('``````')
-            print('~~~~~~',message.author_id, self.env.uid, [u.id for u in message.author_id.user_ids])
             if message.author_id and self.env.uid not in [u.id for u in message.author_id.user_ids]:
                 res['filter_by_partner'] = True
             # if message.author_id and res.get('model'):
@@ -69,7 +52,6 @@ class Wizard(models.TransientModel):
         res['move_followers'] = config_parameters.sudo().get_param('mail_relocation_move_followers')
 
         res['uid'] = self.env.uid
-        print(res)
         return res
 
     message_id = fields.Many2one('mail.message', string='Message')
@@ -80,12 +62,11 @@ class Wizard(models.TransientModel):
     message_moved_by_user_id = fields.Many2one('res.users', related='message_id.moved_by_user_id', string='Moved by', readonly=True)
     message_is_moved = fields.Boolean(string='Is Moved', related='message_id.is_moved', readonly=True)
     parent_id = fields.Many2one('mail.message', string='Search by name', )
-    model = fields.Reference(selection="_model_selection", string='Model')
+    model_record = fields.Reference(selection="_model_selection", string='Model')
+    model = fields.Char(compute="_compute_model_res_id", string='Model')
     # model = fields.Selection(_model_selection, string='Model')
     res_id = fields.Integer(string='Record')
-    # res_id = fields.Reference(selection="_record_selection")
-    # res_id = fields.Selection(selection="_record_selection")
-    # res_id = fields.Char(string='Record ID')
+
 
     can_move = fields.Boolean('Can move', compute='get_can_move')
     move_back = fields.Boolean('MOVE TO ORIGIN', help='Move  message and submessages to original place')
@@ -101,6 +82,13 @@ class Wizard(models.TransientModel):
         help="Add followers of current record to a new record.\n"
              "You must use this option, if new record has restricted access.\n"
              "You can change default value for this option at Settings/System Parameters")
+
+    @api.multi
+    @api.depends('model_record')
+    def _compute_model_res_id(self):
+        for rec in self:
+            rec.model = rec.model_record and rec.model_record._name or False
+            rec.res_id = rec.model_record and rec.model_record.id or False
 
     @api.depends('message_id')
     @api.multi
@@ -143,32 +131,19 @@ class Wizard(models.TransientModel):
     @api.onchange('model', 'filter_by_partner', 'partner_id')
     def on_change_partner(self):
         domain = {'res_id': [('id', '!=', self.message_id.res_id)]}
-        # print('======0============', self.message_id.res_id, domain)
-        # print('===', self.model)
-        # print('===', self.filter_by_partner)
-        # print('===', self.partner_id)
         if self.model and self.filter_by_partner and self.partner_id:
             fields = self.env[self.model].fields_get(False)
             contact_field = False
-            # print('======1============')
             for n, f in iter(fields.items()):
-                # print('=====2=============', n, f)
                 if f['type'] == 'many2one' and f['relation'] == 'res.partner':
-                    print('=====3=============', n)
                     contact_field = n
                     break
             if contact_field:
-                print('=======', contact_field)
                 domain['res_id'].append((contact_field, '=', self.partner_id.id))
-        print('---res_id is in coming-----')
         if self.model:
-            print('-------- ', 'says IF')
             res_id = self.env[self.model].search(domain['res_id'], order='id desc', limit=1)
-            print('--------', res_id)
             self.res_id = res_id and res_id[0].id
-            print('--------', self.res_id)
         else:
-            print('-------- ', 'says ELSE')
             self.res_id = None
         return {'domain': domain}
 
