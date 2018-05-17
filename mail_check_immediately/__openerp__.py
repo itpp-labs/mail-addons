@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     'name': 'Check mail immediately',
     'version': '1.0.1',

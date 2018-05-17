@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 {
     "name": "Mail Base",
     "summary": """Makes Mail extendable""",
     "category": "Discuss",
     "images": [],
-    "version": "1.0.2",
+    "version": "11.0.1.0.2",
 
     "author": "IT-Projects LLC, Pavel Romanchenko",
     "support": "apps@it-projects.info",
