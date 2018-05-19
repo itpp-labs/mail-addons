@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 {
     "name": "Show all messages",
     "summary": """Checkout all messages where you have access""",
     "category": "Discuss",
     # "live_test_url": "",
     "images": ['images/1.jpg'],
-    "version": "1.0.0",
+    "version": "11.0.1.0.0",
     "application": False,
 
     "author": "IT-Projects LLC, Pavel Romanchenko",
