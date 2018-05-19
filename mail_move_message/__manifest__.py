@@ -1,6 +1,6 @@
 {
     'name': 'Mail relocation',
-    'version': '1.0.5',
+    'version': '11.0.1.0.5',
     'author': 'IT-Projects LLC, Ivan Yelizariev, Pavel Romanchenko',
     'license': 'LGPL-3',
     'category': 'Discuss',

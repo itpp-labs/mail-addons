@@ -68,7 +68,7 @@ class Wizard(models.TransientModel):
     res_id = fields.Integer(string='Record')
 
 
-    can_move = fields.Boolean('Can move', compute='get_can_move')
+    can_move = fields.Boolean('Can move', compute='_compute_get_can_move')
     move_back = fields.Boolean('MOVE TO ORIGIN', help='Move  message and submessages to original place')
     partner_id = fields.Many2one('res.partner', string='Author')
     filter_by_partner = fields.Boolean('Filter Records by partner')
@@ -92,7 +92,7 @@ class Wizard(models.TransientModel):
 
     @api.depends('message_id')
     @api.multi
-    def get_can_move(self):
+    def _compute_get_can_move(self):
         for r in self:
             r.get_can_move_one()
 
@@ -273,10 +273,10 @@ class MailMessage(models.Model):
     moved_from_parent_id = fields.Many2one('mail.message', 'Parent Message (Original)', ondelete='set null')
     moved_by_message_id = fields.Many2one('mail.message', 'Moved by message', ondelete='set null', help='Top message, that initate moving this message')
     moved_by_user_id = fields.Many2one('res.users', 'Moved by user', ondelete='set null')
-    all_child_ids = fields.One2many('mail.message', string='All childs', compute='_get_all_childs', help='all childs, including subchilds')
+    all_child_ids = fields.One2many('mail.message', string='All childs', compute='_compute_get_all_childs', help='all childs, including subchilds')
 
     @api.multi
-    def _get_all_childs(self, include_myself=True):
+    def _compute_get_all_childs(self, include_myself=True):
         for r in self:
             r._get_all_childs_one(include_myself=include_myself)
 
