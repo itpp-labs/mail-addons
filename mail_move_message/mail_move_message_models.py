@@ -67,7 +67,6 @@ class Wizard(models.TransientModel):
     # model = fields.Selection(_model_selection, string='Model')
     res_id = fields.Integer(string='Record')
 
-
     can_move = fields.Boolean('Can move', compute='_compute_get_can_move')
     move_back = fields.Boolean('MOVE TO ORIGIN', help='Move  message and submessages to original place')
     partner_id = fields.Many2one('res.partner', string='Author')
