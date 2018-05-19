@@ -43,10 +43,10 @@ class Wizard(models.TransientModel):
             res['partner_id'] = message.author_id.id
             if message.author_id and self.env.uid not in [u.id for u in message.author_id.user_ids]:
                 res['filter_by_partner'] = True
-            # if message.author_id and res.get('model'):
-            #     res_id = self.env[res['model']].search([], order='id desc', limit=1)
-            #     if res_id:
-            #         res['res_id'] = res_id[0].id
+            if message.author_id and res.get('model'):
+                res_id = self.env[res['model']].search([], order='id desc', limit=1)
+                if res_id:
+                    res['res_id'] = res_id[0].id
 
         config_parameters = self.env['ir.config_parameter']
         res['move_followers'] = config_parameters.sudo().get_param('mail_relocation_move_followers')
