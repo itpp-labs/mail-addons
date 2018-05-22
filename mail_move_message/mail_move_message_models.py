@@ -73,7 +73,7 @@ class Wizard(models.TransientModel):
     message_email_from = fields.Char()
     message_name_from = fields.Char()
     # FIXME message_to_read should be True even if current message or any his childs are unread
-    message_to_read = fields.Boolean(related='message_id.needaction')
+    message_to_read = fields.Boolean(compute='_compute_is_read', related='message_id.needaction')
     uid = fields.Integer()
     move_followers = fields.Boolean(
         'Move Followers',
@@ -93,6 +93,11 @@ class Wizard(models.TransientModel):
     def _compute_get_can_move(self):
         for r in self:
             r.get_can_move_one()
+
+    @api.multi
+    def _compute_is_read(self):
+        messages = self.env['mail.message'].sudo().browse(self.message_id.all_child_ids.ids + [self.message_id.id])
+        self.message_to_read = messages._get_needaction()
 
     @api.multi
     def get_can_move_one(self):
@@ -188,7 +193,7 @@ class Wizard(models.TransientModel):
                 # link with the first message of record
                 parent = self.env['mail.message'].search([('model', '=', r.model), ('res_id', '=', r.res_id)], order='id', limit=1)
                 r.parent_id = parent.id or None
-            r.message_id.move(r.parent_id.id, r.res_id, r.model, r.move_back, r.move_followers)
+            r.message_id.move(r.parent_id.id, r.res_id, r.model, r.move_back, r.move_followers, r.message_to_read)
 
         if not (r.model and r.res_id):
             r.message_id.needaction = False
@@ -271,6 +276,7 @@ class MailMessage(models.Model):
     moved_by_message_id = fields.Many2one('mail.message', 'Moved by message', ondelete='set null', help='Top message, that initate moving this message')
     moved_by_user_id = fields.Many2one('res.users', 'Moved by user', ondelete='set null')
     all_child_ids = fields.One2many('mail.message', string='All childs', compute='_compute_get_all_childs', help='all childs, including subchilds')
+    moved_as_unread = fields.Boolean('Was Unread', default=False)
 
     @api.multi
     def _compute_get_all_childs(self, include_myself=True):
@@ -302,12 +308,12 @@ class MailMessage(models.Model):
                 self.env[model].browse(ids).message_subscribe([f.partner_id.id], [s.id for s in f.subtype_ids])
 
     @api.multi
-    def move(self, parent_id, res_id, model, move_back, move_followers=False):
+    def move(self, parent_id, res_id, model, move_back, move_followers=False, message_to_read=False):
         for r in self:
-            r.move_one(parent_id, res_id, model, move_back, move_followers=move_followers)
+            r.move_one(parent_id, res_id, model, move_back, move_followers=move_followers, message_to_read=message_to_read)
 
     @api.multi
-    def move_one(self, parent_id, res_id, model, move_back, move_followers=False):
+    def move_one(self, parent_id, res_id, model, move_back, move_followers=False, message_to_read=False):
         self.ensure_one()
         if parent_id == self.id:
             # if for any reason method is called to move message with parent
@@ -315,6 +321,7 @@ class MailMessage(models.Model):
             # building message tree
             return
         vals = {}
+
         if move_back:
             # clear variables if we move everything back
             vals['is_moved'] = False
@@ -324,6 +331,7 @@ class MailMessage(models.Model):
             vals['moved_from_res_id'] = None
             vals['moved_from_model'] = None
             vals['moved_from_parent_id'] = None
+            vals['moved_as_unread'] = None
         else:
             vals['parent_id'] = parent_id
             vals['res_id'] = res_id
@@ -332,8 +340,18 @@ class MailMessage(models.Model):
             vals['is_moved'] = True
             vals['moved_by_user_id'] = self.env.user.id
             vals['moved_by_message_id'] = self.id
+            vals['moved_as_unread'] = message_to_read
         # Update record_name in message
         vals['record_name'] = self._get_record_name(vals)
+        if self.moved_as_unread:
+            notification = {
+                'mail_message_id': self.id,
+                'res_partner_id': self.env.user.partner_id.id,
+                'is_read': False,
+            }
+            self.write({
+                'notification_ids': [(0, 0, notification)],
+            })
 
         for r in self.all_child_ids:
             r_vals = vals.copy()
@@ -362,7 +380,7 @@ class MailMessage(models.Model):
             'res_id': vals.get('res_id'),
             'model': vals.get('model'),
             'is_moved': vals['is_moved'],
-            'record_name': vals['record_name']
+            'record_name': vals['record_name'],
         }
         self.env['bus.bus'].sendone((self._cr.dbname, 'mail_move_message'), notification)
 
