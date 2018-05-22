@@ -49,8 +49,10 @@ odoo.define('mail_move_message.relocate', function (require) {
         start: function() {
             var result = this._super.apply(this, arguments);
             // For show wizard in the form
-            var thread = this.fields.thread.thread;
-            thread.on('move_message', this, thread.on_move_message);
+            if (this.fields.thread && this.fields.thread.thread) {
+                var thread = this.fields.thread.thread;
+                thread.on('move_message', this, thread.on_move_message);
+            }
             return $.when(result).done(function() {});
         }
     });

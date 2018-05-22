@@ -64,8 +64,7 @@ class Wizard(models.TransientModel):
     parent_id = fields.Many2one('mail.message', string='Search by name', )
     model_record = fields.Reference(selection="_model_selection", string='Model')
     model = fields.Char(compute="_compute_model_res_id", string='Model')
-    # model = fields.Selection(_model_selection, string='Model')
-    res_id = fields.Integer(string='Record')
+    res_id = fields.Integer(compute="_compute_model_res_id", string='Record')
 
     can_move = fields.Boolean('Can move', compute='_compute_get_can_move')
     move_back = fields.Boolean('MOVE TO ORIGIN', help='Move  message and submessages to original place')
@@ -111,7 +110,7 @@ class Wizard(models.TransientModel):
             self.model = model
             self.res_id = self.message_id.moved_from_res_id
 
-    @api.onchange('parent_id', 'res_id', 'model')
+    @api.onchange('parent_id', 'model_record')
     def update_move_back(self):
         model = self.message_id.moved_from_model
         self.move_back = self.parent_id == self.message_id.moved_from_parent_id \
@@ -189,7 +188,6 @@ class Wizard(models.TransientModel):
                 # link with the first message of record
                 parent = self.env['mail.message'].search([('model', '=', r.model), ('res_id', '=', r.res_id)], order='id', limit=1)
                 r.parent_id = parent.id or None
-
             r.message_id.move(r.parent_id.id, r.res_id, r.model, r.move_back, r.move_followers)
 
         if not (r.model and r.res_id):
@@ -334,7 +332,6 @@ class MailMessage(models.Model):
             vals['is_moved'] = True
             vals['moved_by_user_id'] = self.env.user.id
             vals['moved_by_message_id'] = self.id
-
         # Update record_name in message
         vals['record_name'] = self._get_record_name(vals)
 
@@ -343,9 +340,9 @@ class MailMessage(models.Model):
             if not r.is_moved:
                 # moved_from_* variables contain not last, but original
                 # reference
-                r_vals['moved_from_parent_id'] = r.parent_id.id
-                r_vals['moved_from_res_id'] = r.res_id
-                r_vals['moved_from_model'] = r.model
+                r_vals['moved_from_parent_id'] = r.parent_id.id or r.env.context.get('uid')
+                r_vals['moved_from_res_id'] = r.res_id or r.id
+                r_vals['moved_from_model'] = r.model or r._name
             elif move_back:
                 r_vals['parent_id'] = r.moved_from_parent_id.id
                 r_vals['res_id'] = r.moved_from_res_id
