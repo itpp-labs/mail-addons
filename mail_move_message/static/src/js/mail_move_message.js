@@ -1,3 +1,9 @@
+/*Copyright 2016 Ildar Nasyrov <https://it-projects.info/team/iledarn>
+# Copyright 2016 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+# Copyright 2016 Pavel Romanchenko
+# Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html). */
+
 odoo.define('mail_move_message.relocate', function (require) {
     "use strict";
 
