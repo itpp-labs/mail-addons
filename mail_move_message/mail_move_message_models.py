@@ -10,6 +10,7 @@ from odoo import fields
 from odoo import models
 from odoo.tools import email_split
 from odoo.tools.translate import _
+from odoo import exceptions, _
 
 
 class Wizard(models.TransientModel):
@@ -69,7 +70,7 @@ class Wizard(models.TransientModel):
     message_moved_by_user_id = fields.Many2one('res.users', related='message_id.moved_by_user_id', string='Moved by', readonly=True)
     message_is_moved = fields.Boolean(string='Is Moved', related='message_id.is_moved', readonly=True)
     parent_id = fields.Many2one('mail.message', string='Search by name', )
-    model_record = fields.Reference(selection="_model_selection", string='Model')
+    model_record = fields.Reference(selection="_model_selection", string='Record')
     model = fields.Char(compute="_compute_model_res_id", string='Model')
     res_id = fields.Integer(compute="_compute_model_res_id", string='Record')
 
@@ -80,7 +81,8 @@ class Wizard(models.TransientModel):
     message_email_from = fields.Char()
     message_name_from = fields.Char()
     # FIXME message_to_read should be True even if current message or any his childs are unread
-    message_to_read = fields.Boolean(compute='_compute_is_read', related='message_id.needaction')
+    message_to_read = fields.Boolean(compute='_compute_is_read', string="Unread message",
+                                     help="Service field shows that this message were unread when moved")
     uid = fields.Integer()
     move_followers = fields.Boolean(
         'Move Followers',
@@ -194,6 +196,10 @@ class Wizard(models.TransientModel):
     @api.multi
     def move(self):
         for r in self:
+            if not r.model:
+                raise exceptions.except_orm(_('Record field is empty!'), _('Select a record for relocation first'))
+
+        for r in self:
             r.check_access()
             if not r.parent_id or not (r.parent_id.model == r.model and
                                        r.parent_id.res_id == r.res_id):
@@ -202,13 +208,6 @@ class Wizard(models.TransientModel):
                 r.parent_id = parent.id or None
             r.message_id.move(r.parent_id.id, r.res_id, r.model, r.move_back, r.move_followers, r.message_to_read)
 
-        if not (r.model and r.res_id):
-            r.message_id.needaction = False
-            return {
-                'type': 'ir.actions.client',
-                'name': 'All messages',
-                'tag': 'reload',
-            }
         return {
             'name': _('Record'),
             'view_type': 'form',
@@ -350,7 +349,8 @@ class MailMessage(models.Model):
             vals['moved_as_unread'] = message_to_read
         # Update record_name in message
         vals['record_name'] = self._get_record_name(vals)
-        if self.moved_as_unread:
+        # unread message remains unread after moving back to origin
+        if self.moved_as_unread and move_back:
             notification = {
                 'mail_message_id': self.id,
                 'res_partner_id': self.env.user.partner_id.id,
@@ -423,27 +423,26 @@ class MailMoveMessageConfiguration(models.TransientModel):
     move_followers = fields.Boolean('Move Followers')
 
     @api.model
-    def get_default_move_message_configs(self, fields):
-        config_parameters = self.env['ir.config_parameter']
-        model_obj = self.env['ir.model']
+    def get_values(self):
+        res = super(MailMoveMessageConfiguration, self).get_values()
+        config_parameters = self.env["ir.config_parameter"].sudo()
         model_names = config_parameters.sudo().get_param('mail_relocation_models')
-        if not model_names:
-            return {}
         model_names = model_names.split(',')
-        model_ids = model_obj.search([('model', 'in', model_names)])
-        return {
-            'model_ids': [m.id for m in model_ids],
-            'move_followers': config_parameters.sudo().get_param('mail_relocation_move_followers')
-        }
+        model_ids = self.env['ir.model'].sudo().search([('model', 'in', model_names)])
+        res.update(
+            model_ids=[m.id for m in model_ids],
+            move_followers=config_parameters.sudo().get_param('mail_relocation_move_followers'),
+        )
+        return res
 
     @api.multi
-    def set_move_message_configs(self):
-        config_parameters = self.env['ir.config_parameter']
-        model_names = ''
+    def set_values(self):
+        super(MailMoveMessageConfiguration, self).set_values()
+        config_parameters = self.env["ir.config_parameter"].sudo()
         for record in self:
-            model_names = ','.join([m.model for m in record.model_ids])
-            config_parameters.sudo().set_param('mail_relocation_models', model_names)
-            config_parameters.sudo().set_param('mail_relocation_move_followers', record.move_followers or '')
+            model_names = ','.join([x.model for x in record.model_ids])
+            config_parameters.set_param("mail_relocation_models", model_names or '')
+            config_parameters.set_param("mail_relocation_move_followers", record.move_followers or '')
 
 
 class ResPartner(models.Model):
