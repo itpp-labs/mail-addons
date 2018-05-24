@@ -10,7 +10,7 @@ from odoo import fields
 from odoo import models
 from odoo.tools import email_split
 from odoo.tools.translate import _
-from odoo import exceptions, _
+from odoo import exceptions
 
 
 class Wizard(models.TransientModel):
@@ -35,6 +35,11 @@ class Wizard(models.TransientModel):
     @api.model
     def default_get(self, fields_list):
         res = super(Wizard, self).default_get(fields_list)
+
+        available_models = self._model_selection()
+        if len(available_models):
+            record = self.env[available_models[0][0]].search([])
+            res['model_record'] = len(record) and (available_models[0][0] + ',' + str(record[0].id)) or False
 
         if 'message_id' in res:
             message = self.env['mail.message'].browse(res['message_id'])
