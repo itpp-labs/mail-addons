@@ -111,7 +111,7 @@ class Wizard(models.TransientModel):
     @api.multi
     def _compute_is_read(self):
         messages = self.env['mail.message'].sudo().browse(self.message_id.all_child_ids.ids + [self.message_id.id])
-        self.message_to_read = messages._get_needaction()
+        self.message_to_read = True in [m.needaction for m in messages]
 
     @api.multi
     def get_can_move_one(self):
@@ -124,10 +124,9 @@ class Wizard(models.TransientModel):
         if not self.move_back:
             return
         self.parent_id = self.message_id.moved_from_parent_id
-        model = self.message_id.moved_from_model
-        if self.message_id.is_moved:
-            self.model = model
-            self.res_id = self.message_id.moved_from_res_id
+        message = self.message_id
+        if message.is_moved:
+            self.model_record = self.env[message.moved_from_model].browse(message.moved_from_res_id)
 
     @api.onchange('parent_id', 'model_record')
     def update_move_back(self):
