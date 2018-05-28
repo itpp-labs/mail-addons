@@ -331,7 +331,6 @@ class MailMessage(models.Model):
             # building message tree
             return
         vals = {}
-
         if move_back:
             # clear variables if we move everything back
             vals['is_moved'] = False
@@ -342,6 +341,8 @@ class MailMessage(models.Model):
             vals['moved_from_model'] = None
             vals['moved_from_parent_id'] = None
             vals['moved_as_unread'] = None
+            # Restore record_name in message
+            vals['record_name'] = self.env[self.moved_from_model].browse(self.moved_from_res_id).name
         else:
             vals['parent_id'] = parent_id
             vals['res_id'] = res_id
@@ -351,8 +352,9 @@ class MailMessage(models.Model):
             vals['moved_by_user_id'] = self.env.user.id
             vals['moved_by_message_id'] = self.id
             vals['moved_as_unread'] = message_to_read
-        # Update record_name in message
-        vals['record_name'] = self._get_record_name(vals)
+            # Update record_name in message
+            vals['record_name'] = self._get_record_name(vals)
+
         # unread message remains unread after moving back to origin
         if self.moved_as_unread and move_back:
             notification = {
