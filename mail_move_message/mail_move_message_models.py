@@ -212,6 +212,13 @@ class Wizard(models.TransientModel):
                 r.parent_id = parent.id or None
             r.message_id.move(r.parent_id.id, r.res_id, r.model, r.move_back, r.move_followers, r.message_to_read)
 
+        if r.model in ['mail.message', 'mail.channel', False]:
+            return {
+                'name': 'Chess game page',
+                'type': 'ir.actions.act_url',
+                'url': '/web',
+                'target': 'self',
+            }
         return {
             'name': _('Record'),
             'view_type': 'form',
@@ -341,8 +348,6 @@ class MailMessage(models.Model):
             vals['moved_from_model'] = None
             vals['moved_from_parent_id'] = None
             vals['moved_as_unread'] = None
-            # Restore record_name in message
-            vals['record_name'] = self.env[self.moved_from_model].browse(self.moved_from_res_id).name
         else:
             vals['parent_id'] = parent_id
             vals['res_id'] = res_id
@@ -377,7 +382,8 @@ class MailMessage(models.Model):
             elif move_back:
                 r_vals['parent_id'] = r.moved_from_parent_id.id
                 r_vals['res_id'] = r.moved_from_res_id
-                r_vals['model'] = r.moved_from_model
+                r_vals['model'] = (r.moved_from_model and r.moved_from_model not in ['mail.message', 'mail.channel', False]) and r.moved_from_model
+                r_vals['record_name'] = r_vals['model'] and self.env[r.moved_from_model].browse(r.moved_from_res_id).name
 
             if move_followers:
                 r.sudo().move_followers(r_vals.get('model'), r_vals.get('res_id'))
@@ -393,7 +399,7 @@ class MailMessage(models.Model):
             'res_id': vals.get('res_id'),
             'model': vals.get('model'),
             'is_moved': vals['is_moved'],
-            'record_name': vals['record_name'],
+            'record_name': 'record_name' in vals and vals['record_name'],
         }
         self.env['bus.bus'].sendone((self._cr.dbname, 'mail_move_message'), notification)
 
