@@ -38,8 +38,8 @@ class Wizard(models.TransientModel):
 
         available_models = self._model_selection()
         if len(available_models):
-            record = self.env[available_models[0][0]].search([])
-            res['model_record'] = len(record) and (available_models[0][0] + ',' + str(record[0].id)) or False
+            record = self.env[available_models[0][0]].search([], limit=1)
+            res['model_record'] = len(record) and (available_models[0][0] + ',' + str(record.id)) or False
 
         if 'message_id' in res:
             message = self.env['mail.message'].browse(res['message_id'])
