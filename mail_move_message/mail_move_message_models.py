@@ -428,7 +428,6 @@ class MailMessage(models.Model):
 
 
 class MailMoveMessageConfiguration(models.TransientModel):
-    _name = 'mail_move_message.config.settings'
     _inherit = 'res.config.settings'
 
     model_ids = fields.Many2many(comodel_name='ir.model', string='Models')
