@@ -3,10 +3,10 @@
    :alt: License: LGPL-3
 
 =================
- Mail relocation
+ Mail Relocation
 =================
 
-Module allows relocate mails between models
+The module allows to relocate messages between models
 
 Credits
 =======

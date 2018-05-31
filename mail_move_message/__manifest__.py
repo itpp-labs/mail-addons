@@ -6,7 +6,7 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
 {
-    'name': 'Mail relocation',
+    'name': 'Mail Relocation',
     'version': '11.0.1.0.5',
     'author': 'IT-Projects LLC, Ivan Yelizariev, Pavel Romanchenko',
     'license': 'LGPL-3',

@@ -28,7 +28,7 @@ class DataSetCustom(DataSet):
         Model = request.env[model]
         fields = Model.fields_get()
         contact_field = False
-        for n, f in fields.Iteritems():
+        for n, f in iter(fields.items()):
             if f['type'] == 'many2one' and f['relation'] == 'res.partner':
                 contact_field = n
                 break

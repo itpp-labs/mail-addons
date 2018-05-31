@@ -100,8 +100,15 @@
                 <h2>Mail Relocation</h2>
                 <div class="row mt16 o_settings_container">
                     <div class="col-xs-12 col-md-6 o_setting_box" id="crm_lead">
-                        <label for="model_ids"/>
-                        <field name="model_ids" widget="many2many_tags"/>
+                        <div class="o_setting_left_pane">
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="model_ids"/>
+                            <div class="text-muted">
+                                Add models to be able to select for message relocation
+                            </div>
+                            <field name="model_ids" widget="many2many_tags"/>
+                        </div>
                     </div>
                     <div class="col-xs-12 col-md-6 o_setting_box" id="crm_lead">
                         <div class="o_setting_left_pane">
@@ -109,9 +116,6 @@
                         </div>
                         <div class="o_setting_right_pane">
                             <label for="move_followers"/>
-                            <div class="text-muted">
-                                Add models for message relocation
-                            </div>
                         </div>
                     </div>
                 </div>

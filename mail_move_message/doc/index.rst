@@ -1,5 +1,5 @@
 =================
- Mail relocation
+ Mail Relocation
 =================
 
 Installation
