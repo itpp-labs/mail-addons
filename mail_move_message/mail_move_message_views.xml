@@ -105,7 +105,7 @@
                         <div class="o_setting_right_pane">
                             <label for="model_ids"/>
                             <div class="text-muted">
-                                Add models to be able to select for message relocation
+                                Add models to be used for message relocation
                             </div>
                             <field name="model_ids" widget="many2many_tags"/>
                         </div>
