@@ -96,7 +96,7 @@
     <field name="inherit_id" ref="base.res_config_settings_view_form"/>
     <field name="arch" type="xml">
         <xpath expr="//div[hasclass('settings')]" position="inside">
-            <div class="app_settings_block" data-string="Mail Relocation" string="Mail Relocation" data-key="mail_relocation">
+            <div class="app_settings_block" data-string="Mail Relocation" string="Mail Relocation" data-key="mail_move_message">
                 <h2>Mail Relocation</h2>
                 <div class="row mt16 o_settings_container">
                     <div class="col-xs-12 col-md-6 o_setting_box" id="crm_lead">
