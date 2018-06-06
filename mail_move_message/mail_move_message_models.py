@@ -150,7 +150,7 @@ class Wizard(models.TransientModel):
         if self.model and self.filter_by_partner and self.partner_id:
             fields = self.env[self.model].fields_get(False)
             contact_field = False
-            for n, f in iter(fields.items()):
+            for n, f in fields.items():
                 if f['type'] == 'many2one' and f['relation'] == 'res.partner':
                     contact_field = n
                     break
@@ -262,7 +262,7 @@ class Wizard(models.TransientModel):
 
         fields = model.fields_get()
         contact_field = False
-        for n, f in iter(fields.items()):
+        for n, f in fields.items():
             if f['type'] == 'many2one' and f['relation'] == 'res.partner':
                 contact_field = n
                 break
