@@ -37,14 +37,12 @@
     "auto_install": False,
     "installable": True,
 
-     "demo_title": "Mailgun",
-     "demo_addons": [
-     ],
-     "demo_addons_hidden": [
-     ],
-     "demo_url": "mailgun",
-     "demo_summary": "Easy to send outgoing and fetch incoming messages by using Mailgun",
-     "demo_images": [
-         "images/mailgun_main.png",
-]
+    "demo_title": "Mailgun",
+    "demo_addons": [],
+    "demo_addons_hidden": [],
+    "demo_url": "mailgun",
+    "demo_summary": "Easy to send outgoing and fetch incoming messages by using Mailgun",
+    "demo_images": [
+        "images/mailgun_main.png",
+    ]
 }
