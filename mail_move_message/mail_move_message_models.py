@@ -202,7 +202,6 @@ class Wizard(models.TransientModel):
         for r in self:
             if not r.model:
                 raise exceptions.except_orm(_('Record field is empty!'), _('Select a record for relocation first'))
-
         for r in self:
             r.check_access()
             if not r.parent_id or not (r.parent_id.model == r.model and
@@ -210,7 +209,7 @@ class Wizard(models.TransientModel):
                 # link with the first message of record
                 parent = self.env['mail.message'].search([('model', '=', r.model), ('res_id', '=', r.res_id)], order='id', limit=1)
                 r.parent_id = parent.id or None
-            r.message_id.move(r.parent_id.id, r.res_id, r.model, r.move_back, r.move_followers, r.message_to_read)
+            r.message_id.move(r.parent_id.id, r.res_id, r.model, r.move_back, r.move_followers, r.message_to_read, r.partner_id)
 
         if r.model in ['mail.message', 'mail.channel', False]:
             return {
@@ -245,30 +244,6 @@ class Wizard(models.TransientModel):
 
         self.message_id.unlink()
         return {}
-
-    @api.model
-    def create_partner(self, message_id, relation, partner_id, message_name_from, message_email_from):
-        model = self.env[relation]
-        message = self.env['mail.message'].browse(message_id)
-        if not partner_id and message_name_from:
-            partner_id = self.env['res.partner'].with_context({'update_message_author': True}).create({
-                'name': message_name_from,
-                'email': message_email_from
-            }).id
-
-        context = {'partner_id': partner_id}
-        if model._rec_name:
-            context.update({'default_%s' % model._rec_name: message.subject})
-
-        fields = model.fields_get()
-        contact_field = False
-        for n, f in fields.items():
-            if f['type'] == 'many2one' and f['relation'] == 'res.partner':
-                contact_field = n
-                break
-        if contact_field:
-            context.update({'default_%s' % contact_field: partner_id})
-        return context
 
     @api.multi
     def read_close(self):
@@ -325,18 +300,23 @@ class MailMessage(models.Model):
                 self.env[model].browse(ids).message_subscribe([f.partner_id.id], [s.id for s in f.subtype_ids])
 
     @api.multi
-    def move(self, parent_id, res_id, model, move_back, move_followers=False, message_to_read=False):
+    def move(self, parent_id, res_id, model, move_back, move_followers=False, message_to_read=False, author=False):
         for r in self:
-            r.move_one(parent_id, res_id, model, move_back, move_followers=move_followers, message_to_read=message_to_read)
+            r.move_one(parent_id, res_id, model, move_back, move_followers=move_followers, message_to_read=message_to_read, author=author)
 
     @api.multi
-    def move_one(self, parent_id, res_id, model, move_back, move_followers=False, message_to_read=False):
+    def move_one(self, parent_id, res_id, model, move_back, move_followers=False, message_to_read=False, author=False):
         self.ensure_one()
         if parent_id == self.id:
             # if for any reason method is called to move message with parent
             # equal to oneself, we need stop to prevent infinitive loop in
             # building message tree
             return
+        if not self.author_id:
+            self.write({
+                'author_id': author.id,
+            })
+
         vals = {}
         if move_back:
             # clear variables if we move everything back
@@ -476,3 +456,13 @@ class ResPartner(models.Model):
             if messages:
                 messages.sudo().write({'author_id': res.id})
         return res
+
+    @api.model
+    def default_get(self, default_fields):
+        contextual_self = self
+        if 'mail_move_message' in self.env.context and self.env.context['mail_move_message']:
+            contextual_self = self.with_context(
+                default_name=self.env.context['message_name_from'] or '',
+                default_email=self.env.context['message_email_from'] or '',
+            )
+        return super(ResPartner, contextual_self).default_get(default_fields)
