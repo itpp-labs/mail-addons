@@ -1,11 +1,14 @@
+.. image:: https://img.shields.io/badge/license-LGPL--3-blue.png
+   :target: https://www.gnu.org/licenses/lgpl
+   :alt: License: LGPL-3
+
 =========
  Mailgun
 =========
 
-With this module you can receive incoming messages from mailgun.
+The module allows to receive incoming messages or send them to clients who uses external mail services (e.g. gmail.com) by using Mailgun.
 There is no IMAP or POP3 servers on mailgun that is to be used with odoo.
-That is why we need this module. It fetches messages from mailgun using their API
-and stores them in odoo.
+That is why we need this module. It fetches messages from mailgun using their API and stores them in odoo.
 
 TODO
 ====
@@ -24,13 +27,27 @@ Sponsors
 --------
 * `IT-Projects LLC <https://it-projects.info>`__
 
+Maintainers
+-----------
+* `IT-Projects LLC <https://it-projects.info>`__
+
+      To get a guaranteed support you are kindly requested to purchase the module at `odoo apps store <https://apps.odoo.com/apps/modules/11.0/mailgun/>`__.
+
+      Thank you for understanding!
+
+      `IT-Projects Team <https://www.it-projects.info/team>`__
+
 Further information
 ===================
 
-HTML Description: https://apps.odoo.com/apps/modules/9.0/mailgun/
+Demo: http://runbot.it-projects.info/demo/mail-addons/11.0
 
-Usage instructions: `<doc/index.rst>`__
+HTML Description: https://apps.odoo.com/apps/modules/11.0/mailgun/
 
-Changelog: `<doc/changelog.rst>`__
+Usage instructions: `<doc/index.rst>`_
 
-Tested on Odoo 9.0 c8cd67c5d98b410cabe0a6efb3347a8a4de731d8
+Changelog: `<doc/changelog.rst>`_
+
+Notifications on updates: `via Atom <https://github.com/it-projects-llc/mail-addons/commits/11.0/mailgun.atom>`_, `by Email <https://blogtrottr.com/?subscribe=https://github.com/it-projects-llc/mail-addons/commits/11.0/malgun.atom>`_
+
+Tested on Odoo 11.0 dc61861f90d15797b19f8ebddfb0c8a66d0afa88

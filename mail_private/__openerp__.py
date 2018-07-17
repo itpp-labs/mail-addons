@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     "name": """Internal Messaging""",
     "summary": """Send private messages to specified recipients, regardless of who are in followers list.""",
@@ -34,5 +33,5 @@
     "post_init_hook": None,
 
     "auto_install": False,
-    "installable": False,
+    "installable": True,
 }

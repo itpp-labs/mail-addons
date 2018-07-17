@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 {
     "name": "Mail archives",
     "summary": """Adds menu to find old messages""",
     "category": "Discuss",
     "images": ['images/1.jpg'],
-    "version": "1.0.0",
+    "version": "11.0.1.0.0",
 
     "author": "IT-Projects LLC, Pavel Romanchenko",
     "support": "apps@it-projects.info",

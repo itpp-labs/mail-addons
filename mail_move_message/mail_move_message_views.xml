@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp><data>
+<!--# Copyright 2016 Ildar Nasyrov <https://it-projects.info/team/iledarn>
+    # Copyright 2016 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+    # Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
+    # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).-->
+
+<odoo>
 
 <template id="assets_backend" name="custom bar assets" inherit_id="web.assets_backend">
     <xpath expr="." position="inside">
@@ -29,9 +34,11 @@
             </group>
 
             <group attrs="{'invisible':[('can_move', '=', False)]}" colspan="2">
-                <label for="model"/>
+                <label for="model_record"/>
                 <div>
-                    <field name="model" widget="polymorphic" polymorphic="res_id" class="oe_inline"/>
+                    <field name="model_record" class="oe_inline"/>
+                    <field name="model" invisible="1"/>
+                    <field name="res_id" invisible="1"/>
                 </div>
                 <label for="filter_by_partner"/>
                 <div>
@@ -40,11 +47,6 @@
                     <button string="Create Partner" attrs="{'invisible':[('partner_id','!=',False)]}"
                             class="oe_highlight oe_inline ml32"
                             special="quick_create" field="partner_id" context="{'force_email':True,'default_email':message_email_from,'default_name':message_name_from, 'update_message_author':True}" />
-                </div>
-                <label for="res_id"/>
-                <div>
-                    <field name="res_id" context="{'extended_name_with_contact':1}" widget="many2one" attrs="{'readonly': [('model','=',False)]}" class="oe_inline"/>
-                    <button string="Create new record" name="create_record" type="object" class="oe_highlight oe_inline ml32" attrs="{'invisible':['|',('model','=',False)]}" special="quick_create" field="res_id" use_for_mail_move_message="True"/>
                 </div>
                 <label for="move_back" attrs="{'invisible':[('message_is_moved','=',False)]}"/>
                 <div attrs="{'invisible':[('message_is_moved','=',False)]}">
@@ -86,39 +88,50 @@
     </field>
 </record>
 
-        <!-- Relocation config wizard -->
-        <record id="view_mail_move_message_config_settings" model="ir.ui.view">
-            <field name="name">relocation settings</field>
-            <field name="model">mail_move_message.config.settings</field>
-            <field name="arch" type="xml">
-                <form string="Configure Mail Relocation" class="oe_form_configuration">
-                    <header>
-                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
-                        or
-                        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
-                    </header>
-                    <div name="general">
-                        <separator string="Models"/>
-                        <field name="model_ids" widget="many2many_tags"/>
-                        <separator string="Options"/>
-                        <label for="move_followers"/>
-                        <field name="move_followers"/>
+<!-- Relocation config wizard -->
+<record id="view_mail_move_message_config_settings" model="ir.ui.view">
+    <field name="name">res.config.settings.view.form.inherit</field>
+    <field name="model">res.config.settings</field>
+    <field name="priority" eval="55"/>
+    <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//div[hasclass('settings')]" position="inside">
+            <div class="app_settings_block" data-string="Mail Relocation" string="Mail Relocation" data-key="mail_move_message">
+                <h2>Mail Relocation</h2>
+                <div class="row mt16 o_settings_container">
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="crm_lead">
+                        <div class="o_setting_left_pane">
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="model_ids"/>
+                            <div class="text-muted">
+                                Add models to be used for message relocation
+                            </div>
+                            <field name="model_ids" widget="many2many_tags"/>
+                        </div>
                     </div>
-                </form>
-            </field>
-        </record>
+                    <div class="col-xs-12 col-md-6 o_setting_box" id="crm_lead">
+                        <div class="o_setting_left_pane">
+                            <field name="move_followers"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="move_followers"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </field>
+</record>
 
-        <record id="action_mail_move_message_config" model="ir.actions.act_window">
-            <field name="name">Mail Relocation</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">mail_move_message.config.settings</field>
-            <field name="view_id" ref="view_mail_move_message_config_settings"/>
-            <field name="view_mode">form</field>
-            <field name="target">inline</field>
-        </record>
+<record id="action_mail_move_message_config" model="ir.actions.act_window">
+    <field name="name">Mail Relocation</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">res.config.settings</field>
+    <field name="view_id" ref="view_mail_move_message_config_settings"/>
+    <field name="view_mode">form</field>
+    <field name="target">inline</field>
+    <field name="context">{'module' : 'mail_move_message'}</field>
+</record>
 
-        <!-- Add menu entry in Settings/Email -->
-        <menuitem name="Mail Relocation" id="menu_mail_move_message" parent="base.menu_email" sequence="99" action="action_mail_move_message_config"/>
-
-    </data>
-</openerp>
+</odoo>

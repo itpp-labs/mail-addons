@@ -877,6 +877,12 @@ chat_manager.post_message = function (data, options) {
         attachment_ids: data.attachment_ids,
     };
 
+    // for module mail_private
+    if (data.is_private) {
+        msg.is_private = data.is_private;
+        msg.channel_ids = data.channel_ids;
+    }
+
     // Replace emojis by their unicode character
     _.each(_.keys(emoji_unicodes), function (key) {
         var escaped_key = String(key).replace(/([.*+?=^!:${}()|[\]\/\\])/g, '\\$1');

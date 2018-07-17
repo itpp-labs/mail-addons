@@ -1,36 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_sent
-#
+# * mail_sent
+# 
+# Translators:
+# Translation Bot <i18n-bot@it-projects.info>, 2018
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 18:57+0000\n"
-"PO-Revision-Date: 2017-03-29 18:57+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2018-04-21 00:05+0000\n"
+"PO-Revision-Date: 2018-04-21 00:05+0000\n"
+"Last-Translator: Translation Bot <i18n-bot@it-projects.info>, 2018\n"
+"Language-Team: Portuguese (https://www.transifex.com/it-projects-llc/teams/76080/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
-
-#. module: mail_sent
-#: model:ir.actions.client,help:mail_sent.action_mail_sent_feeds
-msgid "<p>\n"
-"                    No message found and no message sent yet.\n"
-"                </p><p>\n"
-"                    Click on the top-right icon to compose a message. This\n"
-"                    message will be sent by email if it's an internal contact.\n"
-"                </p>\n"
-"            "
-msgstr "<p>\n"
-"                    Nenhuma mensagem encontrada e nenhuma enviada ainda.\n"
-"                </p><p>\n"
-"                    Clique no ícone no canto superior direito para compor uma nova mensagem.\n"
-"                    Esta mensagem será enviada por e-mail se não for um contato interno.\n"
-"                </p>\n"
-"            "
+"Language: pt\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mail_sent
 #: model:ir.model,name:mail_sent.model_mail_compose_message
@@ -43,25 +29,37 @@ msgid "Message"
 msgstr "Mensagem"
 
 #. module: mail_sent
-#: model:ir.model,name:mail_sent.model_mail_notification
-msgid "Notifications"
-msgstr "Notificações"
+#. openerp-web
+#: code:addons/mail_sent/static/src/xml/menu.xml:15
+#, python-format
+msgid "No sent messages"
+msgstr ""
 
 #. module: mail_sent
-#: model:ir.actions.client,name:mail_sent.action_mail_sent_feeds
-#: model:ir.ui.menu,name:mail_sent.mail_sentfeeds
-#: field:mail.compose.message,sent:0
-#: field:mail.message,sent:0
+#. openerp-web
+#: code:addons/mail_sent/static/src/js/sent.js:61
+#: code:addons/mail_sent/static/src/xml/menu.xml:7
+#: model:ir.model.fields,field_description:mail_sent.field_mail_compose_message_sent
+#: model:ir.model.fields,field_description:mail_sent.field_mail_mail_sent
+#: model:ir.model.fields,field_description:mail_sent.field_mail_message_sent
+#, python-format
 msgid "Sent"
 msgstr "Enviados"
 
 #. module: mail_sent
-#: help:mail.message,sent:0
+#: model:ir.model.fields,help:mail_sent.field_mail_mail_sent
+#: model:ir.model.fields,help:mail_sent.field_mail_message_sent
 msgid "Was message sent to someone"
 msgstr "Foi enviada mensagem para alguém"
 
 #. module: mail_sent
-#: help:mail.compose.message,sent:0
+#. openerp-web
+#: code:addons/mail_sent/static/src/xml/menu.xml:16
+#, python-format
+msgid "You can send messages and then these messages will appear here."
+msgstr ""
+
+#. module: mail_sent
+#: model:ir.model.fields,help:mail_sent.field_mail_compose_message_sent
 msgid "dummy field to fix inherit error"
 msgstr "campo fictício para corrigir o erro da herança"
-

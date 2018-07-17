@@ -1,20 +1,27 @@
-# -*- coding: utf-8 -*-
-from openerp import api
-from openerp import fields
-from openerp import models
-from openerp.tools import email_split
-from openerp.tools.translate import _
+# Copyright 2016 Ildar Nasyrov <https://it-projects.info/team/iledarn>
+# Copyright 2016-2018 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+# Copyright 2016 intero-chz <https://github.com/intero-chz>
+# Copyright 2016 manawi <https://github.com/manawi>
+# Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+
+from odoo import api
+from odoo import fields
+from odoo import models
+from odoo.tools import email_split
+from odoo.tools.translate import _
+from odoo import exceptions
 
 
 class Wizard(models.TransientModel):
     _name = 'mail_move_message.wizard'
 
+    @api.model
     def _model_selection(self):
         selection = []
         config_parameters = self.env['ir.config_parameter']
-        model_names = config_parameters.get_param('mail_relocation_models')
+        model_names = config_parameters.sudo().get_param('mail_relocation_models')
         model_names = model_names.split(',') if model_names else []
-
         if 'default_message_id' in self.env.context:
             message = self.env['mail.message'].browse(self.env.context['default_message_id'])
             if message.model and message.model not in model_names:
@@ -23,16 +30,16 @@ class Wizard(models.TransientModel):
                 model_names.append(message.moved_from_model)
         if model_names:
             selection = [(m.model, m.display_name) for m in self.env['ir.model'].search([('model', 'in', model_names)])]
-
         return selection
 
     @api.model
     def default_get(self, fields_list):
         res = super(Wizard, self).default_get(fields_list)
 
-        model_fields = self.fields_get()
-        if model_fields['model']['selection']:
-            res['model'] = model_fields['model']['selection'] and model_fields['model']['selection'][0][0]
+        available_models = self._model_selection()
+        if len(available_models):
+            record = self.env[available_models[0][0]].search([], limit=1)
+            res['model_record'] = len(record) and (available_models[0][0] + ',' + str(record.id)) or False
 
         if 'message_id' in res:
             message = self.env['mail.message'].browse(res['message_id'])
@@ -55,10 +62,9 @@ class Wizard(models.TransientModel):
                     res['res_id'] = res_id[0].id
 
         config_parameters = self.env['ir.config_parameter']
-        res['move_followers'] = config_parameters.get_param('mail_relocation_move_followers')
+        res['move_followers'] = config_parameters.sudo().get_param('mail_relocation_move_followers')
 
         res['uid'] = self.env.uid
-
         return res
 
     message_id = fields.Many2one('mail.message', string='Message')
@@ -69,16 +75,19 @@ class Wizard(models.TransientModel):
     message_moved_by_user_id = fields.Many2one('res.users', related='message_id.moved_by_user_id', string='Moved by', readonly=True)
     message_is_moved = fields.Boolean(string='Is Moved', related='message_id.is_moved', readonly=True)
     parent_id = fields.Many2one('mail.message', string='Search by name', )
-    model = fields.Selection(_model_selection, string='Model')
-    res_id = fields.Integer(string='Record')
-    can_move = fields.Boolean('Can move', compute='get_can_move')
+    model_record = fields.Reference(selection="_model_selection", string='Record')
+    model = fields.Char(compute="_compute_model_res_id", string='Model')
+    res_id = fields.Integer(compute="_compute_model_res_id", string='Record')
+
+    can_move = fields.Boolean('Can move', compute='_compute_get_can_move')
     move_back = fields.Boolean('MOVE TO ORIGIN', help='Move  message and submessages to original place')
     partner_id = fields.Many2one('res.partner', string='Author')
     filter_by_partner = fields.Boolean('Filter Records by partner')
     message_email_from = fields.Char()
     message_name_from = fields.Char()
     # FIXME message_to_read should be True even if current message or any his childs are unread
-    message_to_read = fields.Boolean(related='message_id.needaction')
+    message_to_read = fields.Boolean(compute='_compute_is_read', string="Unread message",
+                                     help="Service field shows that this message were unread when moved")
     uid = fields.Integer()
     move_followers = fields.Boolean(
         'Move Followers',
@@ -86,11 +95,23 @@ class Wizard(models.TransientModel):
              "You must use this option, if new record has restricted access.\n"
              "You can change default value for this option at Settings/System Parameters")
 
+    @api.multi
+    @api.depends('model_record')
+    def _compute_model_res_id(self):
+        for rec in self:
+            rec.model = rec.model_record and rec.model_record._name or False
+            rec.res_id = rec.model_record and rec.model_record.id or False
+
     @api.depends('message_id')
     @api.multi
-    def get_can_move(self):
+    def _compute_get_can_move(self):
         for r in self:
             r.get_can_move_one()
+
+    @api.multi
+    def _compute_is_read(self):
+        messages = self.env['mail.message'].sudo().browse(self.message_id.all_child_ids.ids + [self.message_id.id])
+        self.message_to_read = True in [m.needaction for m in messages]
 
     @api.multi
     def get_can_move_one(self):
@@ -103,12 +124,11 @@ class Wizard(models.TransientModel):
         if not self.move_back:
             return
         self.parent_id = self.message_id.moved_from_parent_id
-        model = self.message_id.moved_from_model
-        if self.message_id.is_moved:
-            self.model = model
-            self.res_id = self.message_id.moved_from_res_id
+        message = self.message_id
+        if message.is_moved:
+            self.model_record = self.env[message.moved_from_model].browse(message.moved_from_res_id)
 
-    @api.onchange('parent_id', 'res_id', 'model')
+    @api.onchange('parent_id', 'model_record')
     def update_move_back(self):
         model = self.message_id.moved_from_model
         self.move_back = self.parent_id == self.message_id.moved_from_parent_id \
@@ -130,7 +150,7 @@ class Wizard(models.TransientModel):
         if self.model and self.filter_by_partner and self.partner_id:
             fields = self.env[self.model].fields_get(False)
             contact_field = False
-            for n, f in fields.iteritems():
+            for n, f in fields.items():
                 if f['type'] == 'many2one' and f['relation'] == 'res.partner':
                     contact_field = n
                     break
@@ -180,21 +200,24 @@ class Wizard(models.TransientModel):
     @api.multi
     def move(self):
         for r in self:
+            if not r.model:
+                raise exceptions.except_orm(_('Record field is empty!'), _('Select a record for relocation first'))
+
+        for r in self:
             r.check_access()
             if not r.parent_id or not (r.parent_id.model == r.model and
                                        r.parent_id.res_id == r.res_id):
                 # link with the first message of record
                 parent = self.env['mail.message'].search([('model', '=', r.model), ('res_id', '=', r.res_id)], order='id', limit=1)
                 r.parent_id = parent.id or None
+            r.message_id.move(r.parent_id.id, r.res_id, r.model, r.move_back, r.move_followers, r.message_to_read)
 
-            r.message_id.move(r.parent_id.id, r.res_id, r.model, r.move_back, r.move_followers)
-
-        if not (r.model and r.res_id):
-            r.message_id.needaction = False
+        if r.model in ['mail.message', 'mail.channel', False]:
             return {
-                'type': 'ir.actions.client',
-                'name': 'All messages',
-                'tag': 'reload',
+                'name': 'Chess game page',
+                'type': 'ir.actions.act_url',
+                'url': '/web',
+                'target': 'self',
             }
         return {
             'name': _('Record'),
@@ -239,7 +262,7 @@ class Wizard(models.TransientModel):
 
         fields = model.fields_get()
         contact_field = False
-        for n, f in fields.iteritems():
+        for n, f in fields.items():
             if f['type'] == 'many2one' and f['relation'] == 'res.partner':
                 contact_field = n
                 break
@@ -269,10 +292,11 @@ class MailMessage(models.Model):
     moved_from_parent_id = fields.Many2one('mail.message', 'Parent Message (Original)', ondelete='set null')
     moved_by_message_id = fields.Many2one('mail.message', 'Moved by message', ondelete='set null', help='Top message, that initate moving this message')
     moved_by_user_id = fields.Many2one('res.users', 'Moved by user', ondelete='set null')
-    all_child_ids = fields.One2many('mail.message', string='All childs', compute='_get_all_childs', help='all childs, including subchilds')
+    all_child_ids = fields.One2many('mail.message', string='All childs', compute='_compute_get_all_childs', help='all childs, including subchilds')
+    moved_as_unread = fields.Boolean('Was Unread', default=False)
 
     @api.multi
-    def _get_all_childs(self, include_myself=True):
+    def _compute_get_all_childs(self, include_myself=True):
         for r in self:
             r._get_all_childs_one(include_myself=include_myself)
 
@@ -301,12 +325,12 @@ class MailMessage(models.Model):
                 self.env[model].browse(ids).message_subscribe([f.partner_id.id], [s.id for s in f.subtype_ids])
 
     @api.multi
-    def move(self, parent_id, res_id, model, move_back, move_followers=False):
+    def move(self, parent_id, res_id, model, move_back, move_followers=False, message_to_read=False):
         for r in self:
-            r.move_one(parent_id, res_id, model, move_back, move_followers=move_followers)
+            r.move_one(parent_id, res_id, model, move_back, move_followers=move_followers, message_to_read=message_to_read)
 
     @api.multi
-    def move_one(self, parent_id, res_id, model, move_back, move_followers=False):
+    def move_one(self, parent_id, res_id, model, move_back, move_followers=False, message_to_read=False):
         self.ensure_one()
         if parent_id == self.id:
             # if for any reason method is called to move message with parent
@@ -323,6 +347,7 @@ class MailMessage(models.Model):
             vals['moved_from_res_id'] = None
             vals['moved_from_model'] = None
             vals['moved_from_parent_id'] = None
+            vals['moved_as_unread'] = None
         else:
             vals['parent_id'] = parent_id
             vals['res_id'] = res_id
@@ -331,22 +356,34 @@ class MailMessage(models.Model):
             vals['is_moved'] = True
             vals['moved_by_user_id'] = self.env.user.id
             vals['moved_by_message_id'] = self.id
+            vals['moved_as_unread'] = message_to_read
+            # Update record_name in message
+            vals['record_name'] = self._get_record_name(vals)
 
-        # Update record_name in message
-        vals['record_name'] = self._get_record_name(vals)
+        # unread message remains unread after moving back to origin
+        if self.moved_as_unread and move_back:
+            notification = {
+                'mail_message_id': self.id,
+                'res_partner_id': self.env.user.partner_id.id,
+                'is_read': False,
+            }
+            self.write({
+                'notification_ids': [(0, 0, notification)],
+            })
 
         for r in self.all_child_ids:
             r_vals = vals.copy()
             if not r.is_moved:
                 # moved_from_* variables contain not last, but original
                 # reference
-                r_vals['moved_from_parent_id'] = r.parent_id.id
-                r_vals['moved_from_res_id'] = r.res_id
-                r_vals['moved_from_model'] = r.model
+                r_vals['moved_from_parent_id'] = r.parent_id.id or r.env.context.get('uid')
+                r_vals['moved_from_res_id'] = r.res_id or r.id
+                r_vals['moved_from_model'] = r.model or r._name
             elif move_back:
                 r_vals['parent_id'] = r.moved_from_parent_id.id
                 r_vals['res_id'] = r.moved_from_res_id
-                r_vals['model'] = r.moved_from_model
+                r_vals['model'] = (r.moved_from_model and r.moved_from_model not in ['mail.message', 'mail.channel', False]) and r.moved_from_model
+                r_vals['record_name'] = r_vals['model'] and self.env[r.moved_from_model].browse(r.moved_from_res_id).name
 
             if move_followers:
                 r.sudo().move_followers(r_vals.get('model'), r_vals.get('res_id'))
@@ -362,7 +399,7 @@ class MailMessage(models.Model):
             'res_id': vals.get('res_id'),
             'model': vals.get('model'),
             'is_moved': vals['is_moved'],
-            'record_name': vals['record_name']
+            'record_name': 'record_name' in vals and vals['record_name'],
         }
         self.env['bus.bus'].sendone((self._cr.dbname, 'mail_move_message'), notification)
 
@@ -391,34 +428,32 @@ class MailMessage(models.Model):
 
 
 class MailMoveMessageConfiguration(models.TransientModel):
-    _name = 'mail_move_message.config.settings'
     _inherit = 'res.config.settings'
 
     model_ids = fields.Many2many(comodel_name='ir.model', string='Models')
     move_followers = fields.Boolean('Move Followers')
 
     @api.model
-    def get_default_move_message_configs(self, fields):
-        config_parameters = self.env['ir.config_parameter']
-        model_obj = self.env['ir.model']
-        model_names = config_parameters.get_param('mail_relocation_models')
-        if not model_names:
-            return {}
+    def get_values(self):
+        res = super(MailMoveMessageConfiguration, self).get_values()
+        config_parameters = self.env["ir.config_parameter"].sudo()
+        model_names = config_parameters.sudo().get_param('mail_relocation_models')
         model_names = model_names.split(',')
-        model_ids = model_obj.search([('model', 'in', model_names)])
-        return {
-            'model_ids': [m.id for m in model_ids],
-            'move_followers': config_parameters.get_param('mail_relocation_move_followers')
-        }
+        model_ids = self.env['ir.model'].sudo().search([('model', 'in', model_names)])
+        res.update(
+            model_ids=[m.id for m in model_ids],
+            move_followers=config_parameters.sudo().get_param('mail_relocation_move_followers'),
+        )
+        return res
 
     @api.multi
-    def set_move_message_configs(self):
-        config_parameters = self.env['ir.config_parameter']
-        model_names = ''
+    def set_values(self):
+        super(MailMoveMessageConfiguration, self).set_values()
+        config_parameters = self.env["ir.config_parameter"].sudo()
         for record in self:
-            model_names = ','.join([m.model for m in record.model_ids])
-            config_parameters.set_param('mail_relocation_models', model_names)
-            config_parameters.set_param('mail_relocation_move_followers', record.move_followers or '')
+            model_names = ','.join([x.model for x in record.model_ids])
+            config_parameters.set_param("mail_relocation_models", model_names or '')
+            config_parameters.set_param("mail_relocation_move_followers", record.move_followers or '')
 
 
 class ResPartner(models.Model):
