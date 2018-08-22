@@ -31,8 +31,8 @@
 
     "post_load": None,
     "pre_init_hook": None,
-    "post_init_hook": None,
-    "uninstall_hook": None,
+    "post_init_hook": "post_init_hook",
+    "uninstall_hook": "uninstall_hook",
 
     "auto_install": False,
     "installable": True,
