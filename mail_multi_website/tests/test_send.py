@@ -35,9 +35,13 @@ class TestSendMail(TransactionCase):
         self.switch_user_website()
         # update user's email
         self.env.user.email = self.email
+        # Check that writing works
+        self.env.user.invalidate_cache()
+        self.assertEqual(self.env.user.email, self.email, 'Write methods doesn\'t work (Field is not in registry?)')
 
         # changing company will automatically update website value to empty value
         self.env.user.company_id = self.original_company
+        self.env.user.invalidate_cache()
         self.assertEqual(self.env.user.email, self.original_email, 'Multi-email doesn\'t work on switching websites')
 
     def test_multi_email_partner(self):
@@ -54,5 +58,5 @@ class TestSendMail(TransactionCase):
         self.assertEqual(partner.email, new_email)
         # changing company will automatically update website value to empty value
         self.env.user.company_id = self.original_company
-
+        self.env.user.invalidate_cache()
         self.assertEqual(partner.email, new_email, 'Partner\'s email must not be Multi-website')
