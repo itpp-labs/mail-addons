@@ -34,5 +34,3 @@ def uninstall_hook(cr, registry):
     for partner_id, default_email in cr.fetchall():
         env['res.partner'].browse(partner_id).email = default_email
 
-    # delete email_multi_website column in user
-    cr.execute("ALTER TABLE res_users DROP COLUMN email_multi_website")
