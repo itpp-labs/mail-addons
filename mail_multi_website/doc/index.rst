@@ -25,8 +25,24 @@ User's email per website
 * Refresh page if you just granted your user access to websites
 * Use top right-hand corner button with current website name to switch between websites
 * Use top right-hand corner button with user name and avatar to open
-  Preference popup. When you edit **Email** field, it will be saved as value
+  Preference popup. When you edit **Email** field, it will be saved as a value
   for current website.
+
+Email template per website
+--------------------------
+
+* Refresh page if you just granted your user access to websites
+* `Activate Developer Mode <https://odoo-development.readthedocs.io/en/latest/odoo/usage/debug-mode.html>`__
+* Use top right-hand corner button with current website name to switch between websites
+* Go to menu ``[[ Settings ]] >> Technical >> Email >> Templates``
+* When you edit template, following fields will be saved as a value for current website:
+
+  * **Body**
+  * **Outgoing Mail Server**
+  * **Optional report to print and attach**
+
+* Additional variable ``website`` is available to configure rest fields (**Subject**, **From**, etc.)
+
 
 Alias domain per website
 ------------------------
@@ -44,3 +60,5 @@ Usage
 When you work from backend, Email for current website is used.
 
 When a user do something on website (e.g. purchase products) and some mail is sent, then email address for that website will be used (mostly Administrator's email address).
+
+When email is sent, template's value like body, subject, etc. for current values are used.

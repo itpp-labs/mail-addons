@@ -9,6 +9,10 @@
 Mail-related stuff for multi-website support
 
 * Makes ``res.users``'s ``email`` field website-dependent
+* Makes ``mail.template``'s ``body_html`` field website-dependent
+* Overrides ``mail.template``'s ``render_template`` method to add ``website``
+  variable. It may cause incompatibility with other modules that redefine that
+  method too.
 
 Credits
 =======
