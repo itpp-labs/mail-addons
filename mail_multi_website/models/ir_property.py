@@ -9,6 +9,12 @@ class IrProperty(models.Model):
     @api.multi
     def write(self, vals):
         res = super(IrProperty, self).write(vals)
-        field = self.env.ref('base.field_res_users_email')
-        self._update_db_value_website_dependent(field)
+        field_object_list = [
+            self.env.ref('base.field_res_users_email'),
+            self.env.ref('mail.field_mail_template_body_html'),
+            self.env.ref('mail.field_mail_template_mail_server_id'),
+            self.env.ref('mail.field_mail_template_report_template'),
+        ]
+        for fobj in field_object_list:
+            self._update_db_value_website_dependent(fobj)
         return res
