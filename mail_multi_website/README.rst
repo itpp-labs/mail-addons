@@ -12,7 +12,6 @@ Mail-related stuff for multi-website support
 * Makes following fields in ``mail.template`` website-dependent:
 
   * ``body_html``
-  * ``attachment_ids``
   * ``mail_server_id``
   * ``report_template``
 

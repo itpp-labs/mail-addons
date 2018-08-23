@@ -38,7 +38,6 @@ Email template per website
 * When you edit template, following fields will be saved as a value for current website:
 
   * **Body**
-  * **Attachments**
   * **Outgoing Mail Server**
   * **Optional report to print and attach**
 
