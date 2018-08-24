@@ -7,6 +7,7 @@ class TestUi(odoo.tests.HttpCase):
 
     def test_01_mail_to(self):
         # checks the presence of an element with a link to the recipient
+        # TODO: instead of timeout, try to put $('a.recipient_link') as ready argument of phantom_js (third parameter)
         code = """
             setTimeout(function () {
                 $('a.recipient_link')[0].click();
