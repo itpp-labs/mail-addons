@@ -2,7 +2,6 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 import logging
 from odoo import models, fields, api, tools, _
-from odoo.http import request
 from odoo.exceptions import UserError
 from odoo.tools import pycompat
 from odoo.addons.mail.models.mail_template import format_date, format_tz, format_amount
