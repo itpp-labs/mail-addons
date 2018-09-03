@@ -16,6 +16,11 @@ class TestRender(TestMail):
             'name': 'New Test Website'
         })
         self.website.company_id = self.company
+        self.mail_server_id = self.env['ir.mail_server'].create({
+            'name': 'mail server',
+            'smtp_host': 'mail.example.com',
+        })
+        self.website.mail_server_id = self.mail_server_id
 
         # copy-paste from mail.tests.test_mail_template
         self._attachments = [{
@@ -65,11 +70,13 @@ class TestRender(TestMail):
         mail_id = self.email_template.send_mail(self.test_pigs.id)
         mail = self.env['mail.mail'].browse(mail_id)
         self.assertEqual(mail.subject, '')
+        self.assertFalse(mail.mail_server_id)
 
         # sending from frontend
         mail_id = self.email_template.with_context(website_id=self.website.id).send_mail(self.test_pigs.id)
         mail = self.env['mail.mail'].browse(mail_id)
         self.assertEqual(mail.subject, self.website.name)
+        self.assertEqual(mail.mail_server_id, self.mail_server_id)
 
         # copy-pasted tests
         self.assertEqual(mail.email_to, self.email_template.email_to)
