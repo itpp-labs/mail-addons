@@ -97,6 +97,15 @@ class TestRender(TestMail):
 
     def test_message_post_with_template(self):
         self.switch_user_website()
-        self.test_pigs.message_post_with_template(self.email_template.id)
+        self.env.user.email = self.email
+        self.env.user.invalidate_cache()
+        self.env.user.invalidate_cache()
+        self.assertEqual(self.env.user.email, self.email)
+        # switch admin user back
+        self.env.user.company_id = self.original_company
+        self.env.user.invalidate_cache()
+        self.assertEqual(self.env.user.email, self.original_email)
+
+        self.test_pigs.with_context(website_id=self.website.id).message_post_with_template(self.email_template.id)
         message = self.env['mail.message'].search([], order='id desc', limit=1)
         self.assertIn('<%s>' % self.email, message.email_from)
