@@ -23,6 +23,7 @@
     ],
     "external_dependencies": {"python": [], "bin": []},
     "data": [
+        "views/website_views.xml",
     ],
     "demo": [
     ],

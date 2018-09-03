@@ -24,6 +24,24 @@ class MailTemplate(models.Model):
     mail_server_id = fields.Many2one(string='Outgoing Mail Server (Multi-Website)', company_dependent=True, website_dependent=True)
     report_template = fields.Many2one(string='Optional report to print and attach (Multi-Website)', company_dependent=True, website_dependent=True)
 
+    @api.multi
+    def generate_email(self, res_ids, fields=None):
+        """Remove mail_server_id when not set to recompute in _default_mail_server_id in mail.message"""
+        multi_mode = True
+        if isinstance(res_ids, pycompat.integer_types):
+            multi_mode = False
+        res = super(MailTemplate, self).generate_email(res_ids, fields=fields)
+        if not multi_mode:
+            list_of_dict = {0: res}
+        else:
+            list_of_dict = res
+
+        for _unused, data in list_of_dict.items():
+            if 'mail_server_id' in data and not data.get('mail_server_id'):
+                del data['mail_server_id']
+
+        return res
+
     @api.model
     def render_template(self, template_txt, model, res_ids, post_process=False):
         """Override to add website to context"""

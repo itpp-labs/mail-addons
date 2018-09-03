@@ -62,7 +62,7 @@ class TestRender(TestMail):
         ))
 
     def test_website_in_render_variables(self):
-        """Email body must be per-website and per-language"""
+        """Mail values are per website"""
 
         self.env.user.backend_website_id = None
 
@@ -73,7 +73,7 @@ class TestRender(TestMail):
         self.assertFalse(mail.mail_server_id)
 
         # sending from frontend
-        mail_id = self.email_template.with_context(website_id=self.website.id).send_mail(self.test_pigs.id)
+        mail_id = self.email_template.with_context(wdb=True, website_id=self.website.id).send_mail(self.test_pigs.id)
         mail = self.env['mail.mail'].browse(mail_id)
         self.assertEqual(mail.subject, self.website.name)
         self.assertEqual(mail.mail_server_id, self.mail_server_id)
