@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 from . import models
 from . import wizard
+from .tests import test_mail_model
 
 
 def post_init_hook(cr, registry):
