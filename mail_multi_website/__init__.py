@@ -26,6 +26,7 @@ def uninstall_hook(cr, registry):
     # remove properties
     field_ids = [
         env.ref('base.field_res_users_email').id,
+        env.ref('base.field_res_users_signature').id,
         env.ref('mail.field_mail_template_body_html').id,
         env.ref('mail.field_mail_template_mail_server_id').id,
         env.ref('mail.field_mail_template_report_template').id,
@@ -36,8 +37,3 @@ def uninstall_hook(cr, registry):
     cr.execute("SELECT partner_id,email_multi_website FROM res_users")
     for partner_id, default_email in cr.fetchall():
         env['res.partner'].browse(partner_id).email = default_email
-
-    # No need to update base module as in ir_config_parameter_multi_company,
-    # because email field is related in res.users originally and not needed to be recreated.
-    # So, update mail module only
-    env['ir.module.module'].search([('name', '=', 'mail')]).button_upgrade()

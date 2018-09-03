@@ -8,7 +8,11 @@
 
 Mail-related stuff for multi-website support
 
-* Makes ``res.users``'s ``email`` field website-dependent
+* Makes following field in ``res.users``website-dependent:
+
+  * ``email``
+  * ``signature``
+
 * Makes following fields in ``mail.template`` website-dependent:
 
   * ``body_html``
