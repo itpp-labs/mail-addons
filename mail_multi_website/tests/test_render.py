@@ -59,6 +59,8 @@ class TestRender(TestMail):
     def test_website_in_render_variables(self):
         """Email body must be per-website and per-language"""
 
+        self.env.user.backend_website_id = None
+
         # sending without website
         mail_id = self.email_template.send_mail(self.test_pigs.id)
         mail = self.env['mail.mail'].browse(mail_id)
