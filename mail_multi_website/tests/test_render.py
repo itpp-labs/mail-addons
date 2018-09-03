@@ -11,6 +11,12 @@ class TestRender(TestMail):
 
     def setUp(self):
         super(TestRender, self).setUp()
+
+        self.original_email = self.env.user.email
+        self.original_company = self.env.user.company_id
+        self.email = 'superadmin@second-website.example'
+        self.assertNotEqual(self.original_email, self.email)
+
         self.website = self.env.ref('website.website2')
         self.company = self.env['res.company'].create({
             'name': 'New Test Website'
@@ -88,3 +94,9 @@ class TestRender(TestMail):
         mail_id = self.email_template.send_mail(self.test_pigs.id)
         mail = self.env['mail.mail'].browse(mail_id)
         self.assertEqual(mail.subject, self.website.name)
+
+    def test_message_post_with_template(self):
+        self.switch_user_website()
+        self.test_pigs.message_post_with_template(self.email_template.id)
+        message = self.env['mail.message'].search([], order='id desc', limit=1)
+        self.assertIn('<%s>' % self.email, message.email_from)
