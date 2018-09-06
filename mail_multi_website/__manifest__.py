@@ -5,7 +5,7 @@
     "summary": """Use single Backend to manage several Websites""",
     "category": "Discuss",
     # "live_test_url": "http://apps.it-projects.info/shop/product/DEMO-URL?version=11.0",
-    "images": [],
+    "images": ["images/main.jpg"],
     "version": "11.0.1.0.0",
     "application": False,
 
