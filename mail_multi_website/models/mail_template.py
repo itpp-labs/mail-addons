@@ -60,16 +60,26 @@ class MailTemplate(models.Model):
             _logger.info("Failed to load template %r", template_txt, exc_info=True)
             return multi_mode and results or results[res_ids[0]]
 
+        if self.env.context.get('website_id'):
+            website = self.env['website'].browse(self.env.context.get('website_id'))
+        else:
+            website = self.env.user.backend_website_id
+
+        # TODO
+        # company_id in context is updated in website_multi_company and handled in get_param method in ir_config_parameter_multi_company
+        # It could be wrong and we have to do everything here instead and probably take company_id depending on website_id from context
+        # Also, we need to use force_company and remove the extension in ir_config_parameter_multi_company
+        if self.env.context.get('company_id') \
+           and website \
+           and website.company_id != self.env.context.get('company_id'):
+            # company_id and website_id in context is incompatible
+            self = self.with_context(website_id=False)
+
         # prepare template variables
         records = self.env[model].browse(it for it in res_ids if it)  # filter to avoid browsing [None]
         res_to_rec = dict.fromkeys(res_ids, None)
         for record in records:
             res_to_rec[record.id] = record
-
-        if self.env.context.get('website_id'):
-            website = self.env['website'].browse(self.env.context.get('website_id'))
-        else:
-            website = self.env.user.backend_website_id
 
         variables = {
             'format_date': lambda date, format=False, context=self._context: format_date(self.env, date, format),
