@@ -43,6 +43,7 @@ Email template per website
 
 * Additional variable ``website`` is available to configure rest fields (**Subject**, **From**, etc.)
 
+Note. If related record (e.g. ``sale.order``) has field ``company_id`` or ``website_id`` those values will be used instead of currently selected in Website / Company Switchers
 
 Alias domain per website
 ------------------------

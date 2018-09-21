@@ -79,6 +79,7 @@ class TestRender(TestMail):
         self.assertFalse(mail.mail_server_id)
 
         # sending from frontend
+        self.test_pigs.company_id = None
         mail_id = self.email_template.with_context(wdb=True, website_id=self.website.id).send_mail(self.test_pigs.id)
         mail = self.env['mail.mail'].browse(mail_id)
         self.assertEqual(mail.subject, self.website.name)

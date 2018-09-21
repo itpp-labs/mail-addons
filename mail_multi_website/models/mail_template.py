@@ -60,21 +60,6 @@ class MailTemplate(models.Model):
             _logger.info("Failed to load template %r", template_txt, exc_info=True)
             return multi_mode and results or results[res_ids[0]]
 
-        if self.env.context.get('website_id'):
-            website = self.env['website'].browse(self.env.context.get('website_id'))
-        else:
-            website = self.env.user.backend_website_id
-
-        # TODO
-        # company_id in context is updated in website_multi_company and handled in get_param method in ir_config_parameter_multi_company
-        # It could be wrong and we have to do everything here instead and probably take company_id depending on website_id from context
-        # Also, we need to use force_company and remove the extension in ir_config_parameter_multi_company
-        if self.env.context.get('company_id') \
-           and website \
-           and website.company_id != self.env.context.get('company_id'):
-            # company_id and website_id in context is incompatible
-            self = self.with_context(website_id=False)
-
         # prepare template variables
         records = self.env[model].browse(it for it in res_ids if it)  # filter to avoid browsing [None]
         res_to_rec = dict.fromkeys(res_ids, None)
@@ -87,10 +72,39 @@ class MailTemplate(models.Model):
             'format_amount': lambda amount, currency, context=self._context: format_amount(self.env, amount, currency),
             'user': self.env.user,
             'ctx': self._context,  # context kw would clash with mako internals
-            'website': website,
         }
+
+        # [NEW] Check website and company context
+        company = None
+
+        company_id = self.env.context.get('force_company')
+        if company_id:
+            company = self.env['res.company'].sudo().browse(company_id)
+
+        if self.env.context.get('website_id'):
+            website = self.env['website'].browse(self.env.context.get('website_id'))
+        else:
+            website = self.env.user.backend_website_id
+
         for res_id, record in res_to_rec.items():
-            variables['object'] = record
+            record_company = company
+            if not record_company:
+                if hasattr(record, 'company_id') and record.company_id:
+                    record_company = record.company_id
+
+            record_website = website
+            if hasattr(record, 'website_id') and record.website_id:
+                record_website = record.website_id
+
+            if record_company and record_website \
+               and record_website.company_id != company:
+                # company and website are incompatible, so keep only website
+                record_website = None
+
+            record_context = dict(force_company=record_company, website_id=record_website)
+            variables['object'] = record.with_context(**record_context)
+            variables['website'] = record_website
+
             try:
                 render_result = template.render(variables)
             except Exception:
@@ -98,11 +112,11 @@ class MailTemplate(models.Model):
                 raise UserError(_("Failed to render template %r using values %r") % (template, variables))
             if render_result == u"False":
                 render_result = u""
-            results[res_id] = render_result
 
-        if post_process:
-            for res_id, result in results.items():
-                results[res_id] = self.render_post_process(result)
+            if post_process:
+                render_result = self.with_context(**record_context).render_post_process(render_result)
+
+            results[res_id] = render_result
 
         return multi_mode and results or results[res_ids[0]]
 
