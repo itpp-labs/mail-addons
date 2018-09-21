@@ -8,7 +8,7 @@
 
 Mail-related stuff for multi-website support
 
-* Makes following field in ``res.users``website-dependent:
+* Makes following field in ``res.users`` website-dependent:
 
   * ``email``
   * ``signature``
