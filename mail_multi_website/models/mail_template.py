@@ -101,7 +101,7 @@ class MailTemplate(models.Model):
                 # company and website are incompatible, so keep only website
                 record_website = None
 
-            record_context = dict(force_company=record_company, website_id=record_website)
+            record_context = dict(force_company=record_company.id, website_id=record_website.id)
             variables['object'] = record.with_context(**record_context)
             variables['website'] = record_website
 
