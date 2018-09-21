@@ -1,7 +1,7 @@
 # Copyright 2018 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
-    "name": """Email Addresses per Website""",
+    "name": """Email Addresses and Templates per Website""",
     "summary": """Use single Backend to manage several Websites""",
     "category": "Discuss",
     # "live_test_url": "http://apps.it-projects.info/shop/product/DEMO-URL?version=11.0",

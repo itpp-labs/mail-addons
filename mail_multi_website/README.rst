@@ -2,9 +2,9 @@
    :target: https://www.gnu.org/licenses/lgpl
    :alt: License: LGPL-3
 
-=============================
- Email Addresses per Website
-=============================
+===========================================
+ Email Addresses and Templates per Website
+===========================================
 
 Mail-related stuff for multi-website support
 
