@@ -75,7 +75,7 @@ class MailTemplate(models.Model):
         }
 
         # [NEW] Check website and company context
-        company = None
+        company = self.env['res.company']  # empty value
 
         company_id = self.env.context.get('force_company')
         if company_id:
@@ -99,7 +99,7 @@ class MailTemplate(models.Model):
             if record_company and record_website \
                and record_website.company_id != company:
                 # company and website are incompatible, so keep only website
-                record_website = None
+                record_website = self.env['website']  # empty value
 
             record_context = dict(force_company=record_company.id, website_id=record_website.id)
             variables['object'] = record.with_context(**record_context)
