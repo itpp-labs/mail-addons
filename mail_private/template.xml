@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<odoo>
         <template
                 id="assets_backend"
                 name="mail_private_assets_backend"
@@ -11,5 +10,4 @@
                         src="/mail_private/static/src/js/mail_private.js"></script>
             </xpath>
         </template>
-    </data>
-</openerp>
+</odoo>
