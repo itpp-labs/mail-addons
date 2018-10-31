@@ -31,7 +31,7 @@ Maintainers
 -----------
 * `IT-Projects LLC <https://it-projects.info>`__
 
-      To get a guaranteed support you are kindly requested to purchase the module at `odoo apps store <https://apps.odoo.com/apps/modules/11.0/mailgun/>`__.
+      To get a guaranteed support you are kindly requested to purchase the module at `odoo apps store <https://apps.odoo.com/apps/modules/12.0/mailgun/>`__.
 
       Thank you for understanding!
 
@@ -40,14 +40,14 @@ Maintainers
 Further information
 ===================
 
-Demo: http://runbot.it-projects.info/demo/mail-addons/11.0
+Demo: http://runbot.it-projects.info/demo/mail-addons/12.0
 
-HTML Description: https://apps.odoo.com/apps/modules/11.0/mailgun/
+HTML Description: https://apps.odoo.com/apps/modules/12.0/mailgun/
 
 Usage instructions: `<doc/index.rst>`_
 
 Changelog: `<doc/changelog.rst>`_
 
-Notifications on updates: `via Atom <https://github.com/it-projects-llc/mail-addons/commits/11.0/mailgun.atom>`_, `by Email <https://blogtrottr.com/?subscribe=https://github.com/it-projects-llc/mail-addons/commits/11.0/malgun.atom>`_
+Notifications on updates: `via Atom <https://github.com/it-projects-llc/mail-addons/commits/12.0/mailgun.atom>`_, `by Email <https://blogtrottr.com/?subscribe=https://github.com/it-projects-llc/mail-addons/commits/12.0/malgun.atom>`_
 
-Tested on Odoo 11.0 dc61861f90d15797b19f8ebddfb0c8a66d0afa88
+Tested on Odoo 12.0 486777654009aa372a21e9d6dd52e8c22173ee16
