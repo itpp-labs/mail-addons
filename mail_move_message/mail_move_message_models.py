@@ -77,7 +77,7 @@ class Wizard(models.TransientModel):
     parent_id = fields.Many2one('mail.message', string='Search by name', )
     model_record = fields.Reference(selection="_model_selection", string='Record')
     model = fields.Char(compute="_compute_model_res_id", string='Model')
-    res_id = fields.Integer(compute="_compute_model_res_id", string='Record')
+    res_id = fields.Integer(compute="_compute_model_res_id", string='Record ID')
 
     can_move = fields.Boolean('Can move', compute='_compute_get_can_move')
     move_back = fields.Boolean('MOVE TO ORIGIN', help='Move  message and submessages to original place')
