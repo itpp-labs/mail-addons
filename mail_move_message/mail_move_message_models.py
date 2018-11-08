@@ -15,6 +15,7 @@ from odoo import exceptions
 
 class Wizard(models.TransientModel):
     _name = 'mail_move_message.wizard'
+    _description = 'Mail move message wizard'
 
     @api.model
     def _model_selection(self):
