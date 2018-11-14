@@ -21,7 +21,11 @@ odoo.define('mail_move_message.relocate', function (require) {
     var session = require('web.Session');
     var FormController = require('web.FormController');
     var FormView = require('web.FormView');
-    var registry = require('web.field_registry');
+    var FormRenderer = require('web.FormRenderer');
+    var dialogs = require('web.view_dialogs');
+    var Dialog = require('web.Dialog');
+    var relational_fields = require('web.relational_fields');
+    var Widget = require('web.Widget');
 
     var _t = core._t;
 
@@ -43,7 +47,7 @@ odoo.define('mail_move_message.relocate', function (require) {
                 view_type: 'form',
                 views: [[false, 'form']],
                 target: 'new',
-                context: {'default_message_id': message_id}
+                context: {'default_message_id': message_id},
             };
             this.do_action(action, {
                 'on_close': function(){}
@@ -113,5 +117,40 @@ odoo.define('mail_move_message.relocate', function (require) {
             delete values.model
             return this._super(recordID, values, options)
         }
+    });
+
+    FormController.include({
+        _onButtonClicked: function(event){
+            if(event.data.attrs.special === 'quick_create' && event.data.attrs.field === 'partner_id'){
+                var self = this;
+                var field_data = event.data.record.data;
+                this.on_saved = function(record, bool) {
+                    var values = [{
+                        id: record.res_id,
+                        display_name: record.data.display_name,
+                    }];
+                };
+                var wid = self.initialState.fieldsInfo.form.partner_id.Widget;
+                var relField = new relational_fields.FieldMany2One(wid,
+                    'partner_id',
+                    self.initialState,
+                    {
+                        mode: 'edit',
+                        viewType: 'form',
+                    });
+                relField.getParent = function() {
+                    // necessary for correct _trigger_up implementation in mixins.js
+                    return self;
+                };
+                var wizard_popup = relField._searchCreatePopup("form", false, {
+                    'message_name_from': field_data.message_name_from && field_data.message_name_from.split('@')[0],
+                    'message_email_from': field_data.message_email_from,
+                    'message_id': field_data.res_id,
+                    'mail_move_message': 1,
+                });
+            } else {
+                this._super.apply(this, arguments);
+            }
+        },
     });
 });

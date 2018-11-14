@@ -1,3 +1,8 @@
+/*  Copyright 2016-2018 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+    Copyright 2016 manavi <https://github.com/manawi>
+    Copyright 2017-2018 Artyom Losev <https://github.com/ArtyomLosev>
+    Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
+    License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). */
 odoo.define('mail_private', function (require) {
 'use strict';
 
@@ -100,6 +105,10 @@ ChatterComposer.include({
     init: function (parent, model, suggested_partners, options) {
         this._super(parent, model, suggested_partners, options);
         this.events['click .oe_composer_uncheck'] = 'on_uncheck_recipients';
+        if (typeof options.is_private === 'undefined') {
+            // otherwise it causes an error in context creating function
+            options.is_private = false;
+        }
     },
 
     preprocess_message: function () {
