@@ -1,57 +1,50 @@
+/*  # Copyright 2016-2018 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+    # Copyright 2017-2018 Artyom Losev <https://it-projects.info/team/ArtyomLosev>
+    # Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
+    # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). */
 odoo.define('mail_all.all', function (require) {
 "use strict";
 
-var chat_manager = require('mail_base.base').chat_manager;
 var core = require('web.core');
+var Manager = require('mail.Manager');
+var Mailbox = require('mail.model.Mailbox');
 
-var _lt = core._lt;
+var _t = core._t;
 
-var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
-ChatAction.include({
-    get_thread_rendering_options: function (messages) {
-        var options = this._super.apply(this, arguments);
-        options.display_subject = options.display_subject || this.channel.id === "channel_all";
-        return options;
-    }
+Manager.include({
+    _updateMailboxesFromServer: function (data) {
+        var self = this;
+        this._super(data);
+        if (!_.find(this.getThreads(), function(th){
+            return th.getID() === 'mailbox_channel_all';
+        })) {
+            this._addMailbox({
+                id: 'channel_all',
+                name: _t("All Messages"),
+                mailboxCounter: data.needaction_inbox_counter || 0,
+            });
+        }
+    },
+
+    _makeMessage: function (data) {
+        var message = this._super(data);
+        message._addThread('mailbox_channel_all');
+        return message;
+    },
 });
 
-// override methods
-var chat_manager_super = _.clone(chat_manager);
+Mailbox.include({
+    _getThreadDomain: function () {
+        if (this._id === 'mailbox_channel_all') {
+            return [];
+        }
+        return this._super();
+    },
+});
 
-chat_manager.get_properties = function (msg) {
-    var properties = chat_manager_super.get_properties.apply(this, arguments);
-    properties.is_all = this.property_descr("channel_all", msg, this);
-    return properties;
-};
-
-chat_manager.set_channel_flags = function (data, msg) {
-    chat_manager_super.set_channel_flags.apply(this, arguments);
-    msg.is_all = data.author_id !== 'ODOOBOT';
-    return msg;
-};
-
-chat_manager.get_channel_array = function (msg) {
-    var arr = chat_manager_super.get_channel_array.apply(this, arguments);
-    return arr.concat('channel_all');
-};
-
-chat_manager.get_domain = function (channel) {
-    return (channel.id === "channel_all")
-        ? []
-        : chat_manager_super.get_domain.apply(this, arguments);
-};
-
-
-chat_manager.is_ready.then(function () {
-        // Add all channel
-        chat_manager.add_channel({
-            id: "channel_all",
-            name: _lt("All messages"),
-            type: "static"
-        });
-        return $.when();
-    });
-
-return chat_manager;
+return {
+    'Manager': Manager,
+    'Mailbox': Mailbox,
+    };
 
 });

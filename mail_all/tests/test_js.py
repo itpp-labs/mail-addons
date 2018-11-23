@@ -1,3 +1,7 @@
+# Copyright 2016 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+# Copyright 2016 manawi <https://it-projects.info/team/manawi>
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+
 import odoo.tests
 
 

@@ -1,10 +1,14 @@
+# Copyright 2016-2018 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+# Copyright 2017-2018 Artyom Losev <https://it-projects.info/team/ArtyomLosev>
+# Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
     "name": "Show all messages",
     "summary": """Checkout all messages where you have access""",
     "category": "Discuss",
     # "live_test_url": "",
     "images": ['images/1.jpg'],
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "application": False,
 
     "author": "IT-Projects LLC, Pavel Romanchenko",
@@ -15,7 +19,7 @@
     'currency': 'EUR',
 
     "depends": [
-        "mail_base"
+        "mail"
     ],
     "external_dependencies": {"python": [], "bin": []},
     "data": [
@@ -31,6 +35,6 @@
     "post_init_hook": None,
     "uninstall_hook": None,
 
-    'installable': False,
+    'installable': True,
     "auto_install": False,
 }

@@ -1,8 +1,12 @@
+.. image:: https://img.shields.io/badge/license-LGPL--3-blue.png
+   :target: https://www.gnu.org/licenses/lgpl
+   :alt: License: LGPL-3
+
 ===================
  Show all messages
 ===================
 
-Adds ``Discuss / All`` menu, that shows all messages accesable by current user.
+Adds ``Discuss / All`` menu, that shows all messages accessible by current user.
 
 Credits
 =======
@@ -36,4 +40,4 @@ Usage instructions: `<doc/index.rst>`_
 
 Changelog: `<doc/changelog.rst>`_
 
-Tested on Odoo 11.0 ecbf7aa4714479229658d14cce28fa00376ed390
+Tested on Odoo 12.0 80cef9e8c52ff7dc0715a7478a2288d3de7065df
