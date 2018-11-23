@@ -3,11 +3,9 @@
     # Copyright 2017 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
     # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).-->
 
-<openerp>
-    <data noupdate="1">
+<odoo>
         <record id="mail_relocation_models" model="ir.config_parameter">
             <field name="key">mail_relocation_models</field>
             <field name="value">crm.lead,project.task</field>
         </record>
-    </data>
-</openerp>
+</odoo>
