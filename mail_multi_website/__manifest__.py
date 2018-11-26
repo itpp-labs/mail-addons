@@ -1,4 +1,5 @@
 # Copyright 2018 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+# Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
     "name": """Email Addresses and Templates per Website""",
@@ -6,7 +7,7 @@
     "category": "Discuss",
     "live_test_url": "http://apps.it-projects.info/shop/product/website-multi-company?version=11.0",
     "images": ["images/main.jpg"],
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "application": False,
 
     "author": "IT-Projects LLC, Ivan Yelizariev",
@@ -20,6 +21,7 @@
         "ir_config_parameter_multi_company",
         "web_website",
         "mail",
+        "test_mail",
     ],
     "external_dependencies": {"python": [], "bin": []},
     "data": [
@@ -36,7 +38,7 @@
     "uninstall_hook": "uninstall_hook",
 
     "auto_install": False,
-    "installable": False,
+    "installable": True,
 
     # "demo_title": "Email Addresses per Website",
     # "demo_addons": [
