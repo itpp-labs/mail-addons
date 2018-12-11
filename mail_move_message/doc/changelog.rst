@@ -1,3 +1,8 @@
+`1.0.6`
+-------
+
+- FIX: Error related to *Create Partner* button on the mail move wizard form.
+
 `1.0.5`
 -------
 

@@ -1,20 +1,10 @@
 odoo.define('mail_all.all', function (require) {
 "use strict";
 
-var base_obj = require('mail_base.base');
-
-//-------------------------------------------------------------------------------
-var bus = require('bus.bus').bus;
-var config = require('web.config');
+var chat_manager = require('mail_base.base').chat_manager;
 var core = require('web.core');
-var data = require('web.data');
-var Model = require('web.Model');
-var session = require('web.session');
-var time = require('web.time');
-var web_client = require('web.web_client');
 
 var _lt = core._lt;
-//-------------------------------------------------------------------------------
 
 var ChatAction = core.action_registry.get('mail.chat.instant_messaging');
 ChatAction.include({
@@ -25,41 +15,43 @@ ChatAction.include({
     }
 });
 
-// Inherit class and override methods
-base_obj.MailTools.include({
-    get_properties: function(msg){
-        var properties = this._super.apply(this, arguments);
-        properties.is_all = this.property_descr("channel_all", msg, this);
-        return properties;
-    },
+// override methods
+var chat_manager_super = _.clone(chat_manager);
 
-    set_channel_flags: function(data, msg){
-        this._super.apply(this, arguments);
-        msg.is_all = data.author_id != 'ODOOBOT';
-        return msg;
-    },
+chat_manager.get_properties = function (msg) {
+    var properties = chat_manager_super.get_properties.apply(this, arguments);
+    properties.is_all = this.property_descr("channel_all", msg, this);
+    return properties;
+};
 
-    get_channel_array: function(msg){
-        var arr = this._super.apply(this, arguments);
-        return arr.concat('channel_all');
-    },
+chat_manager.set_channel_flags = function (data, msg) {
+    chat_manager_super.set_channel_flags.apply(this, arguments);
+    msg.is_all = data.author_id !== 'ODOOBOT';
+    return msg;
+};
 
-    get_domain: function(channel){
-        return (channel.id === "channel_all") ? [] : this._super.apply(this, arguments);
-    }
-});
+chat_manager.get_channel_array = function (msg) {
+    var arr = chat_manager_super.get_channel_array.apply(this, arguments);
+    return arr.concat('channel_all');
+};
 
-base_obj.chat_manager.is_ready.then(function(){
+chat_manager.get_domain = function (channel) {
+    return (channel.id === "channel_all")
+        ? []
+        : chat_manager_super.get_domain.apply(this, arguments);
+};
+
+
+chat_manager.is_ready.then(function () {
         // Add all channel
-        base_obj.chat_manager.mail_tools.add_channel({
+        chat_manager.add_channel({
             id: "channel_all",
             name: _lt("All messages"),
             type: "static"
         });
-
         return $.when();
     });
 
-return base_obj.chat_manager;
+return chat_manager;
 
 });
