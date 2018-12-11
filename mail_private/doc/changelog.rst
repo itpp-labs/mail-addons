@@ -1,3 +1,8 @@
+`1.0.2`
+-------
+
+- **FIX:** Error when choosing a message template
+
 `1.0.1`
 -------
 
