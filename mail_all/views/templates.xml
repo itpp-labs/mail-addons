@@ -10,6 +10,7 @@
             <xpath expr="." position="inside">
                 <link rel="stylesheet" href="/mail_all/static/src/css/mail_all.css"/>
                 <script src="/mail_all/static/src/js/mail_all.js" type="text/javascript"></script>
+                <script src="/mail_all/static/src/js/test_mail_all.js" type="text/javascript"></script>
             </xpath>
         </template>
 </odoo>
