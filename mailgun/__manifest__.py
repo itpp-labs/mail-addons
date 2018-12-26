@@ -8,6 +8,6 @@
     'version': '11.0.1.1.0',
     'depends': ['mail'],
     'data': [
-        'data/cron.xml',
+        'data/ir_cron_data.xml',
     ],
 }
