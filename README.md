@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/it-projects-llc/mail-addons.svg?branch=10.0)](https://travis-ci.com/it-projects-llc/mail-addons)
+
 # mail-addons
 Odoo (OpenERP) mail addons
 
