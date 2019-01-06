@@ -3,7 +3,7 @@
     "name": """Popup Attachments""",
     "summary": """Open attached mail images in popup""",
     "category": "Extra Tools",
-    "version": "1.0.0",
+    "version": "10.0.1.0.0",
     "images": ['images/popup_image.png'],
 
     "author": "IT-Projects LLC, Dinar Gabbasov",

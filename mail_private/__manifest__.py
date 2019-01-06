@@ -4,7 +4,7 @@
     "summary": """Send private messages to specified recipients, regardless of who are in followers list.""",
     "category": "Discuss",
     "images": ['images/mail_private_image.png'],
-    "version": "1.0.1",
+    "version": "10.0.1.0.1",
     "application": False,
 
     "author": "IT-Projects LLC, Pavel Romanchenko",
