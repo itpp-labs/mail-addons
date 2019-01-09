@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 {
     "name": """Internal Messaging""",
     "summary": """Send private messages to specified recipients, regardless of who are in followers list.""",
     "category": "Discuss",
     "images": ['images/mail_private_image.png'],
-    "version": "10.0.1.0.1",
+    "version": "11.0.1.0.2",
     "application": False,
 
     "author": "IT-Projects LLC, Pavel Romanchenko",
