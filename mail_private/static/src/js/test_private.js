@@ -7,7 +7,7 @@ odoo.define('mail_private.tour', function (require) {
     var core = require('web.core');
     var _t = core._t;
 
-    var email = 'You Are Whalecum';
+    var email = 'mail_private test email';
     var steps = [{
             trigger: '.o_thread_message strong.o_mail_redirect:contains("Agrolait")',
             content: _t("Open Partners Form"),
