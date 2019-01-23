@@ -24,7 +24,7 @@ odoo.define('mail_private.tour', function (require) {
             trigger: "button.oe_composer_uncheck",
             extra_trigger: "button.oe_composer_uncheck",
             content: _t("Uncheck all Followers"),
-            timeout: 22000,
+            timeout: 10000,
         }, {
             trigger: "div.o_composer_suggested_partners input:first",
             content: _t("Check the first one"),
@@ -35,7 +35,7 @@ odoo.define('mail_private.tour', function (require) {
                 $('textarea.o_composer_text_field:first').val(email);
             },
         }, {
-            trigger: ".o_composer_buttons .o_composer_button_send",
+            trigger: ".o_composer_send .o_composer_button_send",
             content: _t("Send email"),
         }, {
             trigger: ".o_mail_thread .o_thread_message:contains(" + email + ")",
