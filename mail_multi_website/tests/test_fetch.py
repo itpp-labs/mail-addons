@@ -1,8 +1,9 @@
 # Copyright 2018 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+# Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
-from odoo.addons.mail.tests.common import TestMail
+from odoo.addons.test_mail.tests.test_mail_mail import TestMail
 from odoo.tools import mute_logger
-from odoo.addons.mail.tests.test_mail_gateway import MAIL_TEMPLATE
+from odoo.addons.test_mail.data.test_mail_data import MAIL_TEMPLATE
 
 
 class TestFetch(TestMail):
@@ -21,7 +22,7 @@ class TestFetch(TestMail):
         self.website.company_id = self.company
 
         # copy-paste from mail.tests.test_mail_gateway
-        mail_test_model = self.env['ir.model']._get('mail.test')
+        mail_test_model = self.env['ir.model']._get('mail.test.simple')
         # groups@.. will cause the creation of new mail.test
         self.alias = self.env['mail.alias'].create({
             'alias_name': 'groups',
@@ -36,6 +37,5 @@ class TestFetch(TestMail):
 
         # Test: one group created by mailgateway administrator
         self.assertEqual(len(new_groups), 1, 'message_process: a new mail.test should have been created')
-
         self.assertEqual(new_groups.website_id, self.website, 'New record is created with wrong website')
         self.assertEqual(new_groups.company_id, self.company, 'New record is created with wrong company')

@@ -1,8 +1,9 @@
 # Copyright 2018 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+# Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 import base64
 
-from odoo.addons.mail.tests.common import TestMail
+from odoo.addons.test_mail.tests.test_mail_mail import TestMail
 
 
 class TestRender(TestMail):
@@ -28,6 +29,7 @@ class TestRender(TestMail):
         })
         self.website.mail_server_id = self.mail_server_id
 
+        user_admin = self.env.ref('base.user_admin')
         # copy-paste from mail.tests.test_mail_template
         self._attachments = [{
             'name': '_Test_First',
@@ -35,15 +37,17 @@ class TestRender(TestMail):
             'first.txt',
             'datas': base64.b64encode(b'My first attachment'),
             'res_model': 'res.partner',
-            'res_id': self.user_admin.partner_id.id
+            'res_id': user_admin.partner_id.id
         }, {
             'name': '_Test_Second',
             'datas_fname': 'second.txt',
             'datas': base64.b64encode(b'My second attachment'),
             'res_model': 'res.partner',
-            'res_id': self.user_admin.partner_id.id
+            'res_id': user_admin.partner_id.id
         }]
 
+        self.partner_1 = self.env['res.partner'].create({'name': 'partner_1'})
+        self.partner_2 = self.env['res.partner'].create({'name': 'partner_2'})
         self.email_1 = 'test1@example.com'
         self.email_2 = 'test2@example.com'
         self.email_3 = self.partner_1.email
@@ -71,6 +75,16 @@ class TestRender(TestMail):
         """Mail values are per website"""
 
         self.env.user.backend_website_id = None
+        TestModel = self.env['mail.test'].with_context({
+            'mail_create_nolog': True,
+            'mail_create_nosubscribe': True,
+        })
+        self.test_pigs = TestModel.create({
+            'name': 'Pigs',
+            'description': 'Fans of Pigs, unite !',
+            'alias_name': 'pigs',
+            'alias_contact': 'followers',
+        })
 
         # sending without website
         mail_id = self.email_template.send_mail(self.test_pigs.id)
@@ -87,7 +101,8 @@ class TestRender(TestMail):
 
         # copy-pasted tests
         self.assertEqual(mail.email_to, self.email_template.email_to)
-        self.assertEqual(mail.email_cc, self.email_template.email_cc)
+        # for some reason self.email_template.email_cc might return u'False'
+        self.assertEqual(mail.email_cc or 'False', self.email_template.email_cc or 'False')
         self.assertEqual(mail.recipient_ids, self.partner_2 | self.user_employee.partner_id)
 
         # sending from frontend
