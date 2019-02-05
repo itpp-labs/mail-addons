@@ -50,7 +50,7 @@ Alias domain per website
 
 Configure ``mail.catchall.domain`` per website. See Documentation of the module `Context-dependent values in System Parameters <https://apps.odoo.com/apps/modules/10.0/ir_config_parameter_multi_company>`__.
 
-Outgoing mails servers per
+Outgoing mails servers per website
 --------------------------
 
 If each domain has different Outgoing Mail Server you need following adjustments 
