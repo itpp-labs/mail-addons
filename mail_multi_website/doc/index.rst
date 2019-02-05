@@ -48,9 +48,9 @@ Note. If related record (e.g. ``sale.order``) has field ``company_id`` or ``webs
 Alias domain per website
 ------------------------
 
-Configure ``mail.catchall.domain`` per website. See Documentation of the module `Context-dependent values in System Parameters<https://apps.odoo.com/apps/modules/10.0/ir_config_parameter_multi_company/>`__.
+Configure ``mail.catchall.domain`` per website. See Documentation of the module `Context-dependent values in System Parameters <https://apps.odoo.com/apps/modules/10.0/ir_config_parameter_multi_company>`__.
 
-Outgoing mails servers per
+Outgoing mails servers per website
 --------------------------
 
 If each domain has different Outgoing Mail Server you need following adjustments 
@@ -61,7 +61,7 @@ If each domain has different Outgoing Mail Server you need following adjustments
 Properties
 ----------
 
-To review properties by website use menu ``[[ Settings ]] >> Technical >> Parameters >> Company Properties``. See **How it works** in Documentation of module `Website Switcher in Backend<https://apps.odoo.com/apps/modules/10.0/web_website/>`__.
+To review properties by website use menu ``[[ Settings ]] >> Technical >> Parameters >> Company Properties``. See **How it works** in Documentation of module `Website Switcher in Backend <https://apps.odoo.com/apps/modules/10.0/web_website>`__.
 
 Usage
 =====
