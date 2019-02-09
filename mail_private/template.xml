@@ -8,6 +8,9 @@
                 <script
                         type="text/javascript"
                         src="/mail_private/static/src/js/mail_private.js"></script>
+                <script
+                        type="text/javascript"
+                        src="/mail_private/static/src/js/test_private.js"></script>
             </xpath>
         </template>
 </odoo>
