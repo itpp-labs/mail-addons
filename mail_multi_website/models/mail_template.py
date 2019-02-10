@@ -43,7 +43,7 @@ class MailTemplate(models.Model):
         return res
 
     @api.model
-    def render_template(self, template_txt, model, res_ids, post_process=False):
+    def _render_template(self, template_txt, model, res_ids, post_process=False):
         """Override to add website to context"""
         multi_mode = True
         if isinstance(res_ids, pycompat.integer_types):

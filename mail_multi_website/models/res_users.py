@@ -18,7 +18,7 @@ class User(models.Model):
     signature = fields.Html(company_dependent=True, website_dependent=True)
 
     # extra field to detach email field from res.partner
-    email = fields.Char(related='email_multi_website', inherited=False)
+    email = fields.Char(string='Multi Website Email', related='email_multi_website', inherited=False)
     email_multi_website = fields.Char(company_dependent=True, website_dependent=True)
 
     @api.model
