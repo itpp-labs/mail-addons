@@ -98,7 +98,7 @@ class MailTemplate(models.Model):
 
             if record_company and record_website \
                and record_website.company_id != company:
-                # company and website are incompatible, so keep only website
+                # company and website are incompatible, so keep only company
                 record_website = self.env['website']  # empty value
 
             record_context = dict(force_company=record_company.id, website_id=record_website.id)

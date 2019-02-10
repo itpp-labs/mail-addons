@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/it-projects-llc/mail-addons.svg?branch=11.0)](https://travis-ci.com/it-projects-llc/mail-addons)
+
 # mail-addons
 Odoo mail addons
 
