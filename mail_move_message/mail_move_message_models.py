@@ -264,15 +264,15 @@ class MailMessage(models.Model):
     moved_from_parent_id = fields.Many2one('mail.message', 'Parent Message (Original)', ondelete='set null')
     moved_by_message_id = fields.Many2one('mail.message', 'Moved by message', ondelete='set null', help='Top message, that initate moving this message')
     moved_by_user_id = fields.Many2one('res.users', 'Moved by user', ondelete='set null')
-    all_child_ids = fields.One2many('mail.message', string='All childs', compute='_get_all_childs', help='all childs, including subchilds')
+    all_child_ids = fields.One2many('mail.message', string='All childs', compute='_compute_all_childs', help='all childs, including subchilds')
 
     @api.multi
-    def _get_all_childs(self, include_myself=True):
+    def _compute_all_childs(self, include_myself=True):
         for r in self:
-            r._get_all_childs_one(include_myself=include_myself)
+            r._compute_all_childs_one(include_myself=include_myself)
 
     @api.multi
-    def _get_all_childs_one(self, include_myself=True):
+    def _compute_all_childs_one(self, include_myself=True):
         self.ensure_one()
         ids = []
         if include_myself:
