@@ -4,7 +4,7 @@
     "summary": """Makes Mail extendable""",
     "category": "Discuss",
     "images": [],
-    "version": "1.0.4",
+    "version": "10.0.1.0.5",
 
     "author": "IT-Projects LLC, Pavel Romanchenko",
     "support": "apps@it-projects.info",
