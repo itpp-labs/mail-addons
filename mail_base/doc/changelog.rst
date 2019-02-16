@@ -1,3 +1,7 @@
+`1.0.5`
+-------
+**FIX**: polling errors on heavy server load
+
 `1.0.4`
 -------
 **FIX**: issue related to clear cache
