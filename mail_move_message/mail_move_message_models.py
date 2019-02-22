@@ -310,12 +310,13 @@ class MailMessage(models.Model):
     moved_from_res_id = fields.Integer('Related Document ID (Original)')
     moved_from_model = fields.Char('Related Document Model (Original)')
     moved_from_parent_id = fields.Many2one(
-        'mail.message', 'Parent Message (Original)', ondelete='set null')
+        'mail.message', 'Parent Message (Original)', ondelete='set null',
+        index=True)
     moved_by_message_id = fields.Many2one(
         'mail.message', 'Moved by message', ondelete='set null',
-        help='Top message, that initate moving this message')
+        help='Top message, that initate moving this message', index=True)
     moved_by_user_id = fields.Many2one(
-        'res.users', 'Moved by user', ondelete='set null')
+        'res.users', 'Moved by user', ondelete='set null', index=True)
     all_child_ids = fields.One2many('mail.message', string='All childs',
                                     compute='_compute_all_childs',
                                     help='all childs, including subchilds')
