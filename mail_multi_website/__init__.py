@@ -26,11 +26,11 @@ def uninstall_hook(cr, registry):
 
     # remove properties
     field_ids = [
-        env.ref('base.field_res_users_email').id,
-        env.ref('base.field_res_users_signature').id,
-        env.ref('mail.field_mail_template_body_html').id,
-        env.ref('mail.field_mail_template_mail_server_id').id,
-        env.ref('mail.field_mail_template_report_template').id,
+        env.ref('base.field_res_users__email').id,
+        env.ref('base.field_res_users__signature').id,
+        env.ref('mail.field_mail_template__body_html').id,
+        env.ref('mail.field_mail_template__mail_server_id').id,
+        env.ref('mail.field_mail_template__report_template').id,
     ]
     env['ir.property'].search([('fields_id', 'in', field_ids)]).unlink()
 
