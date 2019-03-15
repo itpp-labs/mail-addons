@@ -88,7 +88,7 @@ class MailMessage(models.Model):
 
         # notify partners and channels
         # those methods are called as SUPERUSER because portal users posting messages
-        # have no access to partner model. Maybe propagating a real uid could be necessary.
+        # have no access to partner model. Maybe propagating a real uid could be necessary. 
         email_channels = channels_sudo.filtered(lambda channel: channel.email_send)
         notif_partners = partners_sudo.filtered(lambda partner: 'inbox' in partner.mapped('user_ids.notification_type'))
         if email_channels or partners_sudo - notif_partners:
@@ -99,6 +99,11 @@ class MailMessage(models.Model):
                 ('email', '!=', self_sudo.author_id.email or self_sudo.email_from),
             ])._notify(self, force_send=force_send, send_after_commit=send_after_commit, user_signature=user_signature)
         channels_sudo._notify(self)
+        
+        # (OS8A)[FIX] Add the next line to send private mails.
+        # In the previous "if" conditional. 
+        # If the recipient is the only one, the message is not sent.
+        notif_partners._notify_by_chat(self)
 
         # Discard cache, because child / parent allow reading and therefore
         # change access rights.
