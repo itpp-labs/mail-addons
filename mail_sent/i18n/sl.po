@@ -4,13 +4,15 @@
 # 
 # Translators:
 # Translation Bot <i18n-bot@it-projects.info>, 2017
+# Matjaz Mozetic <m.mozetic@matmoz.si>, 2019
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-17 20:20+0000\n"
-"PO-Revision-Date: 2017-07-17 20:20+0000\n"
-"Last-Translator: Translation Bot <i18n-bot@it-projects.info>, 2017\n"
+"POT-Creation-Date: 2018-05-05 23:11+0000\n"
+"PO-Revision-Date: 2017-06-23 14:31+0000\n"
+"Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>, 2019\n"
 "Language-Team: Slovenian (https://www.transifex.com/it-projects-llc/teams/76080/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +23,7 @@ msgstr ""
 #. module: mail_sent
 #: model:ir.model,name:mail_sent.model_mail_compose_message
 msgid "Email composition wizard"
-msgstr ""
+msgstr "Čarovnik za sestavljanje e-pošte"
 
 #. module: mail_sent
 #: model:ir.model,name:mail_sent.model_mail_message
@@ -33,7 +35,7 @@ msgstr "Sporočilo"
 #: code:addons/mail_sent/static/src/xml/menu.xml:15
 #, python-format
 msgid "No sent messages"
-msgstr ""
+msgstr "Ni poslanih sporočil"
 
 #. module: mail_sent
 #. openerp-web
@@ -57,9 +59,9 @@ msgstr "Je bilo sporočilo komu poslano"
 #: code:addons/mail_sent/static/src/xml/menu.xml:16
 #, python-format
 msgid "You can send messages and then these messages will appear here."
-msgstr ""
+msgstr "Poslana sporočila bodo prikazana tukaj."
 
 #. module: mail_sent
 #: model:ir.model.fields,help:mail_sent.field_mail_compose_message_sent
 msgid "dummy field to fix inherit error"
-msgstr ""
+msgstr "dummy field to fix inherit error"

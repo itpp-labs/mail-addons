@@ -1,9 +1,8 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * mail_base
+# * mail_all
 # 
 # Translators:
-# Translation Bot <i18n-bot@it-projects.info>, 2017
 # Matjaz Mozetic <m.mozetic@matmoz.si>, 2019
 # 
 msgid ""
@@ -20,12 +19,17 @@ msgstr ""
 "Language: sl\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
-#. module: mail_base
-#: model:ir.model,name:mail_base.model_mail_compose_message
-msgid "Email composition wizard"
-msgstr "Čarovnik za sestavljanje e-pošte"
+#. module: mail_all
+#. openerp-web
+#: code:addons/mail_all/static/src/js/mail_all.js:56
+#: code:addons/mail_all/static/src/xml/menu.xml:7
+#, python-format
+msgid "All messages"
+msgstr "Vsa sporočila"
 
-#. module: mail_base
-#: model:ir.model,name:mail_base.model_mail_message
-msgid "Message"
-msgstr "Sporočilo"
+#. module: mail_all
+#. openerp-web
+#: code:addons/mail_all/static/src/xml/menu.xml:15
+#, python-format
+msgid "No messages"
+msgstr "Ni sporočil"
