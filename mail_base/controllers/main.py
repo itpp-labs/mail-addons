@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Copyright 2017 mikaelh <https://github.com/mikaelh>
+# Copyright 2017-2019 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+# License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html)
 from openerp.http import request
 from openerp.addons.bus.controllers.main import BusController
 
