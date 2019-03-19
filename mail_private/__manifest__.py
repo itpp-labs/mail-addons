@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
+# Copyright 2016 x620 <https://github.com/x620>
+# Copyright 2016 Ilmir Karamov <https://it-projects.info/team/ilmir-k>
+# Copyright 2016 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+# Copyright 2017 Artyom Losev <https://github.com/ArtyomLosev>
+# Copyright 2018 Ruslan Ronzhin <https://it-projects.info/team/rusllan/>
+# Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
+# Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
+# License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html).
 {
     "name": """Internal Messaging""",
     "summary": """Send private messages to specified recipients, regardless of who are in followers list.""",
     "category": "Discuss",
     "images": ['images/mail_private_image.png'],
-    "version": "10.0.1.0.1",
+    "version": "10.0.1.1.0",
     "application": False,
 
     "author": "IT-Projects LLC, Pavel Romanchenko",
