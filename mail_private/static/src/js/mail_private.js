@@ -1,3 +1,7 @@
+/*  Copyright 2016 x620 <https://github.com/x620>
+    Copyright 2016 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+    Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
+    License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). */
 openerp.mail_private = function(instance){
 
     var mail = instance.mail;
@@ -5,11 +9,23 @@ openerp.mail_private = function(instance){
     instance.mail.ThreadComposeMessage.include({
         init: function (parent, datasets, options) {
             this._super.apply(this, arguments);
+            var self = this;
             this.private = false;
+            self.recipients = [];
+        },
+        on_uncheck_recipients: function () {
+            this.$(".oe_recipients")
+            .find("input:checked").each(function() {
+                $(this).prop("checked", false);
+            });
+            _.each(self.recipients, function(res) {
+                res.checked = false;
+            });
         },
         bind_events: function(){
             var self = this;
             this.$('.oe_compose_post_private').on('click', self.on_toggle_quick_composer_private);
+            this.$('.oe_composer_uncheck').on('click', self.on_uncheck_recipients);
             this._super.apply(this, arguments);
         },
         on_compose_fullmail: function (default_composition_mode) {
@@ -109,55 +125,65 @@ openerp.mail_private = function(instance){
             var $input = $(event.target);
             this.compute_emails_from();
             var email_addresses = _.pluck(this.recipients, 'email_address');
-            var suggested_partners = $.Deferred();
+            this.get_internal_users_ids().then(function(res_ids){
+                self.internal_users_ids = res_ids;
+                var suggested_partners = $.Deferred();
 
-            // if clicked: call for suggested recipients
-            if (event.type == 'click') {
-                this.private = $input.hasClass('oe_compose_post_private');
-                this.is_log = false;
-                suggested_partners = this.parent_thread.get_recipients_for_internal_message([this.context.default_res_id], this.context)
-                    .done(function (additional_recipients) {
-                        var thread_recipients = additional_recipients[self.context.default_res_id];
-                        _.each(thread_recipients, function (recipient) {
-                            var parsed_email = mail.ChatterUtils.parse_email(recipient[1]);
-                            if (_.indexOf(email_addresses, parsed_email[1]) == -1) {
-                                self.recipients.push({
-                                    'checked': false,
-                                    'partner_id': recipient[0],
-                                    'full_name': recipient[1],
-                                    'name': parsed_email[0],
-                                    'email_address': parsed_email[1],
-                                    'reason': recipient[2],
-                                });
-                            }
+                // if clicked: call for suggested recipients
+                if (event.type === 'click') {
+                    self.private = $input.hasClass('oe_compose_post_private');
+                    self.is_log = false;
+                    suggested_partners = self.parent_thread.get_recipients_for_internal_message([self.context.default_res_id], self.context)
+                        .done(function (additional_recipients) {
+                            var thread_recipients = additional_recipients[self.context.default_res_id];
+                            _.each(thread_recipients, function (recipient) {
+                                var parsed_email = mail.ChatterUtils.parse_email(recipient[1]);
+                                if (_.indexOf(email_addresses, parsed_email[1]) === -1) {
+                                    self.recipients.push({
+                                        'checked': _.intersection(self.internal_users_ids, recipient[3]).length > 0,
+                                        'partner_id': recipient[0],
+                                        'full_name': recipient[1],
+                                        'name': parsed_email[0],
+                                        'email_address': parsed_email[1],
+                                        'reason': recipient[2],
+                                    });
+                                }
+                            });
                         });
-                    });
-            }
-            else {
-                suggested_partners.resolve({});
-            }
-            // uncheck partners from compute_emails_from
-            _.each(this.recipients, function(r){
-                if (!r.partner_id){
-                    r.checked = false;
                 }
+                else {
+                    suggested_partners.resolve({});
+                }
+                // uncheck partners from compute_emails_from
+                _.each(self.recipients, function(r){
+                    if (!r.partner_id){
+                        r.checked = false;
+                    }
+                });
+
+                // when call for suggested partners finished: re-render the widget
+                $.when(suggested_partners).pipe(function (additional_recipients) {
+                    if ((!self.stay_open || (event && event.type === 'click')) && (!self.show_composer || !self.$('textarea:not(.oe_compact)').val().match(/\S+/) && !self.attachment_ids.length)) {
+                        self.show_composer = !self.show_composer || self.stay_open;
+                        self.reinit();
+                    }
+                    if (!self.stay_open && self.show_composer && (!event || event.type !== 'blur')) {
+                        self.$('textarea:not(.oe_compact):first').focus();
+                    }
+                });
+
+                return suggested_partners;
             });
 
-            // when call for suggested partners finished: re-render the widget
-            $.when(suggested_partners).pipe(function (additional_recipients) {
-                if ((!self.stay_open || (event && event.type == 'click')) && (!self.show_composer || !self.$('textarea:not(.oe_compact)').val().match(/\S+/) && !self.attachment_ids.length)) {
-                    self.show_composer = !self.show_composer || self.stay_open;
-                    self.reinit();
-                }
-                if (!self.stay_open && self.show_composer && (!event || event.type != 'blur')) {
-                    self.$('textarea:not(.oe_compact):first').focus();
-                }
+        },
+        get_internal_users_ids: function () {
+            var ResUser = new instance.web.Model('mail.compose.message');
+            return ResUser.call('get_internal_users_ids', [[]]).then( function (users_ids) {
+                return users_ids;
             });
-
-            return suggested_partners;
         }
     });
-    
+
     instance.mail.Thread.include({
         get_recipients_for_internal_message: function(ids, context){
             var self = this;
@@ -187,7 +213,7 @@ openerp.mail_private = function(instance){
                                     reason = 'Partner';
                                 }
                                 self.result[res_id].push(
-                                    [partner.id, partner.name + '<' + partner.email + '>', reason]
+                                    [partner.id, partner.name + '<' + partner.email + '>', reason, partner.user_ids]
                                 );
                             }
                         }
