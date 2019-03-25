@@ -4,7 +4,7 @@
     "name": """Mailgun""",
     "summary": """Setup the outgoing and incoming mail flow easily by using Mailgun""",
     "category": "Discuss",
-    "live_test_url": "http://apps.it-projects.info/shop/product/mailgun?version=11.0",
+    # "live_test_url": "http://apps.it-projects.info/shop/product/mailgun?version=11.0",
     "images": ["images/mailgun_main.png"],
     "version": "11.0.1.1.0",
     "application": False,
