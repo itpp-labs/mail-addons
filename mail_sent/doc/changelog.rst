@@ -1,3 +1,8 @@
+`1.1.0`
+-------
+
+- **New:** Shows messages from channels
+
 `1.0.4`
 -------
 - **FIX:** didn't work for non-admin users
