@@ -19,7 +19,7 @@ Maintainers
 -----------
 * `IT-Projects LLC <https://it-projects.info>`__
 
-      To get a guaranteed support you are kindly requested to purchase the module at `odoo apps store <https://apps.odoo.com/apps/modules/11.0/mail_archives/>`__.
+      To get a guaranteed support you are kindly requested to purchase the module at `odoo apps store <https://apps.odoo.com/apps/modules/12.0/mail_archives/>`__.
 
       Thank you for understanding!
 
@@ -28,12 +28,12 @@ Maintainers
 Further information
 ===================
 
-Demo: http://runbot.it-projects.info/demo/mail_addons/11.0
+Demo: http://runbot.it-projects.info/demo/mail_addons/12.0
 
-HTML Description: https://apps.odoo.com/apps/modules/11.0/mail_archives/
+HTML Description: https://apps.odoo.com/apps/modules/12.0/mail_archives/
 
 Usage instructions: `<doc/index.rst>`_
 
 Changelog: `<doc/changelog.rst>`_
 
-Tested on Odoo 11.0 ecbf7aa4714479229658d14cce28fa00376ed390
+Tested on Odoo 12.0 c423e5fe047a66517a60b68874e18dc5c3697787
