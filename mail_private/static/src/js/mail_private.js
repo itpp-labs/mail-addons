@@ -2,19 +2,19 @@
     Copyright 2016 manavi <https://github.com/manawi>
     Copyright 2017-2018 Artyom Losev <https://github.com/ArtyomLosev>
     Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
+    Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). */
 odoo.define('mail_private', function (require) {
 'use strict';
 
 var core = require('web.core');
 var Chatter = require('mail.Chatter');
-var ChatterComposer = require('mail.ChatterComposer');
-var chat_manager = require('mail_base.base').chat_manager;
+var ChatterComposer = require('mail.composer.Chatter');
 var session = require('web.session');
 
 var rpc = require('web.rpc');
 var config = require('web.config');
-var utils = require('mail.utils');
+var mailUtils = require('mail.utils');
 
 
 Chatter.include({
@@ -36,51 +36,55 @@ Chatter.include({
 
     _openComposer: function (options) {
         var self = this;
-        var old_composer = this.composer;
+        var old_composer = this._composer;
         // create the new composer
-        this.composer = new ChatterComposer(this, this.record.model, options.suggested_partners || [], {
-            commands_enabled: false,
+        this._composer = new ChatterComposer(this, this.record.model, options.suggested_partners || [], {
+            commandsEnabled: false,
             context: this.context,
-            input_min_height: 50,
-            input_max_height: Number.MAX_VALUE,
-            input_baseline: 14,
-            is_log: options && options.is_log,
-            record_name: this.record_name,
-            default_body: old_composer && old_composer.$input && old_composer.$input.val(),
-            default_mention_selections: old_composer && old_composer.mention_get_listener_selections(),
+            inputMinHeight: 50,
+            isLog: options && options.isLog,
+            recordName: this.recordName,
+            defaultBody: old_composer && old_composer.$input && old_composer.$input.val(),
+            defaultMentionSelections: old_composer && old_composer.getMentionListenerSelections(),
+            attachmentIds: (old_composer && old_composer.get('attachment_ids')) || [],
             is_private: options.is_private
         });
-        this.composer.on('input_focused', this, function () {
-            this.composer.mention_set_prefetched_partners(this.mentionSuggestions || []);
+        this._composer.on('input_focused', this, function () {
+            this._composer.mentionSetPrefetchedPartners(this._mentionSuggestions || []);
         });
-        this.composer.insertAfter(this.$('.o_chatter_topbar')).then(function () {
+        this._composer.insertAfter(this.$('.o_chatter_topbar')).then(function () {
             // destroy existing composer
             if (old_composer) {
                 old_composer.destroy();
             }
-            if (!config.device.touch) {
-                self.composer.focus();
-            }
-            self.composer.on('post_message', self, function (message) {
+            self._composer.focus();
+            self._composer.on('post_message', self, function (messageData) {
                 if (options.is_private) {
-                    self.composer.options.is_log = true;
+                    self._composer.options.isLog = true;
                 }
-                self.fields.thread.postMessage(message).then(function () {
-
-                    self._closeComposer(true);
-                    if (self.postRefresh === 'always' || (self.postRefresh === 'recipients' && message.partner_ids.length)) {
-                        self.trigger_up('reload');
-                    }
+                self._discardOnReload(messageData).then(function () {
+                    self._disableComposer();
+                    self.fields.thread.postMessage(messageData).then(function () {
+                        self._closeComposer(true);
+                        if (self._reloadAfterPost(messageData)) {
+                            self.trigger_up('reload');
+                        } else if (messageData.attachment_ids.length) {
+                            self._reloadAttachmentBox();
+                            self.trigger_up('reload', {fieldNames: ['message_attachment_count'], keepChanges: true});
+                        }
+                    }).fail(function () {
+                        self._enableComposer();
+                    });
                 });
             });
-            var toggle_post_private = self.composer.options.is_private || false;
-            self.composer.on('need_refresh', self, self.trigger_up.bind(self, 'reload'));
-            self.composer.on('close_composer', null, self._closeComposer.bind(self, true));
+            var toggle_post_private = self._composer.options.is_private || false;
+            self._composer.on('need_refresh', self, self.trigger_up.bind(self, 'reload'));
+            self._composer.on('close_composer', null, self._closeComposer.bind(self, true));
 
             self.$el.addClass('o_chatter_composer_active');
             self.$('.o_chatter_button_new_message, .o_chatter_button_log_note, .oe_compose_post_private').removeClass('o_active');
-            self.$('.o_chatter_button_new_message').toggleClass('o_active', !self.composer.options.is_log && !self.composer.options.is_private);
-            self.$('.o_chatter_button_log_note').toggleClass('o_active', (self.composer.options.is_log && !options.is_private));
+            self.$('.o_chatter_button_new_message').toggleClass('o_active', !self._composer.options.isLog && !self._composer.options.is_private);
+            self.$('.o_chatter_button_log_note').toggleClass('o_active', self._composer.options.isLog && !options.is_private);
             self.$('.oe_compose_post_private').toggleClass('o_active', toggle_post_private);
         });
     },
@@ -102,8 +106,8 @@ Chatter.include({
 });
 
 ChatterComposer.include({
-    init: function (parent, model, suggested_partners, options) {
-        this._super(parent, model, suggested_partners, options);
+    init: function (parent, model, suggestedPartners, options) {
+        this._super(parent, model, suggestedPartners, options);
         this.events['click .oe_composer_uncheck'] = 'on_uncheck_recipients';
         if (typeof options.is_private === 'undefined') {
             // otherwise it causes an error in context creating function
@@ -111,40 +115,39 @@ ChatterComposer.include({
         }
     },
 
-    preprocess_message: function () {
+    _preprocessMessage: function () {
         var self = this;
         var def = $.Deferred();
         this._super().then(function (message) {
             message = _.extend(message, {
                 subtype: 'mail.mt_comment',
                 message_type: 'comment',
-                content_subtype: 'html',
-                context: self.context,
+                context: _.defaults({}, self.context, session.user_context),
             });
 
             // Subtype
-            if (self.options.is_log) {
+            if (self.options.isLog) {
                 message.subtype = 'mail.mt_note';
             }
 
             if (self.options.is_private) {
-                message.is_private = true;
+                message.context.is_private = true;
                 message.channel_ids = self.get_checked_channel_ids();
             }
 
             // Partner_ids
-            if (!self.options.is_log) {
-                var checked_suggested_partners = self.get_checked_suggested_partners();
-                self.check_suggested_partners(checked_suggested_partners).done(function (partner_ids) {
-                    message.partner_ids = (message.partner_ids || []).concat(partner_ids);
+            if (self.options.isLog) {
+                def.resolve(message);
+            } else {
+                var check_suggested_partners = self._getCheckedSuggestedPartners();
+                self._checkSuggestedPartners(check_suggested_partners).done(function (partnerIDs) {
+                    message.partner_ids = (message.partner_ids || []).concat(partnerIDs);
                     // update context
                     message.context = _.defaults({}, message.context, {
                         mail_post_autofollow: true,
                     });
                     def.resolve(message);
                 });
-            } else {
-                def.resolve(message);
             }
         });
         return def;
@@ -156,25 +159,30 @@ ChatterComposer.include({
         });
     },
 
-    on_open_full_composer: function() {
-        if (!this.do_check_attachment_upload()){
+    _onOpenFullComposer: function () {
+        if (!this._doCheckAttachmentUpload()){
             return false;
         }
         var self = this;
-        var recipient_done = $.Deferred();
-        if (this.options.is_log) {
-            recipient_done.resolve([]);
-        } else {
-            var checked_suggested_partners = this.get_checked_suggested_partners();
-            recipient_done = this.check_suggested_partners(checked_suggested_partners);
-        }
-        recipient_done.then(function (partner_ids) {
+        var recipientDoneDef = $.Deferred();
+        this.trigger_up('discard_record_changes', {
+            proceed: function () {
+                if (self.options.isLog) {
+                    recipientDoneDef.resolve([]);
+                } else {
+                    var checkedSuggestedPartners = self._getCheckedSuggestedPartners();
+                    self._checkSuggestedPartners(checkedSuggestedPartners)
+                        .then(recipientDoneDef.resolve.bind(recipientDoneDef));
+                }
+            },
+        });
+        recipientDoneDef.then(function (partnerIDs) {
             var context = {
                 default_parent_id: self.id,
-                default_body: utils.get_text2html(self.$input.val()),
+                default_body: mailUtils.getTextToHTML(self.$input.val()),
                 default_attachment_ids: _.pluck(self.get('attachment_ids'), 'id'),
-                default_partner_ids: partner_ids,
-                default_is_log: self.options.is_log,
+                default_partner_ids: partnerIDs,
+                default_is_log: self.options.isLog,
                 mail_post_autofollow: true,
                 is_private: self.options.is_private,
             };
@@ -187,7 +195,7 @@ ChatterComposer.include({
                 context.default_model = self.context.default_model;
                 context.default_res_id = self.context.default_res_id;
             }
-            self.do_action({
+            var action = {
                 type: 'ir.actions.act_window',
                 res_model: 'mail.compose.message',
                 view_mode: 'form',
@@ -195,17 +203,14 @@ ChatterComposer.include({
                 views: [[false, 'form']],
                 target: 'new',
                 context: context,
-            }, {
-                on_close: function() {
-                    self.trigger('need_refresh');
-                    var parent = self.getParent();
-                    chat_manager.get_messages({model: parent.model, res_id: parent.res_id});
-                },
+            };
+            self.do_action(action, {
+                on_close: self.trigger.bind(self, 'need_refresh'),
             }).then(self.trigger.bind(self, 'close_composer'));
         });
     },
 
-    get_checked_suggested_partners: function () {
+    _getCheckedSuggestedPartners: function () {
         var checked_partners = this._super(this, arguments);
         // workaround: odoo code works only when all partners are checked intially,
         // while may select only some of them (internal recepients)

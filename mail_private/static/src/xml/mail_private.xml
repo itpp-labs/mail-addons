@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--Copyright 2016-2017 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+    Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
+    License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html).-->
 <template>
 
-    <t t-extend="mail.Chatter.Buttons">
+    <t t-extend="mail.chatter.Buttons">
         <t t-jquery="button[title='Send a message']" t-operation="after">
-            <button class="btn btn-sm btn-link oe_compose_post_private"  title="Send a message to specified recipients only">Send internal message</button>
+            <button class="btn btn-link oe_compose_post_private"  title="Send a message to specified recipients only">Send internal message</button>
         </t>
     </t>
     
-  <t t-extend="mail.chatter.ChatComposer">
+  <t t-extend="mail.chatter.Composer">
         <t t-jquery="small[class='o_chatter_composer_info']" t-operation="replace">
             <small class="o_chatter_composer_info" t-if="!widget.options.is_private">
                     To: Followers of
@@ -20,7 +23,7 @@
             </small>
         </t>
         <t t-jquery="div[class='o_composer_suggested_partners']" t-operation="after">
-            <button class="btn btn-sm btn-link oe_composer_uncheck" t-if="widget.options.is_private">Uncheck all</button>
+            <button class="btn btn-link oe_composer_uncheck" t-if="widget.options.is_private">Uncheck all</button>
         </t>
   </t>
 
