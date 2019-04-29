@@ -14,7 +14,9 @@ class MailMessage(models.Model):
             sent = len(r_sudo.partner_ids) > 1 \
                 or len(r_sudo.partner_ids) == 1 \
                 and r_sudo.author_id \
-                and r_sudo.partner_ids[0].id != r_sudo.author_id.id
+                and r_sudo.partner_ids[0].id != r_sudo.author_id.id \
+                or r_sudo.model == 'mail.channel' \
+                and r_sudo.res_id
             r.sent = sent
 
     @api.multi
