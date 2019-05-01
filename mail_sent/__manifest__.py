@@ -3,7 +3,7 @@
     "summary": """Quick way to find sent messages""",
     "category": "Discuss",
     "images": ['images/menu.png'],
-    "version": "11.0.1.0.4",
+    "version": "12.0.1.0.4",
 
     "author": "IT-Projects LLC, Ivan Yelizariev, Pavel Romanchenko",
     "support": "apps@it-projects.info",
@@ -13,9 +13,7 @@
     'currency': 'EUR',
 
     "depends": [
-        "base",
         "mail",
-        "mail_base"
     ],
 
     "data": [
@@ -24,5 +22,5 @@
     "qweb": [
         "static/src/xml/menu.xml",
     ],
-    'installable': False,
+    'installable': True,
 }
