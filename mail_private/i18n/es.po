@@ -1,0 +1,70 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_private
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-06 09:30+0000\n"
+"PO-Revision-Date: 2019-05-06 11:32+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: mail_private
+#: model:ir.model,name:mail_private.model_mail_compose_message
+msgid "Email composition wizard"
+msgstr "Asistente composición Correo Electrónico"
+
+#. module: mail_private
+#: model:ir.model,name:mail_private.model_mail_message
+msgid "Message"
+msgstr "Mensaje"
+
+#. module: mail_private
+#: model:ir.model.fields,field_description:mail_private.field_mail_compose_message_is_private
+#: model:ir.model.fields,field_description:mail_private.field_mail_mail_is_private
+#: model:ir.model.fields,field_description:mail_private.field_mail_message_is_private
+msgid "Send Internal Message"
+msgstr "Enviar Mensaje Interno"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/xml/mail_private.xml:6
+#, python-format
+msgid "Send a message to specified recipients only"
+msgstr "Enviar mensaje sólo a los destinatarios seleccionados"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/xml/mail_private.xml:6
+#, python-format
+msgid "Send internal message"
+msgstr "Enviar mensaje interno"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/xml/mail_private.xml:12
+#, python-format
+msgid "To: Followers of"
+msgstr "Para: Seguidores del"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/xml/mail_private.xml:23
+#, python-format
+msgid "Uncheck all"
+msgstr "Desmarcar todos"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/xml/mail_private.xml:17
+#, python-format
+msgid "this document"
+msgstr "este documento"
