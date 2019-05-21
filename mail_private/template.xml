@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Copyright 2016 x620 <https://github.com/x620>
+    Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
+    License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html).-->
 <openerp>
     <data>
         <template
@@ -6,6 +9,7 @@
                 name="mail_private_assets_backend"
                 inherit_id="web.assets_backend">
             <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/mail_private/static/src/css/mail_private.css"/>
                 <script
                         type="text/javascript"
                         src="/mail_private/static/src/js/mail_private.js"></script>

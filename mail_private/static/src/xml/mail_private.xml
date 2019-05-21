@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--Copyright 2016 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+    Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
+    License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html).-->
 <template>
     <t t-extend="mail.compose_message">
         <t t-jquery="a[title='Send a message to all followers of the document']" t-operation="after">
@@ -16,6 +19,9 @@
                     <t t-if="!widget.parent_thread.parent_message.record_name and !widget.options.view_inbox">Followers of this document</t>
                 </span>
             </t>
+      </t>
+      <t t-jquery="div[class='oe_recipients']" t-operation="after">
+            <button class="oe_composer_uncheck" t-if="widget.private">Uncheck all</button>
       </t>
   </t>
 </template>

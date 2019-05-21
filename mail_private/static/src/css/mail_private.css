@@ -1,0 +1,8 @@
+.oe_mail .oe_msg_composer .oe_msg_content .oe_composer_uncheck {
+    margin-top: 3px;
+    margin-bottom: 15px;
+    margin-left: 0px;
+}
+.oe_mail .oe_msg_composer .oe_msg_content .oe_recipients {
+    margin-left: 0px;
+}
