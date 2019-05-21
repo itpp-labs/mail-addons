@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Dawid Runowski <dawrun@outlook.com>, 2019
+# Ermin Trevisan <trevi@twanda.com>, 2019
 # 
 msgid ""
 msgstr ""
@@ -11,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-05 23:09+0000\n"
 "PO-Revision-Date: 2018-04-21 00:05+0000\n"
-"Last-Translator: Dawid Runowski <dawrun@outlook.com>, 2019\n"
+"Last-Translator: Ermin Trevisan <trevi@twanda.com>, 2019\n"
 "Language-Team: German (https://www.transifex.com/it-projects-llc/teams/76080/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 #. module: mail_sent
 #: model:ir.model,name:mail_sent.model_mail_compose_message
 msgid "Email composition wizard"
-msgstr ""
+msgstr "Assistent für die Email-Gestaltung"
 
 #. module: mail_sent
 #: model:ir.model,name:mail_sent.model_mail_message
@@ -51,14 +52,15 @@ msgstr "versandt"
 #: model:ir.model.fields,help:mail_sent.field_mail_mail_sent
 #: model:ir.model.fields,help:mail_sent.field_mail_message_sent
 msgid "Was message sent to someone"
-msgstr "Die Nachricht wurde an jmdn versandt"
+msgstr "Die Nachricht wurde an jemanden versandt"
 
 #. module: mail_sent
 #. openerp-web
 #: code:addons/mail_sent/static/src/xml/menu.xml:16
 #, python-format
 msgid "You can send messages and then these messages will appear here."
-msgstr "dann erscheinen diese Nachrichten hier."
+msgstr ""
+"Sie können Nachrichten versenden, dann erscheinen diese Nachrichten hier."
 
 #. module: mail_sent
 #: model:ir.model.fields,help:mail_sent.field_mail_compose_message_sent
