@@ -27,7 +27,7 @@ class MailMessage(models.Model):
 
         for recipient in recipient_ids:
             result.append({
-                'checked': len(recipient.user_ids) > 0,
+                'checked': recipient.user_ids.id and not any(recipient.user_ids.mapped('share')),
                 'partner_id': recipient.id,
                 'full_name': recipient.name,
                 'name': recipient.name,
