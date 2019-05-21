@@ -6,7 +6,7 @@
 
     <t t-extend="mail.chatter.Buttons">
         <t t-jquery="button[title='Send a message']" t-operation="after">
-            <button class="btn btn-link oe_compose_post_private"  title="Send a message to specified recipients only">Send internal message</button>
+            <button t-if="newMessageButton" class="btn btn-link oe_compose_post_private"  title="Send a message to specified recipients only">Send internal message</button>
         </t>
     </t>
     
