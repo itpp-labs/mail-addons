@@ -1,7 +1,7 @@
 `1.0.1`
 -------
 
-- **Fix:** Issue related to module uninstallation
+- **Fix:** Issue with module uninstallation
 
 `1.0.0`
 -------
