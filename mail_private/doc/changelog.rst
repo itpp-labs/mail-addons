@@ -1,3 +1,8 @@
+`1.1.0`
+-------
+
+- **New**: internal users are flagged automatically.
+
 `1.0.2`
 -------
 
