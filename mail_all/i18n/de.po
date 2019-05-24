@@ -1,10 +1,10 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mail_all
-# 
+#
 # Translators:
 # Dawid Runowski <dawrun@outlook.com>, 2019
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
@@ -12,24 +12,59 @@ msgstr ""
 "POT-Creation-Date: 2018-05-05 23:09+0000\n"
 "PO-Revision-Date: 2018-04-21 00:05+0000\n"
 "Last-Translator: Dawid Runowski <dawrun@outlook.com>, 2019\n"
-"Language-Team: German (https://www.transifex.com/it-projects-llc/teams/76080/de/)\n"
+"Language-Team: German (https://www.transifex.com/it-projects-llc/teams/76080/"
+"de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mail_all
 #. openerp-web
-#: code:addons/mail_all/static/src/js/mail_all.js:49
-#: code:addons/mail_all/static/src/xml/menu.xml:7
+#: code:addons/mail_all/static/src/js/mail_all.js:23
+#, fuzzy, python-format
+msgid "All Messages"
+msgstr "Alle Nachrichten"
+
+#. module: mail_all
+#. openerp-web
+#: code:addons/mail_all/static/src/xml/menu.xml:10
 #, python-format
 msgid "All messages"
 msgstr "Alle Nachrichten"
 
 #. module: mail_all
 #. openerp-web
-#: code:addons/mail_all/static/src/xml/menu.xml:15
+#: code:addons/mail_all/static/src/js/test_mail_all.js:23
+#, python-format
+msgid "Check that All Messages are opened"
+msgstr ""
+
+#. module: mail_all
+#. openerp-web
+#: code:addons/mail_all/static/src/js/test_mail_all.js:17
+#, python-format
+msgid "Click to enter menu discuss"
+msgstr ""
+
+#. module: mail_all
+#. openerp-web
+#: code:addons/mail_all/static/src/js/test_mail_all.js:13
+#, python-format
+msgid "Click to open app list"
+msgstr ""
+
+#. module: mail_all
+#. openerp-web
+#: code:addons/mail_all/static/src/xml/menu.xml:20
 #, python-format
 msgid "No messages"
 msgstr "Keine Nachrichten"
+
+#. module: mail_all
+#. openerp-web
+#: code:addons/mail_all/static/src/js/test_mail_all.js:20
+#, fuzzy, python-format
+msgid "Open All Messages"
+msgstr "Alle Nachrichten"
