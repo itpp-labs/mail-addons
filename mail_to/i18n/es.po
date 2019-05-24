@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mail_to
-# 
+#
 # Translators:
 # Randall Castro <rcastro@treintaycinco.com>, 2018
 msgid ""
@@ -11,30 +11,31 @@ msgstr ""
 "POT-Creation-Date: 2018-04-21 23:07+0000\n"
 "PO-Revision-Date: 2018-04-21 23:07+0000\n"
 "Last-Translator: Randall Castro <rcastro@treintaycinco.com>, 2018\n"
-"Language-Team: Spanish (https://www.transifex.com/it-projects-llc/teams/76080/es/)\n"
+"Language-Team: Spanish (https://www.transifex.com/it-projects-llc/"
+"teams/76080/es/)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mail_to
 #. openerp-web
-#: code:addons/mail_to/static/src/xml/recipient.xml:6
+#: code:addons/mail_to/static/src/xml/recipient.xml:10
 #, python-format
 msgid "To:"
 msgstr "Para:"
 
 #. module: mail_to
 #. openerp-web
-#: code:addons/mail_to/static/src/xml/recipient.xml:15
+#: code:addons/mail_to/static/src/xml/recipient.xml:19
 #, python-format
 msgid "and"
 msgstr "y"
 
 #. module: mail_to
 #. openerp-web
-#: code:addons/mail_to/static/src/xml/recipient.xml:16
+#: code:addons/mail_to/static/src/xml/recipient.xml:20
 #, python-format
 msgid "more"
 msgstr "más"
