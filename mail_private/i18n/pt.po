@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mail_private
-# 
+#
 # Translators:
 # Translation Bot <i18n-bot@it-projects.info>, 2017
 msgid ""
@@ -11,12 +11,34 @@ msgstr ""
 "POT-Creation-Date: 2017-12-15 13:31+0000\n"
 "PO-Revision-Date: 2017-12-15 13:31+0000\n"
 "Last-Translator: Translation Bot <i18n-bot@it-projects.info>, 2017\n"
-"Language-Team: Portuguese (https://www.transifex.com/it-projects-llc/teams/76080/pt/)\n"
+"Language-Team: Portuguese (https://www.transifex.com/it-projects-llc/"
+"teams/76080/pt/)\n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/js/test_private.js:30
+#, python-format
+msgid "Check the first one"
+msgstr ""
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/js/test_private.js:17
+#, python-format
+msgid "Click on Private mail creating button"
+msgstr ""
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/js/test_private.js:22
+#, python-format
+msgid "Dummy action"
+msgstr ""
 
 #. module: mail_private
 #: model:ir.model,name:mail_private.model_mail_compose_message
@@ -24,7 +46,21 @@ msgid "Email composition wizard"
 msgstr "Assistente de composição de Email"
 
 #. module: mail_private
+#: model:ir.model,name:mail_private.model_mail_message
+msgid "Message"
+msgstr ""
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/js/test_private.js:13
+#, python-format
+msgid "Open Partners Form"
+msgstr ""
+
+#. module: mail_private
 #: model:ir.model.fields,field_description:mail_private.field_mail_compose_message_is_private
+#: model:ir.model.fields,field_description:mail_private.field_mail_mail_is_private
+#: model:ir.model.fields,field_description:mail_private.field_mail_message_is_private
 msgid "Send Internal Message"
 msgstr ""
 
@@ -33,6 +69,14 @@ msgstr ""
 #: code:addons/mail_private/static/src/xml/mail_private.xml:6
 #, python-format
 msgid "Send a message to specified recipients only"
+msgstr ""
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/js/test_private.js:39
+#: code:addons/mail_private/static/src/js/test_private.js:42
+#, python-format
+msgid "Send email"
 msgstr ""
 
 #. module: mail_private
@@ -54,6 +98,20 @@ msgstr ""
 #: code:addons/mail_private/static/src/xml/mail_private.xml:23
 #, python-format
 msgid "Uncheck all"
+msgstr ""
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/js/test_private.js:26
+#, python-format
+msgid "Uncheck all Followers"
+msgstr ""
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/js/test_private.js:33
+#, python-format
+msgid "Write some email"
 msgstr ""
 
 #. module: mail_private
