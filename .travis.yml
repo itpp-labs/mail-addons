@@ -16,17 +16,13 @@ addons:
 
 env:
   global:
-  - VERSION="11.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0" UNIT_TEST="0"
-  - EXCLUDE="hw_printer_network"
+  - VERSION="11.0" TESTS="0" LINT_CHECK="0" UNIT_TEST="0"
   - PYLINT_ODOO_JSLINTRC="/home/travis/maintainer-quality-tools/travis/cfg/.jslintrc"
-  - TRANSIFEX_USER='i18n-bot@it-projects.info'
-  - secure: "MP25G2qSWZb6Bf+qNn/67OlZ8qudC2+2bMItrrW1NltgxFB8zP+uTGJaglvuobq1RwBbiYKFux0atG3/Bcs/SbhOvcXON6KxLqcYN2ulISD4y1jMb1fk21fQ+caVvto3a1ltplAs2OXCLGNAAT16+z5/ulVbKfthi3+njNgxBOaYVKwb+g3K3osJlwbXbr9kEqZyfUWI8HCAVw8SrlkRYWEyxpg3VmDPJv1xfhr6MTslC96QYzXFurb3jU80sUcnsZyCurjiQwGSlhEn1V/TFfA5SLzVioEqObSkBiQXsXr6Z+LLwC8XrpWm6/Ub7ic2HW56KhMXObllRE9nHcqSwnhEttcCKa+Rqd2G+aVZN1hHXUylDCLl3z4qoOPluy7mZatOkUt6nmt6jxUJFgEgvRJOiD8hF6hQKDbnwzC8hEFAuoepIJeVOR/BGSJx9/b8h6FV5V4XpHCHRXO3E+8hcOrCAEVlFtsHcksE7D4c/xqLvApHFHBy9ig6IrZWFeTDyJhCu5jjZZmPs8c3CtR6hOTwRm5Oo6gOGf8Kf9CqEys+r+7DrCr/mVy3QZH5X3i2xywDRD0cFrT5eZsiRi8o7L+66ruV0KUiCmjxEc17GLieQqwWrSda/wZ3GvIcif4ZLiJMkOojB6kcwTQQY5XkrF1lmDKTx8JE3hdBZ8Ie5OM="
 
   matrix:
   - LINT_CHECK="1"
-  - TESTS="1" ODOO_REPO="odoo/odoo"
+  - TESTS="1" ODOO_REPO="odoo/odoo" MAKEPOT="1"
   - TESTS="1" ODOO_REPO="OCA/OCB"
-  - TRANSIFEX="1"
 
 install:
   - pip install anybox.testing.openerp
