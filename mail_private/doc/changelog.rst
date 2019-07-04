@@ -1,4 +1,8 @@
-`1.1.0`
+`1.1.1`
+-------
+
+- **Fix**: issue with sending to unmarked recipients.
+
 -------
 
 - **New**: internal users are flagged automatically.

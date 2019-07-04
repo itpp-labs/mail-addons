@@ -18,7 +18,7 @@ openerp.mail_private = function(instance){
             .find("input:checked").each(function() {
                 $(this).prop("checked", false);
             });
-            _.each(self.recipients, function(res) {
+            _.each(this.recipients, function(res) {
                 res.checked = false;
             });
         },
