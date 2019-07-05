@@ -21,7 +21,7 @@ Manager.include({
             this._addMailbox({
                 id: 'channel_all',
                 name: _t("All Messages"),
-                mailboxCounter: data.needaction_inbox_counter || 0,
+                mailboxCounter: 0,
             });
         }
     },
