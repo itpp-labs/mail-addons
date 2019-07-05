@@ -6,14 +6,27 @@ class MailMessage(models.Model):
 
     sent = fields.Boolean('Sent', compute="_compute_sent", help='Was message sent to someone', store=True)
 
-    @api.depends('author_id', 'partner_ids')
+    @api.depends('author_id', 'partner_ids', 'channel_ids')
     def _compute_sent(self):
         for r in self:
             r_sudo = r.sudo()
-            sent = len(r_sudo.partner_ids) > 1 \
-                or len(r_sudo.partner_ids) == 1 \
-                and r_sudo.author_id \
-                and r_sudo.partner_ids[0].id != r_sudo.author_id.id
+            recipient_ids = r_sudo.partner_ids
+            author_id = r_sudo.author_id
+            res_id = r_sudo.model and r_sudo.res_id and r_sudo.env[r_sudo.model].browse(r_sudo.res_id)
+            sent = author_id and (
+                len(recipient_ids) > 1
+                or (
+                    len(recipient_ids) == 1
+                    and recipient_ids[0].id != author_id.id
+                )
+                or (
+                    len(r_sudo.channel_ids)
+                )
+                or (
+                    res_id
+                    and len(res_id.message_partner_ids - author_id) > 0
+                )
+            )
             r.sent = sent
 
     @api.multi
