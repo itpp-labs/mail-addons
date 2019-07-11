@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     'name': "Mail Recovery",
     'summary': """Backup and recover unsent message""",
@@ -15,5 +14,5 @@
     'data': [
         'data.xml',
     ],
-    "installable": True,
+    "installable": False,
 }

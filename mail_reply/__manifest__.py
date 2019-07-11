@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     "name": """Always show reply button""",
     "summary": """Got a message out of a Record? Now you can reply to it too!""",
@@ -24,6 +23,6 @@
         "static/src/xml/reply_button.xml",
     ],
     "demo": [],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
 }

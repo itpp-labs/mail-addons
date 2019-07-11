@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     "name": """Partner mails count""",
     "summary": """Displays amount of incoming and outgoing partner mails.""",
@@ -24,6 +23,6 @@
     ],
     "demo": [
     ],
-    "installable": True,
+    "installable": False,
     "auto_install": False,
 }

@@ -38,6 +38,19 @@ msgstr ""
 #: code:addons/mail_private/static/src/js/test_private.js:22
 #, python-format
 msgid "Dummy action"
+<<<<<<< HEAD
+=======
+msgstr ""
+
+#. module: mail_private
+#: model:ir.model,name:mail_private.model_mail_compose_message
+msgid "Email composition wizard"
+msgstr "Componi Email"
+
+#. module: mail_private
+#: model:ir.model,name:mail_private.model_mail_message
+msgid "Message"
+>>>>>>> 07c38e8ed3d0cb51ae12335f5c2b6430e689ebe5
 msgstr ""
 
 #. module: mail_private
@@ -54,6 +67,11 @@ msgstr ""
 
 #. module: mail_private
 #: model:ir.model.fields,field_description:mail_private.field_mail_compose_message_is_private
+<<<<<<< HEAD
+=======
+#: model:ir.model.fields,field_description:mail_private.field_mail_mail_is_private
+#: model:ir.model.fields,field_description:mail_private.field_mail_message_is_private
+>>>>>>> 07c38e8ed3d0cb51ae12335f5c2b6430e689ebe5
 msgid "Send Internal Message"
 msgstr ""
 

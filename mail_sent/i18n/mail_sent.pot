@@ -4,7 +4,11 @@
 #
 msgid ""
 msgstr ""
+<<<<<<< HEAD
 "Project-Id-Version: Odoo Server 10.0\n"
+=======
+"Project-Id-Version: Odoo Server 11.0\n"
+>>>>>>> 07c38e8ed3d0cb51ae12335f5c2b6430e689ebe5
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -32,7 +36,11 @@ msgstr ""
 
 #. module: mail_sent
 #. openerp-web
+<<<<<<< HEAD
 #: code:addons/mail_sent/static/src/js/sent.js:70
+=======
+#: code:addons/mail_sent/static/src/js/sent.js:61
+>>>>>>> 07c38e8ed3d0cb51ae12335f5c2b6430e689ebe5
 #: code:addons/mail_sent/static/src/xml/menu.xml:7
 #: model:ir.model.fields,field_description:mail_sent.field_mail_compose_message_sent
 #: model:ir.model.fields,field_description:mail_sent.field_mail_mail_sent

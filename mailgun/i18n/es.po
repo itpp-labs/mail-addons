@@ -25,6 +25,13 @@ msgid "Email Thread"
 msgstr "Hilo de correo electrónico"
 
 #. module: mailgun
+#: model:ir.actions.server,name:mailgun.mailgun_domain_verification_ir_actions_server
+#: model:ir.cron,cron_name:mailgun.mailgun_domain_verification
+#: model:ir.cron,name:mailgun.mailgun_domain_verification
+msgid "Mailgun - domain verification request"
+msgstr ""
+
+#. module: mailgun
 #: model:ir.model,name:mailgun.model_ir_config_parameter
 msgid "ir.config_parameter"
 msgstr "ir.config_parameter"

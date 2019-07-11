@@ -1,6 +1,12 @@
+`1.0.7`
+-------
+
+**FIX**: polling errors on heavy server load
+
 `1.0.6`
 -------
-**FIX**: polling errors on heavy server load
+
+- FIX: Error related to *Create Partner* button on the mail move wizard form.
 
 `1.0.5`
 -------
