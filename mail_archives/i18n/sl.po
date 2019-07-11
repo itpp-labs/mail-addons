@@ -7,10 +7,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-05 23:11+0000\n"
-"PO-Revision-Date: 2017-06-23 14:31+0000\n"
+"POT-Creation-Date: 2018-05-05 23:09+0000\n"
+"PO-Revision-Date: 2018-04-21 00:05+0000\n"
 "Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>, 2019\n"
 "Language-Team: Slovenian (https://www.transifex.com/it-projects-llc/"
 "teams/76080/sl/)\n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #. module: mail_archives
 #. openerp-web
-#: code:addons/mail_archives/static/src/js/archives.js:76
+#: code:addons/mail_archives/static/src/js/archives.js:68
 #: code:addons/mail_archives/static/src/xml/menu.xml:7
 #, python-format
 msgid "Archive"

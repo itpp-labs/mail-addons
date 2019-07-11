@@ -20,7 +20,13 @@ class TestUi(odoo.tests.HttpCase):
         env['ir.module.module'].search([('name', '=', 'mail_private')], limit=1).state = 'installed'
         cr.release()
 
+        env = Environment(self.registry.test_cr, self.uid, {})
+        partners = env['res.partner'].search([])
+        new_follower = env['res.partner'].search([('name', 'ilike', 'Ja')])
+        for partner in partners:
+            partner.message_subscribe(new_follower.ids, [])
+
         self.phantom_js("/web",
                         "odoo.__DEBUG__.services['web_tour.tour'].run('mail_private_tour', 1000)",
                         "odoo.__DEBUG__.services['web_tour.tour'].tours.mail_private_tour.ready",
-                        login="admin", timeout=70)
+                        login="admin", timeout=90)
