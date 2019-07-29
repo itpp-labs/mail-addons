@@ -273,10 +273,10 @@ class MailMessage(models.Model):
     @api.multi
     def _compute_get_all_childs(self, include_myself=True):
         for r in self:
-            r._get_all_childs_one(include_myself=include_myself)
+            r._compute_all_childs_one(include_myself=include_myself)
 
     @api.multi
-    def _get_all_childs_one(self, include_myself=True):
+    def _compute_all_childs_one(self, include_myself=True):
         self.ensure_one()
         ids = []
         if include_myself:

@@ -1,0 +1,384 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_move_message
+# 
+# Translators:
+# Dawid Runowski <dawrun@outlook.com>, 2019
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-05 23:11+0000\n"
+"PO-Revision-Date: 2017-06-23 14:31+0000\n"
+"Last-Translator: Dawid Runowski <dawrun@outlook.com>, 2019\n"
+"Language-Team: German (https://www.transifex.com/it-projects-llc/teams/76080/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mail_move_message
+#: code:addons/mail_move_message/controllers/main.py:40
+#, python-format
+msgid "%s ID %s"
+msgstr "%sID%s"
+
+#. module: mail_move_message
+#: code:addons/mail_move_message/controllers/main.py:38
+#, python-format
+msgid "%s [%s] ID %s"
+msgstr "%s[%s]ID%s"
+
+#. module: mail_move_message
+#: model:ir.model.fields,help:mail_move_message.field_mail_move_message_wizard_move_followers
+msgid ""
+"Add followers of current record to a new record.\n"
+"You must use this option, if new record has restricted access.\n"
+"You can change default value for this option at Settings/System Parameters"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_compose_message_all_child_ids
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_mail_all_child_ids
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_message_all_child_ids
+msgid "All childs"
+msgstr "Alle Kinder"
+
+#. module: mail_move_message
+#: model:ir.ui.view,arch_db:mail_move_message.view_mail_move_message_config_settings
+msgid "Apply"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_partner_id
+msgid "Author"
+msgstr "Autor"
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_can_move
+msgid "Can move"
+msgstr "Kann verschoben werden"
+
+#. module: mail_move_message
+#: model:ir.ui.view,arch_db:mail_move_message.view_mail_move_message_config_settings
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. module: mail_move_message
+#: model:ir.ui.view,arch_db:mail_move_message.view_wizard
+msgid "Close"
+msgstr "Schließen"
+
+#. module: mail_move_message
+#: model:ir.ui.view,arch_db:mail_move_message.view_mail_move_message_config_settings
+msgid "Configure Mail Relocation"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.ui.view,arch_db:mail_move_message.view_wizard
+msgid "Create Partner"
+msgstr "Partner erstellen"
+
+#. module: mail_move_message
+#. openerp-web
+#: code:addons/mail_move_message/static/src/js/mail_move_message.js:125
+#: model:ir.ui.view,arch_db:mail_move_message.view_wizard
+#, python-format
+msgid "Create new record"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_config_settings_create_uid
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_config_settings_create_date
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: mail_move_message
+#: model:ir.ui.view,arch_db:mail_move_message.view_wizard
+msgid "Delete message"
+msgstr "Nachricht löschen"
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_config_settings_display_name
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: mail_move_message
+#: model:ir.ui.view,arch_db:mail_move_message.view_wizard
+msgid "Do you really want to delete this message?"
+msgstr "Wollen Sie wirklich die Nachricht löschen?"
+
+#. module: mail_move_message
+#: model:ir.model.fields,help:mail_move_message.field_mail_move_message_wizard_message_from
+msgid ""
+"Email address of the sender. This field is set when no matching partner is "
+"found and replaces the author_id field in the chatter."
+msgstr ""
+"Email-Adresse des Absenders. Dieses Feld wird eingestellt, wenn kein "
+"passender Partner gefunden wird und tauscht das author_id Feld in der "
+"Koversation."
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_filter_by_partner
+msgid "Filter Records by partner"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_message_from
+msgid "From"
+msgstr "Von"
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_config_settings_id
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_id
+msgid "ID"
+msgstr "ID"
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_message_is_moved
+msgid "Is Moved"
+msgstr "wurde versetzt"
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_compose_message_is_moved
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_mail_is_moved
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_message_is_moved
+msgid "Is moved"
+msgstr "Wurde versetzt"
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_config_settings___last_update
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard___last_update
+msgid "Last Modified on"
+msgstr "Zuletzt modifiziert am"
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_config_settings_write_uid
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert von"
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_config_settings_write_date
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_move_back
+msgid "MOVE TO ORIGIN"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.actions.act_window,name:mail_move_message.action_mail_move_message_config
+#: model:ir.ui.menu,name:mail_move_message.menu_mail_move_message
+msgid "Mail Relocation"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.ui.view,arch_db:mail_move_message.view_wizard
+msgid "Mark as read and Close"
+msgstr "als gelesen markieren und schließen"
+
+#. module: mail_move_message
+#: model:ir.model,name:mail_move_message.model_mail_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_message_id
+#: model:ir.ui.view,arch_db:mail_move_message.view_wizard
+msgid "Message"
+msgstr "Nachricht"
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_message_email_from
+msgid "Message email from"
+msgstr "Email-Nachricht von"
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_message_name_from
+msgid "Message name from"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_message_body
+msgid "Message to move"
+msgstr "Nachricht zu verschieben"
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_model
+msgid "Model"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_config_settings_model_ids
+#: model:ir.ui.view,arch_db:mail_move_message.view_mail_move_message_config_settings
+msgid "Models"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.ui.view,arch_db:mail_move_message.view_wizard
+msgid "Move"
+msgstr "Verschieben"
+
+#. module: mail_move_message
+#: model:ir.model.fields,help:mail_move_message.field_mail_move_message_wizard_move_back
+msgid "Move  message and submessages to original place"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_config_settings_move_followers
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_move_followers
+msgid "Move Followers"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.ui.view,arch_db:mail_move_message.view_wizard
+msgid "Move Message"
+msgstr "Nachricht verschieben"
+
+#. module: mail_move_message
+#. openerp-web
+#: code:addons/mail_move_message/static/src/xml/mail_move_message_main.xml:6
+#, python-format
+msgid "Move to thread"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_message_moved_by_user_id
+msgid "Moved by"
+msgstr "Verschoben von"
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_compose_message_moved_by_message_id
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_mail_moved_by_message_id
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_message_moved_by_message_id
+msgid "Moved by message"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_compose_message_moved_by_user_id
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_mail_moved_by_user_id
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_message_moved_by_user_id
+msgid "Moved by user"
+msgstr "Verschoben von dem Benutzer"
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_message_moved_by_message_id
+msgid "Moved with"
+msgstr "Verschoben mit"
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_message_to_read
+#: model:ir.model.fields,help:mail_move_message.field_mail_move_message_wizard_message_to_read
+msgid "Need Action"
+msgstr "Aktion erforderlich"
+
+#. module: mail_move_message
+#: model:ir.ui.view,arch_db:mail_move_message.view_wizard
+msgid "Open message"
+msgstr "Nachricht öffnen"
+
+#. module: mail_move_message
+#: model:ir.ui.view,arch_db:mail_move_message.view_mail_move_message_config_settings
+msgid "Options"
+msgstr "Optionen"
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_compose_message_moved_from_parent_id
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_mail_moved_from_parent_id
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_message_moved_from_parent_id
+msgid "Parent Message (Original)"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model,name:mail_move_message.model_res_partner
+msgid "Partner"
+msgstr "Partner"
+
+#. module: mail_move_message
+#: code:addons/mail_move_message/mail_move_message_models.py:200
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_res_id
+#, python-format
+msgid "Record"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_compose_message_moved_from_res_id
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_mail_moved_from_res_id
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_message_moved_from_res_id
+msgid "Related Document ID (Original)"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_compose_message_moved_from_model
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_mail_moved_from_model
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_message_moved_from_model
+msgid "Related Document Model (Original)"
+msgstr ""
+
+#. module: mail_move_message
+#. openerp-web
+#: code:addons/mail_move_message/static/src/js/mail_move_message.js:27
+#, python-format
+msgid "Relocate Message"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_parent_id
+msgid "Search by name"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_message_subject
+msgid "Subject"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model.fields,help:mail_move_message.field_mail_compose_message_moved_by_message_id
+#: model:ir.model.fields,help:mail_move_message.field_mail_mail_moved_by_message_id
+#: model:ir.model.fields,help:mail_move_message.field_mail_message_moved_by_message_id
+#: model:ir.model.fields,help:mail_move_message.field_mail_move_message_wizard_message_moved_by_message_id
+msgid "Top message, that initate moving this message"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_uid
+msgid "Uid"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.ui.view,arch_db:mail_move_message.view_wizard
+msgid ""
+"You cannot move this message. It was already moved with a message bellow. "
+"Open one and apply changes there."
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model.fields,help:mail_move_message.field_mail_compose_message_all_child_ids
+#: model:ir.model.fields,help:mail_move_message.field_mail_mail_all_child_ids
+#: model:ir.model.fields,help:mail_move_message.field_mail_message_all_child_ids
+msgid "all childs, including subchilds"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model,name:mail_move_message.model_mail_move_message_config_settings
+msgid "mail_move_message.config.settings"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.model,name:mail_move_message.model_mail_move_message_wizard
+msgid "mail_move_message.wizard"
+msgstr ""
+
+#. module: mail_move_message
+#: model:ir.ui.view,arch_db:mail_move_message.view_mail_move_message_config_settings
+#: model:ir.ui.view,arch_db:mail_move_message.view_wizard
+msgid "or"
+msgstr "oder"

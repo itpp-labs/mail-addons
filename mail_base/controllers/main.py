@@ -9,6 +9,7 @@ class MailChatController(BusController):
 
     def _poll(self, dbname, channels, last, options):
         if request.session.uid:
+            channels = list(channels)       # do not alter original list
             channels.append((request.db, 'mail_base.mail_sent'))
 
         return super(MailChatController, self)._poll(dbname, channels, last, options)

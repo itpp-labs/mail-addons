@@ -1,3 +1,8 @@
+`1.0.7`
+-------
+
+**FIX**: polling errors on heavy server load
+
 `1.0.6`
 -------
 
