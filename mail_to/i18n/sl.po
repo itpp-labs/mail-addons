@@ -1,9 +1,8 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * mail_base
+# * mail_to
 # 
 # Translators:
-# Translation Bot <i18n-bot@it-projects.info>, 2017
 # Matjaz Mozetic <m.mozetic@matmoz.si>, 2019
 # 
 msgid ""
@@ -11,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-05 23:09+0000\n"
-"PO-Revision-Date: 2017-11-28 13:59+0000\n"
+"PO-Revision-Date: 2018-04-21 00:05+0000\n"
 "Last-Translator: Matjaz Mozetic <m.mozetic@matmoz.si>, 2019\n"
 "Language-Team: Slovenian (https://www.transifex.com/it-projects-llc/teams/76080/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -20,12 +19,23 @@ msgstr ""
 "Language: sl\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
-#. module: mail_base
-#: model:ir.model,name:mail_base.model_mail_compose_message
-msgid "Email composition wizard"
-msgstr "Čarovnik za sestavljanje sporočil"
+#. module: mail_to
+#. openerp-web
+#: code:addons/mail_to/static/src/xml/recipient.xml:6
+#, python-format
+msgid "To:"
+msgstr "Za:"
 
-#. module: mail_base
-#: model:ir.model,name:mail_base.model_mail_message
-msgid "Message"
-msgstr "Sporočilo"
+#. module: mail_to
+#. openerp-web
+#: code:addons/mail_to/static/src/xml/recipient.xml:15
+#, python-format
+msgid "and"
+msgstr "in"
+
+#. module: mail_to
+#. openerp-web
+#: code:addons/mail_to/static/src/xml/recipient.xml:16
+#, python-format
+msgid "more"
+msgstr "več"

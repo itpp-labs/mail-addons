@@ -4,16 +4,16 @@
 #
 # Translators:
 # Dawid Runowski <dawrun@outlook.com>, 2019
-#
+# Ermin Trevisan <trevi@twanda.com>, 2019
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-05 23:09+0000\n"
 "PO-Revision-Date: 2018-04-21 00:05+0000\n"
-"Last-Translator: Dawid Runowski <dawrun@outlook.com>, 2019\n"
-"Language-Team: German (https://www.transifex.com/it-projects-llc/teams/76080/"
-"de/)\n"
+"Last-Translator: Ermin Trevisan <trevi@twanda.com>, 2019\n"
+"Language-Team: German (https://www.transifex.com/it-projects-llc/teams/76080/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,14 +25,14 @@ msgstr ""
 #: code:addons/mail_to/static/src/xml/recipient.xml:10
 #, python-format
 msgid "To:"
-msgstr "zu:"
+msgstr "An:"
 
 #. module: mail_to
 #. openerp-web
 #: code:addons/mail_to/static/src/xml/recipient.xml:19
 #, python-format
 msgid "and"
-msgstr "un"
+msgstr "und"
 
 #. module: mail_to
 #. openerp-web
