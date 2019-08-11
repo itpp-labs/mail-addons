@@ -1,3 +1,6 @@
+/*  Copyright 2017 Artyom Losev <https://github.com/ArtyomLosev>
+    Copyright 2019 Artem Rafailov <https://github.com/Ommo73>
+    License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html). */
 odoo.define('mail_base.base', function (require) {
 "use strict";
 
@@ -215,7 +218,7 @@ var MailComposer = composer.BasicComposer.extend({
                     var parsed_email = utils.parse_email(recipient[1]);
                     if (_.indexOf(email_addresses, parsed_email[1]) === -1) {
                         self.suggested_partners.push({
-                            checked: true,
+                            checked: false,
                             partner_id: recipient[0],
                             full_name: recipient[1],
                             name: parsed_email[0],
@@ -1059,6 +1062,7 @@ chat_manager.post_message = function (data, options) {
         options = options || {};
         var msg = {
             partner_ids: data.partner_ids,
+            channel_ids: data.channel_ids,
             body: _.str.trim(data.content),
             attachment_ids: data.attachment_ids
         };

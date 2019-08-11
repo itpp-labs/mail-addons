@@ -6,7 +6,7 @@ Mail Base
 * fixes toggling left bar
 * fixes Recipients field. Out-of-box this field could be empty.
 
-One can say, that the module do this todo from `addons/mail/static/src/js/chat_manager.js <https://github.com/odoo/odoo/blob/9.0/addons/mail/static/src/js/chat_manager.js#L57>`__
+One can say, that the module do this todo from `addons/mail/static/src/js/chat_manager.js <https://github.com/odoo/odoo/blob/10.0/addons/mail/static/src/js/chat_manager.js#L57>`__
 
     // to do: move this to mail.utils
 

@@ -1,3 +1,9 @@
+/*  Copyright 2016 x620 <https://github.com/x620>
+    Copyright 2016 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+    Copyright 2016 manawi <https://github.com/manawi>
+    Copyright 2017 Artyom Losev <https://github.com/ArtyomLosev>
+    Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
+    License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html). */
 odoo.define('mail_private', function (require) {
 'use strict';
 
@@ -22,6 +28,7 @@ Chatter.include({
         var self = this;
         if (this.private) {
             message.subtype = false;
+            message.channel_ids = this.get_checked_channels_ids();
         }
         var options = {model: this.model, res_id: this.res_id};
         chat_manager.post_message(message, options).then(
@@ -33,32 +40,38 @@ Chatter.include({
             }).fail(function () {
                 // todo: display notification
             });
-        },
+    },
 
     on_open_composer_private_message: function (event) {
         var self = this;
         this.private = true;
         this.get_recipients_for_internal_message().then(function (data) {
             self.recipients_for_internal_message = data;
-            self.open_composer({is_private: true});
+            return self.get_channels_for_internal_message();
+        }).then(function (data) {
+            self.channels_for_internal_message = data;
+            self.get_internal_users_ids().then(function(res_ids){
+                self.open_composer({is_private: true, internal_ids: res_ids});
+            });
         });
     },
 
     on_open_composer_new_message: function () {
         this._super.apply(this, arguments);
         this.private = false;
+        this.context.is_private = false;
     },
 
     open_composer: function (options) {
         var self = this;
         this._super.apply(this, arguments);
         if (options && options.is_private) {
-
+            self.internal_users_ids = options.internal_ids;
             this.composer.options.is_private = options.is_private;
 
             _.each(self.recipients_for_internal_message, function (partner) {
                 self.composer.suggested_partners.push({
-                    checked: (partner.user_ids.length > 0),
+                    checked: _.intersection(self.internal_users_ids, partner.user_ids).length > 0,
                     partner_id: partner.id,
                     full_name: partner.name,
                     name: partner.name,
@@ -66,6 +79,15 @@ Chatter.include({
                     reason: _.include(partner.user_ids, self.session.uid)
                     ?'Partner'
                     :'Follower'
+                });
+            });
+
+            _.each(self.channels_for_internal_message, function (channel) {
+                self.composer.suggested_channels.push({
+                    checked: true,
+                    channel_id: channel.id,
+                    full_name: channel.name,
+                    name: ('# ' + channel.name),
                 });
             });
         }
@@ -101,13 +123,68 @@ Chatter.include({
                                 });
                     });
         });
-    }
+    },
+
+    get_channels_for_internal_message: function () {
+        var self = this;
+        self.result = {};
+        return new Model(this.context.default_model).query(
+            ['message_follower_ids', 'partner_id']).filter(
+            [['id', '=', self.context.default_res_id]]).all()
+            .then(function (thread) {
+                var follower_ids = thread[0].message_follower_ids;
+                self.result[self.context.default_res_id] = [];
+                self.customer = thread[0].partner_id;
+
+                // Fetch channels ids
+                return new Model('mail.followers').call(
+                    'read', [follower_ids, ['channel_id']]).then(function (res_channels) {
+                        // Filter result and push to array
+                        var res_channels_filtered = _.map(res_channels, function (channel) {
+                            if (channel.channel_id[0]) {
+                                return channel.channel_id[0];
+                            }
+                        }).filter(function (channel) {
+                            return typeof channel !== 'undefined';
+                        });
+
+                        return new Model('mail.channel').call(
+                            'read', [res_channels_filtered, ['name', 'id']]
+                                ).then(function (recipients) {
+                                    return recipients;
+                                });
+                    });
+        });
+    },
+
+    get_internal_users_ids: function () {
+            var ResUser = new Model('mail.compose.message');
+            this.users_ids = ResUser.call('get_internal_users_ids', [[]]).then( function (users_ids) {
+                return users_ids;
+            });
+            return this.users_ids;
+    },
+
+    get_checked_channels_ids: function () {
+        var self = this;
+        var checked_channels = [];
+        this.$('.o_composer_suggested_channels input:checked').each(function() {
+            var full_name = $(this).data('fullname').toString();
+            _.each(self.channels_for_internal_message, function(item) {
+                if (full_name === item.name) {
+                    checked_channels.push(item.id);
+                }
+            });
+        });
+        return checked_channels;
+    },
 });
 
 MailComposer.include({
     init: function (parent, dataset, options) {
         this._super(parent, dataset, options);
         this.events['click .oe_composer_uncheck'] = 'on_uncheck_recipients';
+        this.suggested_channels = [];
 
     },
 
@@ -115,6 +192,17 @@ MailComposer.include({
         this.$('.o_composer_suggested_partners input:checked').each(function() {
             $(this).prop('checked', false);
         });
+        this.$('.o_composer_suggested_channels input:checked').each(function() {
+            $(this).prop('checked', false);
+        });
+    },
+
+    preprocess_message: function () {
+        var self = this;
+        if (self.options.is_private) {
+            self.context.is_private = true;
+        }
+        return this._super();
     },
 
     on_open_full_composer: function() {

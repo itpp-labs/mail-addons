@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--Copyright 2016 x620 <https://github.com/x620>
+    Copyright 2016 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+    Copyright 2016 manawi <https://github.com/manawi>
+    Copyright 2017 Artyom Losev <https://github.com/ArtyomLosev>
+    Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
+    License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html).-->
 <template>
 
     <t t-extend="mail.Chatter">
@@ -20,6 +26,16 @@
             </span>
         </t>
         <t t-jquery="div[class='o_composer_suggested_partners']" t-operation="after">
+            <div class="o_composer_suggested_channels">
+                <t t-foreach='widget.suggested_channels' t-as='channel'>
+                    <div t-attf-title="Add as channel and follower">
+                        <input type="checkbox"
+                            t-att-checked="channel.checked ? 'checked' : undefined"
+                            t-att-data-fullname="channel.full_name"/>
+                        <t t-esc="channel.name"/>
+                    </div>
+                </t>
+            </div>
             <button class="btn btn-sm btn-link oe_composer_uncheck" t-if="widget.options.is_private">Uncheck all</button>
         </t>
   </t>
