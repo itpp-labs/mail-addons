@@ -42,7 +42,7 @@ msgstr ""
 
 #. module: mail_sent
 #. openerp-web
-#: code:addons/mail_sent/static/src/js/sent.js:20
+#: code:addons/mail_sent/static/src/js/sent.js:21
 #, python-format
 msgid "Sent Messages"
 msgstr ""
