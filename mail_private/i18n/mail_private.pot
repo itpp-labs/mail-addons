@@ -35,8 +35,18 @@ msgid "Dummy action"
 msgstr ""
 
 #. module: mail_private
+#: model:ir.model,name:mail_private.model_mail_thread
+msgid "Email Thread"
+msgstr ""
+
+#. module: mail_private
 #: model:ir.model,name:mail_private.model_mail_compose_message
 msgid "Email composition wizard"
+msgstr ""
+
+#. module: mail_private
+#: model:ir.model,name:mail_private.model_mail_message
+msgid "Message"
 msgstr ""
 
 #. module: mail_private
@@ -53,7 +63,7 @@ msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/xml/mail_private.xml:6
+#: code:addons/mail_private/static/src/xml/mail_private.xml:12
 #, python-format
 msgid "Send a message to specified recipients only"
 msgstr ""
@@ -68,21 +78,21 @@ msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/xml/mail_private.xml:6
+#: code:addons/mail_private/static/src/xml/mail_private.xml:12
 #, python-format
 msgid "Send internal message"
 msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/xml/mail_private.xml:12
+#: code:addons/mail_private/static/src/xml/mail_private.xml:18
 #, python-format
 msgid "To: Followers of"
 msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/xml/mail_private.xml:23
+#: code:addons/mail_private/static/src/xml/mail_private.xml:39
 #, python-format
 msgid "Uncheck all"
 msgstr ""
@@ -103,7 +113,7 @@ msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/xml/mail_private.xml:17
+#: code:addons/mail_private/static/src/xml/mail_private.xml:23
 #, python-format
 msgid "this document"
 msgstr ""
