@@ -1,3 +1,8 @@
+`1.1.1`
+-------
+
+- **Imp:** Not all channel messages are shown if page was refreshed on a channel screen
+
 `1.1.0`
 -------
 
