@@ -40,7 +40,7 @@ Maintainers
 
       To get a guaranteed support
       you are kindly requested to purchase the module
-      at `odoo apps store <https://apps.odoo.com/apps/modules/12.0/mail_multi_website/>`__.
+      at `odoo apps store <https://apps.odoo.com/apps/modules/13.0/mail_multi_website/>`__.
 
       Thank you for understanding!
 
@@ -49,14 +49,14 @@ Maintainers
 Further information
 ===================
 
-Demo: http://runbot.it-projects.info/demo/mail-addons/12.0
+Demo: http://runbot.it-projects.info/demo/mail-addons/13.0
 
-HTML Description: https://apps.odoo.com/apps/modules/12.0/mail_multi_website/
+HTML Description: https://apps.odoo.com/apps/modules/13.0/mail_multi_website/
 
 Usage instructions: `<doc/index.rst>`_
 
 Changelog: `<doc/changelog.rst>`_
 
-Notifications on updates: `via Atom <https://github.com/it-projects-llc/mail-addons/commits/12.0/mail_multi_website.atom>`_, `by Email <https://blogtrottr.com/?subscribe=https://github.com/it-projects-llc/mail-addons/commits/12.0/mail_multi_website.atom>`_
+Notifications on updates: `via Atom <https://github.com/it-projects-llc/mail-addons/commits/13.0/mail_multi_website.atom>`_, `by Email <https://blogtrottr.com/?subscribe=https://github.com/it-projects-llc/mail-addons/commits/13.0/mail_multi_website.atom>`_
 
 Tested on Odoo 12.0 80cef9e8c52ff7dc0715a7478a2288d3de7065df
