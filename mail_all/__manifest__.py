@@ -35,6 +35,6 @@
     "post_init_hook": None,
     "uninstall_hook": None,
 
-    'installable': True,
+    'installable': False,
     "auto_install": False,
 }

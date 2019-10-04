@@ -38,7 +38,7 @@
     "uninstall_hook": "uninstall_hook",
 
     "auto_install": False,
-    "installable": True,
+    "installable": False,
 
     # "demo_title": "Email Addresses per Website",
     # "demo_addons": [
