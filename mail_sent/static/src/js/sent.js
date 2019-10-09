@@ -35,6 +35,9 @@ Manager.include({
             if (_.without(new_channels, ...current_threads).length) {
                 message._threadIDs = _.union(new_channels, current_threads);
             }
+        } else if (data.author_id && data.author_id[0] && odoo.session_info.partner_id &&
+                   data.author_id[0] === odoo.session_info.partner_id) {
+            data.channel_ids.push('mailbox_channel_sent');
         }
         return this._super(data, options);
     },

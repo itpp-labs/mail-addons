@@ -6,7 +6,7 @@
     "summary": """Quick way to find sent messages""",
     "category": "Discuss",
     "images": ['images/menu.png'],
-    "version": "12.0.1.1.1",
+    "version": "12.0.1.2.0",
 
     "author": "IT-Projects LLC, Ivan Yelizariev, Pavel Romanchenko",
     "support": "apps@it-projects.info",
