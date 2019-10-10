@@ -2,7 +2,7 @@
 # Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
-    "name": """Email Addresses and Templates per Website""",
+    "name": """Multi-Brand Mailing""",
     "summary": """Use single Backend to manage several Websites""",
     "category": "Discuss",
     # "live_test_url": "http://apps.it-projects.info/shop/product/website-multi-company?version=11.0",

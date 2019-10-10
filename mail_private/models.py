@@ -21,14 +21,13 @@ class MailMessage(models.Model):
         result = []
         default_resource = self.env[model].search(domain)
         follower_ids = default_resource.message_follower_ids
-        internal_ids = self.get_internal_users_ids()
 
         recipient_ids = [r.partner_id for r in follower_ids if r.partner_id]
         # channel_ids = [c.channel_id for c in follower_ids if c.channel_id]
 
         for recipient in recipient_ids:
             result.append({
-                'checked': recipient.user_ids.id in internal_ids,
+                'checked': recipient.user_ids.id and not any(recipient.user_ids.mapped('share')),
                 'partner_id': recipient.id,
                 'full_name': recipient.name,
                 'name': recipient.name,
@@ -62,7 +61,3 @@ class MailMessage(models.Model):
         pids = [x[1] for x in msg_vals.get('partner_ids')] if 'partner_ids' in msg_vals else self.sudo().partner_ids.ids
         recipient_data['partners'] = [i for i in recipient_data['partners'] if i['id'] in pids]
         return recipient_data
-
-    def get_internal_users_ids(self):
-        internal_users_ids = self.env['res.users'].search([('share', '=', False)]).ids
-        return internal_users_ids

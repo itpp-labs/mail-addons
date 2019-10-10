@@ -1,3 +1,8 @@
+`1.1.1`
+-------
+
+- **Improvement:** refactoring code
+
 `1.1.0`
 -------
 
