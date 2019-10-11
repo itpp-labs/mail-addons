@@ -1,18 +1,20 @@
+# Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
+# License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html).
 import odoo.tests
+from odoo.api import Environment
 
 
-@odoo.tests.common.at_install(False)
+@odoo.tests.common.at_install(True)
 @odoo.tests.common.post_install(True)
 class TestUi(odoo.tests.HttpCase):
 
     def test_01_mail_to(self):
-        # checks the presence of an element with a link to the recipient
-        # TODO: instead of timeout, try to put $('a.recipient_link') as ready argument of phantom_js (third parameter)
-        code = """
-            setTimeout(function () {
-                $('a.recipient_link')[0].click();
-                console.log('ok');
-            }, 1000);
-        """
-        link = '/web#action=%s' % self.ref('mail.mail_channel_action_client_chat')
-        self.phantom_js(link, code, "odoo.__DEBUG__.services['mail_to.MailTo']", login="admin")
+        cr = self.registry.cursor()
+        env = Environment(cr, self.uid, {})
+        env['ir.module.module'].search([('name', '=', 'mail_to')], limit=1).state = 'installed'
+        cr.release()
+
+        self.phantom_js("/web",
+                        "odoo.__DEBUG__.services['web_tour.tour'].run('mail_to_tour', 1000)",
+                        "odoo.__DEBUG__.services['web_tour.tour'].tours.mail_to_tour.ready",
+                        login="admin", timeout=200)

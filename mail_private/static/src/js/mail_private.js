@@ -1,8 +1,9 @@
-/*  Copyright 2016-2018 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
-    Copyright 2016 manavi <https://github.com/manawi>
-    Copyright 2017-2018 Artyom Losev <https://github.com/ArtyomLosev>
-    Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
-    License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). */
+/*  Copyright 2016 x620 <https://github.com/x620>
+    Copyright 2016 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+    Copyright 2016 manawi <https://github.com/manawi>
+    Copyright 2017 Artyom Losev <https://github.com/ArtyomLosev>
+    Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
+    License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html). */
 odoo.define('mail_private', function (require) {
 'use strict';
 
@@ -98,7 +99,61 @@ Chatter.include({
                 return obj.partner_id !== session.partner_id;
             });
         });
-    }
+    },
+
+    get_channels_for_internal_message: function () {
+        var self = this;
+        self.result = {};
+        return new Model(this.context.default_model).query(
+            ['message_follower_ids', 'partner_id']).filter(
+            [['id', '=', self.context.default_res_id]]).all()
+            .then(function (thread) {
+                var follower_ids = thread[0].message_follower_ids;
+                self.result[self.context.default_res_id] = [];
+                self.customer = thread[0].partner_id;
+
+                // Fetch channels ids
+                return new Model('mail.followers').call(
+                    'read', [follower_ids, ['channel_id']]).then(function (res_channels) {
+                        // Filter result and push to array
+                        var res_channels_filtered = _.map(res_channels, function (channel) {
+                            if (channel.channel_id[0]) {
+                                return channel.channel_id[0];
+                            }
+                        }).filter(function (channel) {
+                            return typeof channel !== 'undefined';
+                        });
+
+                        return new Model('mail.channel').call(
+                            'read', [res_channels_filtered, ['name', 'id']]
+                                ).then(function (recipients) {
+                                    return recipients;
+                                });
+                    });
+        });
+    },
+
+    get_internal_users_ids: function () {
+            var ResUser = new Model('mail.compose.message');
+            this.users_ids = ResUser.call('get_internal_users_ids', [[]]).then( function (users_ids) {
+                return users_ids;
+            });
+            return this.users_ids;
+    },
+
+    get_checked_channels_ids: function () {
+        var self = this;
+        var checked_channels = [];
+        this.$('.o_composer_suggested_channels input:checked').each(function() {
+            var full_name = $(this).data('fullname').toString();
+            _.each(self.channels_for_internal_message, function(item) {
+                if (full_name === item.name) {
+                    checked_channels.push(item.id);
+                }
+            });
+        });
+        return checked_channels;
+    },
 });
 
 ChatterComposer.include({
@@ -154,6 +209,17 @@ ChatterComposer.include({
         this.$('.o_composer_suggested_partners input:checked').each(function() {
             $(this).prop('checked', false);
         });
+        this.$('.o_composer_suggested_channels input:checked').each(function() {
+            $(this).prop('checked', false);
+        });
+    },
+
+    preprocess_message: function () {
+        var self = this;
+        if (self.options.is_private) {
+            self.context.is_private = true;
+        }
+        return this._super();
     },
 
     on_open_full_composer: function() {

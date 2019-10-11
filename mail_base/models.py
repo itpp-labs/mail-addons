@@ -1,3 +1,6 @@
+# Copyright 2016 x620 <https://github.com/x620>
+# Copyright 2017 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+# License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html)
 
 from openerp import api, models
 
@@ -12,8 +15,8 @@ class MailMessage(models.Model):
                 values['partner_ids'] = []
             for triplet in values.get('needaction_partner_ids'):
                 if triplet[0] == 6:
-                    for id in triplet[2]:
-                        values['partner_ids'].append((4, id, False))
+                    for i in triplet[2]:
+                        values['partner_ids'].append((4, i, False))
         return super(MailMessage, self).write(values)
 
 
