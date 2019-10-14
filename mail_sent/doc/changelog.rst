@@ -1,3 +1,9 @@
+`1.2.0`
+-------
+
+- **Imp:** Messages sent in the discuss page are automatically added to sent channel
+- **Fix:** Not all channel messages are shown if page was refreshed on a channel screen
+
 `1.1.0`
 -------
 

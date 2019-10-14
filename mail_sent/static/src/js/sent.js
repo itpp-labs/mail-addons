@@ -1,3 +1,6 @@
+/*  # Copyright 2018 Artyom Losev <https://it-projects.info/team/ArtyomLosev>
+    # Copyright 2019 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
+    # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). */
 odoo.define('mail_sent.sent', function (require) {
 "use strict";
 
@@ -22,6 +25,21 @@ Manager.include({
                 mailboxCounter: 0,
             });
         }
+    },
+
+    addMessage: function (data, options) {
+        var message = this.getMessage(data.id);
+        if (message) {
+            var current_threads = message._threadIDs;
+            var new_channels = data.channel_ids;
+            if (_.without(new_channels, ...current_threads).length) {
+                message._threadIDs = _.union(new_channels, current_threads);
+            }
+        } else if (data.author_id && data.author_id[0] && odoo.session_info.partner_id &&
+                   data.author_id[0] === odoo.session_info.partner_id) {
+            data.channel_ids.push('mailbox_channel_sent');
+        }
+        return this._super(data, options);
     },
 });
 
