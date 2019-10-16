@@ -30,7 +30,8 @@ Chatter.include({
         this.fetch_recipients_for_internal_message().then(function (data) {
             self._openComposer({
                     is_private: true,
-                    suggested_partners: data
+                    suggested_partners: data["partners"],
+                    suggested_channels: data["channels"],
                 });
         });
     },
@@ -49,7 +50,8 @@ Chatter.include({
             record_name: this.record_name,
             default_body: old_composer && old_composer.$input && old_composer.$input.val(),
             default_mention_selections: old_composer && old_composer.mention_get_listener_selections(),
-            is_private: options.is_private
+            is_private: options.is_private,
+            suggested_channels: options.suggested_channels
         });
         this.composer.on('input_focused', this, function () {
             this.composer.mention_set_prefetched_partners(this.mentionSuggestions || []);
@@ -65,6 +67,7 @@ Chatter.include({
             self.composer.on('post_message', self, function (message) {
                 if (options.is_private) {
                     self.composer.options.is_log = true;
+                    self.composer.options.is_private = options.is_private;
                 }
                 self.fields.thread.postMessage(message).then(function () {
 
@@ -95,70 +98,18 @@ Chatter.include({
             method: 'send_recepients_for_internal_message',
             args: [[], self.context.default_model, follower_ids_domain]
         }).then(function (res) {
-            return _.filter(res, function (obj) {
+            res["partners"] = _.filter(res["partners"], function (obj) {
                 return obj.partner_id !== session.partner_id;
             });
+            return res;
         });
-    },
-
-    get_channels_for_internal_message: function () {
-        var self = this;
-        self.result = {};
-        return new Model(this.context.default_model).query(
-            ['message_follower_ids', 'partner_id']).filter(
-            [['id', '=', self.context.default_res_id]]).all()
-            .then(function (thread) {
-                var follower_ids = thread[0].message_follower_ids;
-                self.result[self.context.default_res_id] = [];
-                self.customer = thread[0].partner_id;
-
-                // Fetch channels ids
-                return new Model('mail.followers').call(
-                    'read', [follower_ids, ['channel_id']]).then(function (res_channels) {
-                        // Filter result and push to array
-                        var res_channels_filtered = _.map(res_channels, function (channel) {
-                            if (channel.channel_id[0]) {
-                                return channel.channel_id[0];
-                            }
-                        }).filter(function (channel) {
-                            return typeof channel !== 'undefined';
-                        });
-
-                        return new Model('mail.channel').call(
-                            'read', [res_channels_filtered, ['name', 'id']]
-                                ).then(function (recipients) {
-                                    return recipients;
-                                });
-                    });
-        });
-    },
-
-    get_internal_users_ids: function () {
-            var ResUser = new Model('mail.compose.message');
-            this.users_ids = ResUser.call('get_internal_users_ids', [[]]).then( function (users_ids) {
-                return users_ids;
-            });
-            return this.users_ids;
-    },
-
-    get_checked_channels_ids: function () {
-        var self = this;
-        var checked_channels = [];
-        this.$('.o_composer_suggested_channels input:checked').each(function() {
-            var full_name = $(this).data('fullname').toString();
-            _.each(self.channels_for_internal_message, function(item) {
-                if (full_name === item.name) {
-                    checked_channels.push(item.id);
-                }
-            });
-        });
-        return checked_channels;
     },
 });
 
 ChatterComposer.include({
     init: function (parent, model, suggested_partners, options) {
         this._super(parent, model, suggested_partners, options);
+        this.suggested_channels = options.suggested_channels;
         this.events['click .oe_composer_uncheck'] = 'on_uncheck_recipients';
         if (typeof options.is_private === 'undefined') {
             // otherwise it causes an error in context creating function
@@ -212,14 +163,6 @@ ChatterComposer.include({
         this.$('.o_composer_suggested_channels input:checked').each(function() {
             $(this).prop('checked', false);
         });
-    },
-
-    preprocess_message: function () {
-        var self = this;
-        if (self.options.is_private) {
-            self.context.is_private = true;
-        }
-        return this._super();
     },
 
     on_open_full_composer: function() {
@@ -281,16 +224,15 @@ ChatterComposer.include({
         checked_partners = _.uniq(_.filter(checked_partners, function (obj) {
             return obj.reason !== 'Channel';
         }));
-        this.get_checked_channel_ids();
         return checked_partners;
     },
 
     get_checked_channel_ids: function () {
         var self = this;
         var checked_channels = [];
-        this.$('.o_composer_suggested_partners input:checked').each(function() {
+        this.$('.o_composer_suggested_channels input:checked').each(function() {
             var full_name = $(this).data('fullname');
-            checked_channels = checked_channels.concat(_.filter(self.suggested_partners, function(item) {
+            checked_channels = checked_channels.concat(_.filter(self.suggested_channels, function(item) {
                 return full_name === item.full_name;
             }));
         });

@@ -1,3 +1,8 @@
+`1.2.0`
+-------
+
+- **New**: added ability to select channels for private message sending.
+
 `1.1.0`
 -------
 
