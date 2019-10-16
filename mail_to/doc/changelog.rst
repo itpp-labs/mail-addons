@@ -7,7 +7,7 @@
 `1.0.1`
 -------
 
-- **FIX**: the problem with duplicating the names of recipients was solved.
+- **FIX:** The problem with duplicating the names of recipients was solved.
 
 `1.0.0`
 -------

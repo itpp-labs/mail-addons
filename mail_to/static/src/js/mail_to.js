@@ -34,10 +34,7 @@ chat_manager.make_message = function (data) {
 
             msg.more_recipients = more_recipients;
             return msg;
-        }
-    }
-    msg.more_recipients = more_recipients;
-    return msg;
-};
+        };
+
     return chat_manager;
 });
