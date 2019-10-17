@@ -5,7 +5,6 @@ from openerp import models
 class Partner(models.Model):
     _inherit = 'res.partner'
 
-    @api.multi
     def read(self, fields=None, load='_classic_read'):
         res = super(Partner, self).read(fields=fields, load=load)
         if fields and 'message_ids' in fields:

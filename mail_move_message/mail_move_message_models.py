@@ -96,7 +96,6 @@ class Wizard(models.TransientModel):
              "You must use this option, if new record has restricted access.\n"
              "You can change default value for this option at Settings/System Parameters")
 
-    @api.multi
     @api.depends('model_record')
     def _compute_model_res_id(self):
         for rec in self:
@@ -104,17 +103,14 @@ class Wizard(models.TransientModel):
             rec.res_id = rec.model_record and rec.model_record.id or False
 
     @api.depends('message_id')
-    @api.multi
     def _compute_get_can_move(self):
         for r in self:
             r.get_can_move_one()
 
-    @api.multi
     def _compute_is_read(self):
         messages = self.env['mail.message'].sudo().browse(self.message_id.all_child_ids.ids + [self.message_id.id])
         self.message_to_read = True in [m.needaction for m in messages]
 
-    @api.multi
     def get_can_move_one(self):
         self.ensure_one()
         # message was not moved before OR message is a top message of previous move
@@ -164,12 +160,10 @@ class Wizard(models.TransientModel):
             self.res_id = None
         return {'domain': domain}
 
-    @api.multi
     def check_access(self):
         for r in self:
             r.check_access_one()
 
-    @api.multi
     def check_access_one(self):
         self.ensure_one()
         operation = 'write'
@@ -183,7 +177,6 @@ class Wizard(models.TransientModel):
         else:
             self.env['mail.thread'].check_mail_message_access(mids.ids, operation, model_name=self.model)
 
-    @api.multi
     def open_moved_by_message_id(self):
         message_id = None
         for r in self:
@@ -198,7 +191,6 @@ class Wizard(models.TransientModel):
             'context': {'default_message_id': message_id},
         }
 
-    @api.multi
     def move(self):
         for r in self:
             if not r.model:
@@ -229,12 +221,10 @@ class Wizard(models.TransientModel):
             'type': 'ir.actions.act_window',
         }
 
-    @api.multi
     def delete(self):
         for r in self:
             r.delete_one()
 
-    @api.multi
     def delete_one(self):
         self.ensure_one()
         msg_id = self.message_id.id
@@ -246,12 +236,10 @@ class Wizard(models.TransientModel):
         self.message_id.unlink()
         return {}
 
-    @api.multi
     def read_close(self):
         for r in self:
             r.read_close_one()
 
-    @api.multi
     def read_close_one(self):
         self.ensure_one()
         self.message_id.set_message_done()
@@ -271,12 +259,10 @@ class MailMessage(models.Model):
     all_child_ids = fields.One2many('mail.message', string='All childs', compute='_compute_get_all_childs', help='all childs, including subchilds')
     moved_as_unread = fields.Boolean('Was Unread', default=False)
 
-    @api.multi
     def _compute_get_all_childs(self, include_myself=True):
         for r in self:
             r._get_all_childs_one(include_myself=include_myself)
 
-    @api.multi
     def _get_all_childs_one(self, include_myself=True):
         self.ensure_one()
         ids = []
@@ -291,7 +277,6 @@ class MailMessage(models.Model):
         moved_childs = self.search([('moved_by_message_id', '=', self.id)]).ids
         self.all_child_ids = ids + moved_childs
 
-    @api.multi
     def move_followers(self, model, ids):
         fol_obj = self.env['mail.followers']
         for message in self:
@@ -300,12 +285,10 @@ class MailMessage(models.Model):
             for f in followers:
                 self.env[model].browse(ids).message_subscribe([f.partner_id.id], [s.id for s in f.subtype_ids])
 
-    @api.multi
     def move(self, parent_id, res_id, model, move_back, move_followers=False, message_to_read=False, author=False):
         for r in self:
             r.move_one(parent_id, res_id, model, move_back, move_followers=move_followers, message_to_read=message_to_read, author=author)
 
-    @api.multi
     def move_one(self, parent_id, res_id, model, move_back, move_followers=False, message_to_read=False, author=False):
         self.ensure_one()
         if parent_id == self.id:
@@ -384,7 +367,6 @@ class MailMessage(models.Model):
         }
         self.env['bus.bus'].sendone((self._cr.dbname, 'mail_move_message'), notification)
 
-    @api.multi
     def name_get(self):
         context = self.env.context
         if not (context or {}).get('extended_name'):
@@ -397,7 +379,6 @@ class MailMessage(models.Model):
             res.append((record['id'], name + extended_name))
         return res
 
-    @api.multi
     def message_format(self):
         message_values = super(MailMessage, self).message_format()
         message_index = {message['id']: message for message in message_values}
@@ -427,7 +408,6 @@ class MailMoveMessageConfiguration(models.TransientModel):
         )
         return res
 
-    @api.multi
     def set_values(self):
         super(MailMoveMessageConfiguration, self).set_values()
         config_parameters = self.env["ir.config_parameter"].sudo()

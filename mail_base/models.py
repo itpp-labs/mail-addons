@@ -5,7 +5,6 @@ from openerp import api, models
 class MailMessage(models.Model):
     _inherit = 'mail.message'
 
-    @api.multi
     def write(self, values):
         if values.get('needaction_partner_ids'):
             if not values.get('partner_ids'):
@@ -21,7 +20,6 @@ class MailComposer(models.TransientModel):
 
     _inherit = 'mail.compose.message'
 
-    @api.multi
     def send_mail(self, auto_commit=False):
         res = super(MailComposer, self).send_mail(auto_commit=auto_commit)
         notification = {}

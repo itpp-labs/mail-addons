@@ -29,7 +29,6 @@ class MailMessage(models.Model):
             )
             r.sent = sent
 
-    @api.multi
     def message_format(self):
         message_values = super(MailMessage, self).message_format()
         message_index = {message['id']: message for message in message_values}
