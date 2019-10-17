@@ -46,7 +46,6 @@ class MailMessage(models.Model):
         #     })
         return result
 
-    @api.multi
     def _notify(self, record, msg_vals, force_send=False, send_after_commit=True, model_description=False, mail_auto_delete=True):
         self_sudo = self.sudo()
         msg_vals = msg_vals if msg_vals else {}
@@ -56,7 +55,6 @@ class MailMessage(models.Model):
             rdata = self._notify_compute_internal_recipients(record, msg_vals)
             return self._notify_recipients(rdata, record, msg_vals, force_send, send_after_commit, model_description, mail_auto_delete)
 
-    @api.multi
     def _notify_compute_internal_recipients(self, record, msg_vals):
         recipient_data = super(MailMessage, self)._notify_compute_recipients(record, msg_vals)
         pids = [x[1] for x in msg_vals.get('partner_ids')] if 'partner_ids' in msg_vals else self.sudo().partner_ids.ids

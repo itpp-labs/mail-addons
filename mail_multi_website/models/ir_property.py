@@ -7,7 +7,6 @@ from odoo import models, api
 class IrProperty(models.Model):
     _inherit = 'ir.property'
 
-    @api.multi
     def write(self, vals):
         res = super(IrProperty, self).write(vals)
         field_object_list = [

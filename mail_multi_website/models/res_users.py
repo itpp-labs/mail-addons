@@ -30,7 +30,6 @@ class User(models.Model):
             res._force_default(f, vals.get(f))
         return res
 
-    @api.multi
     def write(self, vals):
         res = super(User, self).write(vals)
         # TODO: will it work with OCA's partner_firstname module?

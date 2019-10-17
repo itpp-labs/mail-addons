@@ -24,7 +24,6 @@ class MailTemplate(models.Model):
     mail_server_id = fields.Many2one(string='Outgoing Mail Server (Multi-Website)', company_dependent=True, website_dependent=True)
     report_template = fields.Many2one(string='Optional report to print and attach (Multi-Website)', company_dependent=True, website_dependent=True)
 
-    @api.multi
     def generate_email(self, res_ids, fields=None):
         """Remove mail_server_id when not set to recompute in _default_mail_server_id in mail.message"""
         multi_mode = True
@@ -128,7 +127,6 @@ class MailTemplate(models.Model):
             res._force_default(f, vals.get(f))
         return res
 
-    @api.multi
     def write(self, vals):
         res = super(MailTemplate, self).write(vals)
 
