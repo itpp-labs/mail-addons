@@ -41,3 +41,7 @@ Related issues at odoo's tracker:
 * https://github.com/odoo/odoo/issues/3347
 
 Fix: https://github.com/odoo-dev/odoo/commit/a4597fe34fcfa8dae28b156410080346bb33af33
+
+Maintainers
+-----------
+This module is not maintainable since Odoo 9.0, because lack of interests from customers.
