@@ -3,7 +3,7 @@
     'version': '1.0.0',
     'author': 'IT-Projects LLC, Ivan Yelizariev',
     'license': 'LGPL-3',
-    "price": 70.00,
+    "price": 35.00,
     "currency": "EUR",
     'category': 'Discuss',
     "support": "apps@it-projects.info",
