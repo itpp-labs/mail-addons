@@ -1,3 +1,8 @@
+`1.1.2
+-------
+
+- **FIX:** Compatibility error with EE modules
+
 `1.1.1`
 -------
 
