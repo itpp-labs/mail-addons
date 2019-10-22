@@ -53,7 +53,9 @@ class MailMessage(models.Model):
             return super(MailMessage, self)._notify(record, msg_vals, force_send, send_after_commit, model_description, mail_auto_delete)
         else:
             rdata = self._notify_compute_internal_recipients(record, msg_vals)
-            return self._notify_recipients(rdata, record, msg_vals, force_send, send_after_commit, model_description, mail_auto_delete)
+            return self._notify_recipients(rdata, record, msg_vals,
+                                           force_send=force_send, send_after_commit=send_after_commit,
+                                           model_description=model_description, mail_auto_delete=mail_auto_delete)
 
     @api.multi
     def _notify_compute_internal_recipients(self, record, msg_vals):
