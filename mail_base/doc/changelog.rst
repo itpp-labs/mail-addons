@@ -1,3 +1,8 @@
+`1.0.6`
+-------
+
+**Fix**: Messages were marked as read, while there were not
+
 `1.0.5`
 -------
 **FIX**: polling errors on heavy server load
