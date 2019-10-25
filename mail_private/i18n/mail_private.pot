@@ -94,7 +94,7 @@ msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/xml/mail_private.xml:39
+#: code:addons/mail_private/static/src/xml/mail_private.xml:43
 #, python-format
 msgid "Uncheck all"
 msgstr ""
