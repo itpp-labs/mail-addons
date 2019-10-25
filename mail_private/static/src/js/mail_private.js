@@ -1,8 +1,9 @@
-/*  Copyright 2016-2018 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
-    Copyright 2016 manavi <https://github.com/manawi>
-    Copyright 2017-2018 Artyom Losev <https://github.com/ArtyomLosev>
-    Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
-    License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). */
+/*  Copyright 2016 x620 <https://github.com/x620>
+    Copyright 2016 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+    Copyright 2016 manawi <https://github.com/manawi>
+    Copyright 2017 Artyom Losev <https://github.com/ArtyomLosev>
+    Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
+    License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html). */
 odoo.define('mail_private', function (require) {
 'use strict';
 
@@ -29,7 +30,8 @@ Chatter.include({
         this.fetch_recipients_for_internal_message().then(function (data) {
             self._openComposer({
                     is_private: true,
-                    suggested_partners: data
+                    suggested_partners: data["partners"],
+                    suggested_channels: data["channels"],
                 });
         });
     },
@@ -48,7 +50,8 @@ Chatter.include({
             record_name: this.record_name,
             default_body: old_composer && old_composer.$input && old_composer.$input.val(),
             default_mention_selections: old_composer && old_composer.mention_get_listener_selections(),
-            is_private: options.is_private
+            is_private: options.is_private,
+            suggested_channels: options.suggested_channels
         });
         this.composer.on('input_focused', this, function () {
             this.composer.mention_set_prefetched_partners(this.mentionSuggestions || []);
@@ -64,6 +67,7 @@ Chatter.include({
             self.composer.on('post_message', self, function (message) {
                 if (options.is_private) {
                     self.composer.options.is_log = true;
+                    self.composer.options.is_private = options.is_private;
                 }
                 self.fields.thread.postMessage(message).then(function () {
 
@@ -94,16 +98,18 @@ Chatter.include({
             method: 'send_recepients_for_internal_message',
             args: [[], self.context.default_model, follower_ids_domain]
         }).then(function (res) {
-            return _.filter(res, function (obj) {
+            res["partners"] = _.filter(res["partners"], function (obj) {
                 return obj.partner_id !== session.partner_id;
             });
+            return res;
         });
-    }
+    },
 });
 
 ChatterComposer.include({
     init: function (parent, model, suggested_partners, options) {
         this._super(parent, model, suggested_partners, options);
+        this.suggested_channels = options.suggested_channels;
         this.events['click .oe_composer_uncheck'] = 'on_uncheck_recipients';
         if (typeof options.is_private === 'undefined') {
             // otherwise it causes an error in context creating function
@@ -152,6 +158,9 @@ ChatterComposer.include({
 
     on_uncheck_recipients: function () {
         this.$('.o_composer_suggested_partners input:checked').each(function() {
+            $(this).prop('checked', false);
+        });
+        this.$('.o_composer_suggested_channels input:checked').each(function() {
             $(this).prop('checked', false);
         });
     },
@@ -215,16 +224,15 @@ ChatterComposer.include({
         checked_partners = _.uniq(_.filter(checked_partners, function (obj) {
             return obj.reason !== 'Channel';
         }));
-        this.get_checked_channel_ids();
         return checked_partners;
     },
 
     get_checked_channel_ids: function () {
         var self = this;
         var checked_channels = [];
-        this.$('.o_composer_suggested_partners input:checked').each(function() {
+        this.$('.o_composer_suggested_channels input:checked').each(function() {
             var full_name = $(this).data('fullname');
-            checked_channels = checked_channels.concat(_.filter(self.suggested_partners, function(item) {
+            checked_channels = checked_channels.concat(_.filter(self.suggested_channels, function(item) {
                 return full_name === item.full_name;
             }));
         });
