@@ -29,7 +29,8 @@ Chatter.include({
         this.fetch_recipients_for_internal_message().then(function (data) {
             self._openComposer({
                     is_private: true,
-                    suggested_partners: data
+                    suggested_partners: data["partners"],
+                    suggested_channels: data["channels"],
                 });
         });
     },
@@ -47,7 +48,8 @@ Chatter.include({
             defaultBody: old_composer && old_composer.$input && old_composer.$input.val(),
             defaultMentionSelections: old_composer && old_composer.getMentionListenerSelections(),
             attachmentIds: (old_composer && old_composer.get('attachment_ids')) || [],
-            is_private: options.is_private
+            is_private: options.is_private,
+            suggested_channels: options.suggested_channels
         });
         this._composer.on('input_focused', this, function () {
             this._composer.mentionSetPrefetchedPartners(this._mentionSuggestions || []);
@@ -61,6 +63,7 @@ Chatter.include({
             self._composer.on('post_message', self, function (messageData) {
                 if (options.is_private) {
                     self._composer.options.isLog = true;
+                    self.composer.options.is_private = options.is_private;
                 }
                 self._discardOnReload(messageData).then(function () {
                     self._disableComposer();
@@ -98,16 +101,18 @@ Chatter.include({
             method: 'send_recepients_for_internal_message',
             args: [[], self.context.default_model, follower_ids_domain]
         }).then(function (res) {
-            return _.filter(res, function (obj) {
+            res["partners"] = _.filter(res["partners"], function (obj) {
                 return obj.partner_id !== session.partner_id;
             });
+            return res;
         });
-    }
+    },
 });
 
 ChatterComposer.include({
     init: function (parent, model, suggestedPartners, options) {
         this._super(parent, model, suggestedPartners, options);
+        this.suggested_channels = options.suggested_channels;
         this.events['click .oe_composer_uncheck'] = 'on_uncheck_recipients';
         if (typeof options.is_private === 'undefined') {
             // otherwise it causes an error in context creating function
@@ -155,6 +160,9 @@ ChatterComposer.include({
 
     on_uncheck_recipients: function () {
         this.$('.o_composer_suggested_partners input:checked').each(function() {
+            $(this).prop('checked', false);
+        });
+        this.$('.o_composer_suggested_channels input:checked').each(function() {
             $(this).prop('checked', false);
         });
     },
@@ -220,16 +228,15 @@ ChatterComposer.include({
         checked_partners = _.uniq(_.filter(checked_partners, function (obj) {
             return obj.reason !== 'Channel';
         }));
-        this.get_checked_channel_ids();
         return checked_partners;
     },
 
     get_checked_channel_ids: function () {
         var self = this;
         var checked_channels = [];
-        this.$('.o_composer_suggested_partners input:checked').each(function() {
+        this.$('.o_composer_suggested_channels input:checked').each(function() {
             var full_name = $(this).data('fullname');
-            checked_channels = checked_channels.concat(_.filter(self.suggested_partners, function(item) {
+            checked_channels = checked_channels.concat(_.filter(self.suggested_channels, function(item) {
                 return full_name === item.full_name;
             }));
         });

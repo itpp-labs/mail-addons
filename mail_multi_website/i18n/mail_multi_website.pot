@@ -120,4 +120,3 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_multi_website.field_mail_test_simple__website_id
 msgid "Website"
 msgstr ""
-

@@ -61,4 +61,3 @@ msgstr ""
 #, python-format
 msgid "Open All Messages"
 msgstr ""
-

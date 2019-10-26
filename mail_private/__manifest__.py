@@ -1,3 +1,4 @@
+# Copyright 2018 Ruslan Ronzhin <https://it-projects.info/team/rusllan/>
 # Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
 # Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
 # License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html).
@@ -7,7 +8,7 @@
     "category": "Discuss",
     # "live_test_url": "http://apps.it-projects.info/shop/product/DEMO-URL?version=12.0",
     "images": ['images/mail_private_image.png'],
-    "version": "12.0.1.1.2",
+    "version": "12.0.1.2.0",
     "application": False,
 
     "author": "IT-Projects LLC, Pavel Romanchenko",

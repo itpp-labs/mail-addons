@@ -1,3 +1,7 @@
+# Copyright 2018 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+# Copyright 2018 Artyom Losev <https://it-projects.info/team/ArtyomLosev>
+# Copyright 2019 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
+# License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html).
 import odoo.tests
 from werkzeug import url_encode
 

@@ -81,7 +81,6 @@ msgstr ""
 #. module: mail_private
 #: model:ir.model.fields,field_description:mail_private.field_mail_compose_message__is_private
 #: model:ir.model.fields,field_description:mail_private.field_mail_mail__is_private
-#: model:ir.model.fields,field_description:mail_private.field_mail_message__is_private
 msgid "Send Internal Message"
 msgstr ""
 

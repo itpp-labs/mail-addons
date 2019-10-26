@@ -27,4 +27,3 @@ msgstr ""
 #, python-format
 msgid "Archive is empty"
 msgstr ""
-

@@ -1,3 +1,6 @@
+/*  Copyright 2017 Artyom Losev <https://github.com/ArtyomLosev>
+    Copyright 2019 Artem Rafailov <https://github.com/Ommo73>
+    License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html). */
 odoo.define('mail_base.base', function (require) {
 "use strict";
 
