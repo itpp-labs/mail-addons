@@ -6,15 +6,16 @@
 odoo.define('mail_to.MailTo', function (require) {
     "use strict";
 
-var chat_manager = require('mail_base.base').chat_manager;
+    var MailManager = require("mail.Manager");
 
-var make_message_super = chat_manager.make_message;
-chat_manager.make_message = function (data) {
-            var msg = make_message_super.call(this, data);
-            msg.partner_ids = data.partner_ids;
+    MailManager.include({
+        _makeMessage: function(data) {
+            var msg = this._super(data);
+            msg.partner_names = data.partner_names;
             msg.channel_names = data.channel_names;
-            msg.recipients = data.partner_ids.concat(data.channel_names);
-            if (!msg.partner_ids && !msg.channel_names) {
+            msg.recipients = msg.partner_names.concat(msg.channel_names);
+
+            if (!msg.partner_names && !msg.channel_names) {
                 return msg;
             }
 
@@ -27,14 +28,16 @@ chat_manager.make_message = function (data) {
                         more_recipients += msg.recipients[i][1];
                         // separate them with semicolon
                         if (i < msg.recipients.length - 1){
-                            more_recipients += '; ';
+                            more_recipients += ', ';
                         }
                     }
             }
 
             msg.more_recipients = more_recipients;
-            return msg;
-        };
 
-    return chat_manager;
+            return msg;
+        }
+    });
+
+    return MailManager;
 });
