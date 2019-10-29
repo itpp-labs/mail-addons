@@ -11,11 +11,20 @@ var core = require('web.core');
 var Chatter = require('mail.Chatter');
 var ChatterComposer = require('mail.composer.Chatter');
 var session = require('web.session');
+var Thread = require('mail.model.Thread');
 
 var rpc = require('web.rpc');
 var config = require('web.config');
 var mailUtils = require('mail.utils');
 
+Thread.include({
+    _postMessage: function (data) {
+        return this._super.apply(this, arguments).then(function (messageData) {
+            messageData['channel_ids'] = data['channel_ids'];
+            return messageData;
+        });
+    },
+});
 
 Chatter.include({
     init: function () {
@@ -63,7 +72,7 @@ Chatter.include({
             self._composer.on('post_message', self, function (messageData) {
                 if (options.is_private) {
                     self._composer.options.isLog = true;
-                    self.composer.options.is_private = options.is_private;
+                    self._composer.options.is_private = options.is_private;
                 }
                 self._discardOnReload(messageData).then(function () {
                     self._disableComposer();

@@ -67,16 +67,21 @@ class MailMessage(models.Model):
         recipient_data['channels'] = [i for i in recipient_data['channels'] if i['id'] in cids]
         return recipient_data
 
-# First test it without this model
-# class MailThread(models.AbstractModel):
-#     _inherit = 'mail.thread'
-#
-#     @api.multi
-#     @api.returns('self', lambda value: value.id)
-#     def message_post(self, body='', subject=None, message_type='notification', subtype=None, parent_id=False,
-#                      attachments=None, content_subtype='html', **kwargs):
-#         if 'channel_ids' in kwargs:
-#             kwargs['channel_ids'] = [(4, pid) for pid in kwargs['channel_ids']]
-#         return super(MailThread, self).message_post(body, subject, message_type,
-#                                                     subtype, parent_id, attachments,
-#                                                     content_subtype, **kwargs)
+
+class MailThread(models.AbstractModel):
+    _inherit = 'mail.thread'
+
+    @api.multi
+    @api.returns('mail.message', lambda value: value.id)
+    def message_post(self, body='', subject=None,
+                     message_type='notification', subtype=None,
+                     parent_id=False, attachments=None,
+                     notif_layout=False, add_sign=True, model_description=False,
+                     mail_auto_delete=True, **kwargs):
+        if 'channel_ids' in kwargs:
+            kwargs['channel_ids'] = [(4, pid) for pid in kwargs['channel_ids']]
+        return super(MailThread, self).message_post(body, subject,
+                                                    message_type, subtype,
+                                                    parent_id, attachments,
+                                                    notif_layout, add_sign, model_description,
+                                                    mail_auto_delete, **kwargs)

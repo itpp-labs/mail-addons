@@ -25,16 +25,22 @@
         <t t-jquery="div[class='o_composer_suggested_partners']" t-operation="after">
             <div class="o_composer_suggested_channels">
                 <t t-if="widget.suggested_channels">
+                    <t t-set="count" t-value="0"/>
                     <t t-foreach='widget.suggested_channels' t-as='channel'>
                         <div t-attf-title="Add as channel and follower">
-                            <div class="o_checkbox">
+                            <div class="custom-control custom-checkbox">
                                 <input type="checkbox"
                                     t-att-checked="channel.checked ? 'checked' : undefined"
-                                    t-att-data-fullname="channel.full_name"/>
+                                    t-att-data-fullname="channel.full_name"
+                                    class="custom-control-input"
+                                    t-att-id="'o_composer_suggested_channels_p' + count"/>
                                 <span/>
+                                <label class="custom-control-label" t-att-for="'o_composer_suggested_channels_p' + count">
+                                    <t t-esc="channel.name"/>
+                                </label>
                             </div>
-                            <t t-esc="channel.name"/>
                         </div>
+                        <t t-set="count" t-value="count+1"/>
                     </t>
                 </t>
                 <button class="btn btn-link oe_composer_uncheck" t-if="widget.options.is_private">Uncheck all</button>
