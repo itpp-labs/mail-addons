@@ -3,7 +3,7 @@
     "name": """Always show reply button""",
     "summary": """Got a message out of a Record? Now you can reply to it too!""",
     "category": "Discuss",
-    "images": [],
+    "images": ['images/mail_reply.jpg'],
     "version": "1.0.0",
 
     "author": "IT-Projects LLC, Pavel Romanchenko",
