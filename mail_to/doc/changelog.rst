@@ -1,3 +1,8 @@
+`1.1.0`
+-------
+
+- **New**: channels are displayed in recipients
+
 `1.0.1`
 -------
 

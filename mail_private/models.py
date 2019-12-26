@@ -3,6 +3,7 @@
 # Copyright 2018 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
 # Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
 # License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html).
+
 from odoo import models, fields, api
 
 
@@ -18,15 +19,15 @@ class MailMessage(models.Model):
     is_private = fields.Boolean(string='Send Internal Message')
 
     def send_recepients_for_internal_message(self, model, domain):
-        result = []
+        result = {'partners': [], 'channels': []}
         default_resource = self.env[model].search(domain)
         follower_ids = default_resource.message_follower_ids
 
         recipient_ids = [r.partner_id for r in follower_ids if r.partner_id]
-        # channel_ids = [c.channel_id for c in follower_ids if c.channel_id]
+        channel_ids = [c.channel_id for c in follower_ids if c.channel_id]
 
         for recipient in recipient_ids:
-            result.append({
+            result['partners'].append({
                 'checked': recipient.user_ids.id and not any(recipient.user_ids.mapped('share')),
                 'partner_id': recipient.id,
                 'full_name': recipient.name,
@@ -35,14 +36,14 @@ class MailMessage(models.Model):
                 'reason': 'Recipient'
             })
 
-        # for channel in channel_ids:
-        #     result.append({
-        #         'checked': True,
-        #         'channel_id': channel.id,
-        #         'full_name': channel,
-        #         'name': '# '+channel.name,
-        #         'reason': 'Channel',
-        #     })
+        for channel in channel_ids:
+            result['channels'].append({
+                'checked': True,
+                'channel_id': channel.id,
+                'full_name': channel.name,
+                'name': '# '+channel.name,
+                'reason': 'Channel',
+            })
         return result
 
     @api.multi
@@ -61,5 +62,26 @@ class MailMessage(models.Model):
     def _notify_compute_internal_recipients(self, record, msg_vals):
         recipient_data = super(MailMessage, self)._notify_compute_recipients(record, msg_vals)
         pids = [x[1] for x in msg_vals.get('partner_ids')] if 'partner_ids' in msg_vals else self.sudo().partner_ids.ids
+        cids = [x[1] for x in msg_vals.get('channel_ids')] if 'channel_ids' in msg_vals else self.sudo().channel_ids.ids
         recipient_data['partners'] = [i for i in recipient_data['partners'] if i['id'] in pids]
+        recipient_data['channels'] = [i for i in recipient_data['channels'] if i['id'] in cids]
         return recipient_data
+
+
+class MailThread(models.AbstractModel):
+    _inherit = 'mail.thread'
+
+    @api.multi
+    @api.returns('mail.message', lambda value: value.id)
+    def message_post(self, body='', subject=None,
+                     message_type='notification', subtype=None,
+                     parent_id=False, attachments=None,
+                     notif_layout=False, add_sign=True, model_description=False,
+                     mail_auto_delete=True, **kwargs):
+        if 'channel_ids' in kwargs:
+            kwargs['channel_ids'] = [(4, pid) for pid in kwargs['channel_ids']]
+        return super(MailThread, self).message_post(body, subject,
+                                                    message_type, subtype,
+                                                    parent_id, attachments,
+                                                    notif_layout, add_sign, model_description,
+                                                    mail_auto_delete, **kwargs)

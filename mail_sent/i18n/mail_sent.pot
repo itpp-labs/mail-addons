@@ -64,4 +64,3 @@ msgstr ""
 #: model:ir.model.fields,help:mail_sent.field_mail_compose_message__sent
 msgid "dummy field to fix inherit error"
 msgstr ""
-

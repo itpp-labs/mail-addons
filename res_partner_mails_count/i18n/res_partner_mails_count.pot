@@ -1,130 +1,119 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * res_partner_mails_count
+#	* res_partner_mails_count
 #
-# Translators:
-# Lilya Salihova <liliya@it-projects.info>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-17 20:20+0000\n"
-"PO-Revision-Date: 2017-07-17 20:20+0000\n"
-"Last-Translator: Lilya Salihova <liliya@it-projects.info>, 2017\n"
-"Language-Team: Russian (https://www.transifex.com/it-projects-llc/"
-"teams/76080/ru/)\n"
-"Language: ru\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: \n"
 
 #. module: res_partner_mails_count
 #. openerp-web
 #: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:31
 #, python-format
 msgid "Close Tutorial"
-msgstr "Закройте инструкцию"
+msgstr ""
 
 #. module: res_partner_mails_count
 #. openerp-web
 #: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:25
 #, python-format
 msgid "Done"
-msgstr "Готово"
+msgstr ""
 
 #. module: res_partner_mails_count
 #. openerp-web
 #: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:20
 #, python-format
 msgid "Here is new fields with mails counters. Press one of it."
-msgstr "Здесь новые поля с счетчиками писем. Нажмите на один из них."
+msgstr ""
 
 #. module: res_partner_mails_count
 #. openerp-web
 #: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:15
 #, python-format
 msgid "Let's see how mails count work."
-msgstr "Посмотрим как работает счетчик писем"
+msgstr ""
 
 #. module: res_partner_mails_count
 #: model:ir.actions.client,name:res_partner_mails_count.action_mails
 msgid "Mails"
-msgstr "Письма"
+msgstr ""
 
 #. module: res_partner_mails_count
 #. openerp-web
 #: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:9
 #, python-format
 msgid "Mails count Tour"
-msgstr "Руководство по модулю \"Mails count\""
+msgstr ""
 
 #. module: res_partner_mails_count
 #. openerp-web
 #: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:14
 #, python-format
 msgid "Mails count tutorial"
-msgstr "Инструкция по счетчику писем"
+msgstr ""
 
 #. module: res_partner_mails_count
 #: model:ir.model.fields,field_description:res_partner_mails_count.field_res_partner_mails_from
 #: model:ir.model.fields,field_description:res_partner_mails_count.field_res_users_mails_from
 #: model:ir.ui.view,arch_db:res_partner_mails_count.view_res_partner_mails_count_info_form
 msgid "Mails from"
-msgstr "Входящие"
+msgstr ""
 
 #. module: res_partner_mails_count
 #: model:ir.actions.client,help:res_partner_mails_count.action_mails
 msgid "Mails not found. Probably, they exist, but you don't have access."
-msgstr "Письма не найдены. Возможно, они есть, но у вас нет к ним доступа."
+msgstr ""
 
 #. module: res_partner_mails_count
 #: model:ir.model.fields,field_description:res_partner_mails_count.field_res_partner_mails_to
 #: model:ir.model.fields,field_description:res_partner_mails_count.field_res_users_mails_to
 #: model:ir.ui.view,arch_db:res_partner_mails_count.view_res_partner_mails_count_info_form
 msgid "Mails to"
-msgstr "Исходящие"
+msgstr ""
 
 #. module: res_partner_mails_count
 #. openerp-web
 #: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:30
 #, python-format
-msgid ""
-"Message are found. <br/>Enjoy your day! <br/> <br/><a href='https://www.it-"
-"projects.info/apps' target='_blank'>IT-Projects LLC</a> team "
+msgid "Message are found. <br/>Enjoy your day! <br/> <br/><a href='https://www.it-projects.info/apps' target='_blank'>IT-Projects LLC</a> team "
 msgstr ""
-"Письма найдены. <br/> Хорошего дня! <br/><br/><a href='https://www.it-"
-"projects.info/apps' target='_blank'>IT-Projects LLC</a> team "
 
 #. module: res_partner_mails_count
 #. openerp-web
 #: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:19
 #, python-format
 msgid "New fields"
-msgstr "Новые поля"
+msgstr ""
 
 #. module: res_partner_mails_count
 #: model:ir.model,name:res_partner_mails_count.model_res_partner
 msgid "Partner"
-msgstr "Партнер"
+msgstr ""
 
 #. module: res_partner_mails_count
 #. openerp-web
 #: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:16
 #, python-format
 msgid "Skip"
-msgstr "Пропустить"
+msgstr ""
 
 #. module: res_partner_mails_count
 #. openerp-web
 #: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:16
 #, python-format
 msgid "Start Tutorial"
-msgstr "Начать обучение"
+msgstr ""
 
 #. module: res_partner_mails_count
 #: model:ir.actions.act_url,name:res_partner_mails_count.res_partner_mails_count_tutorial
 msgid "res_partner_mails_count Tutorial"
-msgstr "res_partner_mails_count Руководство"
+msgstr ""
+

@@ -1,3 +1,11 @@
+`1.1.0`
+-------
+- **New**: added ability to select channels for private message sending.
+
+`1.0.5`
+-------
+**FIX**: polling errors on heavy server load
+
 `1.0.4`
 -------
 **FIX**: issue related to clear cache
