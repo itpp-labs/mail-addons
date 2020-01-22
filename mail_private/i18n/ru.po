@@ -1,0 +1,140 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mail_private
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-22 15:48+0000\n"
+"PO-Revision-Date: 2020-01-22 15:48+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/js/test_private.js:43
+#, python-format
+msgid "Check the first one"
+msgstr "Отметьте галкой первого"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/js/test_private.js:30
+#, python-format
+msgid "Click on Private mail creating button"
+msgstr "Нажмите на кнопку создания приватного сообщения"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/js/test_private.js:35
+#, python-format
+msgid "Dummy action"
+msgstr "Пустое действие"
+
+#. module: mail_private
+#: model:ir.model,name:mail_private.model_mail_compose_message
+msgid "Email composition wizard"
+msgstr "Мастер составления эл. писем"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/js/test_private.js:18
+#, python-format
+msgid "Go to the list of subscribers"
+msgstr "Перейдите с списку подписчиков"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/js/test_private.js:26
+#, python-format
+msgid "Go to user page"
+msgstr "Перейдите на страницу пользователя"
+
+#. module: mail_private
+#: model:ir.model,name:mail_private.model_mail_message
+msgid "Message"
+msgstr "Сообщение"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/js/test_private.js:22
+#, python-format
+msgid "Select a user"
+msgstr "Выберите пользователя"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/js/test_private.js:14
+#, python-format
+msgid "Select channel settings"
+msgstr "Выберите настройки канала"
+
+#. module: mail_private
+#: model:ir.model.fields,field_description:mail_private.field_mail_compose_message__is_private
+#: model:ir.model.fields,field_description:mail_private.field_mail_mail__is_private
+#: model:ir.model.fields,field_description:mail_private.field_mail_message__is_private
+msgid "Send Internal Message"
+msgstr "Отправить внутреннее сообщение"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/xml/mail_private.xml:9
+#, python-format
+msgid "Send a message to specified recipients only"
+msgstr "Отправьте сообщение только выбранным пользователям"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/js/test_private.js:52
+#: code:addons/mail_private/static/src/js/test_private.js:55
+#, python-format
+msgid "Send email"
+msgstr "Отправить эл.письмо"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/xml/mail_private.xml:9
+#, python-format
+msgid "Send internal message"
+msgstr "Отправить внутреннее сообщение"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/xml/mail_private.xml:15
+#, python-format
+msgid "To: Followers of"
+msgstr "Подписчикам"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/xml/mail_private.xml:26
+#, python-format
+msgid "Uncheck all"
+msgstr "Сбросить отметки"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/js/test_private.js:39
+#, python-format
+msgid "Uncheck all Followers"
+msgstr "Убрать галки со всех подписчиков"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/js/test_private.js:46
+#, python-format
+msgid "Write some email"
+msgstr "Напишите какое-либо сообщение"
+
+#. module: mail_private
+#. openerp-web
+#: code:addons/mail_private/static/src/xml/mail_private.xml:20
+#, python-format
+msgid "this document"
+msgstr "этот документ"
+
