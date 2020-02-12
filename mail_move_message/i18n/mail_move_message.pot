@@ -14,13 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mail_move_message
-#: code:addons/mail_move_message/controllers/main.py:41
+#: code:addons/mail_move_message/controllers/main.py:43
 #, python-format
 msgid "%s ID %s"
 msgstr ""
 
 #. module: mail_move_message
-#: code:addons/mail_move_message/controllers/main.py:39
+#: code:addons/mail_move_message/controllers/main.py:40
 #, python-format
 msgid "%s [%s] ID %s"
 msgstr ""
@@ -76,7 +76,7 @@ msgstr ""
 
 #. module: mail_move_message
 #. openerp-web
-#: code:addons/mail_move_message/static/src/js/mail_move_message.js:125
+#: code:addons/mail_move_message/static/src/js/mail_move_message.js:130
 #: model:ir.ui.view,arch_db:mail_move_message.view_wizard
 #, python-format
 msgid "Create new record"
@@ -233,7 +233,7 @@ msgstr ""
 
 #. module: mail_move_message
 #. openerp-web
-#: code:addons/mail_move_message/static/src/xml/mail_move_message_main.xml:6
+#: code:addons/mail_move_message/static/src/xml/mail_move_message_main.xml:10
 #, python-format
 msgid "Move to thread"
 msgstr ""
@@ -291,7 +291,7 @@ msgid "Partner"
 msgstr ""
 
 #. module: mail_move_message
-#: code:addons/mail_move_message/mail_move_message_models.py:195
+#: code:addons/mail_move_message/mail_move_message_models.py:249
 #: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_res_id
 #, python-format
 msgid "Record"
@@ -313,7 +313,7 @@ msgstr ""
 
 #. module: mail_move_message
 #. openerp-web
-#: code:addons/mail_move_message/static/src/js/mail_move_message.js:27
+#: code:addons/mail_move_message/static/src/js/mail_move_message.js:26
 #, python-format
 msgid "Relocate Message"
 msgstr ""
