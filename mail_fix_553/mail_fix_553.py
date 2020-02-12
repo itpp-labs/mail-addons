@@ -160,7 +160,7 @@ class MailMail(osv.Model):
                             context=context,
                         )
                     except AssertionError as error:
-                        if error.message == ir_mail_server.NO_VALID_RECIPIENT:
+                        if str(error) == ir_mail_server.NO_VALID_RECIPIENT:
                             # No valid recipient found for this particular
                             # mail item -> ignore error to avoid blocking
                             # delivery to next recipients, if any. If this is
