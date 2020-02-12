@@ -4,14 +4,8 @@ odoo.define("mail_archives.archives", function(require) {
     var base_obj = require("mail_base.base");
 
     // -------------------------------------------------------------------------------
-    var bus = require("bus.bus").bus;
-    var config = require("web.config");
     var core = require("web.core");
-    var data = require("web.data");
-    var Model = require("web.Model");
     var session = require("web.session");
-    var time = require("web.time");
-    var web_client = require("web.web_client");
 
     var _lt = core._lt;
     // -------------------------------------------------------------------------------
@@ -52,7 +46,7 @@ odoo.define("mail_archives.archives", function(require) {
             // If author or recipient
             if (
                 data.author_id[0] === session.partner_id ||
-                recipients_ids.indexOf(session.partner_id) != -1
+                recipients_ids.indexOf(session.partner_id) !== -1
             ) {
                 msg.is_archive = true;
             }
