@@ -200,7 +200,7 @@ msgstr ""
 
 #. module: mail_move_message
 #. openerp-web
-#: code:addons/mail_move_message/static/src/xml/mail_move_message_main.xml:12
+#: code:addons/mail_move_message/static/src/xml/mail_move_message_main.xml:15
 #, python-format
 msgid "Move to thread"
 msgstr ""
@@ -242,7 +242,7 @@ msgid "Parent Message (Original)"
 msgstr ""
 
 #. module: mail_move_message
-#: code:addons/mail_move_message/mail_move_message_models.py:222
+#: code:addons/mail_move_message/mail_move_message_models.py:292
 #: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_model_record
 #: model:ir.model.fields,field_description:mail_move_message.field_mail_move_message_wizard_res_id
 #, python-format
@@ -250,7 +250,7 @@ msgid "Record"
 msgstr ""
 
 #. module: mail_move_message
-#: code:addons/mail_move_message/mail_move_message_models.py:204
+#: code:addons/mail_move_message/mail_move_message_models.py:259
 #, python-format
 msgid "Record field is empty!"
 msgstr ""
@@ -282,7 +282,7 @@ msgid "Search by name"
 msgstr ""
 
 #. module: mail_move_message
-#: code:addons/mail_move_message/mail_move_message_models.py:204
+#: code:addons/mail_move_message/mail_move_message_models.py:260
 #, python-format
 msgid "Select a record for relocation first"
 msgstr ""
