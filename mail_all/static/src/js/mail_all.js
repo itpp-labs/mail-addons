@@ -4,14 +4,7 @@ odoo.define("mail_all.all", function(require) {
     var base_obj = require("mail_base.base");
 
     // -------------------------------------------------------------------------------
-    var bus = require("bus.bus").bus;
-    var config = require("web.config");
     var core = require("web.core");
-    var data = require("web.data");
-    var Model = require("web.Model");
-    var session = require("web.session");
-    var time = require("web.time");
-    var web_client = require("web.web_client");
 
     var _lt = core._lt;
     // -------------------------------------------------------------------------------
@@ -36,7 +29,7 @@ odoo.define("mail_all.all", function(require) {
 
         set_channel_flags: function(data, msg) {
             this._super.apply(this, arguments);
-            msg.is_all = data.author_id != "ODOOBOT";
+            msg.is_all = data.author_id !== "ODOOBOT";
             return msg;
         },
 
