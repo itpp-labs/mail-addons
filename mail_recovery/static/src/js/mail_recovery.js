@@ -1,4 +1,5 @@
 odoo.define("mail_recovery", function(require) {
+    "use strict";
     var composer = require("mail.composer");
 
     composer.BasicComposer.include({
