@@ -15,28 +15,28 @@ msgstr ""
 
 #. module: mail_all
 #. openerp-web
-#: code:addons/mail_all/static/src/js/mail_all.js:23
+#: code:addons/mail_all/static/src/js/mail_all.js:25
 #, python-format
 msgid "All Messages"
 msgstr ""
 
 #. module: mail_all
 #. openerp-web
-#: code:addons/mail_all/static/src/xml/menu.xml:10
+#: code:addons/mail_all/static/src/xml/menu.xml:15
 #, python-format
 msgid "All messages"
 msgstr ""
 
 #. module: mail_all
 #. openerp-web
-#: code:addons/mail_all/static/src/js/test_mail_all.js:23
+#: code:addons/mail_all/static/src/js/test_mail_all.js:26
 #, python-format
 msgid "Check that All Messages are opened"
 msgstr ""
 
 #. module: mail_all
 #. openerp-web
-#: code:addons/mail_all/static/src/js/test_mail_all.js:17
+#: code:addons/mail_all/static/src/js/test_mail_all.js:18
 #, python-format
 msgid "Click to enter menu discuss"
 msgstr ""
@@ -50,14 +50,14 @@ msgstr ""
 
 #. module: mail_all
 #. openerp-web
-#: code:addons/mail_all/static/src/xml/menu.xml:18
+#: code:addons/mail_all/static/src/xml/menu.xml:23
 #, python-format
 msgid "No messages"
 msgstr ""
 
 #. module: mail_all
 #. openerp-web
-#: code:addons/mail_all/static/src/js/test_mail_all.js:20
+#: code:addons/mail_all/static/src/js/test_mail_all.js:22
 #, python-format
 msgid "Open All Messages"
 msgstr ""
