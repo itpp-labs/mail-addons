@@ -15,21 +15,21 @@ msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/js/test_private.js:43
+#: code:addons/mail_private/static/src/js/test_private.js:52
 #, python-format
 msgid "Check the first one"
 msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/js/test_private.js:30
+#: code:addons/mail_private/static/src/js/test_private.js:36
 #, python-format
 msgid "Click on Private mail creating button"
 msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/js/test_private.js:35
+#: code:addons/mail_private/static/src/js/test_private.js:42
 #, python-format
 msgid "Dummy action"
 msgstr ""
@@ -41,14 +41,14 @@ msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/js/test_private.js:18
+#: code:addons/mail_private/static/src/js/test_private.js:21
 #, python-format
 msgid "Go to the list of subscribers"
 msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/js/test_private.js:26
+#: code:addons/mail_private/static/src/js/test_private.js:31
 #, python-format
 msgid "Go to user page"
 msgstr ""
@@ -60,14 +60,14 @@ msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/js/test_private.js:22
+#: code:addons/mail_private/static/src/js/test_private.js:26
 #, python-format
 msgid "Select a user"
 msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/js/test_private.js:14
+#: code:addons/mail_private/static/src/js/test_private.js:16
 #, python-format
 msgid "Select channel settings"
 msgstr ""
@@ -81,57 +81,57 @@ msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/xml/mail_private.xml:9
+#: code:addons/mail_private/static/src/xml/mail_private.xml:13
 #, python-format
 msgid "Send a message to specified recipients only"
 msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/js/test_private.js:52
-#: code:addons/mail_private/static/src/js/test_private.js:55
+#: code:addons/mail_private/static/src/js/test_private.js:63
+#: code:addons/mail_private/static/src/js/test_private.js:67
 #, python-format
 msgid "Send email"
 msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/xml/mail_private.xml:9
+#: code:addons/mail_private/static/src/xml/mail_private.xml:13
 #, python-format
 msgid "Send internal message"
 msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/xml/mail_private.xml:15
+#: code:addons/mail_private/static/src/xml/mail_private.xml:19
 #, python-format
 msgid "To: Followers of"
 msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/xml/mail_private.xml:26
+#: code:addons/mail_private/static/src/xml/mail_private.xml:33
 #, python-format
 msgid "Uncheck all"
 msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/js/test_private.js:39
+#: code:addons/mail_private/static/src/js/test_private.js:47
 #, python-format
 msgid "Uncheck all Followers"
 msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/js/test_private.js:46
+#: code:addons/mail_private/static/src/js/test_private.js:56
 #, python-format
 msgid "Write some email"
 msgstr ""
 
 #. module: mail_private
 #. openerp-web
-#: code:addons/mail_private/static/src/xml/mail_private.xml:20
+#: code:addons/mail_private/static/src/xml/mail_private.xml:24
 #, python-format
 msgid "this document"
 msgstr ""
