@@ -2,7 +2,7 @@
 # Copyright 2017 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
 # License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html)
 
-from openerp import api, models
+from odoo import api, models
 
 
 class MailMessage(models.Model):
