@@ -36,7 +36,7 @@ class TestUi(odoo.tests.HttpCase):
         # notifications for everyone
         for p in partner_ids.ids:
             env["mail.notification"].create(
-                {"res_partner_id": p, "mail_message_id": msg.id, "is_read": False,}
+                {"res_partner_id": p, "mail_message_id": msg.id, "is_read": False}
             )
         code = """
             setTimeout(function () {

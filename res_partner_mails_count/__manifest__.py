@@ -15,7 +15,7 @@
         # 'web_tour_extra',
     ],
     "external_dependencies": {"python": [], "bin": []},
-    "data": ["views/res_partner_mails_count.xml", "templates.xml",],
+    "data": ["views/res_partner_mails_count.xml", "templates.xml"],
     "demo": [],
     "installable": False,
     "auto_install": False,
