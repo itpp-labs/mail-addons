@@ -22,7 +22,7 @@
         "test_mail",
     ],
     "external_dependencies": {"python": [], "bin": []},
-    "data": ["views/website_views.xml",],
+    "data": ["views/website_views.xml"],
     "demo": [],
     "qweb": [],
     "post_load": None,

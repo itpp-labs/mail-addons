@@ -22,7 +22,7 @@ class TestRender(TestMail):
         self.company = self.env["res.company"].create({"name": "New Test Website"})
         self.website.company_id = self.company
         self.mail_server_id = self.env["ir.mail_server"].create(
-            {"name": "mail server", "smtp_host": "mail.example.com",}
+            {"name": "mail server", "smtp_host": "mail.example.com"}
         )
         self.website.mail_server_id = self.mail_server_id
 
@@ -84,7 +84,7 @@ class TestRender(TestMail):
 
         self.env.user.backend_website_id = None
         TestModel = self.env["mail.test"].with_context(
-            {"mail_create_nolog": True, "mail_create_nosubscribe": True,}
+            {"mail_create_nolog": True, "mail_create_nosubscribe": True}
         )
         self.test_pigs = TestModel.create(
             {

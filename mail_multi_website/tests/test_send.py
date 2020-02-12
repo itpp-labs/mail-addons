@@ -57,7 +57,7 @@ class TestSendMail(TransactionCase):
         original_email = "original@email1"
         new_email = "new@email2"
         partner = self.env["res.partner"].create(
-            {"name": "test", "email": original_email,}
+            {"name": "test", "email": original_email}
         )
         self.switch_user_website()
         # update partner's email

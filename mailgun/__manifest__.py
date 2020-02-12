@@ -14,9 +14,9 @@
     "license": "LGPL-3",
     "price": 195.00,
     "currency": "EUR",
-    "depends": ["mail",],
+    "depends": ["mail"],
     "external_dependencies": {"python": [], "bin": []},
-    "data": ["data/ir_cron_data.xml",],
+    "data": ["data/ir_cron_data.xml"],
     "demo": [],
     "qweb": [],
     "post_load": None,
@@ -30,5 +30,5 @@
     "demo_addons_hidden": [],
     "demo_url": "mailgun",
     "demo_summary": "Easy to send outgoing and fetch incoming messages by using Mailgun",
-    "demo_images": ["images/mailgun_main.png",],
+    "demo_images": ["images/mailgun_main.png"],
 }
