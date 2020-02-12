@@ -1,17 +1,25 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <!--Copyright 2016 x620 <https://github.com/x620>
     Copyright 2017 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
     Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
     License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html).-->
 <openerp>
     <data>
-        <template id="mail_to_assets_backend"
-                  name="mail_to_assets_backend"
-                  inherit_id="web.assets_backend">
+        <template
+            id="mail_to_assets_backend"
+            name="mail_to_assets_backend"
+            inherit_id="web.assets_backend"
+        >
             <xpath expr="." position="inside">
-                <link rel="stylesheet" href="/mail_to/static/src/css/mail_to.css"/>
-                <script src="/mail_to/static/src/js/mail_to.js" type="text/javascript"></script>
-                <script src="/mail_to/static/src/js/test_mail_to.js" type="text/javascript"></script>
+                <link rel="stylesheet" href="/mail_to/static/src/css/mail_to.css" />
+                <script
+                    src="/mail_to/static/src/js/mail_to.js"
+                    type="text/javascript"
+                />
+                <script
+                    src="/mail_to/static/src/js/test_mail_to.js"
+                    type="text/javascript"
+                />
             </xpath>
         </template>
     </data>

@@ -21,9 +21,9 @@ Move message
 ------------
 
 * Open ``[[ Discuss ]] >> Inbox`` menu
-* Click on icon of two cross arrows 
-* Select a record you need 
-* Click **Move** 
+* Click on icon of two cross arrows
+* Select a record you need
+* Click **Move**
 RESULT: The message has been moved to the record selected.
 
 Move to origin

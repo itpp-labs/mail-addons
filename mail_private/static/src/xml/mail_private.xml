@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!--Copyright 2016 x620 <https://github.com/x620>
     Copyright 2016 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
     Copyright 2016 manawi <https://github.com/manawi>
@@ -9,16 +9,20 @@
 
     <t t-extend="mail.Chatter.Buttons">
         <t t-jquery="button[title='Send a message']" t-operation="after">
-            <button t-if="new_message_btn" class="btn btn-sm btn-link oe_compose_post_private"  title="Send a message to specified recipients only">Send internal message</button>
+            <button
+                t-if="new_message_btn"
+                class="btn btn-sm btn-link oe_compose_post_private"
+                title="Send a message to specified recipients only"
+            >Send internal message</button>
         </t>
     </t>
-    
+
   <t t-extend="mail.chatter.ChatComposer">
         <t t-jquery="small[class='o_chatter_composer_info']" t-operation="replace">
             <small class="o_chatter_composer_info" t-if="!widget.options.is_private">
                     To: Followers of
                     <t t-if="widget.options.record_name">
-                        &quot;<t t-esc="widget.options.record_name"/>&quot;
+                        &quot;<t t-esc="widget.options.record_name" />&quot;
                     </t>
                     <t t-if="!widget.options.record_name">
                         this document
@@ -31,16 +35,21 @@
                     <t t-foreach='widget.suggested_channels' t-as='channel'>
                         <div t-attf-title="Add as channel and follower">
                             <div class="o_checkbox">
-                                <input type="checkbox"
+                                <input
+                                    type="checkbox"
                                     t-att-checked="channel.checked ? 'checked' : undefined"
-                                    t-att-data-fullname="channel.full_name"/>
-                                <span/>
+                                    t-att-data-fullname="channel.full_name"
+                                />
+                                <span />
                             </div>
-                            <t t-esc="channel.name"/>
+                            <t t-esc="channel.name" />
                         </div>
                     </t>
                 </t>
-                <button class="btn btn-sm btn-link oe_composer_uncheck" t-if="widget.options.is_private">Uncheck all</button>
+                <button
+                    class="btn btn-sm btn-link oe_composer_uncheck"
+                    t-if="widget.options.is_private"
+                >Uncheck all</button>
             </div>
         </t>
   </t>

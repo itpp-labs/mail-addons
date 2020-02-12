@@ -9,13 +9,11 @@ class TestSendMail(TransactionCase):
 
     def setUp(self):
         super(TestSendMail, self).setUp()
-        self.website = self.env.ref('website.website2')
-        self.company = self.env['res.company'].create({
-            'name': 'New Test Website'
-        })
+        self.website = self.env.ref("website.website2")
+        self.company = self.env["res.company"].create({"name": "New Test Website"})
         self.original_email = self.env.user.email
         self.original_company = self.env.user.company_id
-        self.email = 'superadmin@second-website.example'
+        self.email = "superadmin@second-website.example"
         # Check that current email is set and differs
         self.assertTrue(self.email)
         self.assertNotEqual(self.original_email, self.email)
@@ -23,12 +21,14 @@ class TestSendMail(TransactionCase):
 
     def switch_user_website(self):
         # add website to allowed
-        self.env.user.write(dict(
-            backend_website_ids=[(4, self.website.id)],
-            backend_website_id=self.website.id,
-            company_id=self.company.id,
-            company_ids=[(4, self.company.id)]
-        ))
+        self.env.user.write(
+            dict(
+                backend_website_ids=[(4, self.website.id)],
+                backend_website_id=self.website.id,
+                company_id=self.company.id,
+                company_ids=[(4, self.company.id)],
+            )
+        )
 
     def test_multi_email(self):
         """User has email addresses per website"""
@@ -37,21 +37,28 @@ class TestSendMail(TransactionCase):
         self.env.user.email = self.email
         # Check that writing works
         self.env.user.invalidate_cache()
-        self.assertEqual(self.env.user.email, self.email, 'Write methods doesn\'t work (Field is not in registry?)')
+        self.assertEqual(
+            self.env.user.email,
+            self.email,
+            "Write methods doesn't work (Field is not in registry?)",
+        )
 
         # changing company will automatically update website value to empty value
         self.env.user.company_id = self.original_company
         self.env.user.invalidate_cache()
-        self.assertEqual(self.env.user.email, self.original_email, 'Multi-email doesn\'t work on switching websites')
+        self.assertEqual(
+            self.env.user.email,
+            self.original_email,
+            "Multi-email doesn't work on switching websites",
+        )
 
     def test_multi_email_partner(self):
         """Partner doesn't have email addresses per website"""
-        original_email = 'original@email1'
-        new_email = 'new@email2'
-        partner = self.env['res.partner'].create({
-            'name': 'test',
-            'email': original_email,
-        })
+        original_email = "original@email1"
+        new_email = "new@email2"
+        partner = self.env["res.partner"].create(
+            {"name": "test", "email": original_email}
+        )
         self.switch_user_website()
         # update partner's email
         partner.email = new_email
@@ -59,4 +66,6 @@ class TestSendMail(TransactionCase):
         # changing company will automatically update website value to empty value
         self.env.user.company_id = self.original_company
         self.env.user.invalidate_cache()
-        self.assertEqual(partner.email, new_email, 'Partner\'s email must not be Multi-website')
+        self.assertEqual(
+            partner.email, new_email, "Partner's email must not be Multi-website"
+        )
