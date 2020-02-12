@@ -1,7 +1,6 @@
 odoo.define("mail_move_message.relocate", function(require) {
     "use strict";
 
-    var bus = require("bus.bus").bus;
     var chat_manager = require("mail.chat_manager");
     var base_obj = require("mail_base.base");
     var thread = require("mail.ChatThread");
@@ -35,7 +34,9 @@ odoo.define("mail_move_message.relocate", function(require) {
             };
 
             this.do_action(action, {
-                on_close: function() {},
+                on_close: function() {
+                    // Empty
+                },
             });
         },
     });
@@ -45,7 +46,9 @@ odoo.define("mail_move_message.relocate", function(require) {
             var result = this._super.apply(this, arguments);
             // For show wizard in the form
             this.thread.on("move_message", this, this.thread.on_move_message);
-            return $.when(result).done(function() {});
+            return $.when(result).done(function() {
+                // TODO: do we need .done(...) part?
+            });
         },
     });
 
@@ -55,7 +58,9 @@ odoo.define("mail_move_message.relocate", function(require) {
             var result = this._super.apply(this, arguments);
             // For show wizard in the channels
             this.thread.on("move_message", this, this.thread.on_move_message);
-            return $.when(result).done(function() {});
+            return $.when(result).done(function() {
+                // TODO: do we need .done(...) part?
+            });
         },
     });
 
@@ -93,7 +98,7 @@ odoo.define("mail_move_message.relocate", function(require) {
 
     widgets.WidgetButton.include({
         on_click: function() {
-            if (this.node.attrs.special == "quick_create") {
+            if (this.node.attrs.special === "quick_create") {
                 var self = this;
                 var related_field = this.field_manager.fields[this.node.attrs.field];
                 var context_built = $.Deferred();
