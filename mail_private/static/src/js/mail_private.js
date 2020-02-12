@@ -7,13 +7,11 @@
 odoo.define("mail_private", function(require) {
     "use strict";
 
-    var core = require("web.core");
     var Chatter = require("mail.Chatter");
     var MailComposer = require("mail_base.base").MailComposer;
     var chat_manager = require("mail.chat_manager");
     var session = require("web.session");
     var Model = require("web.Model");
-    var config = require("web.config");
     var utils = require("mail.utils");
 
     Chatter.include({
