@@ -15,15 +15,15 @@ msgstr ""
 
 #. module: mail_archives
 #. openerp-web
-#: code:addons/mail_archives/static/src/js/archives.js:21
-#: code:addons/mail_archives/static/src/xml/menu.xml:8
+#: code:addons/mail_archives/static/src/js/archives.js:23
+#: code:addons/mail_archives/static/src/xml/menu.xml:12
 #, python-format
 msgid "Archive"
 msgstr ""
 
 #. module: mail_archives
 #. openerp-web
-#: code:addons/mail_archives/static/src/xml/menu.xml:16
+#: code:addons/mail_archives/static/src/xml/menu.xml:20
 #, python-format
 msgid "Archive is empty"
 msgstr ""
