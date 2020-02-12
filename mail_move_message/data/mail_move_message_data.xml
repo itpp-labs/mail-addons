@@ -1,8 +1,7 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <!--# Copyright 2016 Ildar Nasyrov <https://it-projects.info/team/iledarn>
     # Copyright 2017 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
     # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).-->
-
 <odoo>
         <record id="mail_relocation_models" model="ir.config_parameter">
             <field name="key">mail_relocation_models</field>

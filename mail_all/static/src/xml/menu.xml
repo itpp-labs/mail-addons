@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!--# Copyright 2018 Artyom Losev <https://it-projects.info/team/ArtyomLosev>
     # Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
     # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). -->
@@ -6,8 +6,13 @@
     <!--Inherit Sidebar and add All messages menu item after Starred -->
     <t t-extend="mail.discuss.Sidebar">
         <t t-jquery="div[data-thread-id=mailbox_starred]" t-operation="after">
-            <div t-attf-class="o_mail_discuss_title_main o_mail_mailbox_title_all o_mail_discuss_item #{(activeThreadID == 'channel_all') ? 'o_active': ''}" data-thread-id="mailbox_channel_all">
-                <span class="o_channel_name mail_all"> <i class="fa fa-database"/> All messages </span>
+            <div
+                t-attf-class="o_mail_discuss_title_main o_mail_mailbox_title_all o_mail_discuss_item #{(activeThreadID == 'channel_all') ? 'o_active': ''}"
+                data-thread-id="mailbox_channel_all"
+            >
+                <span class="o_channel_name mail_all"> <i
+                        class="fa fa-database"
+                    /> All messages </span>
             </div>
         </t>
     </t>

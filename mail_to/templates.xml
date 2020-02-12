@@ -1,11 +1,13 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <openerp>
     <data>
-        <template id="mail_to_assets_backend"
-                  name="mail_to_assets_backend"
-                  inherit_id="web.assets_backend">
+        <template
+            id="mail_to_assets_backend"
+            name="mail_to_assets_backend"
+            inherit_id="web.assets_backend"
+        >
             <xpath expr="." position="inside">
-                <link rel="stylesheet" href="/mail_to/static/src/css/mail_to.css"/>
+                <link rel="stylesheet" href="/mail_to/static/src/css/mail_to.css" />
             </xpath>
         </template>
     </data>
