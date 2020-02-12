@@ -15,28 +15,28 @@ msgstr ""
 
 #. module: res_partner_mails_count
 #. openerp-web
-#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:31
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:34
 #, python-format
 msgid "Close Tutorial"
 msgstr ""
 
 #. module: res_partner_mails_count
 #. openerp-web
-#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:25
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:26
 #, python-format
 msgid "Done"
 msgstr ""
 
 #. module: res_partner_mails_count
 #. openerp-web
-#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:20
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:21
 #, python-format
 msgid "Here is new fields with mails counters. Press one of it."
 msgstr ""
 
 #. module: res_partner_mails_count
 #. openerp-web
-#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:15
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:16
 #, python-format
 msgid "Let's see how mails count work."
 msgstr ""
@@ -55,7 +55,7 @@ msgstr ""
 
 #. module: res_partner_mails_count
 #. openerp-web
-#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:14
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:15
 #, python-format
 msgid "Mails count tutorial"
 msgstr ""
@@ -81,14 +81,14 @@ msgstr ""
 
 #. module: res_partner_mails_count
 #. openerp-web
-#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:30
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:31
 #, python-format
 msgid "Message are found. <br/>Enjoy your day! <br/> <br/><a href='https://www.it-projects.info/apps' target='_blank'>IT-Projects LLC</a> team "
 msgstr ""
 
 #. module: res_partner_mails_count
 #. openerp-web
-#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:19
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:20
 #, python-format
 msgid "New fields"
 msgstr ""
@@ -100,14 +100,14 @@ msgstr ""
 
 #. module: res_partner_mails_count
 #. openerp-web
-#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:16
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:17
 #, python-format
 msgid "Skip"
 msgstr ""
 
 #. module: res_partner_mails_count
 #. openerp-web
-#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:16
+#: code:addons/res_partner_mails_count/static/src/js/res_partner_mails_count_tour.js:17
 #, python-format
 msgid "Start Tutorial"
 msgstr ""
