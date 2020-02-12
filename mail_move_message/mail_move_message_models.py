@@ -428,9 +428,7 @@ class MailMessage(models.Model):
             # building message tree
             return
         if not self.author_id:
-            self.write(
-                {"author_id": author.id}
-            )
+            self.write({"author_id": author.id})
 
         vals = {}
         if move_back:
@@ -462,9 +460,7 @@ class MailMessage(models.Model):
                 "res_partner_id": self.env.user.partner_id.id,
                 "is_read": False,
             }
-            self.write(
-                {"notification_ids": [(0, 0, notification)]}
-            )
+            self.write({"notification_ids": [(0, 0, notification)]})
 
         for r in self.all_child_ids:
             r_vals = vals.copy()
@@ -518,8 +514,7 @@ class MailMessage(models.Model):
         for record in reads:
             name = record["record_name"] or ""
             extended_name = "   [{}] ID {}".format(
-                record.get("model", "UNDEF"),
-                record.get("res_id", "UNDEF"),
+                record.get("model", "UNDEF"), record.get("res_id", "UNDEF"),
             )
             res.append((record["id"], name + extended_name))
         return res
