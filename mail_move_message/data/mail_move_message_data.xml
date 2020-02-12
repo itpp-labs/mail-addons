@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <openerp>
     <data noupdate="1">
         <record id="mail_relocation_models" model="ir.config_parameter">

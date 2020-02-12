@@ -1,27 +1,55 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <template>
     <t t-extend="mail.Attachment">
         <t t-jquery="div[t-att-title='attachment.name'] .o_image" t-operation="replace">
-            <t t-if="attachment.mimetype and attachment.mimetype.search('image/') !== -1">
-                <span class="m-dotted" t-attf-onclick="$('#ImageModal{{ attachment.id }}').arcticmodal()">
-                    <div class="o_image" target="_blank" t-att-data-mimetype="attachment.mimetype" t-attf-data-src="/web/image/#{attachment.id}/100x80">
-                        <span class='o_attachment_name'><t t-esc='attachment.name'/></span>
+            <t
+                t-if="attachment.mimetype and attachment.mimetype.search('image/') !== -1"
+            >
+                <span
+                    class="m-dotted"
+                    t-attf-onclick="$('#ImageModal{{ attachment.id }}').arcticmodal()"
+                >
+                    <div
+                        class="o_image"
+                        target="_blank"
+                        t-att-data-mimetype="attachment.mimetype"
+                        t-attf-data-src="/web/image/#{attachment.id}/100x80"
+                    >
+                        <span class='o_attachment_name'><t
+                                t-esc='attachment.name'
+                            /></span>
                     </div>
                 </span>
                 <div class="g-hidden">
                     <div class="box-modal" t-attf-id="ImageModal{{ attachment.id }}">
                         <div class="box-modal_close arcticmodal-close">X</div>
-                        <img t-att-data-mimetype="attachment.mimetype" t-attf-src="/web/image/#{attachment.id}"></img>
+                        <img
+                            t-att-data-mimetype="attachment.mimetype"
+                            t-attf-src="/web/image/#{attachment.id}"
+                        />
                         <ul class="box-modal-li">
-                            <li><span class='o_attachment_name'><t t-esc='attachment.name'/></span></li>
-                            <li><span class='oe_download_original_img'><a t-att-href='attachment.url' target="_blank">Download</a></span></li>
+                            <li><span class='o_attachment_name'><t
+                                        t-esc='attachment.name'
+                                    /></span></li>
+                            <li><span class='oe_download_original_img'><a
+                                        t-att-href='attachment.url'
+                                        target="_blank"
+                                    >Download</a></span></li>
                         </ul>
                     </div>
                 </div>
             </t>
-            <t t-if="! (attachment.mimetype and attachment.mimetype.search('image/') !== -1)">
-                <a class="o_image" t-att-href='attachment.url' target="_blank" t-att-data-mimetype="attachment.mimetype" t-attf-data-src="/web/image/#{attachment.id}/100x80">
-                    <span class='o_attachment_name'><t t-esc='attachment.name'/></span>
+            <t
+                t-if="! (attachment.mimetype and attachment.mimetype.search('image/') !== -1)"
+            >
+                <a
+                    class="o_image"
+                    t-att-href='attachment.url'
+                    target="_blank"
+                    t-att-data-mimetype="attachment.mimetype"
+                    t-attf-data-src="/web/image/#{attachment.id}/100x80"
+                >
+                    <span class='o_attachment_name'><t t-esc='attachment.name' /></span>
                 </a>
             </t>
         </t>

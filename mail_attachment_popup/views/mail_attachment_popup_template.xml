@@ -1,12 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <openerp>
     <data>
-        <template id="assets_backend" name="mail attachment popup assets" inherit_id="web.assets_backend">
+        <template
+            id="assets_backend"
+            name="mail attachment popup assets"
+            inherit_id="web.assets_backend"
+        >
             <xpath expr="." position="inside">
-                <link rel="stylesheet" href="/mail_attachment_popup/static/src/css/jquery.arcticmodal.css"/>
-                <link rel="stylesheet" href="/mail_attachment_popup/static/src/css/simple.css"/>
-                <link rel="stylesheet" href="/mail_attachment_popup/static/src/css/styles.css"/>
-                <script type="text/javascript" src="/mail_attachment_popup/static/lib/js/jquery.arcticmodal.js"></script>
+                <link
+                    rel="stylesheet"
+                    href="/mail_attachment_popup/static/src/css/jquery.arcticmodal.css"
+                />
+                <link
+                    rel="stylesheet"
+                    href="/mail_attachment_popup/static/src/css/simple.css"
+                />
+                <link
+                    rel="stylesheet"
+                    href="/mail_attachment_popup/static/src/css/styles.css"
+                />
+                <script
+                    type="text/javascript"
+                    src="/mail_attachment_popup/static/lib/js/jquery.arcticmodal.js"
+                />
             </xpath>
         </template>
     </data>

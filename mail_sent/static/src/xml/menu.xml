@@ -1,10 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <template>
     <!--Inherit Sidebar and add Sent menu item after Starred -->
     <t t-extend="mail.chat.Sidebar">
         <t t-jquery="div[data-channel-id=channel_inbox]" t-operation="after">
-            <div t-attf-class="o_mail_chat_channel_item #{(active_channel_id == 'channel_sent') ? 'o_active': ''}" data-channel-id="channel_sent">
-                <span class="o_channel_name mail_sent"> <i class="fa fa-send-o"/> Sent </span>
+            <div
+                t-attf-class="o_mail_chat_channel_item #{(active_channel_id == 'channel_sent') ? 'o_active': ''}"
+                data-channel-id="channel_sent"
+            >
+                <span class="o_channel_name mail_sent"> <i
+                        class="fa fa-send-o"
+                    /> Sent </span>
             </div>
         </t>
     </t>
@@ -13,7 +18,8 @@
         <t t-jquery="t:last-child" t-operation="after">
             <t t-if="options.channel_id==='channel_sent'">
                 <div class="o_thread_title">No sent messages</div>
-                <div>You can send messages and then these messages will appear here.</div>
+                <div
+                >You can send messages and then these messages will appear here.</div>
             </t>
         </t>
     </t>
