@@ -13,7 +13,7 @@ class TestFetch(TestMail):
     def setUp(self):
         super(TestFetch, self).setUp()
         self.website = self.env["website"].create(
-            {"name": "Test Website", "domain": "example.com",}
+            {"name": "Test Website", "domain": "example.com"}
         )
         self.company = self.env["res.company"].create({"name": "New Test Website"})
         self.website.company_id = self.company

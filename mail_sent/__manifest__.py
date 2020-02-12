@@ -11,7 +11,7 @@
     "price": 40.00,
     "currency": "EUR",
     "depends": ["base", "mail", "mail_base"],
-    "data": ["views/templates.xml",],
-    "qweb": ["static/src/xml/menu.xml",],
+    "data": ["views/templates.xml"],
+    "qweb": ["static/src/xml/menu.xml"],
     "installable": True,
 }

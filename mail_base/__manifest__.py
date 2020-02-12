@@ -15,6 +15,6 @@
     "price": 9.00,
     "currency": "EUR",
     "depends": ["base", "mail"],
-    "data": ["views/templates.xml",],
+    "data": ["views/templates.xml"],
     "installable": True,
 }

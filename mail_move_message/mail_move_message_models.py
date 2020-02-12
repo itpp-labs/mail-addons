@@ -429,7 +429,7 @@ class MailMessage(models.Model):
             return
         if not self.author_id:
             self.write(
-                {"author_id": author.id,}
+                {"author_id": author.id}
             )
 
         vals = {}
@@ -463,7 +463,7 @@ class MailMessage(models.Model):
                 "is_read": False,
             }
             self.write(
-                {"notification_ids": [(0, 0, notification)],}
+                {"notification_ids": [(0, 0, notification)]}
             )
 
         for r in self.all_child_ids:
