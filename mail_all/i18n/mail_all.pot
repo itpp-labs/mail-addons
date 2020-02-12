@@ -16,14 +16,14 @@ msgstr ""
 #. module: mail_all
 #. openerp-web
 #: code:addons/mail_all/static/src/js/mail_all.js:49
-#: code:addons/mail_all/static/src/xml/menu.xml:7
+#: code:addons/mail_all/static/src/xml/menu.xml:12
 #, python-format
 msgid "All messages"
 msgstr ""
 
 #. module: mail_all
 #. openerp-web
-#: code:addons/mail_all/static/src/xml/menu.xml:15
+#: code:addons/mail_all/static/src/xml/menu.xml:20
 #, python-format
 msgid "No messages"
 msgstr ""
