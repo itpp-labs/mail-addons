@@ -11,8 +11,8 @@
     "license": "LGPL-3",
     "price": 40.00,
     "currency": "EUR",
-    "depends": ["mail_base",],
-    "data": ["views/templates.xml",],
-    "qweb": ["static/src/xml/menu.xml",],
+    "depends": ["mail_base"],
+    "data": ["views/templates.xml"],
+    "qweb": ["static/src/xml/menu.xml"],
     "installable": True,
 }

@@ -11,7 +11,7 @@
     "price": 100.00,
     "currency": "EUR",
     "depends": ["mail_all", "web_polymorphic_field"],
-    "data": ["mail_move_message_views.xml", "data/mail_move_message_data.xml",],
-    "qweb": ["static/src/xml/mail_move_message_main.xml",],
+    "data": ["mail_move_message_views.xml", "data/mail_move_message_data.xml"],
+    "qweb": ["static/src/xml/mail_move_message_main.xml"],
     "installable": True,
 }

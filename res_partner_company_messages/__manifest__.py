@@ -11,6 +11,6 @@
     "website": "https://twitter.com/yelizariev",
     "images": ["images/child.png", "images/parent.png"],
     "depends": ["mail"],
-    "data": ["views.xml",],
+    "data": ["views.xml"],
     "installable": True,
 }

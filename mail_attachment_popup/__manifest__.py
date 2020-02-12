@@ -11,10 +11,10 @@
     "license": "GPL-3",
     "price": "50.0",
     "currency": "EUR",
-    "depends": ["mail",],
+    "depends": ["mail"],
     "external_dependencies": {"python": [], "bin": []},
-    "data": ["views/mail_attachment_popup_template.xml",],
-    "qweb": ["static/src/xml/mail_attachment_popup.xml",],
+    "data": ["views/mail_attachment_popup_template.xml"],
+    "qweb": ["static/src/xml/mail_attachment_popup.xml"],
     "installable": True,
     "auto_install": False,
 }
