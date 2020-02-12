@@ -4,10 +4,11 @@ import re
 from email.utils import formataddr
 
 from odoo import SUPERUSER_ID, tools
-from odoo.addons.base.ir.ir_mail_server import MailDeliveryException
 from odoo.osv import osv
 from odoo.tools.safe_eval import safe_eval as eval
 from odoo.tools.translate import _
+
+from odoo.addons.base.ir.ir_mail_server import MailDeliveryException
 
 _logger = logging.getLogger(__name__)
 
@@ -146,7 +147,8 @@ class MailMail(osv.Model):
                         attachments=attachments,
                         message_id=mail.message_id,
                         references=mail.references,
-                        object_id=mail.res_id and ("{}-{}".format(mail.res_id, mail.model)),
+                        object_id=mail.res_id
+                        and ("{}-{}".format(mail.res_id, mail.model)),
                         subtype="html",
                         subtype_alternative="plain",
                         headers=headers,
