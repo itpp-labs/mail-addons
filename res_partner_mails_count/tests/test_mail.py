@@ -34,7 +34,7 @@ class TestMessageCount(TransactionCase):
         )
         mail_compose = self.env["mail.compose.message"]
         compose = mail_compose.with_context(
-            {"default_composition_mode": "comment",}
+            {"default_composition_mode": "comment"}
         ).create(
             {
                 "subject": "test subj",
