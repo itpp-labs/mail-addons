@@ -25,14 +25,14 @@ msgstr ""
 
 #. module: mail_sent
 #. openerp-web
-#: code:addons/mail_sent/static/src/xml/menu.xml:16
+#: code:addons/mail_sent/static/src/xml/menu.xml:20
 #, python-format
 msgid "No sent messages"
 msgstr ""
 
 #. module: mail_sent
 #. openerp-web
-#: code:addons/mail_sent/static/src/xml/menu.xml:8
+#: code:addons/mail_sent/static/src/xml/menu.xml:12
 #: model:ir.model.fields,field_description:mail_sent.field_mail_compose_message__sent
 #: model:ir.model.fields,field_description:mail_sent.field_mail_mail__sent
 #: model:ir.model.fields,field_description:mail_sent.field_mail_message__sent
@@ -42,7 +42,7 @@ msgstr ""
 
 #. module: mail_sent
 #. openerp-web
-#: code:addons/mail_sent/static/src/js/sent.js:24
+#: code:addons/mail_sent/static/src/js/sent.js:26
 #, python-format
 msgid "Sent Messages"
 msgstr ""
@@ -55,7 +55,7 @@ msgstr ""
 
 #. module: mail_sent
 #. openerp-web
-#: code:addons/mail_sent/static/src/xml/menu.xml:17
+#: code:addons/mail_sent/static/src/xml/menu.xml:22
 #, python-format
 msgid "You can send messages and then these messages will appear here."
 msgstr ""
