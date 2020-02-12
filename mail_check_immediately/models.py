@@ -1,7 +1,7 @@
 import datetime
 
-from openerp import api, exceptions, fields, models, tools
-from openerp.tools.translate import _
+from odoo import api, exceptions, fields, models, tools
+from odoo.tools.translate import _
 
 
 class FetchMailServer(models.Model):
