@@ -148,7 +148,8 @@ class MailMail(osv.Model):
                         attachments=attachments,
                         message_id=mail.message_id,
                         references=mail.references,
-                        object_id=mail.res_id and ("{}-{}".format(mail.res_id, mail.model)),
+                        object_id=mail.res_id
+                        and ("{}-{}".format(mail.res_id, mail.model)),
                         subtype="html",
                         subtype_alternative="plain",
                         headers=headers,

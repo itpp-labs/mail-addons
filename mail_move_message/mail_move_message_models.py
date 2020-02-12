@@ -451,8 +451,7 @@ class MailMessage(models.Model):
         for record in reads:
             name = record["record_name"] or ""
             extended_name = "   [{}] ID {}".format(
-                record.get("model", "UNDEF"),
-                record.get("res_id", "UNDEF"),
+                record.get("model", "UNDEF"), record.get("res_id", "UNDEF"),
             )
             res.append((record["id"], name + extended_name))
         return res
