@@ -15,7 +15,7 @@ msgstr ""
 
 #. module: mail_attachment_popup
 #. openerp-web
-#: code:addons/mail_attachment_popup/static/src/xml/mail_attachment_popup.xml:17
+#: code:addons/mail_attachment_popup/static/src/xml/mail_attachment_popup.xml:37
 #, python-format
 msgid "Download"
 msgstr ""
