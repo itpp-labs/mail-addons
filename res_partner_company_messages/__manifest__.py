@@ -1,18 +1,16 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Aggregate messages from company's contacts",
-    'version': '1.0.0',
-    'author': 'IT-Projects LLC, Ivan Yelizariev',
-    'license': 'LGPL-3',
+    "name": "Aggregate messages from company's contacts",
+    "vesion": "10.0.1.0.0",
+    "author": "IT-Projects LLC, Ivan Yelizariev",
+    "license": "LGPL-3",
     "price": 70.00,
     "currency": "EUR",
-    'category': 'Discuss',
+    "category": "Discuss",
     "support": "apps@it-projects.info",
-    'website': 'https://twitter.com/yelizariev',
-    'images': ['images/child.png', 'images/parent.png'],
-    'depends': ['mail'],
-    'data': [
-        'views.xml',
-    ],
-    'installable': True
+    "website": "https://twitter.com/yelizariev",
+    "images": ["images/child.png", "images/parent.png"],
+    "depends": ["mail"],
+    "data": ["views.xml"],
+    "installable": True,
 }

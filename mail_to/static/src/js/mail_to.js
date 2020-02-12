@@ -3,13 +3,13 @@
  * Copyright 2017 Artyom Losev <https://it-projects.info/>
  * Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
  * License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html). */
-odoo.define('mail_to.MailTo', function (require) {
+odoo.define("mail_to.MailTo", function(require) {
     "use strict";
 
-    var base_obj = require('mail_base.base');
+    var base_obj = require("mail_base.base");
 
     base_obj.MailTools.include({
-        make_message: function(data){
+        make_message: function(data) {
             var msg = this._super(data);
             msg.partner_ids = data.partner_ids;
             msg.channel_names = data.channel_names;
@@ -18,22 +18,22 @@ odoo.define('mail_to.MailTo', function (require) {
                 return msg;
             }
 
-            var more_recipients = '';
-            // value which define more recipients
+            var more_recipients = "";
+            // Value which define more recipients
             msg.more_recipients_value = 4;
-            for (var i = 0; i < msg.recipients.length; i++){
-                    if (i >= msg.more_recipients_value){
-                        // append names
-                        more_recipients += msg.recipients[i][1];
-                        // separate them with semicolon
-                        if (i < msg.recipients.length - 1){
-                            more_recipients += '; ';
-                        }
+            for (var i = 0; i < msg.recipients.length; i++) {
+                if (i >= msg.more_recipients_value) {
+                    // Append names
+                    more_recipients += msg.recipients[i][1];
+                    // Separate them with semicolon
+                    if (i < msg.recipients.length - 1) {
+                        more_recipients += "; ";
                     }
+                }
             }
 
             msg.more_recipients = more_recipients;
             return msg;
-        }
+        },
     });
 });
