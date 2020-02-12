@@ -8,19 +8,22 @@ from odoo.api import Environment
 @odoo.tests.common.at_install(True)
 @odoo.tests.common.post_install(True)
 class TestUi(odoo.tests.HttpCase):
-
     def test_create_new_partner_and_move_message(self):
         env = Environment(self.registry.test_cr, self.uid, {})
         # needed because tests are run before the module is marked as
         # installed. In js web will only load qweb coming from modules
         # that are returned by the backend in module_boot. Without
         # this you end up with js, css but no qweb.
-        env['ir.module.module'].search([('name', '=', 'mail_move_message')], limit=1).state = 'installed'
+        env["ir.module.module"].search(
+            [("name", "=", "mail_move_message")], limit=1
+        ).state = "installed"
         self.registry.cursor().release()
 
         # updating models, to be able relocate messages to a partner at_install
         config_parameters = self.env["ir.config_parameter"].sudo()
-        config_parameters.set_param("mail_relocation_models", "crm.lead,project.task,res.partner")
+        config_parameters.set_param(
+            "mail_relocation_models", "crm.lead,project.task,res.partner"
+        )
 
         code = """
                     var delayed_button_click = function(delay, button){
@@ -49,4 +52,6 @@ class TestUi(odoo.tests.HttpCase):
                     console.log('ok')
         """
 
-        self.phantom_js('/web', code, login="admin", ready="$('.o_thread_icons').length")
+        self.phantom_js(
+            "/web", code, login="admin", ready="$('.o_thread_icons').length"
+        )

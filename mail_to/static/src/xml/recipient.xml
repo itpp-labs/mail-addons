@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!--Copyright 2016 x620 <https://github.com/x620>
     Copyright 2017 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
     Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
@@ -11,17 +11,32 @@
                 <t t-else="message.channel_ids.length > 0">To: </t>
                 <t t-foreach="message.partner_ids.length" t-as="i">
                     <t t-if="i &lt; message.more_recipients_value">
-                        <a t-att-href="_.str.sprintf('/web?#id=%s&amp;view_type=form&amp;model=res.partner', message.partner_ids[i][0])" class="recipient_link">
-                            <i t-esc="message.partner_ids[i][1]"/><t t-if="i &lt; message.partner_ids.length - 1">; </t><t t-else="message.channel_ids.length > 0 and message.partner_ids.length &lt; 4">; </t>
+                        <a
+                                t-att-href="_.str.sprintf('/web?#id=%s&amp;view_type=form&amp;model=res.partner', message.partner_ids[i][0])"
+                                class="recipient_link"
+                            >
+                            <i t-esc="message.partner_ids[i][1]" /><t
+                                    t-if="i &lt; message.partner_ids.length - 1"
+                                >; </t><t
+                                    t-else="message.channel_ids.length > 0 and message.partner_ids.length &lt; 4"
+                                >; </t>
                         </a>
                     </t>
                 </t>
 
                 <t t-if="message.channel_names">
                     <t t-foreach="message.channel_ids.length" t-as="i">
-                        <t t-if="message.partner_ids.length &lt; message.more_recipients_value  and (message.partner_ids.length + i) &lt; message.more_recipients_value">
-                            <a t-if="message.channel_names[i]" t-att-href="_.str.sprintf('/web?#id=%s&amp;view_type=form&amp;model=mail.channel', message.channel_names[i][0])" class="recipient_link">
-                                <i t-esc="message.channel_names[i][1]"/><t t-if="i &lt; message.channel_ids.length - 1">; </t>
+                        <t
+                                t-if="message.partner_ids.length &lt; message.more_recipients_value  and (message.partner_ids.length + i) &lt; message.more_recipients_value"
+                            >
+                            <a
+                                    t-if="message.channel_names[i]"
+                                    t-att-href="_.str.sprintf('/web?#id=%s&amp;view_type=form&amp;model=mail.channel', message.channel_names[i][0])"
+                                    class="recipient_link"
+                                >
+                                <i t-esc="message.channel_names[i][1]" /><t
+                                        t-if="i &lt; message.channel_ids.length - 1"
+                                    >; </t>
                             </a>
                         </t>
                     </t>
@@ -30,7 +45,9 @@
 
                 <t t-if="message.recipients.length &gt; message.more_recipients_value">
                     <span t-att-title="message.more_recipients">
-                        and <t t-esc="message.recipients.length - message.more_recipients_value"/> more
+                        and <t
+                                t-esc="message.recipients.length - message.more_recipients_value"
+                            /> more
                     </span>
                 </t>
             </t></span>

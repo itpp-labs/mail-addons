@@ -1,10 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <template>
     <!--Inherit Sidebar and add All messages menu item after Starred -->
     <t t-extend="mail.chat.Sidebar">
         <t t-jquery="div[data-channel-id=channel_starred]" t-operation="after">
-            <div t-attf-class="o_mail_chat_title_main o_mail_chat_channel_item #{(active_channel_id == 'channel_all') ? 'o_active': ''}" data-channel-id="channel_all">
-                <span class="o_channel_name mail_all"> <i class="fa fa-database"/> All messages </span>
+            <div
+                t-attf-class="o_mail_chat_title_main o_mail_chat_channel_item #{(active_channel_id == 'channel_all') ? 'o_active': ''}"
+                data-channel-id="channel_all"
+            >
+                <span class="o_channel_name mail_all"> <i
+                        class="fa fa-database"
+                    /> All messages </span>
             </div>
         </t>
     </t>
