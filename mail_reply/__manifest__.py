@@ -3,7 +3,7 @@
     "summary": """Got a message out of a Record? Now you can reply to it too!""",
     "category": "Discuss",
     "images": ["images/mail_reply.jpg"],
-    "version": "1.0.0",
+    "vesion": "11.0.1.0.0",
     "author": "IT-Projects LLC, Pavel Romanchenko",
     "support": "apps@it-projects.info",
     "website": "https://it-projects.info",
