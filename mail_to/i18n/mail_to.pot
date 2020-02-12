@@ -35,14 +35,14 @@ msgstr ""
 
 #. module: mail_to
 #. openerp-web
-#: code:addons/mail_to/static/src/xml/recipient.xml:32
+#: code:addons/mail_to/static/src/xml/recipient.xml:47
 #, python-format
 msgid "and"
 msgstr ""
 
 #. module: mail_to
 #. openerp-web
-#: code:addons/mail_to/static/src/xml/recipient.xml:33
+#: code:addons/mail_to/static/src/xml/recipient.xml:50
 #, python-format
 msgid "more"
 msgstr ""
