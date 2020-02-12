@@ -6,7 +6,7 @@
     "support": "apps@it-projects.info",
     "website": "https://twitter.com/nasyrov_ildar",
     "category": "Discuss",
-    "version": "1.1.0",
+    "vesion": "10.0.1.1.0",
     "depends": ["mail"],
     "data": ["data/cron.xml",],
 }

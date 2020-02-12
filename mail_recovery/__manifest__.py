@@ -10,7 +10,7 @@
     "website": "https://twitter.com/nasyrov_ildar",
     "category": "Discuss",
     "images": ["images/mail_recovery.png"],
-    "version": "1.0.0",
+    "vesion": "10.0.1.0.0",
     "depends": ["mail"],
     "data": ["data.xml",],
     "installable": True,
