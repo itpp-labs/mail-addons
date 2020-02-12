@@ -1,6 +1,6 @@
 {
     "name": "Aggregate messages from company's contacts",
-    "version": "1.0.0",
+    "vesion": "13.0.1.0.0",
     "author": "IT-Projects LLC, Ivan Yelizariev",
     "license": "LGPL-3",
     "price": 35.00,
