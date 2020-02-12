@@ -9,36 +9,23 @@
     "images": [],
     "version": "12.0.1.1.0",
     "application": False,
-
     "author": "IT-Projects LLC, Pavel Romanchenko",
     "support": "apps@it-projects.info",
     "website": "https://it-projects.info/",
     "license": "LGPL-3",
     "price": 50.00,
     "currency": "EUR",
-
-    "depends": [
-        "mail"
-    ],
+    "depends": ["mail"],
     "external_dependencies": {"python": [], "bin": []},
-    "data": [
-        'template.xml',
-        'full_composer_wizard.xml',
-    ],
-    "demo": [
-    ],
-    "qweb": [
-        'static/src/xml/mail_private.xml',
-    ],
-
+    "data": ["template.xml", "full_composer_wizard.xml"],
+    "demo": [],
+    "qweb": ["static/src/xml/mail_private.xml"],
     "post_load": None,
     "pre_init_hook": None,
     "post_init_hook": None,
     "uninstall_hook": None,
-
     "auto_install": False,
     "installable": False,
-
     # "demo_title": "{MODULE_NAME}",
     # "demo_addons": [
     # ],
