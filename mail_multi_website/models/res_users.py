@@ -1,31 +1,33 @@
 # Copyright 2018 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 import logging
-from odoo import models, fields, api
 
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
-FIELD_NAME = 'email_multi_website'
-FIELDS = ['signature']
+FIELD_NAME = "email_multi_website"
+FIELDS = ["signature"]
 ALL_FIELDS = [FIELD_NAME] + FIELDS
 
 
 class User(models.Model):
 
-    _inherit = ['res.users', 'website_dependent.mixin']
-    _name = 'res.users'
+    _inherit = ["res.users", "website_dependent.mixin"]
+    _name = "res.users"
 
     signature = fields.Html(company_dependent=True, website_dependent=True)
 
     # extra field to detach email field from res.partner
-    email = fields.Char(string='Multi Website Email', related='email_multi_website', inherited=False)
+    email = fields.Char(
+        string="Multi Website Email", related="email_multi_website", inherited=False
+    )
     email_multi_website = fields.Char(company_dependent=True, website_dependent=True)
 
     @api.model
     def create(self, vals):
         res = super(User, self).create(vals)
         # make value company independent
-        res._force_default(FIELD_NAME, vals.get('email'))
+        res._force_default(FIELD_NAME, vals.get("email"))
         for f in FIELDS:
             res._force_default(f, vals.get(f))
         return res
@@ -34,7 +36,7 @@ class User(models.Model):
     def write(self, vals):
         res = super(User, self).write(vals)
         # TODO: will it work with OCA's partner_firstname module?
-        if any(k in vals for k in ['name', 'email'] + FIELDS):
+        if any(k in vals for k in ["name", "email"] + FIELDS):
             for f in ALL_FIELDS:
                 self._update_properties_label(f)
         return res

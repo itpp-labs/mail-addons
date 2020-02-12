@@ -25,4 +25,4 @@ Usage
 
   * SentBox: https://apps.odoo.com/apps/modules/11.0/mail_sent/
   * Archive: https://apps.odoo.com/apps/modules/11.0/mail_archives/
-  * All Messages: https://www.odoo.com/apps/modules/11.0/mail_all/ 
+  * All Messages: https://www.odoo.com/apps/modules/11.0/mail_all/
