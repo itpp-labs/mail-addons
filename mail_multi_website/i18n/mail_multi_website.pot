@@ -55,7 +55,7 @@ msgid "Email composition wizard"
 msgstr ""
 
 #. module: mail_multi_website
-#: code:addons/mail_multi_website/models/mail_template.py:112
+#: code:addons/mail_multi_website/models/mail_template.py:147
 #, python-format
 msgid "Failed to render template %r using values %r"
 msgstr ""
