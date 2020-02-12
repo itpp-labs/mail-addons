@@ -1,4 +1,5 @@
 openerp.mail_check_immediately = function(instance, local) {
+    "use strict";
     instance.mail.Wall.include({
         init: function() {
             this._super.apply(this, arguments);
@@ -42,7 +43,7 @@ openerp.mail_check_immediately = function(instance, local) {
                     context: new instance.web.CompoundContext(),
                 })
                 .then(function(res) {
-                    var value;
+                    var value = null;
                     if (res) value = $.timeago(res);
                     value = value || "undefined";
                     _this.$el
