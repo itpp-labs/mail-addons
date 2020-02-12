@@ -15,7 +15,7 @@ msgstr ""
 
 #. module: mail_reply
 #. openerp-web
-#: code:addons/mail_reply/static/src/xml/reply_button.xml:7
+#: code:addons/mail_reply/static/src/xml/reply_button.xml:13
 #, python-format
 msgid "Reply"
 msgstr ""
