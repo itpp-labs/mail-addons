@@ -7,7 +7,6 @@ odoo.define("mail_to.tour", function(require) {
     var core = require("web.core");
     var _t = core._t;
 
-    var email = "mail_private test email";
     var steps = [
         {
             trigger: "a.recipient_link:first",
