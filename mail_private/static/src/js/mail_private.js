@@ -3,7 +3,7 @@
     Copyright 2017-2018 Artyom Losev <https://github.com/ArtyomLosev>
     Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
     Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
-    License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html). */
+    License MIT (https://opensource.org/licenses/MIT). */
 odoo.define("mail_private", function(require) {
     "use strict";
 

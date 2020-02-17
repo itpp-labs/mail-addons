@@ -1,6 +1,6 @@
 # Copyright 2016 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
 # Copyright 2019 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
-# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+# License MIT (https://opensource.org/licenses/MIT).
 {
     "name": "Sentbox",
     "summary": """Quick way to find sent messages""",
@@ -10,7 +10,7 @@
     "author": "IT-Projects LLC, Ivan Yelizariev, Pavel Romanchenko",
     "support": "apps@it-projects.info",
     "website": "https://it-projects.info",
-    "license": "LGPL-3",
+    "license": "Other OSI approved licence",  # MIT
     "price": 40.00,
     "currency": "EUR",
     "depends": ["mail"],
