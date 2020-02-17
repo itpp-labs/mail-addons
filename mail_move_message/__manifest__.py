@@ -3,13 +3,13 @@
 # Copyright 2017 Lilia Salihova
 # Copyright 2016-2018 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
 # Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
-# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+# License MIT (https://opensource.org/licenses/MIT).
 
 {
     "name": "Mail Relocation",
     "version": "11.0.1.0.7",
     "author": "IT-Projects LLC, Ivan Yelizariev, Pavel Romanchenko",
-    "license": "LGPL-3",
+    "license": "Other OSI approved licence",  # MIT
     "category": "Discuss",
     "images": ["images/m1.png"],
     "support": "apps@it-projects.info",
