@@ -3,7 +3,7 @@
     "name": "Mail Recovery",
     "summary": """Backup and recover unsent message""",
     "author": "IT-Projects LLC, Ildar Nasyrov",
-    "license": "LGPL-3",
+    "license": "Other OSI approved licence",  # MIT
     "price": 190.00,
     "currency": "EUR",
     "support": "apps@it-projects.info",
