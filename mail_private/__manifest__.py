@@ -14,7 +14,7 @@
     "version": "11.0.1.2.0",
     "application": False,
     "author": "IT-Projects LLC, Pavel Romanchenko",
-    "support": "apps@it-projects.info",
+    "support": "apps@itpp.dev",
     "website": "https://it-projects.info",
     "license": "GPL-3",
     "price": 50.00,

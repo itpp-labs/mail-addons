@@ -12,7 +12,7 @@
     "license": "Other OSI approved licence",  # MIT
     "category": "Discuss",
     "images": ["images/m1.png"],
-    "support": "apps@it-projects.info",
+    "support": "apps@itpp.dev",
     "website": "https://twitter.com/yelizariev",
     "price": 100.00,
     "currency": "EUR",
