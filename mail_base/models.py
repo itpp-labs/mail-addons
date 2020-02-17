@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016 x620 <https://github.com/x620>
 # Copyright 2017 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
-# License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html)
+# License MIT (https://opensource.org/licenses/MIT)
 
 from openerp import api, models
 
