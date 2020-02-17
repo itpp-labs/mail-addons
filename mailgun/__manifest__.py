@@ -3,7 +3,7 @@
     "name": "Mailgun",
     "author": "IT-Projects LLC, Ildar Nasyrov",
     "license": "Other OSI approved licence",  # MIT
-    "support": "apps@it-projects.info",
+    "support": "apps@itpp.dev",
     "website": "https://twitter.com/nasyrov_ildar",
     "category": "Discuss",
     "vesion": "10.0.1.1.0",
