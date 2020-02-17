@@ -5,7 +5,7 @@
     "author": "IT-Projects LLC, Ivan Yelizariev",
     "license": "Other OSI approved licence",  # MIT
     "category": "Discuss",
-    "support": "apps@it-projects.info",
+    "support": "apps@itpp.dev",
     "website": "https://yelizariev.github.io",
     "depends": ["base", "mail"],
     "data": ["data.xml"],

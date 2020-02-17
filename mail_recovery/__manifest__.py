@@ -6,7 +6,7 @@
     "license": "Other OSI approved licence",  # MIT
     "price": 190.00,
     "currency": "EUR",
-    "support": "apps@it-projects.info",
+    "support": "apps@itpp.dev",
     "website": "https://twitter.com/nasyrov_ildar",
     "category": "Discuss",
     "images": ["images/mail_recovery.png"],
