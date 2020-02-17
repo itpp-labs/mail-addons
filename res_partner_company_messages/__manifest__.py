@@ -2,7 +2,7 @@
     "name": "Aggregate messages from company's contacts",
     "vesion": "13.0.1.0.0",
     "author": "IT-Projects LLC, Ivan Yelizariev",
-    "license": "LGPL-3",
+    "license": "Other OSI approved licence",  # MIT
     "price": 35.00,
     "currency": "EUR",
     "category": "Discuss",

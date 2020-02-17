@@ -3,7 +3,7 @@
 # Copyright 2016 intero-chz <https://github.com/intero-chz>
 # Copyright 2016 manawi <https://github.com/manawi>
 # Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
-# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+# License MIT (https://opensource.org/licenses/MIT).
 
 from odoo import api, exceptions, fields, models
 from odoo.tools import email_split

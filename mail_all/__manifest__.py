@@ -1,7 +1,7 @@
 # Copyright 2016-2018 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
 # Copyright 2017-2018 Artyom Losev <https://it-projects.info/team/ArtyomLosev>
 # Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
-# License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
+# License MIT (https://opensource.org/licenses/MIT).
 {
     "name": "Show all messages",
     "summary": """Checkout all messages where you have access""",
@@ -13,7 +13,7 @@
     "author": "IT-Projects LLC, Pavel Romanchenko",
     "support": "apps@it-projects.info",
     "website": "https://it-projects.info",
-    "license": "LGPL-3",
+    "license": "Other OSI approved licence",  # MIT
     "price": 40.00,
     "currency": "EUR",
     "depends": ["mail"],
