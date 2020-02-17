@@ -1,6 +1,6 @@
 # Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
 # Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
-# License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html).
+# License MIT (https://opensource.org/licenses/MIT).
 {
     "name": """Internal Messaging""",
     "summary": """Send private messages to specified recipients, regardless of who are in followers list.""",
@@ -12,7 +12,7 @@
     "author": "IT-Projects LLC, Pavel Romanchenko",
     "support": "apps@it-projects.info",
     "website": "https://it-projects.info/",
-    "license": "LGPL-3",
+    "license": "Other OSI approved licence",  # MIT
     "price": 50.00,
     "currency": "EUR",
     "depends": ["mail"],
