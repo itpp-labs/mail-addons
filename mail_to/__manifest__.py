@@ -10,7 +10,7 @@
     "images": ["images/1.png"],
     "version": "11.0.1.1.0",
     "author": "IT-Projects LLC, Pavel Romanchenko",
-    "support": "apps@it-projects.info",
+    "support": "apps@itpp.dev",
     "website": "https://it-projects.info",
     "license": "Other OSI approved licence",  # MIT
     "price": 40.00,
