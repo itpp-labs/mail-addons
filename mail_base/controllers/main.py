@@ -1,6 +1,6 @@
 # Copyright 2017 mikaelh <https://github.com/mikaelh>
 # Copyright 2017-2019 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
-# License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html)
+# License MIT (https://opensource.org/licenses/MIT)
 from odoo.http import request
 
 from odoo.addons.bus.controllers.main import BusController
