@@ -1,3 +1,4 @@
+# pylint: disable=old-api7-method-defined,invalid-commit
 import base64
 import logging
 import re
