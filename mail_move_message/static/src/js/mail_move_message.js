@@ -38,7 +38,9 @@ odoo.define("mail_move_message.relocate", function(require) {
                 context: {default_message_id: message_id},
             };
             this.do_action(action, {
-                on_close: function() {},
+                on_close: function() {
+                    // Empty
+                },
             });
         },
     });
