@@ -7,25 +7,13 @@
 odoo.define("mail_move_message.relocate", function(require) {
     "use strict";
 
-    var bus = require("bus.bus").bus;
     var chat_manager = require("mail_base.base").chat_manager;
     var thread = require("mail.ChatThread");
     var chatter = require("mail.Chatter");
-    var rpc = require("web.rpc");
     var Basicmodel = require("web.BasicModel");
-    var view_dialogs = require("web.view_dialogs");
-    var field_utils_format = require("web.field_utils").format;
-    var BasicRenderer = require("web.BasicRenderer");
     var core = require("web.core");
-    var form_widget = require("web.FormRenderer");
-    var session = require("web.Session");
     var FormController = require("web.FormController");
-    var FormView = require("web.FormView");
-    var FormRenderer = require("web.FormRenderer");
-    var dialogs = require("web.view_dialogs");
-    var Dialog = require("web.Dialog");
     var relational_fields = require("web.relational_fields");
-    var Widget = require("web.Widget");
 
     var _t = core._t;
 
