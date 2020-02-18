@@ -7,7 +7,6 @@
 odoo.define("mail_private", function(require) {
     "use strict";
 
-    var core = require("web.core");
     var Chatter = require("mail.Chatter");
     var ChatterComposer = require("mail.ChatterComposer");
     var chat_manager = require("mail_base.base").chat_manager;
@@ -174,7 +173,9 @@ odoo.define("mail_private", function(require) {
                 }
 
                 // Partner_ids
-                if (!self.options.is_log) {
+                if (self.options.is_log) {
+                    def.resolve(message);
+                } else {
                     var checked_suggested_partners = self.get_checked_suggested_partners();
                     self.check_suggested_partners(checked_suggested_partners).done(
                         function(partner_ids) {
@@ -188,8 +189,6 @@ odoo.define("mail_private", function(require) {
                             def.resolve(message);
                         }
                     );
-                } else {
-                    def.resolve(message);
                 }
             });
             return def;
