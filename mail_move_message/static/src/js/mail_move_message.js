@@ -1,3 +1,5 @@
+/* eslint no-unused-vars: "off"*/
+
 /* Copyright 2016 Ildar Nasyrov <https://it-projects.info/team/iledarn>
 # Copyright 2016 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
 # Copyright 2016 Pavel Romanchenko
@@ -7,25 +9,13 @@
 odoo.define("mail_move_message.relocate", function(require) {
     "use strict";
 
-    var bus = require("bus.bus").bus;
     var chat_manager = require("mail_base.base").chat_manager;
     var thread = require("mail.ChatThread");
     var chatter = require("mail.Chatter");
-    var rpc = require("web.rpc");
     var Basicmodel = require("web.BasicModel");
-    var view_dialogs = require("web.view_dialogs");
-    var field_utils_format = require("web.field_utils").format;
-    var BasicRenderer = require("web.BasicRenderer");
     var core = require("web.core");
-    var form_widget = require("web.FormRenderer");
-    var session = require("web.Session");
     var FormController = require("web.FormController");
-    var FormView = require("web.FormView");
-    var FormRenderer = require("web.FormRenderer");
-    var dialogs = require("web.view_dialogs");
-    var Dialog = require("web.Dialog");
     var relational_fields = require("web.relational_fields");
-    var Widget = require("web.Widget");
 
     var _t = core._t;
 
@@ -50,7 +40,9 @@ odoo.define("mail_move_message.relocate", function(require) {
                 context: {default_message_id: message_id},
             };
             this.do_action(action, {
-                on_close: function() {},
+                on_close: function() {
+                    // Empty
+                },
             });
         },
     });
@@ -60,10 +52,12 @@ odoo.define("mail_move_message.relocate", function(require) {
             var result = this._super.apply(this, arguments);
             // For show wizard in the form
             if (this.fields.thread && this.fields.thread.thread) {
-                var thread = this.fields.thread.thread;
+                thread = this.fields.thread.thread;
                 thread.on("move_message", this, thread.on_move_message);
             }
-            return $.when(result).done(function() {});
+            return $.when(result).done(function() {
+                // Empty
+            });
         },
     });
 
@@ -73,7 +67,9 @@ odoo.define("mail_move_message.relocate", function(require) {
             var result = this._super.apply(this, arguments);
             // For show wizard in the channels
             this.thread.on("move_message", this, this.thread.on_move_message);
-            return $.when(result).done(function() {});
+            return $.when(result).done(function() {
+                // Empty
+            });
         },
     });
 
@@ -127,6 +123,7 @@ odoo.define("mail_move_message.relocate", function(require) {
             ) {
                 var self = this;
                 var field_data = event.data.record.data;
+                // TODO: it seems like debugging, test without this code
                 this.on_saved = function(record, bool) {
                     var values = [
                         {
@@ -149,6 +146,7 @@ odoo.define("mail_move_message.relocate", function(require) {
                     // Necessary for correct _trigger_up implementation in mixins.js
                     return self;
                 };
+                // TODO: it seems like debugging, test without this code
                 var wizard_popup = relField._searchCreatePopup("form", false, {
                     message_name_from:
                         field_data.message_name_from &&
