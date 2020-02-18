@@ -1,3 +1,5 @@
+/* eslint no-unused-vars: "off"*/
+
 /* Copyright 2016 Ildar Nasyrov <https://it-projects.info/team/iledarn>
 # Copyright 2016 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
 # Copyright 2016 Pavel Romanchenko
@@ -121,6 +123,7 @@ odoo.define("mail_move_message.relocate", function(require) {
             ) {
                 var self = this;
                 var field_data = event.data.record.data;
+                // TODO: it seems like debugging, test without this code
                 this.on_saved = function(record, bool) {
                     var values = [
                         {
@@ -143,6 +146,7 @@ odoo.define("mail_move_message.relocate", function(require) {
                     // Necessary for correct _trigger_up implementation in mixins.js
                     return self;
                 };
+                // TODO: it seems like debugging, test without this code
                 var wizard_popup = relField._searchCreatePopup("form", false, {
                     message_name_from:
                         field_data.message_name_from &&
