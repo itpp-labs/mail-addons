@@ -1,3 +1,4 @@
+# pylint: disable=manifest-version-format
 {
     "name": "Fix mail error 553",
     "version": "0.3",
