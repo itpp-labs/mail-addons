@@ -11,8 +11,8 @@ class MailMessage(models.Model):
                 values["partner_ids"] = []
             for triplet in values.get("needaction_partner_ids"):
                 if triplet[0] == 6:
-                    for id in triplet[2]:
-                        values["partner_ids"].append((4, id, False))
+                    for i in triplet[2]:
+                        values["partner_ids"].append((4, i, False))
         return super(MailMessage, self).write(values)
 
 
