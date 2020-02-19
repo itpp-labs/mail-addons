@@ -3,7 +3,7 @@
     "summary": """Allows you be sure, that all discussion participants were notified""",
     "category": "Discuss",
     "images": ["images/1.png"],
-    "version": "12.0.1.0.1",
+    "version": "13.0.1.0.1",
     "author": "IT-Projects LLC, Pavel Romanchenko",
     "support": "apps@itpp.dev",
     "website": "https://it-projects.info",

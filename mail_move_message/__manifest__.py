@@ -7,7 +7,7 @@
 
 {
     "name": "Mail Relocation",
-    "version": "11.0.1.0.6",
+    "version": "13.0.1.0.6",
     "author": "IT-Projects LLC, Ivan Yelizariev, Pavel Romanchenko",
     "license": "Other OSI approved licence",  # MIT
     "category": "Discuss",
