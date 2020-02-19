@@ -1,3 +1,4 @@
+# pylint: disable=old-api7-method-defined,invalid-commit
 import base64
 import logging
 import re
@@ -5,7 +6,7 @@ from email.utils import formataddr
 
 from odoo import SUPERUSER_ID, tools
 from odoo.osv import osv
-from odoo.tools.safe_eval import safe_eval as eval
+from odoo.tools.safe_eval import safe_eval
 from odoo.tools.translate import _
 
 from odoo.addons.base.ir.ir_mail_server import MailDeliveryException
@@ -115,7 +116,7 @@ class MailMail(osv.Model):
                         )
                 if mail.headers:
                     try:
-                        headers.update(eval(mail.headers))
+                        headers.update(safe_eval(mail.headers))
                     except Exception:
                         pass
 
