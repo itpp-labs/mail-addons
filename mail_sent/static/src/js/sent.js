@@ -14,7 +14,6 @@ odoo.define("mail_sent.sent", function(require) {
 
     Manager.include({
         _updateMailboxesFromServer: function(data) {
-            var self = this;
             this._super(data);
             if (
                 !_.find(this.getThreads(), function(th) {
