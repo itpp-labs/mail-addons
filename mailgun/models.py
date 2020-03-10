@@ -2,8 +2,12 @@
 import logging
 
 import requests
-import simplejson
 from openerp import api, models
+
+try:
+    import simplejson as json
+except ImportError:
+    import json
 
 _logger = logging.getLogger(__name__)
 
@@ -38,6 +42,6 @@ class IrConfigParameter(models.Model):
             res = requests.put(url, auth=("api", api_key))
             if (
                 res.status_code == 200
-                and simplejson.loads(res.text)["domain"]["state"] == "active"
+                and json.loads(res.text)["domain"]["state"] == "active"
             ):
                 self.set_param("mailgun.verified", "1")
