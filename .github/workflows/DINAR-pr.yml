@@ -242,6 +242,7 @@ jobs:
           export VERSION=${{ github.event.pull_request.base.ref }}
           export REVISION_PR=${{ github.event.pull_request.head.sha}}
           export DINAR_REPO="itpp-labs/DINAR"
+          export ODOO_EXTRA_ARG=--test-enable
           bash DINAR/workflow-files/how-to-run-locally.sh
 
           # TODO move to how-to-run-locally.sh
