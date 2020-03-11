@@ -22,7 +22,9 @@ class TestUi(odoo.tests.HttpCase):
 
         env = Environment(self.registry.test_cr, self.uid, {})
         partners = env["res.partner"].search([])
-        new_follower = env["res.partner"].search([("name", "ilike", "Ja")])
+        new_follower = env["res.partner"].search(
+            [("name", "ilike", "Ja"), ("email", "!=", False)]
+        )
         for partner in partners:
             partner.message_subscribe(new_follower.ids, [])
 
