@@ -19,7 +19,7 @@
     "license": "GPL-3",
     "price": 50.00,
     "currency": "EUR",
-    "depends": ["mail", "base", "mail_base"],
+    "depends": ["mail", "base", "mail_base", "note"],
     "external_dependencies": {"python": [], "bin": []},
     "data": ["template.xml", "full_composer_wizard.xml"],
     "qweb": ["static/src/xml/mail_private.xml"],
