@@ -249,12 +249,12 @@ jobs:
                   machine api.github.com
                   login $USERNAME
                   password $PASSWORD
-          
-              EOOF    
+
+              EOOF
               # Check the authentication with following comman:
               curl --netrc https://api.github.com/user
-          
-          
+
+
               # download artifact
               curl --location --netrc $ARTIFACT_URL > new-deps.zip
               # unpack
