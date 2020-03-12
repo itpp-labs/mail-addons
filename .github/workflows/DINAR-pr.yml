@@ -267,7 +267,7 @@ jobs:
               export PROJECT_NAME=$(basename $(pwd))
               bash load-docker-layers.sh new-deps/
 
-         EOF
+          EOF
 
           fi
       - name: Download base images
