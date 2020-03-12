@@ -237,7 +237,7 @@ jobs:
 
               # get artifact URL
               ARTIFACT_URL=$(curl -s "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/artifacts" -H "Authorization: token $GITHUB_TOKEN" | \
-              jq -r '.artifacts[] | select(.name == "new-deps) | .archive_download_url')
+              jq -r '.artifacts[] | select(.name == "new-deps") | .archive_download_url')
 
 
               cat << EOF
