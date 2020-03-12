@@ -216,23 +216,6 @@ jobs:
           DEPS_MODULES=$(cat new-deps/modules.txt || true)
           cd REPO
           python ../DINAR/workflow-files/analyze-modules.py all "$DEPS_MODULES"
-      - name: Download base images
-        run: |
-          docker-compose -p DINAR -f DINAR/workflow-files/docker-compose-DINAR-pr.yml config
-          docker-compose -p DINAR -f DINAR/workflow-files/docker-compose-DINAR-pr.yml pull
-          docker-compose -p DINAR -f DINAR/workflow-files/docker-compose-DINAR-pr.yml up --no-start
-      - name: Apply new-deps artifact
-        if: env.ARTIFACT != 'empty'
-        run: |
-          bash DINAR/workflow-files/load-docker-layers.sh new-deps/
-
-      - name: Test all modules
-        run: |
-          export MODULES="${{ env.ALL_MODULES }}"
-          export LOAD_MODULES="${{ env.ALL_MODULES_LOAD }}"
-          export ODOO_EXTRA_ARG=--test-enable
-          docker-compose -p DINAR -f DINAR/workflow-files/docker-compose-DINAR-pr.yml config
-          docker-compose -p DINAR -f DINAR/workflow-files/docker-compose-DINAR-pr.yml up --abort-on-container-exit
       - name: Install json parser
         run: |
           sudo apt-get install jq
@@ -287,3 +270,20 @@ jobs:
               EOF
 
           fi
+      - name: Download base images
+        run: |
+          docker-compose -p DINAR -f DINAR/workflow-files/docker-compose-DINAR-pr.yml config
+          docker-compose -p DINAR -f DINAR/workflow-files/docker-compose-DINAR-pr.yml pull
+          docker-compose -p DINAR -f DINAR/workflow-files/docker-compose-DINAR-pr.yml up --no-start
+      - name: Apply new-deps artifact
+        if: env.ARTIFACT != 'empty'
+        run: |
+          bash DINAR/workflow-files/load-docker-layers.sh new-deps/
+
+      - name: Test all modules
+        run: |
+          export MODULES="${{ env.ALL_MODULES }}"
+          export LOAD_MODULES="${{ env.ALL_MODULES_LOAD }}"
+          export ODOO_EXTRA_ARG=--test-enable
+          docker-compose -p DINAR -f DINAR/workflow-files/docker-compose-DINAR-pr.yml config
+          docker-compose -p DINAR -f DINAR/workflow-files/docker-compose-DINAR-pr.yml up --abort-on-container-exit
