@@ -231,6 +231,7 @@ jobs:
           export DINAR_REPO="itpp-labs/DINAR"
           export ODOO_EXTRA_ARG=--test-enable
           bash DINAR/workflow-files/how-to-run-locally.sh ${{ secrets.GITHUB_TOKEN }}
+
       - name: Download base images
         run: |
           docker-compose -p DINAR -f DINAR/workflow-files/docker-compose-DINAR-pr.yml config
