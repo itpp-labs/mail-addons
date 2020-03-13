@@ -248,3 +248,4 @@ jobs:
           export ODOO_EXTRA_ARG=--test-enable
           docker-compose -p DINAR -f DINAR/workflow-files/docker-compose-DINAR-pr.yml config
           docker-compose -p DINAR -f DINAR/workflow-files/docker-compose-DINAR-pr.yml up --abort-on-container-exit
+
