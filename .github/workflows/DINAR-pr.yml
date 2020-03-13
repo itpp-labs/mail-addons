@@ -241,7 +241,6 @@ jobs:
         if: env.ARTIFACT != 'empty'
         run: |
           bash DINAR/workflow-files/load-docker-layers.sh new-deps/
-
       - name: Test all modules
         run: |
           export MODULES="${{ env.ALL_MODULES }}"
