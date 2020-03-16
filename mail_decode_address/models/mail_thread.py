@@ -10,8 +10,10 @@ class MailThread(models.AbstractModel):
 
     @api.model
     def create(self, vals):
-        if vals.get("email_from"):
-            vals["email_from"] = tools.decode_smtp_header(vals["email_from"])
+        for f in ("email_from", "contact_name",):
+            if vals.get(f):
+                vals[f] = tools.decode_smtp_header(vals[f])
+
         return super(MailThread, self).create(vals)
 
     def _message_post_after_hook(self, message, msg_vals):
