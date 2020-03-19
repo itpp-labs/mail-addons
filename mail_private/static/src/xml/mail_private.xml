@@ -3,7 +3,6 @@
     Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
     License MIT (https://opensource.org/licenses/MIT).-->
 <template>
-
     <t t-extend="mail.chatter.Buttons">
         <t t-jquery="button[title='Send a message']" t-operation="after">
             <button
@@ -12,8 +11,7 @@
             >Send internal message</button>
         </t>
     </t>
-
-  <t t-extend="mail.chatter.Composer">
+    <t t-extend="mail.chatter.Composer">
         <t t-jquery="small[class='o_chatter_composer_info']" t-operation="replace">
             <small class="o_chatter_composer_info" t-if="!widget.options.is_private">
                     To: Followers of
@@ -31,6 +29,5 @@
                 t-if="widget.options.is_private"
             >Uncheck all</button>
         </t>
-  </t>
-
+    </t>
 </template>
