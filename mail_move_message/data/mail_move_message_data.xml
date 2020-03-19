@@ -3,8 +3,8 @@
     # Copyright 2017 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
     # License MIT (https://opensource.org/licenses/MIT).-->
 <odoo>
-        <record id="mail_relocation_models" model="ir.config_parameter">
-            <field name="key">mail_relocation_models</field>
-            <field name="value">crm.lead,project.task</field>
-        </record>
+    <record id="mail_relocation_models" model="ir.config_parameter">
+        <field name="key">mail_relocation_models</field>
+        <field name="value">crm.lead,project.task</field>
+    </record>
 </odoo>
