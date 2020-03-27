@@ -2,9 +2,9 @@
    :target: https://opensource.org/licenses/MIT
    :alt: License: MIT
 
-===========================================
- Email Addresses and Templates per Website
-===========================================
+=====================
+ Multi-Brand Mailing
+=====================
 
 Mail-related stuff for multi-website support
 
