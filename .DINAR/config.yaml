@@ -2,6 +2,10 @@ addons:
   # modules to install before running tests
   include:
     - contacts
+    # "contacts" already has mail in dependencies,
+    # but without the following line DINAR may run odoo odoo with --init=mail,....
+    # which leads to error on loading mail's demo data
+    - mail
 
   # modules to exclude from installation/testing
   exclude:
