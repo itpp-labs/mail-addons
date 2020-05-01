@@ -1,3 +1,9 @@
+`1.2.1`
+-------
+
+- **Fix:** Error while using Full composer
+
+
 `1.2.0`
 -------
 
