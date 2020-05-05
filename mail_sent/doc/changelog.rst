@@ -1,3 +1,9 @@
+`1.3.0`
+-------
+- **Imp:** optimize database queries
+- **Fix:** some messages were incorrectly marked as "Sent"
+- **Fix:** error on sending message via Composer and occasional related errors on installation
+
 `1.2.0`
 -------
 
