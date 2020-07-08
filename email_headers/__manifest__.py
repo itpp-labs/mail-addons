@@ -27,21 +27,14 @@
     Adds fields on outgoing email server that allows you to better control the
     outgoing email headers and Reply-To addresses.
     """,
-    "data": [
-        "data/ir_config_parameter_data.xml",
-        "views/ir_mail_server_views.xml",
-    ],
+    "data": ["data/ir_config_parameter_data.xml", "views/ir_mail_server_views.xml",],
     "author": "Avoin.Systems",
     "website": "https://avoin.systems",
     "category": "Email",
     "depends": ["mail"],
     "external_dependencies": {
-        "python": [
-            "Crypto.Cipher.AES",  # pip3 install pycryptodome
-        ],
-        "bin": [
-
-        ],
+        "python": ["Crypto.Cipher.AES",],  # pip3 install pycryptodome
+        "bin": [],
     },
     "installable": True,
     "post_init_hook": "set_catchall_alias",
