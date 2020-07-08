@@ -24,9 +24,9 @@ from odoo import SUPERUSER_ID, api
 
 def set_catchall_alias(cr, registry):
     env = api.Environment(cr, SUPERUSER_ID, {})
-    icp = env['ir.config_parameter']
-    custom_alias = icp.get_param('mail.catchall.alias.custom')
+    icp = env["ir.config_parameter"]
+    custom_alias = icp.get_param("mail.catchall.alias.custom")
     if not custom_alias:
-        original_alias = icp.get_param('mail.catchall.alias', 'catchall')
-        icp.set_param('mail.catchall.alias.custom', original_alias)
-        icp.set_param('mail.catchall.alias', 'Use mail.catchall.alias.custom')
+        original_alias = icp.get_param("mail.catchall.alias", "catchall")
+        icp.set_param("mail.catchall.alias.custom", original_alias)
+        icp.set_param("mail.catchall.alias", "Use mail.catchall.alias.custom")
