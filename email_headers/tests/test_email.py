@@ -1,3 +1,5 @@
+# No need to translate tests
+# pylint: disable=translation-required
 from email.message import EmailMessage
 
 import mock
