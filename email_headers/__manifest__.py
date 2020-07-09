@@ -23,17 +23,17 @@
     "name": "Default Email Headers",
     "version": "13.0.1.2.0",
     "license": "AGPL-3",
-    "description": """
+    "summary": """
     Adds fields on outgoing email server that allows you to better control the
     outgoing email headers and Reply-To addresses.
     """,
-    "data": ["data/ir_config_parameter_data.xml", "views/ir_mail_server_views.xml",],
+    "data": ["data/ir_config_parameter_data.xml", "views/ir_mail_server_views.xml"],
     "author": "Avoin.Systems",
     "website": "https://avoin.systems",
     "category": "Email",
     "depends": ["mail"],
     "external_dependencies": {
-        "python": ["Crypto.Cipher.AES",],  # pip3 install pycryptodome
+        "python": ["Crypto.Cipher.AES"],  # pip3 install pycryptodome
         "bin": [],
     },
     "installable": True,

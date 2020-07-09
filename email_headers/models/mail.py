@@ -57,15 +57,15 @@ def get_cipher(env):
     )
 
 
-def encode_msg_id(id, env):
-    id_padded = "%016d" % id
+def encode_msg_id(msg_id, env):
+    id_padded = "%016d" % msg_id
     encrypted = get_cipher(env).encrypt(id_padded.encode("utf-8"))
     return base64.b32encode(encrypted).decode("utf-8")
 
 
 # Remove in Odoo 14
-def encode_msg_id_legacy(id, env):
-    id_padded = "%016d" % id
+def encode_msg_id_legacy(msg_id, env):
+    id_padded = "%016d" % msg_id
     encrypted = get_cipher(env).encrypt(id_padded.encode("utf-8"))
     return base64.urlsafe_b64encode(encrypted).decode("utf-8")
 
@@ -106,7 +106,7 @@ class MailServer(models.Model):
     _inherit = "ir.mail_server"
 
     reply_to_method = fields.Selection(
-        [("default", "Odoo Default"), ("alias", "Alias"), ("msg_id", "Message ID"),],
+        [("default", "Odoo Default"), ("alias", "Alias"), ("msg_id", "Message ID")],
         "Reply-To Method",
         default="default",
         help="Odoo Default: Don't add any unique identifiers into the\n"
@@ -573,7 +573,7 @@ class MailThread(models.AbstractModel):
                     message_id,
                 )
                 body = self.env.ref("mail.mail_bounce_catchall").render(
-                    {"message": message,}, engine="ir.qweb"
+                    {"message": message}, engine="ir.qweb"
                 )
                 self._routing_create_bounce_email(
                     email_from, body, message, reply_to=self.env.user.company_id.email
