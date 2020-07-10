@@ -1,4 +1,4 @@
-# Email Headers
+# Robust Mails
 
 This module is used to improve email deliverability and make sure that replies find
 their way to the correct thread in Odoo.
