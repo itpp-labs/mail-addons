@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="prioritize_replyto_over_headers" model="ir.config_parameter">
+        <field name="key">email_headers.prioritize_replyto_over_headers</field>
+        <field name="value">True</field>
+    </record>
+    <!-- The original field was called just strip_message_ids, but since
+         it's manually set in some production databases, it's risky to
+         define here. It might break a database upgrade. -->
+    <record id="strip_mail_message_ids" model="ir.config_parameter">
+        <field name="key">email_headers.strip_mail_message_ids</field>
+        <field name="value">True</field>
+    </record>
+</odoo>

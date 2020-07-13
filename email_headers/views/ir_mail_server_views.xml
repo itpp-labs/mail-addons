@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- FORM: ir.mail.server -->
+    <record id="ir_mail_server_form_email_headers" model="ir.ui.view">
+        <field name="name">ir.mail_server.form.email.headers</field>
+        <field name="model">ir.mail_server</field>
+        <field name="inherit_id" ref="base.ir_mail_server_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[last()]" position="after">
+                <group name="advanced" string="Smart Headers">
+                    <field name="force_email_sender" />
+                    <field name="force_email_reply_to" />
+                    <field name="force_email_reply_to_name" />
+                    <field name="force_email_reply_to_domain" />
+                    <field name="force_email_from" />
+                    <field name="reply_to_method" />
+                    <field name="headers_example" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
