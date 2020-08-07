@@ -2,6 +2,7 @@
  * Copyright 2016-2017 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
  * Copyright 2017 Artyom Losev <https://it-projects.info/>
  * Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
+ * Copyright 2019-2020 Eugene Molotov <https://it-projects.info/team/em230418>
  * License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html). */
 odoo.define('mail_to.MailTo', function (require) {
     "use strict";
