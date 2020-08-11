@@ -15,7 +15,7 @@ odoo.define('mail_to.MailTo', function (require) {
             msg.partner_ids = data.partner_ids;
             msg.channel_names = data.channel_names;
             msg.channel_ids = data.channel_ids;
-            msg.recipients = data.partner_ids.concat(data.channel_names);
+            msg.recipients = data.partner_ids.concat(data.channel_names ? data.channel_names : []);
             if (!msg.partner_ids && !msg.channel_names) {
                 return msg;
             }
