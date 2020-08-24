@@ -14,6 +14,7 @@ Configuration
 Access to websites
 ------------------
 
+* Activate `Developer mode <https://odoo-development.readthedocs.io/en/latest/odoo/usage/debug-mode.html>`__
 * Go to menu ``[[ Settings ]] >> Users & Companies >> Users``
 * Select a user
 * Grant access ``[x] Multi Websites for Backend``
