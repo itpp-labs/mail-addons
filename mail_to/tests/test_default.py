@@ -1,3 +1,7 @@
+# Copyright 2018 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+# Copyright 2018 Artyom Losev <https://it-projects.info/team/ArtyomLosev>
+# Copyright 2019 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
+# License LGPL-3.0 (https://www.gnu.org/licenses/lgpl.html).
 from werkzeug import url_encode
 
 import odoo.tests
@@ -38,16 +42,11 @@ class TestUi(odoo.tests.HttpCase):
             env["mail.notification"].create(
                 {"res_partner_id": p, "mail_message_id": msg.id, "is_read": False}
             )
-        code = """
-            setTimeout(function () {
-                console.log($('a.recipient_link').length && 'ok' || 'error');
-            }, 3000);
-        """
 
         link = "/web#%s" % url_encode({"action": "mail.action_discuss"})
         self.phantom_js(
             link,
-            code,
-            "odoo.__DEBUG__.services['web_tour.tour'].tours.mail_tour.ready",
+            "odoo.__DEBUG__.services['web_tour.tour'].run('mail_to_tour', 1000);",
+            "odoo.__DEBUG__.services['web_tour.tour'].tours.mail_to_tour.ready",
             login="admin",
         )
