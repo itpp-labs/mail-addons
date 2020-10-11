@@ -1,3 +1,8 @@
+Mail addons
+===========
+
+Odoo addons for messages/emails/chatters
+
 List of repositories
 ====================
 
