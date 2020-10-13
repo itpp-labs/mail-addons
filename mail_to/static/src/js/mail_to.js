@@ -26,7 +26,7 @@ odoo.define("mail_to.MailTo", function(require) {
             // Value which define more recipients
             msg.more_recipients_value = 4;
             for (var i = 0; i < msg.recipients.length; i++) {
-                if (i >= msg.more_recipients_value) {
+                if ( (i >= msg.more_recipients_value) && !(msg.recipients[i] === undefined) ){
                     // Append names
                     more_recipients += msg.recipients[i][1];
                     // Separate them with semicolon
