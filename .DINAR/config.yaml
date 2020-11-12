@@ -13,3 +13,7 @@ addons:
 
   server_wide_modules:
     - web
+
+readme:
+  addons:
+    - mail_to
