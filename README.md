@@ -1,6 +1,5 @@
 [![Tested and maintained by IT Projects Labs](https://itpp.dev/images/infinity-readme.png)](https://itpp.dev)
-
-To get an assistance contact us by email :arrow_right: help@itpp.dev
+ help@itpp.dev
 # Odoo 13.0
 
 
