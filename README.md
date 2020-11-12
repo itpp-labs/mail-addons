@@ -5,9 +5,9 @@
 
 # Repositories
 
-* https://github.com/itpp-labs/pos-addons
-* https://github.com/itpp-labs/mail-addons
-* https://github.com/itpp-labs/misc-addons
-* https://github.com/itpp-labs/sync-addons
-* https://github.com/itpp-labs/access-addons
-* https://github.com/itpp-labs/website-addons
+* [itpp-labs/**pos-addons**](https://github.com/itpp-labs/pos-addons)
+* [itpp-labs/**mail-addons**](https://github.com/itpp-labs/mail-addons)
+* [itpp-labs/**misc-addons**](https://github.com/itpp-labs/misc-addons)
+* [itpp-labs/**sync-addons**](https://github.com/itpp-labs/sync-addons)
+* [itpp-labs/**access-addons**](https://github.com/itpp-labs/access-addons)
+* [itpp-labs/**website-addons**](https://github.com/itpp-labs/website-addons)
