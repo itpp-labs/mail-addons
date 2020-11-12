@@ -1,7 +1,7 @@
 [![Tested and maintained by IT Projects Labs](https://itpp.dev/images/infinity-readme.png)](https://itpp.dev)
+To get an assistance contact us by email :arrow_right: help@itpp.dev
 # Odoo 13.0
 
-To get an assistance contact us by email :arrow_right: help@itpp.dev
 
 Following modules are ported to v13.0, but currently available in Odoo Apps Store only:
 
