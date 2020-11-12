@@ -1,10 +1,13 @@
-[![Build Status](https://travis-ci.com/it-projects-llc/mail-addons.svg?branch=13.0)](https://travis-ci.com/it-projects-llc/mail-addons)
+[![Tested and maintained by IT Projects Labs](https://itpp.dev/images/infinity-readme.png)](https://itpp.dev)
+# Odoo 13.0
 
-# mail-addons
-Odoo mail addons
+To get an assistance contact us by email :arrow_right: help@itpp.dev
 
-List of repositories:
----------------------
+Following modules are ported to v13.0, but currently available in Odoo Apps Store only:
+
+* [mail_to](https://apps.odoo.com/apps/modules/13.0/mail_to/)
+
+# List of repositories
 
 * https://github.com/it-projects-llc/misc-addons
 * https://github.com/it-projects-llc/pos-addons
@@ -14,7 +17,3 @@ List of repositories:
 * https://github.com/it-projects-llc/l10n-addons
 * https://github.com/it-projects-llc/odoo-telegram
 * https://github.com/it-projects-llc/odoo-saas-tools
-
-Donation
-========
-Feel free to support our efforts by purchasing [our mail modules at app store](https://apps.odoo.com/apps/modules/category/Discuss/browse?price=Paid&order=Newest&author=IT-Projects+LLC)
