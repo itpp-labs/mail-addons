@@ -1,5 +1,5 @@
 [![Tested and maintained by IT Projects Labs](https://itpp.dev/images/infinity-readme.png)](https://itpp.dev)
-:arrow_right: help@itpp.dev
+help@itpp.dev
 # Modules
 
 * [mail_to](https://apps.odoo.com/apps/modules/13.0/mail_to/)
