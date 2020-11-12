@@ -1,4 +1,4 @@
-[![Tested and maintained by IT Projects Labs](https://itpp.dev/images/infinity-readme.png)](mailto:help@itpp.dev)
+[![help@itpp.dev](https://itpp.dev/images/infinity-readme.png)](mailto:help@itpp.dev)
 # [13.0] Odoo Mail Addons
 
 * [mail_to](https://apps.odoo.com/apps/modules/13.0/mail_to/) :tada:
