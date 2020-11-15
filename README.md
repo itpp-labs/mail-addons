@@ -5,8 +5,6 @@
 <br/>:heavy_check_mark: [mail_archives](https://apps.odoo.com/apps/modules/10.0/mail_archives/)
 <br/>:heavy_check_mark: [mail_attachment_popup](https://apps.odoo.com/apps/modules/10.0/mail_attachment_popup/)
 <br/>:heavy_check_mark: [mail_base](https://apps.odoo.com/apps/modules/10.0/mail_base/)
-<br/>:heavy_check_mark: [mail_check_immediately](https://apps.odoo.com/apps/modules/10.0/mail_check_immediately/)
-<br/>:heavy_check_mark: [mail_fix_553](https://apps.odoo.com/apps/modules/10.0/mail_fix_553/)
 <br/>:heavy_check_mark: [mail_move_message](https://apps.odoo.com/apps/modules/10.0/mail_move_message/)
 <br/>:heavy_check_mark: [mail_private](https://apps.odoo.com/apps/modules/10.0/mail_private/)
 <br/>:heavy_check_mark: [mail_recovery](https://apps.odoo.com/apps/modules/10.0/mail_recovery/)
