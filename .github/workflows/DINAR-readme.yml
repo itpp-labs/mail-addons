@@ -50,7 +50,7 @@ jobs:
           REF=${GITHUB_BASE_REF:-${GITHUB_REF}}
           BRANCH=${REF##*/}
           cd REPO
-          python ../DINAR/workflow-files/generate-repo-readme.py $BRANCH "${{ github.repository }}"
+          python ../DINAR/workflow-files/generate-repo-readme.py ${{ secrets.GITHUB_TOKEN }} ${{ github.repository }} $BRANCH
       - name: Commit updates
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
