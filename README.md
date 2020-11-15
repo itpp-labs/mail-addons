@@ -3,19 +3,10 @@
 
 <br/>:heavy_check_mark: [mail_all](https://apps.odoo.com/apps/modules/12.0/mail_all/)
 <br/>:heavy_check_mark: [mail_archives](https://apps.odoo.com/apps/modules/12.0/mail_archives/)
-<br/>:heavy_check_mark: [mail_base](https://apps.odoo.com/apps/modules/12.0/mail_base/)
-<br/>:heavy_check_mark: [mail_check_immediately](https://apps.odoo.com/apps/modules/12.0/mail_check_immediately/)
-<br/>:heavy_check_mark: [mail_fix_553](https://apps.odoo.com/apps/modules/12.0/mail_fix_553/)
-<br/>:heavy_check_mark: [mail_move_message](https://apps.odoo.com/apps/modules/12.0/mail_move_message/)
 <br/>:heavy_check_mark: [mail_multi_website](https://apps.odoo.com/apps/modules/12.0/mail_multi_website/)
 <br/>:heavy_check_mark: [mail_private](https://apps.odoo.com/apps/modules/12.0/mail_private/)
-<br/>:heavy_check_mark: [mail_recovery](https://apps.odoo.com/apps/modules/12.0/mail_recovery/)
-<br/>:heavy_check_mark: [mail_reply](https://apps.odoo.com/apps/modules/12.0/mail_reply/)
 <br/>:heavy_check_mark: [mail_sent](https://apps.odoo.com/apps/modules/12.0/mail_sent/)
 <br/>:heavy_check_mark: [mail_to](https://apps.odoo.com/apps/modules/12.0/mail_to/)
-<br/>:heavy_check_mark: [mailgun](https://apps.odoo.com/apps/modules/12.0/mailgun/)
-<br/>:heavy_check_mark: [res_partner_company_messages](https://apps.odoo.com/apps/modules/12.0/res_partner_company_messages/)
-<br/>:heavy_check_mark: [res_partner_mails_count](https://apps.odoo.com/apps/modules/12.0/res_partner_mails_count/)
 
 Other Addons
 ============
