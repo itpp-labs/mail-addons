@@ -52,7 +52,7 @@ jobs:
       - name: Commit updates
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          repository: .
+          repository: REPO
           commit_user_name: Mitchell Admin
           commit_user_email: itpp-bot@users.noreply.github.com
           # Commit may contain other updates, but in usual flow it's only module list
