@@ -19,3 +19,44 @@ on:
       - ".DINAR/build-date.txt"
       - ".DINAR/config.yaml"
       - ".github/workflows/DINAR-readme.yml"
+      - "*/__manifest__.py"
+jobs:
+  repo_readme:
+    runs-on: ubuntu-latest
+    if:
+      "! endsWith(github.repository, '-store') && startsWith(github.repository,
+      'itpp-labs/')"
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+        with:
+          path: REPO
+      - name: Checkout DINAR
+        uses: actions/checkout@v2
+        with:
+          path: DINAR
+          repository: itpp-labs/DINAR-fork
+          ref: master
+      - uses: actions/setup-python@v1
+        with:
+          python-version: "3.7.x"
+      - name: Install python tools
+        run: |
+          pip install plumbum pyyaml
+      - name: Generate readme
+        run: |
+          REF=${GITHUB_BASE_REF:-${GITHUB_REF}}
+          BRANCH=${REF##*/}
+          cd REPO
+          python ../DINAR/workflow-files/generate-repo-readme.py $BRANCH "${{ github.repository.description }}"
+    - name: Commit updates
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        repository: .
+        commit_user_name: Mitchell Admin
+        commit_user_email: itpp-bot@users.noreply.github.com
+        # Commit may contain other updates, but in usual flow it's only module list
+        commit_message: |
+          :construction_worker_man: Update module list
+          
+          Sent from Github Actions (see .github/workflows/DINAR-readme.yml )
