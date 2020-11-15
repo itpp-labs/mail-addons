@@ -14,6 +14,6 @@ addons:
   server_wide_modules:
     - web
 
-readme:
+repo_readme:
   addons:
     - mail_to
