@@ -1,5 +1,5 @@
 [![help@itpp.dev](https://itpp.dev/images/infinity-readme.png)](mailto:help@itpp.dev)
-# [10.0] 
+# [10.0] Odoo Mail Addons
 
 * [mail_all](https://apps.odoo.com/apps/modules/10.0/mail_all/)
 * [mail_archives](https://apps.odoo.com/apps/modules/10.0/mail_archives/)
