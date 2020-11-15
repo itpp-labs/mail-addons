@@ -49,14 +49,14 @@ jobs:
           BRANCH=${REF##*/}
           cd REPO
           python ../DINAR/workflow-files/generate-repo-readme.py $BRANCH "${{ github.repository.description }}"
-       - name: Commit updates
-         uses: stefanzweifel/git-auto-commit-action@v4
-         with:
-           repository: .
-           commit_user_name: Mitchell Admin
-           commit_user_email: itpp-bot@users.noreply.github.com
-           # Commit may contain other updates, but in usual flow it's only module list
-           commit_message: |
-             :construction_worker_man: Update module list
+      - name: Commit updates
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          repository: .
+          commit_user_name: Mitchell Admin
+          commit_user_email: itpp-bot@users.noreply.github.com
+          # Commit may contain other updates, but in usual flow it's only module list
+          commit_message: |
+            :construction_worker_man: Update module list
 
-             Sent from Github Actions (see .github/workflows/DINAR-readme.yml )
+            Sent from Github Actions (see .github/workflows/DINAR-readme.yml )
