@@ -17,3 +17,4 @@ addons:
 repo_readme:
   addons:
     - mail_to
+    - mail_multi_website
