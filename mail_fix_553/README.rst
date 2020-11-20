@@ -1,3 +1,7 @@
+.. image:: https://itpp.dev/images/infinity-readme.png
+   :alt: Tested and maintained by IT Projects Labs
+   :target: https://itpp.dev
+
 Fix mail error 553
 ==================
 
@@ -31,7 +35,7 @@ can happens and the module should be updated. You can check commits
 for mail_mail.py here:
 https://github.com/odoo/odoo/commits/8.0/addons/mail/mail_mail.py
 
-Tested on Odoo 8.0 d023c079ed86468436f25da613bf486a4a17d625
+Tested on `Odoo 8.0 <https://github.com/odoo/odoo/commit/d023c079ed86468436f25da613bf486a4a17d625>`_
 
 Status
 ======
@@ -42,6 +46,3 @@ Related issues at odoo's tracker:
 
 Fix: https://github.com/odoo-dev/odoo/commit/a4597fe34fcfa8dae28b156410080346bb33af33
 
-Maintainers
------------
-This module is not maintainable since Odoo 9.0, because lack of interests from customers.
