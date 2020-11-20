@@ -1,7 +1,7 @@
 [![help@itpp.dev](https://itpp.dev/images/infinity-readme.png)](mailto:help@itpp.dev)
 # [13.0] Odoo Mail Addons
 
-<br/>:heavy_check_mark: [email_headers](https://apps.odoo.com/apps/modules/13.0/email_headers/)
+:heavy_check_mark: [email_headers](https://apps.odoo.com/apps/modules/13.0/email_headers/)
 <br/>:heavy_check_mark: [mail_multi_website](https://apps.odoo.com/apps/modules/13.0/mail_multi_website/)
 <br/>:heavy_check_mark: [mail_to](https://apps.odoo.com/apps/modules/13.0/mail_to/)
 
