@@ -1,3 +1,7 @@
+.. image:: https://itpp.dev/images/infinity-readme.png
+   :alt: Tested and maintained by IT Projects Labs
+   :target: https://itpp.dev
+
 Mail Archives
 =============
 
@@ -10,6 +14,6 @@ Click Discuss/Archive menu -- sent/received messages are displayed
 Further information
 -------------------
 
-HTML Description: https://apps.odoo.com/apps/modules/9.0/mail_archives/
+Odoo Apps Store: https://apps.odoo.com/apps/modules/9.0/mail_archives/
 
-Tested on Odoo 9.0 b9f206953e3f877adf18643f154d1262842564ee
+Tested on `Odoo 9.0 <https://github.com/odoo/odoo/commit/b9f206953e3f877adf18643f154d1262842564ee>`_
