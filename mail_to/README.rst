@@ -1,32 +1,27 @@
+.. image:: https://itpp.dev/images/infinity-readme.png
+   :alt: Tested and maintained by IT Projects Labs
+   :target: https://itpp.dev
+
 =========================
  Show message recipients
 =========================
 
 Allows you be sure, that all discussion participants were notified. Adds recipients label the right of message.
 
-Credits
-=======
+Questions?
+==========
+
+To get an assistance on this module contact us by email :arrow_right: help@itpp.dev
 
 Contributors
-------------
+============
 * Pavel Romanchenko <apps@it-projects.info>
 
-Sponsors
---------
-* `IT-Projects LLC <https://it-projects.info>`__
-
-Maintainers
------------
-* `IT-Projects LLC <https://it-projects.info>`__
 
 Further information
 ===================
-Demo: http://runbot.it-projects.info/demo/mail-addons/10.0
 
-HTML Description: https://apps.odoo.com/apps/modules/10.0/mail_to/
+Odoo Apps Store: https://apps.odoo.com/apps/modules/10.0/mail_to/
 
-Usage instructions: `<doc/index.rst>`_
 
-Changelog: `<doc/changelog.rst>`_
-
-Tested on Odoo 10.0 ffba5c688ff74a0630f9f70be1d7760a43a7deba
+Tested on `Odoo 10.0 <https://github.com/odoo/odoo/commit/ffba5c688ff74a0630f9f70be1d7760a43a7deba>`_
