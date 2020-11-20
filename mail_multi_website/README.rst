@@ -1,3 +1,7 @@
+.. image:: https://itpp.dev/images/infinity-readme.png
+   :alt: Tested and maintained by IT Projects Labs
+   :target: https://itpp.dev
+
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
    :target: https://opensource.org/licenses/MIT
    :alt: License: MIT
@@ -23,40 +27,22 @@ Mail-related stuff for multi-website support
   variable. It may cause incompatibility with other modules that redefine that
   method too.
 
-Credits
-=======
+Questions?
+==========
+
+To get an assistance on this module contact us by email :arrow_right: help@itpp.dev
 
 Contributors
-------------
+============
 * `Ivan Yelizariev <https://it-projects.info/team/yelizariev>`__
 
-Sponsors
---------
-* `e-thos SSII <http://www.e-thos.fr/>`__
-
-Maintainers
------------
-* `IT-Projects LLC <https://it-projects.info>`__
-
-      To get a guaranteed support
-      you are kindly requested to purchase the module
-      at `odoo apps store <https://apps.odoo.com/apps/modules/11.0/mail_multi_website/>`__.
-
-      Thank you for understanding!
-
-      `IT-Projects Team <https://www.it-projects.info/team>`__
 
 Further information
 ===================
 
-Demo: http://runbot.it-projects.info/demo/mail-addons/11.0
+Odoo Apps Store: https://apps.odoo.com/apps/modules/11.0/mail_multi_website/
 
-HTML Description: https://apps.odoo.com/apps/modules/11.0/mail_multi_website/
-
-Usage instructions: `<doc/index.rst>`_
-
-Changelog: `<doc/changelog.rst>`_
 
 Notifications on updates: `via Atom <https://github.com/it-projects-llc/mail-addons/commits/11.0/mail_multi_website.atom>`_, `by Email <https://blogtrottr.com/?subscribe=https://github.com/it-projects-llc/mail-addons/commits/11.0/mail_multi_website.atom>`_
 
-Tested on Odoo 11.0 4d0a1330e05bd688265bea14df4ad12838f9f2d7
+Tested on `Odoo 11.0 <https://github.com/odoo/odoo/commit/4d0a1330e05bd688265bea14df4ad12838f9f2d7>`_
