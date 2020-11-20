@@ -1,3 +1,7 @@
+.. image:: https://itpp.dev/images/infinity-readme.png
+   :alt: Tested and maintained by IT Projects Labs
+   :target: https://itpp.dev
+
 ===================
  Show all messages
 ===================
@@ -7,10 +11,7 @@ Adds ``Discuss / All`` menu, that shows all messages accesable by current user
 Further information
 -------------------
 
-HTML Description: https://apps.odoo.com/apps/modules/9.0/mail_all/
+Odoo Apps Store: https://apps.odoo.com/apps/modules/9.0/mail_all/
 
-Usage instructions: `<doc/index.rst>`__
 
-Changelog: `<doc/changelog.rst>`__
-
-Tested on Odoo 9.0 d3dd4161ad0598ebaa659fbd083457c77aa9448d
+Tested on `Odoo 9.0 <https://github.com/odoo/odoo/commit/d3dd4161ad0598ebaa659fbd083457c77aa9448d>`_

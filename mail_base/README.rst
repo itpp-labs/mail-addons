@@ -1,3 +1,7 @@
+.. image:: https://itpp.dev/images/infinity-readme.png
+   :alt: Tested and maintained by IT Projects Labs
+   :target: https://itpp.dev
+
 Mail Base
 =========
 
@@ -11,18 +15,12 @@ One can say, that the module do this todo from `addons/mail/static/src/js/chat_m
     // to do: move this to mail.utils
 
 
-
 Note. Due to odoo restrictions, module makes mail initialization again. That is browser loads emoji and other chat data twice. This is the only way to make Mail feature extendable.
 
 Further information
 ===================
 
-Demo: http://runbot.it-projects.info/demo/mail-addons/9.0
+.. Odoo Apps Store: https://apps.odoo.com/apps/modules/9.0/mail_base/
 
-.. HTML Description: https://apps.odoo.com/apps/modules/9.0/mail_base/
 
-Usage instructions: `<doc/index.rst>`_
-
-Changelog: `<doc/changelog.rst>`_
-
-Tested on Odoo 9.0 ed463864366029f8d4289db831fcdc196fc716cb
+Tested on `Odoo 9.0 <https://github.com/odoo/odoo/commit/ed463864366029f8d4289db831fcdc196fc716cb>`_

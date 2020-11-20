@@ -1,29 +1,26 @@
+.. image:: https://itpp.dev/images/infinity-readme.png
+   :alt: Tested and maintained by IT Projects Labs
+   :target: https://itpp.dev
+
 ===================
  Popup Attachments
 ===================
 
  The module opens attached mail images in popup.
 
-Credits
-=======
+Questions?
+==========
+
+To get an assistance on this module contact us by email :arrow_right: help@itpp.dev
 
 Contributors
-------------
+============
 * Dinar Gabbasov <gabbasov@it-projects.info>
-
-Sponsors
---------
-* `IT-Projects LLC <https://it-projects.info>`_
 
 Further information
 ===================
 
-Demo: http://runbot.it-projects.info/demo/mail-addons/9.0
+Odoo Apps Store: https://apps.odoo.com/apps/modules/9.0/mail_attachment_popup/
 
-HTML Description: https://apps.odoo.com/apps/modules/9.0/mail_attachment_popup/
 
-Usage instructions: `<doc/index.rst>`_
-
-Changelog: `<doc/changelog.rst>`_
-
-Tested on Odoo 9.0 021878f9c41c6d652abf345c3c5537fe92f8bc5b
+Tested on `Odoo 9.0 <https://github.com/odoo/odoo/commit/021878f9c41c6d652abf345c3c5537fe92f8bc5b>`_
