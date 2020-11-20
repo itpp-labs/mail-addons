@@ -1,3 +1,7 @@
+.. image:: https://itpp.dev/images/infinity-readme.png
+   :alt: Tested and maintained by IT Projects Labs
+   :target: https://itpp.dev
+
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
    :target: https://opensource.org/licenses/MIT
    :alt: License: MIT
@@ -8,42 +12,24 @@
 
 The module allows to relocate messages between models
 
-Credits
-=======
+Questions?
+==========
+
+To get an assistance on this module contact us by email :arrow_right: help@itpp.dev
 
 Contributors
-------------
+============
 * `Ivan Yelizariev <https://it-projects.info/team/yelizariev>`__
 
-Sponsors
---------
-* `IT-Projects LLC <https://it-projects.info>`__
-
-Maintainers
------------
-* `IT-Projects LLC <https://it-projects.info>`__
-
-      To get a guaranteed support
-      you are kindly requested to purchase the module
-      at `odoo apps store <https://apps.odoo.com/apps/modules/11.0/mail_move_message/>`__.
-
-      Thank you for understanding!
-
-      `IT-Projects Team <https://www.it-projects.info/team>`__
 
 Further information
 ===================
 
-Demo: http://runbot.it-projects.info/demo/mail-addons/11.0
+Odoo Apps Store: https://apps.odoo.com/apps/modules/11.0/mail_move_message/
 
-HTML Description: https://apps.odoo.com/apps/modules/11.0/mail_move_message/
-
-Usage instructions: `<doc/index.rst>`_
-
-Changelog: `<doc/changelog.rst>`_
 
 Notifications on updates: `via Atom <https://github.com/it-projects-llc/mail-addons/commits/11.0/mail_move_message.atom>`_, `by Email <https://blogtrottr.com/?subscribe=https://github.com/it-projects-llc/mail-addons/commits/11.0/mail_move_message.atom>`_
 
 Further information and discussion: http://yelizariev.github.io/odoo/module/2015/04/10/mail-relocation.html
 
-Tested on Odoo 11.0 e9454e79e27d0b85546132cbe00b391e974c66bf
+Tested on `Odoo 11.0 <https://github.com/odoo/odoo/commit/e9454e79e27d0b85546132cbe00b391e974c66bf>`_
