@@ -1,7 +1,7 @@
 [![help@itpp.dev](https://itpp.dev/images/infinity-readme.png)](mailto:help@itpp.dev)
 # [10.0] Odoo Mail Addons
 
-<br/>:heavy_check_mark: [mail_all](https://apps.odoo.com/apps/modules/10.0/mail_all/)
+:heavy_check_mark: [mail_all](https://apps.odoo.com/apps/modules/10.0/mail_all/)
 <br/>:heavy_check_mark: [mail_archives](https://apps.odoo.com/apps/modules/10.0/mail_archives/)
 <br/>:heavy_check_mark: [mail_attachment_popup](https://apps.odoo.com/apps/modules/10.0/mail_attachment_popup/)
 <br/>:heavy_check_mark: [mail_base](https://apps.odoo.com/apps/modules/10.0/mail_base/)
