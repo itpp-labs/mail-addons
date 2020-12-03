@@ -2,7 +2,7 @@
     "name": "Mail Base",
     "summary": """Makes Mail extendable""",
     "category": "Discuss",
-    "images": [],
+    "images": ["images/mail_base_image.png"],
     "version": "12.0.1.0.2",
     "author": "IT-Projects LLC, Pavel Romanchenko",
     "support": "apps@itpp.dev",
