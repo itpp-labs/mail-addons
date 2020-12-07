@@ -1,5 +1,5 @@
 /* Copyright 2016 x620 <https://github.com/x620>
- * Copyright 2016-2017 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+ * Copyright 2016-2017,2020 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
  * Copyright 2017 Artyom Losev <https://it-projects.info/>
  * Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
  * Copyright 2019-2020 Eugene Molotov <https://it-projects.info/team/em230418>
@@ -15,7 +15,7 @@ odoo.define("mail_to.MailTo", function(require) {
             msg.partner_ids = data.partner_ids;
             msg.channel_names = data.channel_names;
             msg.channel_ids = data.channel_ids;
-            msg.recipients = data.partner_ids.concat(
+            msg.recipients = (data.partner_ids || []).concat(
                 data.channel_names ? data.channel_names : []
             );
             if (!msg.partner_ids && !msg.channel_names) {
