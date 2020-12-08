@@ -88,7 +88,7 @@ odoo.define("mail_private", function(require) {
                                     });
                                 }
                             })
-                            .fail(function() {
+                            .guardedCatch(function() {
                                 self._enableComposer();
                             });
                     });
@@ -177,7 +177,7 @@ odoo.define("mail_private", function(require) {
                     def.resolve(message);
                 } else {
                     var check_suggested_partners = self._getCheckedSuggestedPartners();
-                    self._checkSuggestedPartners(check_suggested_partners).done(
+                    self._checkSuggestedPartners(check_suggested_partners).then(
                         function(partnerIDs) {
                             message.partner_ids = (message.partner_ids || []).concat(
                                 partnerIDs
