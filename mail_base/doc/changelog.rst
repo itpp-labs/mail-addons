@@ -1,3 +1,8 @@
+`1.1.2`
+-------
+
+**FIX**: random initialization errors
+
 `1.1.1`
 -------
 
