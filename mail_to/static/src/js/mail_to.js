@@ -2,11 +2,14 @@
  * Copyright 2016-2017,2020 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
  * Copyright 2017 Artyom Losev <https://it-projects.info/>
  * Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
+ * Copyright 2020 Denis Mudarisov <https://github.com/trojikman>
  * License MIT (https://opensource.org/licenses/MIT). */
 odoo.define("mail_to.MailTo", function(require) {
     "use strict";
 
     var chat_manager = require("mail_base.base").chat_manager;
+
+    chat_manager.is_ready = chat_manager.is_ready.then(function(){
 
     var make_message_super = chat_manager.make_message;
     chat_manager.make_message = function(data) {
@@ -35,6 +38,7 @@ odoo.define("mail_to.MailTo", function(require) {
         msg.more_recipients = more_recipients;
         return msg;
     };
+    });
 
     return chat_manager;
 });
