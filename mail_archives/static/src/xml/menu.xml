@@ -7,9 +7,10 @@
                 t-attf-class="o_mail_chat_channel_item o_mail_chat_title_main #{(active_channel_id == 'channel_archive') ? 'o_active': ''}"
                 data-channel-id="channel_archive"
             >
-                <span class="o_channel_name mail_archives"> <i
-                        class="fa fa-archive"
-                    /> Archive </span>
+                <span class="o_channel_name mail_archives">
+                    <i class="fa fa-archive" />
+                    Archive
+                </span>
             </div>
         </t>
     </t>
