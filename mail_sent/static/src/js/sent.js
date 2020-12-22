@@ -1,3 +1,5 @@
+/* Copyright 2020 Denis Mudarisov <https://github.com/trojikman>
+   License MIT (https://opensource.org/licenses/MIT). */
 odoo.define("mail_sent.sent", function(require) {
     "use strict";
 
@@ -25,6 +27,7 @@ odoo.define("mail_sent.sent", function(require) {
         },
     });
 
+    chat_manager.is_ready.then(function() {
     // Inherit class and override methods
     var chat_manager_super = _.clone(chat_manager);
     chat_manager.get_properties = function(msg) {
@@ -55,14 +58,13 @@ odoo.define("mail_sent.sent", function(require) {
             : chat_manager_super.get_domain.apply(this, arguments);
     };
 
-    chat_manager.is_ready.then(function() {
-        // Add sent channel
-        chat_manager.add_channel({
-            id: "channel_sent",
-            name: _lt("Sent"),
-            type: "static",
-        });
-        return $.when();
+    // Add sent channel
+    chat_manager.add_channel({
+        id: "channel_sent",
+        name: _lt("Sent"),
+        type: "static",
+    });
+    return $.when();
     });
 
     return chat_manager;
