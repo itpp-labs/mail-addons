@@ -1,7 +1,7 @@
 `1.1.2`
 -------
 
-- **Fix** if open the pop-up chat window and reload the page, then an error might occur randomly 
+- **Fix:** if open the pop-up chat window and reload the page, then an error might occur randomly
 
 `1.1.1`
 -------

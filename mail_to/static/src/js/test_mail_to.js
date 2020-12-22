@@ -1,6 +1,6 @@
 /*  Copyright 2018 Artem Rafailov <https://it-projects.info/team/KolushovAlexandr>
     License MIT (https://opensource.org/licenses/MIT).*/
-odoo.define("mail_to.tour", function(require) {
+odoo.define("mail_to.tour", function (require) {
     "use strict";
 
     var tour = require("web_tour.tour");
