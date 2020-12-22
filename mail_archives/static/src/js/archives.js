@@ -1,3 +1,6 @@
+/* Copyright 2020 Denis Mudarisov <https://github.com/trojikman>
+* License MIT (https://opensource.org/licenses/MIT). */
+
 odoo.define("mail_archives.archives", function(require) {
     "use strict";
 
@@ -24,6 +27,7 @@ odoo.define("mail_archives.archives", function(require) {
         },
     });
 
+    chat_manager.is_ready.then(function() {
     // Inherit class and override methods
 
     var chat_manager_super = _.clone(chat_manager);
@@ -68,12 +72,11 @@ odoo.define("mail_archives.archives", function(require) {
             : chat_manager_super.get_domain.apply(this, arguments);
     };
 
-    chat_manager.is_ready.then(function() {
-        chat_manager.add_channel({
-            id: "channel_archive",
-            name: _lt("Archive"),
-            type: "static",
-        });
+    chat_manager.add_channel({
+        id: "channel_archive",
+        name: _lt("Archive"),
+        type: "static",
+    });
     });
 
     return chat_manager;
