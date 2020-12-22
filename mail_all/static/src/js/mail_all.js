@@ -1,3 +1,6 @@
+/* Copyright 2020 Denis Mudarisov <https://github.com/trojikman>
+   License MIT (https://opensource.org/licenses/MIT). */
+
 odoo.define("mail_all.all", function(require) {
     "use strict";
 
@@ -16,6 +19,8 @@ odoo.define("mail_all.all", function(require) {
         },
     });
 
+
+    chat_manager.is_ready = chat_manager.is_ready.then(function () {
     // Override methods
     var chat_manager_super = _.clone(chat_manager);
 
@@ -42,14 +47,14 @@ odoo.define("mail_all.all", function(require) {
             : chat_manager_super.get_domain.apply(this, arguments);
     };
 
-    chat_manager.is_ready.then(function() {
-        // Add all channel
-        chat_manager.add_channel({
-            id: "channel_all",
-            name: _lt("All messages"),
-            type: "static",
-        });
-        return $.when();
+    // Add all channel
+    chat_manager.add_channel({
+        id: "channel_all",
+        name: _lt("All messages"),
+        type: "static",
+    });
+    return $.when();
+
     });
 
     return chat_manager;
