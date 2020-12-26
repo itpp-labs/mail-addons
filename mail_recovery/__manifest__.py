@@ -4,8 +4,6 @@
     "summary": """Backup and recover unsent message""",
     "author": "IT-Projects LLC, Ildar Nasyrov",
     "license": "Other OSI approved licence",  # MIT
-    "price": 190.00,
-    "currency": "EUR",
     "support": "apps@itpp.dev",
     "website": "https://twitter.com/nasyrov_ildar",
     "category": "Discuss",

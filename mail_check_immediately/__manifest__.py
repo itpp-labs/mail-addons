@@ -7,8 +7,6 @@
     "category": "Discuss",
     "support": "apps@itpp.dev",
     "website": "https://twitter.com/yelizariev",
-    "price": 9.00,
-    "currency": "EUR",
     "depends": ["base", "web", "fetchmail", "mail"],
     "data": ["views.xml"],
     "qweb": ["static/src/xml/main.xml"],
