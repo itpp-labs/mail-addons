@@ -9,8 +9,6 @@
     "author": "IT-Projects LLC, Ivan Yelizariev, Pavel Romanchenko",
     "website": "https://it-projects.info",
     "license": "LGPL-3",
-    'price': 40.00,
-    'currency': 'EUR',
 
     "depends": [
         "base",
