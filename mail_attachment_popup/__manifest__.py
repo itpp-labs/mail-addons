@@ -9,8 +9,6 @@
     "support": "apps@itpp.dev",
     "website": "https://twitter.com/gabbasov_dinar",
     "license": "GPL-3",
-    "price": "50.0",
-    "currency": "EUR",
     "depends": ["mail"],
     "external_dependencies": {"python": [], "bin": []},
     "data": ["views/mail_attachment_popup_template.xml"],
