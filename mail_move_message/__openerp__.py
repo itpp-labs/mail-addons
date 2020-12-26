@@ -6,8 +6,6 @@
     'license': 'GPL-3',
     "category": "Discuss",
     'website': 'https://twitter.com/yelizariev',
-    'price': 100.00,
-    'currency': 'EUR',
     'depends': ['mail', 'web_polymorphic_field'],
     'images': ['images/inbox.png'],
     'data': [
