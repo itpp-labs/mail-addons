@@ -11,8 +11,6 @@
     "support": "apps@it-projects.info",
     "website": "https://it-projects.info",
     "license": "GPL-3",
-    "price": 50.00,
-    "currency": "EUR",
 
     "depends": [
         "mail",

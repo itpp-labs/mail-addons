@@ -4,8 +4,6 @@
     'version': '1.0.0',
     'author': 'IT-Projects LLC, Ivan Yelizariev',
     'license': 'LGPL-3',
-    "price": 70.00,
-    "currency": "EUR",
     'category': 'Discuss',
     'website': 'https://twitter.com/yelizariev',
     'images': ['images/child.png', 'images/parent.png'],
