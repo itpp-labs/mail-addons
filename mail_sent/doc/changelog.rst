@@ -1,3 +1,8 @@
+`1.1.1`
+-------
+
+- **Fix:** adaptation to changes in `mail_base`
+
 `1.1.0`
 -------
 

@@ -123,6 +123,8 @@ ChatAction.include({
     }
 });
 
+function init_chat_manager(){
+
 chat_manager.notify_incoming_message = function (msg, options) {
     if (bus.is_odoo_focused() && options.is_displayed) {
         // no need to notify
@@ -1409,10 +1411,16 @@ chat_manager.search_partner = function (search_val, limit) {
     });
 }
 
+}; // init_chat_manager
+
+chat_manager.is_ready = chat_manager.is_ready.then(function(){
+
+init_chat_manager();
 chat_manager.start();
 bus.off('notification');
 bus.on('notification', null, function () {
     chat_manager.on_notification.apply(chat_manager, arguments);
+});
 });
 
 return {
