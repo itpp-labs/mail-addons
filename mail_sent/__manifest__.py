@@ -9,7 +9,7 @@
     "version": "12.0.1.3.0",
     "author": "IT-Projects LLC, Ivan Yelizariev, Pavel Romanchenko",
     "support": "apps@itpp.dev",
-    "website": "https://it-projects.info",
+    "website": "https://itpp.dev",
     "license": "Other OSI approved licence",  # MIT
     "price": 40.00,
     "currency": "EUR",

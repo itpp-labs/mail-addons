@@ -11,7 +11,7 @@
     "version": "12.0.1.1.1",
     "author": "IT-Projects LLC, Pavel Romanchenko",
     "support": "apps@itpp.dev",
-    "website": "https://it-projects.info",
+    "website": "https://itpp.dev",
     "license": "LGPL-3",
     "price": 40.00,
     "currency": "EUR",
