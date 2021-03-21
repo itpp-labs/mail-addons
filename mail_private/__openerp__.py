@@ -9,7 +9,7 @@
 
     "author": "IT-Projects LLC, Pavel Romanchenko",
     "support": "apps@it-projects.info",
-    "website": "https://it-projects.info",
+    "website": "https://twitter.com/OdooFree",
     "license": "GPL-3",
 
     "depends": [
