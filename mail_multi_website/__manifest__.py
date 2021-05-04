@@ -4,9 +4,8 @@
     "name": """Multi-Brand Mailing""",
     "summary": """Use single Backend to manage several Websites""",
     "category": "Discuss",
-    # "live_test_url": "http://apps.it-projects.info/shop/product/website-multi-company?version=11.0",
     "images": ["images/main.jpg"],
-    "version": "11.0.1.0.0",
+    "version": "11.0.1.0.1",
     "application": False,
     "author": "IT-Projects LLC, Ivan Yelizariev",
     "support": "apps@itpp.dev",
@@ -25,14 +24,4 @@
     "uninstall_hook": "uninstall_hook",
     "auto_install": False,
     "installable": True,
-    # "demo_title": "Email Addresses per Website",
-    # "demo_addons": [
-    # ],
-    # "demo_addons_hidden": [
-    # ],
-    # "demo_url": "DEMO-URL",
-    # "demo_summary": "Use single Backend to manage several Websites",
-    # "demo_images": [
-    #    "images/MAIN_IMAGE",
-    # ]
 }

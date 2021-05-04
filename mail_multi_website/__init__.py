@@ -10,7 +10,9 @@ def post_init_hook(cr, registry):
 
     env = api.Environment(cr, SUPERUSER_ID, {})
 
-    env.cr.execute("ALTER TABLE res_users ADD COLUMN IF NOT EXISTS email_multi_website VARCHAR")
+    env.cr.execute(
+        "ALTER TABLE res_users ADD COLUMN IF NOT EXISTS email_multi_website VARCHAR"
+    )
 
     # fill new email column with values from partner
     for user in env["res.users"].with_context(active_test=False).search([]):
