@@ -135,15 +135,25 @@ class MailServer(models.Model):
         "In-Reply-To headers.",
     )
 
-    force_email_reply_to = fields.Char("Force Reply-To Address",)
+    force_email_reply_to = fields.Char(
+        "Force Reply-To Address",
+    )
 
-    force_email_reply_to_name = fields.Char("Force Reply-To Name",)
+    force_email_reply_to_name = fields.Char(
+        "Force Reply-To Name",
+    )
 
-    force_email_reply_to_domain = fields.Char("Force Reply-To Domain",)
+    force_email_reply_to_domain = fields.Char(
+        "Force Reply-To Domain",
+    )
 
-    force_email_from = fields.Char("Force From Address",)
+    force_email_from = fields.Char(
+        "Force From Address",
+    )
 
-    force_email_sender = fields.Char("Force Sender Address",)
+    force_email_sender = fields.Char(
+        "Force Sender Address",
+    )
 
     prioritize_reply_to_over_msgid = fields.Boolean(
         "Prioritize Reply-To Over Email Headers",
@@ -156,7 +166,9 @@ class MailServer(models.Model):
     )
 
     headers_example = fields.Text(
-        "Example Headers", compute="_compute_headers_example", store=False,
+        "Example Headers",
+        compute="_compute_headers_example",
+        store=False,
     )
 
     # TODO Implement field input validators
@@ -266,7 +278,10 @@ class MailServer(models.Model):
                 # Find or create an email alias
                 alias = self.find_or_create_alias(force_email_from.split("@"))
                 # noinspection PyProtectedMember
-                reply_to = mail_server._get_reply_to_address(alias, original_from_name,)
+                reply_to = mail_server._get_reply_to_address(
+                    alias,
+                    original_from_name,
+                )
                 del message["Reply-To"]
                 message["Reply-To"] = reply_to
 
