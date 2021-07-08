@@ -21,7 +21,7 @@
 # noinspection PyStatementEffect
 {
     "name": "Robust Mails",
-    "version": "13.0.1.2.0",
+    "version": "14.0.1.2.0",
     "license": "AGPL-3",
     "summary": """
     Adds fields on outgoing email server that allows you to better control the
