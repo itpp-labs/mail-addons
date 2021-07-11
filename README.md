@@ -1,6 +1,8 @@
 [![help@itpp.dev](https://itpp.dev/images/infinity-readme.png)](mailto:help@itpp.dev)
 # [11.0] Odoo Mail Addons
 
+:open_file_folder: Get a **.zip** file with all needed dependencies:
+
 :heavy_check_mark: [mail_all](https://apps.odoo.com/apps/modules/11.0/mail_all/)
 <br/>:heavy_check_mark: [mail_archives](https://apps.odoo.com/apps/modules/11.0/mail_archives/)
 <br/>:heavy_check_mark: [mail_base](https://apps.odoo.com/apps/modules/11.0/mail_base/)
@@ -10,6 +12,10 @@
 <br/>:heavy_check_mark: [mail_sent](https://apps.odoo.com/apps/modules/11.0/mail_sent/)
 <br/>:heavy_check_mark: [mail_to](https://apps.odoo.com/apps/modules/11.0/mail_to/)
 <br/>:heavy_check_mark: [mailgun](https://apps.odoo.com/apps/modules/11.0/mailgun/)
+
+:star: Star this repo if you **like** it!
+
+:heart: [Sponsor us](https://patreon.com/itpp) if you **love** it!
 
 Other Addons
 ============
