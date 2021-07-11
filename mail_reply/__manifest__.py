@@ -4,7 +4,7 @@
     "summary": """Got a message out of a Record? Now you can reply to it too!""",
     "category": "Discuss",
     "images": ["images/mail_reply.jpg"],
-    "vesion": "10.0.1.0.0",
+    "version": "10.0.1.0.0",
     "author": "IT-Projects LLC, Pavel Romanchenko",
     "support": "apps@itpp.dev",
     "website": "https://twitter.com/OdooFree",

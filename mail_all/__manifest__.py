@@ -4,7 +4,7 @@
     "summary": """Checkout all messages where you have access""",
     "category": "Discuss",
     "images": ["images/1.jpg"],
-    "vesion": "10.0.1.0.0",
+    "version": "10.0.1.0.0",
     "author": "IT-Projects LLC, Pavel Romanchenko",
     "support": "apps@itpp.dev",
     "website": "https://twitter.com/OdooFree",
