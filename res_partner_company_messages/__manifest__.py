@@ -1,6 +1,6 @@
 {
     "name": "Aggregate messages from company's contacts",
-    "vesion": "12.0.1.0.0",
+    "version": "12.0.1.0.0",
     "author": "IT-Projects LLC, Ivan Yelizariev",
     "license": "Other OSI approved licence",  # MIT
     "price": 70.00,
