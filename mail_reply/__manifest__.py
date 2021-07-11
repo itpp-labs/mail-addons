@@ -3,7 +3,7 @@
     "summary": """Got a message out of a Record? Now you can reply to it too!""",
     "category": "Discuss",
     "images": [],
-    "vesion": "13.0.1.0.0",
+    "version": "13.0.1.0.0",
     "author": "IT-Projects LLC, Pavel Romanchenko",
     "support": "apps@itpp.dev",
     "website": "https://itpp.dev",

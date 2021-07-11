@@ -1,6 +1,6 @@
 {
     "name": "Check mail immediately",
-    "vesion": "13.0.1.0.1",
+    "version": "13.0.1.0.1",
     "author": "IT-Projects LLC, Ivan Yelizariev",
     "license": "Other OSI approved licence",  # MIT
     "category": "Discuss",
