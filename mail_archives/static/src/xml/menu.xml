@@ -7,9 +7,10 @@
                 t-attf-class="o_mail_discuss_title_main o_mail_discuss_item #{(activeThreadID == 'channel_archive') ? 'o_active': ''}"
                 data-thread-id="mailbox_channel_archive"
             >
-                <span class="o_channel_name mail_archives"> <i
-                        class="fa fa-archive"
-                    /> Archive </span>
+                <span class="o_channel_name mail_archives">
+                    <i class="fa fa-archive" />
+                    Archive
+                </span>
             </div>
         </t>
     </t>
