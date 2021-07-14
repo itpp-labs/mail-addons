@@ -2,7 +2,7 @@
     # Copyright 2017-2018 Artyom Losev <https://it-projects.info/team/ArtyomLosev>
     # Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
     # License MIT (https://opensource.org/licenses/MIT). */
-odoo.define("mail_all.all", function(require) {
+odoo.define("mail_all.all", function (require) {
     "use strict";
 
     var core = require("web.core");
@@ -12,10 +12,10 @@ odoo.define("mail_all.all", function(require) {
     var _t = core._t;
 
     Manager.include({
-        _updateMailboxesFromServer: function(data) {
+        _updateMailboxesFromServer: function (data) {
             this._super(data);
             if (
-                !_.find(this.getThreads(), function(th) {
+                !_.find(this.getThreads(), function (th) {
                     return th.getID() === "mailbox_channel_all";
                 })
             ) {
@@ -27,7 +27,7 @@ odoo.define("mail_all.all", function(require) {
             }
         },
 
-        _makeMessage: function(data) {
+        _makeMessage: function (data) {
             var message = this._super(data);
             message._addThread("mailbox_channel_all");
             return message;
@@ -35,7 +35,7 @@ odoo.define("mail_all.all", function(require) {
     });
 
     Mailbox.include({
-        _getThreadDomain: function() {
+        _getThreadDomain: function () {
             if (this._id === "mailbox_channel_all") {
                 return [];
             }

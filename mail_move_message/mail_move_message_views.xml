@@ -31,9 +31,10 @@
                 <field name="message_email_from" invisible="1" />
                 <field name="message_to_read" invisible="1" />
                 <field name="uid" invisible="1" />
-                <p
-                    attrs="{'invisible':[('can_move', '!=', False)]}"
-                >You cannot move this message. It was already moved with a message bellow. Open one and apply changes there.</p>
+                <p attrs="{'invisible':[('can_move', '!=', False)]}">
+                    You cannot move this message. It was already moved with a message
+                    bellow. Open one and apply changes there.
+                </p>
                 <group attrs="{'invisible':[('can_move', '!=', False)]}">
                     <field
                         name="message_moved_by_message_id"
@@ -107,16 +108,15 @@
                     </div>
                 </div>
                 <footer>
-                <button
+                    <button
                         name="read_close"
                         string="Mark as read and Close"
                         type="object"
                         class="oe_highlight"
-                    /> or
-                <button special="cancel" string="Close" class="oe_link" />
-
-
-                <button
+                    />
+                    or
+                    <button special="cancel" string="Close" class="oe_link" />
+                    <button
                         name="delete"
                         string="Delete message"
                         type="object"
@@ -124,7 +124,7 @@
                         confirm="Do you really want to delete this message?"
                         attrs="{'invisible':[('uid','!=',1)]}"
                     />
-            </footer>
+                </footer>
             </form>
         </field>
     </record>
@@ -146,12 +146,13 @@
                     <div class="row mt16 o_settings_container">
                         <div class="col-xs-12 col-md-6 o_setting_box" id="crm_lead">
                             <div class="o_setting_left_pane">
-                        </div>
+
+                            </div>
                             <div class="o_setting_right_pane">
                                 <label for="model_ids" />
                                 <div class="text-muted">
-                                Add models to be used for message relocation
-                            </div>
+                                    Add models to be used for message relocation
+                                </div>
                                 <field name="model_ids" widget="many2many_tags" />
                             </div>
                         </div>

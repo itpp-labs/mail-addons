@@ -4,7 +4,7 @@
     Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
     Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
     License MIT (https://opensource.org/licenses/MIT). */
-odoo.define("mail_private", function(require) {
+odoo.define("mail_private", function (require) {
     "use strict";
 
     var Chatter = require("mail.Chatter");
@@ -15,16 +15,16 @@ odoo.define("mail_private", function(require) {
     var mailUtils = require("mail.utils");
 
     Chatter.include({
-        init: function() {
+        init: function () {
             this._super.apply(this, arguments);
             this.private = false;
             this.events["click .oe_compose_post_private"] =
                 "on_open_composer_private_message";
         },
 
-        on_open_composer_private_message: function(event) {
+        on_open_composer_private_message: function (event) {
             var self = this;
-            this.fetch_recipients_for_internal_message().then(function(data) {
+            this.fetch_recipients_for_internal_message().then(function (data) {
                 self._openComposer({
                     is_private: true,
                     suggested_partners: data,
@@ -32,7 +32,7 @@ odoo.define("mail_private", function(require) {
             });
         },
 
-        _openComposer: function(options) {
+        _openComposer: function (options) {
             var self = this;
             var old_composer = this._composer;
             // Create the new composer
@@ -57,26 +57,26 @@ odoo.define("mail_private", function(require) {
                     is_private: options.is_private,
                 }
             );
-            this._composer.on("input_focused", this, function() {
+            this._composer.on("input_focused", this, function () {
                 this._composer.mentionSetPrefetchedPartners(
                     this._mentionSuggestions || []
                 );
             });
-            this._composer.insertAfter(this.$(".o_chatter_topbar")).then(function() {
+            this._composer.insertAfter(this.$(".o_chatter_topbar")).then(function () {
                 // Destroy existing composer
                 if (old_composer) {
                     old_composer.destroy();
                 }
                 self._composer.focus();
-                self._composer.on("post_message", self, function(messageData) {
+                self._composer.on("post_message", self, function (messageData) {
                     if (options.is_private) {
                         self._composer.options.isLog = true;
                     }
-                    self._discardOnReload(messageData).then(function() {
+                    self._discardOnReload(messageData).then(function () {
                         self._disableComposer();
                         self.fields.thread
                             .postMessage(messageData)
-                            .then(function() {
+                            .then(function () {
                                 self._closeComposer(true);
                                 if (self._reloadAfterPost(messageData)) {
                                     self.trigger_up("reload");
@@ -88,7 +88,7 @@ odoo.define("mail_private", function(require) {
                                     });
                                 }
                             })
-                            .fail(function() {
+                            .fail(function () {
                                 self._enableComposer();
                             });
                     });
@@ -124,7 +124,7 @@ odoo.define("mail_private", function(require) {
             });
         },
 
-        fetch_recipients_for_internal_message: function() {
+        fetch_recipients_for_internal_message: function () {
             var self = this;
             self.result = {};
             var follower_ids_domain = [["id", "=", self.context.default_res_id]];
@@ -134,8 +134,8 @@ odoo.define("mail_private", function(require) {
                     method: "send_recepients_for_internal_message",
                     args: [[], self.context.default_model, follower_ids_domain],
                 })
-                .then(function(res) {
-                    return _.filter(res, function(obj) {
+                .then(function (res) {
+                    return _.filter(res, function (obj) {
                         return obj.partner_id !== session.partner_id;
                     });
                 });
@@ -143,7 +143,7 @@ odoo.define("mail_private", function(require) {
     });
 
     ChatterComposer.include({
-        init: function(parent, model, suggestedPartners, options) {
+        init: function (parent, model, suggestedPartners, options) {
             this._super(parent, model, suggestedPartners, options);
             this.events["click .oe_composer_uncheck"] = "on_uncheck_recipients";
             if (typeof options.is_private === "undefined") {
@@ -152,10 +152,10 @@ odoo.define("mail_private", function(require) {
             }
         },
 
-        _preprocessMessage: function() {
+        _preprocessMessage: function () {
             var self = this;
             var def = $.Deferred();
-            this._super().then(function(message) {
+            this._super().then(function (message) {
                 message = _.extend(message, {
                     subtype: "mail.mt_comment",
                     message_type: "comment",
@@ -178,7 +178,7 @@ odoo.define("mail_private", function(require) {
                 } else {
                     var check_suggested_partners = self._getCheckedSuggestedPartners();
                     self._checkSuggestedPartners(check_suggested_partners).done(
-                        function(partnerIDs) {
+                        function (partnerIDs) {
                             message.partner_ids = (message.partner_ids || []).concat(
                                 partnerIDs
                             );
@@ -194,20 +194,20 @@ odoo.define("mail_private", function(require) {
             return def;
         },
 
-        on_uncheck_recipients: function() {
-            this.$(".o_composer_suggested_partners input:checked").each(function() {
+        on_uncheck_recipients: function () {
+            this.$(".o_composer_suggested_partners input:checked").each(function () {
                 $(this).prop("checked", false);
             });
         },
 
-        _onOpenFullComposer: function() {
+        _onOpenFullComposer: function () {
             if (!this._doCheckAttachmentUpload()) {
                 return false;
             }
             var self = this;
             var recipientDoneDef = $.Deferred();
             this.trigger_up("discard_record_changes", {
-                proceed: function() {
+                proceed: function () {
                     if (self.options.isLog) {
                         recipientDoneDef.resolve([]);
                     } else {
@@ -218,7 +218,7 @@ odoo.define("mail_private", function(require) {
                     }
                 },
             });
-            recipientDoneDef.then(function(partnerIDs) {
+            recipientDoneDef.then(function (partnerIDs) {
                 var context = {
                     default_parent_id: self.id,
                     default_body: mailUtils.getTextToHTML(self.$input.val()),
@@ -252,15 +252,15 @@ odoo.define("mail_private", function(require) {
             });
         },
 
-        _getCheckedSuggestedPartners: function() {
+        _getCheckedSuggestedPartners: function () {
             var checked_partners = this._super(this, arguments);
             // Workaround: odoo code works only when all partners are checked intially,
             // while may select only some of them (internal recepients)
-            _.each(checked_partners, function(partner) {
+            _.each(checked_partners, function (partner) {
                 partner.checked = true;
             });
             checked_partners = _.uniq(
-                _.filter(checked_partners, function(obj) {
+                _.filter(checked_partners, function (obj) {
                     return obj.reason !== "Channel";
                 })
             );
@@ -268,19 +268,19 @@ odoo.define("mail_private", function(require) {
             return checked_partners;
         },
 
-        get_checked_channel_ids: function() {
+        get_checked_channel_ids: function () {
             var self = this;
             var checked_channels = [];
-            this.$(".o_composer_suggested_partners input:checked").each(function() {
+            this.$(".o_composer_suggested_partners input:checked").each(function () {
                 var full_name = $(this).data("fullname");
                 checked_channels = checked_channels.concat(
-                    _.filter(self.suggested_partners, function(item) {
+                    _.filter(self.suggested_partners, function (item) {
                         return full_name === item.full_name;
                     })
                 );
             });
             checked_channels = _.uniq(
-                _.filter(checked_channels, function(obj) {
+                _.filter(checked_channels, function (obj) {
                     return obj.reason === "Channel";
                 })
             );

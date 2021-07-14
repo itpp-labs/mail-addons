@@ -1,4 +1,4 @@
-odoo.define("res_partner_mails_count.res_partner_mails_count_tour", function(require) {
+odoo.define("res_partner_mails_count.res_partner_mails_count_tour", function (require) {
     "use strict";
     var Core = require("web.core");
     var Tour = require("web.Tour");

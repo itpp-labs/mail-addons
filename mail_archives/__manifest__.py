@@ -13,5 +13,5 @@
     "depends": ["mail"],
     "data": ["views/templates.xml"],
     "qweb": ["static/src/xml/menu.xml"],
-    "installable": False,
+    "installable": True,
 }

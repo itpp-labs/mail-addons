@@ -21,19 +21,19 @@ class MailMail(osv.Model):
         self, cr, uid, ids, auto_commit=False, raise_exception=False, context=None
     ):
         # copy-paste from addons/mail/mail_mail.py
-        """ Sends the selected emails immediately, ignoring their current
-            state (mails that have already been sent should not be passed
-            unless they should actually be re-sent).
-            Emails successfully delivered are marked as 'sent', and those
-            that fail to be deliver are marked as 'exception', and the
-            corresponding error mail is output in the server logs.
+        """Sends the selected emails immediately, ignoring their current
+        state (mails that have already been sent should not be passed
+        unless they should actually be re-sent).
+        Emails successfully delivered are marked as 'sent', and those
+        that fail to be deliver are marked as 'exception', and the
+        corresponding error mail is output in the server logs.
 
-            :param bool auto_commit: whether to force a commit of the mail status
-                after sending each mail (meant only for scheduler processing);
-                should never be True during normal transactions (default: False)
-            :param bool raise_exception: whether to raise an exception if the
-                email sending process has failed
-            :return: True
+        :param bool auto_commit: whether to force a commit of the mail status
+            after sending each mail (meant only for scheduler processing);
+            should never be True during normal transactions (default: False)
+        :param bool raise_exception: whether to raise an exception if the
+            email sending process has failed
+        :return: True
         """
 
         # NEW STUFF

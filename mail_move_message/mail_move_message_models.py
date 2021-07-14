@@ -108,7 +108,10 @@ class Wizard(models.TransientModel):
     message_is_moved = fields.Boolean(
         string="Is Moved", related="message_id.is_moved", readonly=True
     )
-    parent_id = fields.Many2one("mail.message", string="Search by name",)
+    parent_id = fields.Many2one(
+        "mail.message",
+        string="Search by name",
+    )
     model_record = fields.Reference(selection="_model_selection", string="Record")
     model = fields.Char(compute="_compute_model_res_id", string="Model")
     res_id = fields.Integer(compute="_compute_model_res_id", string="Record ID")
@@ -497,7 +500,8 @@ class MailMessage(models.Model):
         for record in reads:
             name = record["record_name"] or ""
             extended_name = "   [{}] ID {}".format(
-                record.get("model", "UNDEF"), record.get("res_id", "UNDEF"),
+                record.get("model", "UNDEF"),
+                record.get("res_id", "UNDEF"),
             )
             res.append((record["id"], name + extended_name))
         return res

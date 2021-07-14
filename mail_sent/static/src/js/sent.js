@@ -1,4 +1,4 @@
-odoo.define("mail_sent.sent", function(require) {
+odoo.define("mail_sent.sent", function (require) {
     "use strict";
 
     var core = require("web.core");
@@ -10,10 +10,10 @@ odoo.define("mail_sent.sent", function(require) {
     var _t = core._t;
 
     Manager.include({
-        _updateMailboxesFromServer: function(data) {
+        _updateMailboxesFromServer: function (data) {
             this._super(data);
             if (
-                !_.find(this.getThreads(), function(th) {
+                !_.find(this.getThreads(), function (th) {
                     return th.getID() === "mailbox_channel_sent";
                 })
             ) {
@@ -27,7 +27,7 @@ odoo.define("mail_sent.sent", function(require) {
     });
 
     SearchableThread.include({
-        _fetchMessages: function(pDomain, loadMore) {
+        _fetchMessages: function (pDomain, loadMore) {
             var self = this;
             if (this._id !== "mailbox_channel_sent") {
                 return this._super(pDomain, loadMore);
@@ -48,16 +48,16 @@ odoo.define("mail_sent.sent", function(require) {
                 method: "message_fetch",
                 args: [domain],
                 kwargs: this._getFetchMessagesKwargs(),
-            }).then(function(messages) {
+            }).then(function (messages) {
                 // Except this function. It adds the required thread to downloaded messages
-                _.each(messages, function(m) {
+                _.each(messages, function (m) {
                     m.channel_ids.push("mailbox_channel_sent");
                 });
                 if (!cache.allHistoryLoaded) {
                     cache.allHistoryLoaded = messages.length < self._FETCH_LIMIT;
                 }
                 cache.loaded = true;
-                _.each(messages, function(message) {
+                _.each(messages, function (message) {
                     self.call("mail_service", "addMessage", message, {
                         silent: true,
                         domain: pDomain,
@@ -70,7 +70,7 @@ odoo.define("mail_sent.sent", function(require) {
     });
 
     Mailbox.include({
-        _getThreadDomain: function() {
+        _getThreadDomain: function () {
             if (this._id === "mailbox_channel_sent") {
                 return [
                     ["sent", "=", true],

@@ -1,6 +1,6 @@
 /*  # Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
     # License MIT (https://opensource.org/licenses/MIT). */
-odoo.define("mail_all.tour", function(require) {
+odoo.define("mail_all.tour", function (require) {
     "use strict";
 
     var tour = require("web_tour.tour");

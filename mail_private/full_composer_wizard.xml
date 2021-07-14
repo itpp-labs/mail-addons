@@ -17,8 +17,9 @@
                     expr="//div[@groups='base.group_user']/span[2]"
                     position="attributes"
                 >
-                    <attribute name="attrs">{'invisible': [('is_private', '=', True)]}
-                        </attribute>
+                    <attribute name="attrs">
+                        {'invisible': [('is_private', '=', True)]}
+                    </attribute>
                 </xpath>
             </data>
         </field>

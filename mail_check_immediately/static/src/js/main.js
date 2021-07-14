@@ -1,48 +1,48 @@
-openerp.mail_check_immediately = function(instance, local) {
+openerp.mail_check_immediately = function (instance, local) {
     "use strict";
     instance.mail.Wall.include({
-        init: function() {
+        init: function () {
             this._super.apply(this, arguments);
 
             var _this = this;
 
             this.imm_model = new instance.web.Model("fetch_mail.imm");
-            this.events["click a.oe_fetch_new_mails"] = function() {
+            this.events["click a.oe_fetch_new_mails"] = function () {
                 _this.run_fetchmail_manually();
             };
         },
 
-        start: function() {
+        start: function () {
             var _this = this;
 
             this._super();
 
             this.get_last_fetched_time();
 
-            this.get_time_loop = setInterval(function() {
+            this.get_time_loop = setInterval(function () {
                 _this.get_last_fetched_time();
             }, 30000);
         },
 
-        run_fetchmail_manually: function() {
+        run_fetchmail_manually: function () {
             var _this = this;
 
             this.imm_model
                 .call("run_fetchmail_manually", {
                     context: new instance.web.CompoundContext(),
                 })
-                .then(function() {
+                .then(function () {
                     _this.get_last_fetched_time();
                 });
         },
 
-        get_last_fetched_time: function() {
+        get_last_fetched_time: function () {
             var _this = this;
             this.imm_model
                 .call("get_last_update_time", {
                     context: new instance.web.CompoundContext(),
                 })
-                .then(function(res) {
+                .then(function (res) {
                     var value = null;
                     if (res) value = $.timeago(res);
                     value = value || "undefined";
@@ -52,7 +52,7 @@ openerp.mail_check_immediately = function(instance, local) {
                 });
         },
 
-        destroy: function() {
+        destroy: function () {
             clearInterval(this.get_time_loop);
             this._super.apply(this, arguments);
         },
