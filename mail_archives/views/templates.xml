@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
-<openerp>
-    <data>
+<odoo>
         <template
             id="res_partner_mails_count_assets_backend"
             name="res_partner_mails_count_assets_backend"
@@ -17,5 +16,4 @@
                 />
             </xpath>
         </template>
-    </data>
-</openerp>
+</odoo>
