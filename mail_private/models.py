@@ -16,8 +16,6 @@ class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
 
     def _notify_thread(self, message, msg_vals=False, **kwargs):
-        # import wdb;wdb.set_trace()
-        self_sudo = self.sudo()
         msg_vals = msg_vals if msg_vals else {}
         return super(MailThread, self)._notify_thread(message, msg_vals)
 
@@ -49,7 +47,6 @@ class MailMessage(models.Model):
         internal_ids = self.get_internal_users_ids()
 
         recipient_ids = [r.partner_id for r in follower_ids if r.partner_id]
-        # channel_ids = [c.channel_id for c in follower_ids if c.channel_id]
 
         for recipient in recipient_ids:
             result.append(
@@ -63,14 +60,6 @@ class MailMessage(models.Model):
                 }
             )
 
-        # for channel in channel_ids:
-        #     result.append({
-        #         'checked': True,
-        #         'channel_id': channel.id,
-        #         'full_name': channel,
-        #         'name': '# '+channel.name,
-        #         'reason': 'Channel',
-        #     })
         return result
 
     def get_internal_users_ids(self):
