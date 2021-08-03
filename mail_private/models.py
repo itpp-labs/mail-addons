@@ -11,6 +11,7 @@ class MailComposeMessage(models.TransientModel):
 
     is_private = fields.Boolean(string="Send Internal Message")
 
+
 class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
 
@@ -18,18 +19,13 @@ class MailThread(models.AbstractModel):
         # import wdb;wdb.set_trace()
         self_sudo = self.sudo()
         msg_vals = msg_vals if msg_vals else {}
-        return super(MailThread, self)._notify_thread(
-            message,
-            msg_vals
-        )
+        return super(MailThread, self)._notify_thread(message, msg_vals)
 
     def _notify_compute_recipients(self, message, msg_vals):
         recipient_data = super(MailThread, self)._notify_compute_recipients(
             message, msg_vals
         )
-        if (
-            "is_private" in message._context
-        ):
+        if "is_private" in message._context:
             pids = (
                 [x for x in msg_vals.get("partner_ids")]
                 if "partner_ids" in msg_vals
@@ -39,7 +35,6 @@ class MailThread(models.AbstractModel):
                 i for i in recipient_data["partners"] if i["id"] in pids
             ]
         return recipient_data
-
 
 
 class MailMessage(models.Model):
