@@ -12,6 +12,11 @@
 
 Send private messages to specified recipients, regardless of who are in followers list.
 
+Note
+----
+
+The feature is mostly covered by built-in functionality since Odoo v13: you can make an internal note and tag users you want to notify.
+
 Questions?
 ==========
 

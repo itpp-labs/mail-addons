@@ -8,26 +8,28 @@
             <button
                 class="btn btn-link oe_compose_post_private"
                 title="Send a message to specified recipients only"
-            >Send internal message</button>
+            >
+                Send internal message
+            </button>
         </t>
     </t>
     <t t-extend="mail.chatter.Composer">
         <t t-jquery="small[class='o_chatter_composer_info']" t-operation="replace">
             <small class="o_chatter_composer_info" t-if="!widget.options.is_private">
-                    To: Followers of
-                    <t t-if="widget.options.record_name">
+                To: Followers of
+                <t t-if="widget.options.record_name">
                         &quot;<t t-esc="widget.options.record_name" />&quot;
                     </t>
-                    <t t-if="!widget.options.record_name">
-                        this document
-                    </t>
+                <t t-if="!widget.options.record_name">this document</t>
             </small>
         </t>
         <t t-jquery="div[class='o_composer_suggested_partners']" t-operation="after">
             <button
                 class="btn btn-link oe_composer_uncheck"
                 t-if="widget.options.is_private"
-            >Uncheck all</button>
+            >
+                Uncheck all
+            </button>
         </t>
     </t>
 </template>

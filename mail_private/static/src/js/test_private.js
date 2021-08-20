@@ -1,7 +1,7 @@
 /*  Copyright 2018-2019 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
     Copyright 2019 Artem Rafailov <https://it-projects.info/team/Ommo73/>
     License MIT (https://opensource.org/licenses/MIT).*/
-odoo.define("mail_private.tour", function(require) {
+odoo.define("mail_private.tour", function (require) {
     "use strict";
 
     var core = require("web.core");
@@ -54,7 +54,7 @@ odoo.define("mail_private.tour", function(require) {
         {
             trigger: "textarea.o_composer_text_field:first",
             content: _t("Write some email"),
-            run: function() {
+            run: function () {
                 $("textarea.o_composer_text_field:first").val(email);
             },
         },
