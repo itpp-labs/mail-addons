@@ -5,6 +5,7 @@
 
 :heavy_check_mark: [email_headers](https://apps.odoo.com/apps/modules/13.0/email_headers/)
 <br/>:heavy_check_mark: [mail_multi_website](https://apps.odoo.com/apps/modules/13.0/mail_multi_website/)
+<br/>:heavy_check_mark: [mail_private](https://apps.odoo.com/apps/modules/13.0/mail_private/)
 <br/>:heavy_check_mark: [mail_to](https://apps.odoo.com/apps/modules/13.0/mail_to/)
 
 :star: Star this repo if you **like** it!
