@@ -1,7 +1,6 @@
 # Copyright 2018,2020 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
 # Copyright 2018 Kolushov Alexandr <https://it-projects.info/team/KolushovAlexandr>
 # License MIT (https://opensource.org/licenses/MIT).
-# License OPL-1 (https://www.odoo.com/documentation/user/13.0/legal/licenses/licenses.html#odoo-apps) for derivative work.
 {
     "name": """Multi-Brand Mailing""",
     "summary": """Use single Backend to manage several Websites""",
@@ -13,7 +12,7 @@
     "author": "IT-Projects LLC, Ivan Yelizariev",
     "support": "apps@itpp.dev",
     "website": "https://twitter.com/OdooFree",
-    "license": "OPL-1",
+    "license": "Other OSI approved licence",  # MIT
     "price": 115.00,
     "currency": "EUR",
     "depends": [
